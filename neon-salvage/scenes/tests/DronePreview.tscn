@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cvmm6wtllqapo"]
+
+[ext_resource type="Texture2D" uid="uid://d35usakmh4oyl" path="res://assets/player/PlayerDrone_composite.png" id="1_jmkjn"]
+
+[node name="DronePreview" type="Node2D" unique_id=673518995]
+
+[node name="DroneComposite" type="Sprite2D" parent="." unique_id=89368735]
+texture = ExtResource("1_jmkjn")
