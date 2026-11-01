@@ -1,8 +1,21 @@
 [gd_scene format=3 uid="uid://cvmm6wtllqapo"]
 
-[ext_resource type="Texture2D" uid="uid://d35usakmh4oyl" path="res://assets/player/PlayerDrone_composite.png" id="1_jmkjn"]
+[ext_resource type="Texture2D" uid="uid://scxi5spjwust" path="res://assets/player/PlayerDrone_Shadow.png" id="1_2s24y"]
+[ext_resource type="Texture2D" uid="uid://brw4cu62hlr7x" path="res://assets/player/PlayerDrone_BodyComposite.png" id="1_jmkjn"]
 
 [node name="DronePreview" type="Node2D" unique_id=673518995]
 
+[node name="TestFloor" type="ColorRect" parent="." unique_id=539785845]
+offset_left = -320.0
+offset_top = -180.0
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0.09019608, 0.15294118, 0.2, 1)
+
+[node name="GroundShadow" type="Sprite2D" parent="." unique_id=122663640]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_2s24y")
+
 [node name="DroneComposite" type="Sprite2D" parent="." unique_id=89368735]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_jmkjn")
