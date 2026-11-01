@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://b8sv2wmfuy86"]
 
 [ext_resource type="Texture2D" uid="uid://scxi5spjwust" path="res://assets/player/PlayerDrone_Shadow.png" id="1_a1gcq"]
+[ext_resource type="Script" uid="uid://bbi86bji33bwu" path="res://scripts/player/player_drone.gd" id="1_qcr60"]
 [ext_resource type="Texture2D" uid="uid://dm8671uxxhdu0" path="res://assets/player/PlayerDrone_Thruster_Left.png" id="2_cunj6"]
+[ext_resource type="Texture2D" uid="uid://tsgq733vkbqn" path="res://assets/effects/SoftRadialLight.tres" id="3_cunj6"]
 [ext_resource type="Texture2D" uid="uid://c061xcskklm7d" path="res://assets/player/PlayerDrone_Thruster_Right.png" id="3_qcr60"]
 [ext_resource type="Texture2D" uid="uid://cjy2lhg1121ou" path="res://assets/player/PlayerDrone_Hull.png" id="4_annjb"]
 [ext_resource type="Texture2D" uid="uid://12ftfaxtvras" path="res://assets/player/PlayerDrone_PrimaryCarbine.png" id="5_j1agh"]
@@ -44,10 +46,34 @@ tracks/2/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("VisualRig/ThrusterLeftPivot/ThrusterLeftIdle/LeftExhaustLight:energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.65]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("VisualRig/ThrusterRightPivot/ThrusterRightIdle/RightExhaustLight:energy")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.65]
+}
 
 [sub_resource type="Animation" id="Animation_a1gcq"]
 resource_name = "idle_hover"
-length = 1.5999999999999999
+length = 1.6
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -56,10 +82,10 @@ tracks/0/path = NodePath("VisualRig:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.4, 0.8, 1.2, 1.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, -1.5), Vector2(0, -3), Vector2(0, -1.5), Vector2(0, 0)]
+"values": [Vector2(0, 0), Vector2(0, -1.5), Vector2(0, -3), Vector2(0, -1.5), Vector2(0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -85,6 +111,30 @@ tracks/2/keys = {
 "update": 0,
 "values": [0.0, -0.02617994, 0.0, 0.02617994, 0.0]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("VisualRig/ThrusterLeftPivot/ThrusterLeftIdle/LeftExhaustLight:energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.65, 0.9, 0.65, 0.5, 0.65]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("VisualRig/ThrusterRightPivot/ThrusterRightIdle/RightExhaustLight:energy")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.65, 0.5, 0.65, 0.9, 0.65]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cunj6"]
 _data = {
@@ -93,6 +143,7 @@ _data = {
 }
 
 [node name="PlayerDrone" type="CharacterBody2D" unique_id=1138100880]
+script = ExtResource("1_qcr60")
 
 [node name="GroundShadow" type="Sprite2D" parent="." unique_id=727927119]
 scale = Vector2(0.5, 0.5)
@@ -111,6 +162,13 @@ position = Vector2(-56, 22)
 position = Vector2(56, -22)
 texture = ExtResource("2_cunj6")
 
+[node name="LeftExhaustLight" type="PointLight2D" parent="VisualRig/ThrusterLeftPivot/ThrusterLeftIdle" unique_id=317554521]
+color = Color(0.17254902, 0.9019608, 0.94509804, 1)
+energy = 0.65
+texture = ExtResource("3_cunj6")
+offset = Vector2(-20.5, 59.5)
+texture_scale = 0.55
+
 [node name="ThrusterRightPivot" type="Node2D" parent="VisualRig" unique_id=1708995763]
 position = Vector2(56, 22)
 
@@ -119,6 +177,13 @@ position = Vector2(56, 22)
 [node name="ThrusterRight" type="Sprite2D" parent="VisualRig/ThrusterRightPivot/ThrusterRightIdle" unique_id=71256282]
 position = Vector2(-56, -22)
 texture = ExtResource("3_qcr60")
+
+[node name="RightExhaustLight" type="PointLight2D" parent="VisualRig/ThrusterRightPivot/ThrusterRightIdle" unique_id=284016114]
+color = Color(0.17254902, 0.9019608, 0.94509804, 1)
+energy = 0.65
+texture = ExtResource("3_cunj6")
+offset = Vector2(19.5, 59.5)
+texture_scale = 0.55
 
 [node name="Hull" type="Sprite2D" parent="VisualRig" unique_id=784299406]
 texture = ExtResource("4_annjb")
@@ -130,5 +195,9 @@ position = Vector2(0, -7)
 position = Vector2(0, 7)
 texture = ExtResource("5_j1agh")
 
+[node name="Muzzle" type="Marker2D" parent="VisualRig/WeaponPivot" unique_id=2130137396]
+position = Vector2(0, -80)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1127356994]
 libraries/ = SubResource("AnimationLibrary_cunj6")
+autoplay = &"idle_hover"

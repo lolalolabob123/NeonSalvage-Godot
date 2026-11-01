@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="32"
+   height="64"
+   viewBox="0 0 8.4666665 16.933333"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   sodipodi:docname="PrimaryCarbineBolt.svg"
+   inkscape:export-filename="PrimaryCarbineBolt.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="8.9161746"
+     inkscape:cx="15.98219"
+     inkscape:cy="32.020459"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer2"
+     inkscape:export-bgcolor="#ffffff00" />
+  <defs
+     id="defs1">
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter1"
+       x="-0.096799998"
+       y="-0.041485713"
+       width="1.1936"
+       height="1.0829714">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.25611666"
+         id="feGaussianBlur1" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter2"
+       x="-0.037028571"
+       y="-0.011269566"
+       width="1.0740571"
+       height="1.0225391">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.057149997"
+         id="feGaussianBlur2" />
+    </filter>
+  </defs>
+  <g
+     inkscape:label="00_Glow"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <ellipse
+       style="opacity:0.22;fill:#2ce6f1;stroke-width:0.27285;fill-opacity:1;filter:url(#filter1)"
+       id="path1"
+       cx="4.2333331"
+       cy="8.4666662"
+       rx="3.175"
+       ry="7.4083333" />
+    <ellipse
+       style="opacity:0.28;fill:#2ce6f1;fill-opacity:1;stroke-width:0.244933;filter:url(#filter2)"
+       id="path2"
+       cx="4.2333331"
+       cy="8.4666662"
+       rx="1.8520833"
+       ry="6.0854163" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="01_Bolt">
+    <ellipse
+       style="opacity:0.28;fill:#06758a;fill-opacity:1;stroke-width:0.0833313"
+       id="path3"
+       cx="4.2333331"
+       cy="8.4666662"
+       rx="1.0583333"
+       ry="6.0854163" />
+    <ellipse
+       style="opacity:0.28;fill:#2ce6f1;fill-opacity:1;stroke-width:0.0542153"
+       id="path4"
+       cx="4.2333331"
+       cy="8.2020826"
+       rx="0.79374999"
+       ry="5.0270834" />
+    <ellipse
+       style="opacity:0.28;fill:#e8ffff;fill-opacity:1;stroke-width:0.0236979"
+       id="path5"
+       cx="4.2333331"
+       cy="7.6729169"
+       rx="0.26458332"
+       ry="3.4395833" />
+    <ellipse
+       style="opacity:0.28;fill:#e8ffff;fill-opacity:1;stroke-width:0.0250011"
+       id="path6"
+       cx="4.2333331"
+       cy="2.9104166"
+       rx="0.79374999"
+       ry="1.0583333" />
+  </g>
+</svg>
