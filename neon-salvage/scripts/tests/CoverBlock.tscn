@@ -1,17 +1,15 @@
 [gd_scene format=3 uid="uid://cg1ufgms80u3y"]
 
+[ext_resource type="Texture2D" uid="uid://di7d15fpbbiv6" path="res://assets/environment/IndustrialCover_A.png" id="1_3c7yd"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aa0n8"]
 size = Vector2(180, 44)
 
 [node name="CoverBlock" type="StaticBody2D" unique_id=38345602]
 collision_mask = 0
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=367144116]
-offset_left = -90.0
-offset_top = -22.0
-offset_right = 90.0
-offset_bottom = 22.0
-color = Color(0.20392157, 0.29411766, 0.34901962, 1)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1506650072]
 shape = SubResource("RectangleShape2D_aa0n8")
+
+[node name="CoverVisual" type="Sprite2D" parent="." unique_id=78149280]
+texture = ExtResource("1_3c7yd")

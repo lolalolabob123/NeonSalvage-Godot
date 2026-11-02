@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://bingiiqgvp24e"]
+
+[ext_resource type="Texture2D" uid="uid://cqqouqhcddfm6" path="res://assets/environment/IndustrialDeck_A.png" id="1_c20ak"]
+[ext_resource type="PackedScene" uid="uid://b8sv2wmfuy86" path="res://scenes/player/PlayerDrone.tscn" id="1_dr0mu"]
+[ext_resource type="PackedScene" uid="uid://cg1ufgms80u3y" path="res://scripts/tests/CoverBlock.tscn" id="1_ho4y1"]
+
+[node name="SalvageYardPrototype" type="Node2D" unique_id=1876928811]
+
+[node name="Floor" type="TextureRect" parent="." unique_id=30215839]
+offset_left = -1536.0
+offset_top = -1024.0
+offset_right = 1536.0
+offset_bottom = 1024.0
+mouse_filter = 2
+texture = ExtResource("1_c20ak")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Obstacles" type="Node2D" parent="." unique_id=109663560]
+
+[node name="CoverNorth" parent="Obstacles" unique_id=38345602 instance=ExtResource("1_ho4y1")]
+position = Vector2(-210, -180)
+
+[node name="CoverEast" parent="Obstacles" unique_id=1858343960 instance=ExtResource("1_ho4y1")]
+position = Vector2(300, 0)
+rotation = 1.5707964
+
+[node name="CoverSouth" parent="Obstacles" unique_id=341584431 instance=ExtResource("1_ho4y1")]
+position = Vector2(100, 220)
+
+[node name="CoverWest" parent="Obstacles" unique_id=705001583 instance=ExtResource("1_ho4y1")]
+position = Vector2(-340, 75)
+rotation = 1.5707964
+
+[node name="PlayerDrone" parent="." unique_id=1138100880 instance=ExtResource("1_dr0mu")]
