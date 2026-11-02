@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cqqouqhcddfm6" path="res://assets/environment/IndustrialDeck_A.png" id="1_c20ak"]
 [ext_resource type="PackedScene" uid="uid://b8sv2wmfuy86" path="res://scenes/player/PlayerDrone.tscn" id="1_dr0mu"]
 [ext_resource type="PackedScene" uid="uid://cg1ufgms80u3y" path="res://scripts/tests/CoverBlock.tscn" id="1_ho4y1"]
+[ext_resource type="PackedScene" uid="uid://xcxn162tuund" path="res://scenes/environment/SalvageCrate.tscn" id="3_6eqrc"]
 
 [node name="SalvageYardPrototype" type="Node2D" unique_id=1876928811]
 
@@ -31,5 +32,14 @@ position = Vector2(100, 220)
 [node name="CoverWest" parent="Obstacles" unique_id=705001583 instance=ExtResource("1_ho4y1")]
 position = Vector2(-340, 75)
 rotation = 1.5707964
+
+[node name="SalvageCrate" parent="Obstacles" unique_id=362166078 instance=ExtResource("3_6eqrc")]
+position = Vector2(-120, -60)
+
+[node name="SalvageCrate2" parent="Obstacles" unique_id=1183883042 instance=ExtResource("3_6eqrc")]
+position = Vector2(150, -100)
+
+[node name="SalvageCrate3" parent="Obstacles" unique_id=143263393 instance=ExtResource("3_6eqrc")]
+position = Vector2(-60, 140)
 
 [node name="PlayerDrone" parent="." unique_id=1138100880 instance=ExtResource("1_dr0mu")]

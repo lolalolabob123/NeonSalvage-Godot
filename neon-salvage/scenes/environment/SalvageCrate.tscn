@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://xcxn162tuund"]
+
+[ext_resource type="Texture2D" uid="uid://jc0obekyfthb" path="res://assets/environment/SalvageCrate_A.png" id="1_5v7uc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yd1rv"]
+size = Vector2(80, 80)
+
+[node name="SalvageCrate" type="StaticBody2D" unique_id=362166078]
+collision_mask = 0
+
+[node name="CrateVisual" type="Sprite2D" parent="." unique_id=934251818]
+texture = ExtResource("1_5v7uc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1952423560]
+shape = SubResource("RectangleShape2D_yd1rv")
