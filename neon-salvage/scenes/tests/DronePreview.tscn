@@ -3,14 +3,18 @@
 [ext_resource type="Texture2D" uid="uid://scxi5spjwust" path="res://assets/player/PlayerDrone_Shadow.png" id="1_2s24y"]
 [ext_resource type="Texture2D" uid="uid://brw4cu62hlr7x" path="res://assets/player/PlayerDrone_BodyComposite.png" id="1_jmkjn"]
 [ext_resource type="PackedScene" uid="uid://b8sv2wmfuy86" path="res://scenes/player/PlayerDrone.tscn" id="3_w2sf3"]
+[ext_resource type="Script" uid="uid://b7qclmnnou0un" path="res://scripts/tests/target_dummy.gd" id="4_b15v7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0gddg"]
+size = Vector2(60, 60)
 
 [node name="DronePreview" type="Node2D" unique_id=673518995]
 
 [node name="TestFloor" type="ColorRect" parent="." unique_id=539785845]
-offset_left = -576.0
-offset_top = -324.0
-offset_right = 576.0
-offset_bottom = 324.0
+offset_left = -2048.0
+offset_top = -2048.0
+offset_right = 2048.0
+offset_bottom = 2048.0
 color = Color(0.09019608, 0.15294118, 0.2, 1)
 
 [node name="GroundShadow" type="Sprite2D" parent="." unique_id=122663640]
@@ -25,4 +29,18 @@ texture = ExtResource("1_jmkjn")
 
 [node name="PlayerDrone" parent="." unique_id=1138100880 instance=ExtResource("3_w2sf3")]
 
-[node name="previewCamera" type="Camera2D" parent="." unique_id=1735223691]
+[node name="TargetDummy" type="StaticBody2D" parent="." unique_id=1646820067]
+position = Vector2(240, 0)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_b15v7")
+
+[node name="ColorRect" type="ColorRect" parent="TargetDummy" unique_id=524763727]
+offset_left = -30.0
+offset_top = -30.0
+offset_right = 30.0
+offset_bottom = 30.0
+color = Color(0.7529412, 0.3019608, 0.35686275, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TargetDummy" unique_id=1046407198]
+shape = SubResource("RectangleShape2D_0gddg")

@@ -142,7 +142,11 @@ _data = {
 &"idle_hover": SubResource("Animation_a1gcq")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_0gddg"]
+radius = 26.0
+
 [node name="PlayerDrone" type="CharacterBody2D" unique_id=1138100880]
+motion_mode = 1
 script = ExtResource("1_qcr60")
 
 [node name="GroundShadow" type="Sprite2D" parent="." unique_id=727927119]
@@ -201,3 +205,11 @@ position = Vector2(0, -80)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1127356994]
 libraries/ = SubResource("AnimationLibrary_cunj6")
 autoplay = &"idle_hover"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1939183266]
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_0gddg")
+
+[node name="FollowCamera" type="Camera2D" parent="." unique_id=402263176]
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bn8v1bpyx1cji"]
+
+[ext_resource type="Script" uid="uid://bvcmfn5rxkfge" path="res://scripts/effects/carbine_impact.gd" id="1_gamca"]
+
+[node name="CarbineImpact" type="Node2D" unique_id=2054329148]
+script = ExtResource("1_gamca")

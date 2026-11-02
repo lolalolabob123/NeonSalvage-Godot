@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bnw354tsrq20i"]
 
+[ext_resource type="Script" uid="uid://dcxpnmqd3tm5x" path="res://scripts/projectiles/primary_carbine_bolt.gd" id="1_hnsw8"]
 [ext_resource type="Texture2D" uid="uid://dapwwvvttuhhb" path="res://assets/projectiles/PrimaryCarbineBolt.png" id="1_pw2j8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hnsw8"]
@@ -7,6 +8,9 @@ radius = 2.5
 height = 20.0
 
 [node name="PrimaryCarbineBolt" type="Area2D" unique_id=1817938578]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_hnsw8")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1885978306]
 scale = Vector2(0.4, 0.4)
