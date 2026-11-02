@@ -8,8 +8,8 @@ radius = 2.5
 height = 20.0
 
 [node name="PrimaryCarbineBolt" type="Area2D" unique_id=1817938578]
-collision_layer = 2
-collision_mask = 4
+collision_layer = 8
+collision_mask = 5
 script = ExtResource("1_hnsw8")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1885978306]

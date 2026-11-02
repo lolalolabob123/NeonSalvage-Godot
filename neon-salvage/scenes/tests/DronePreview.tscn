@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://brw4cu62hlr7x" path="res://assets/player/PlayerDrone_BodyComposite.png" id="1_jmkjn"]
 [ext_resource type="PackedScene" uid="uid://b8sv2wmfuy86" path="res://scenes/player/PlayerDrone.tscn" id="3_w2sf3"]
 [ext_resource type="Script" uid="uid://b7qclmnnou0un" path="res://scripts/tests/target_dummy.gd" id="4_b15v7"]
+[ext_resource type="PackedScene" uid="uid://cg1ufgms80u3y" path="res://scripts/tests/CoverBlock.tscn" id="5_c2tng"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0gddg"]
 size = Vector2(60, 60)
@@ -32,7 +33,7 @@ texture = ExtResource("1_jmkjn")
 [node name="TargetDummy" type="StaticBody2D" parent="." unique_id=1646820067]
 position = Vector2(240, 0)
 collision_layer = 4
-collision_mask = 0
+collision_mask = 2
 script = ExtResource("4_b15v7")
 
 [node name="ColorRect" type="ColorRect" parent="TargetDummy" unique_id=524763727]
@@ -44,3 +45,6 @@ color = Color(0.7529412, 0.3019608, 0.35686275, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TargetDummy" unique_id=1046407198]
 shape = SubResource("RectangleShape2D_0gddg")
+
+[node name="CoverBlock" parent="." unique_id=38345602 instance=ExtResource("5_c2tng")]
+position = Vector2(0, -170)
