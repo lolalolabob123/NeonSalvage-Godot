@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://oohw5n16r2ll"]
 
+[ext_resource type="Script" uid="uid://dm7ph5q80ayru" path="res://scripts/ui/salvage_hud.gd" id="1_2r02q"]
 [ext_resource type="Texture2D" uid="uid://dlnr0tuaw8net" path="res://assets/pickups/SalvageCell_A.png" id="1_wqvua"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8c4qq"]
@@ -19,6 +20,7 @@ corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
 [node name="SalvageHUD" type="CanvasLayer" unique_id=507685534]
+script = ExtResource("1_2r02q")
 
 [node name="SalvagePanel" type="PanelContainer" parent="." unique_id=1225295404]
 custom_minimum_size = Vector2(200, 50)

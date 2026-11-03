@@ -28,7 +28,7 @@ func _ready() -> void:
 		0.65
 	)
 	
-	await get_tree().create_timer(0.8).timeout
+	await get_tree().create_timer(0.15).timeout
 	monitoring = true
 
 func _on_body_entered(body: Node2D) -> void:
