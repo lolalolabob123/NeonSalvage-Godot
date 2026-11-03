@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://oohw5n16r2ll"]
+
+[ext_resource type="Texture2D" uid="uid://dlnr0tuaw8net" path="res://assets/pickups/SalvageCell_A.png" id="1_wqvua"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8c4qq"]
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.0627451, 0.13725491, 0.16862746, 0.88235295)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.20784314, 0.34901962, 0.41568628, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="SalvageHUD" type="CanvasLayer" unique_id=507685534]
+
+[node name="SalvagePanel" type="PanelContainer" parent="." unique_id=1225295404]
+custom_minimum_size = Vector2(200, 50)
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 60.0
+offset_bottom = 60.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8c4qq")
+
+[node name="Row" type="HBoxContainer" parent="SalvagePanel" unique_id=2096624402]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="SalvagePanel/Row" unique_id=1453694582]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+texture = ExtResource("1_wqvua")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="Title" type="Label" parent="SalvagePanel/Row" unique_id=1811418775]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.5686275, 0.68235296, 0.73333335, 1)
+theme_override_font_sizes/font_size = 13
+text = "	SALVAGE"
+
+[node name="Amount" type="Label" parent="SalvagePanel/Row" unique_id=186692559]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.8039216, 0.45882353, 1)
+theme_override_font_sizes/font_size = 20
+text = "0"

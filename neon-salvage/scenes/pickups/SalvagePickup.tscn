@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://djmeml17bsbjb"]
+
+[ext_resource type="Script" uid="uid://bmtuowegiiqug" path="res://scripts/pickups/salvage_pickup.gd" id="1_32jly"]
+[ext_resource type="Texture2D" uid="uid://dlnr0tuaw8net" path="res://assets/pickups/SalvageCell_A.png" id="1_dasig"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_32jly"]
+radius = 20.0
+
+[node name="SalvagePickup" type="Area2D" unique_id=936039805]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_32jly")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1983810369]
+texture = ExtResource("1_dasig")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=4872091]
+shape = SubResource("CircleShape2D_32jly")

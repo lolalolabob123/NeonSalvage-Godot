@@ -1,5 +1,9 @@
 extends CharacterBody2D
 
+signal salvage_changed(total: int)
+
+var salvage_total: int = 0
+
 const CARBINE_BOLT: PackedScene = preload(
 	'res://scenes/projectiles/PrimaryCarbineBolt.tscn'
 )
@@ -97,3 +101,12 @@ func update_flight_bank(delta: float) -> void:
 		thruster_angle,
 		blend
 	)
+	
+func add_salvage(amount: int) -> void:
+	if amount <= 0:
+		return
+		
+	salvage_total += amount
+	salvage_changed.emit(salvage_total)
+		
+	print("Total salvage: ", salvage_total)
