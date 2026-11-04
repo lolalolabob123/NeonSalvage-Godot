@@ -2,6 +2,9 @@ extends CharacterBody2D
 
 signal salvage_changed(total: int)
 
+signal health_changed(current: int, maximum: int)
+signal plyaer_destroyed
+
 var salvage_total: int = 0
 
 const CARBINE_BOLT: PackedScene = preload(
@@ -16,13 +19,25 @@ const FIRE_INTERVAL: float = 0.18
 @onready var left_thruster_pivot: Node2D = $VisualRig/ThrusterLeftPivot
 @onready var right_thruster_pivot: Node2D = $VisualRig/ThrusterRightPivot
 
+@onready var current_health: int = max_health
+
 @export var move_speed: float = 240.0
 @export var acceleration: float = 1250.0
 @export var deceleration: float = 1500.0
 
+@export var max_health: int = 5
+@onready var invulnerability_duration: float = 0.75
+
 var fire_timer: float = 0.0
+var damage_cooldown: float = 0.0
 
 func _process(delta: float) -> void:
+	
+	damage_cooldown = maxf(
+		damage_cooldown - delta,
+		0.0
+	)
+	
 	var aim_direction: Vector2 = (
 		get_global_mouse_position() - weapon_pivot.global_position
 	)
@@ -110,3 +125,43 @@ func add_salvage(amount: int) -> void:
 	salvage_changed.emit(salvage_total)
 		
 	print("Total salvage: ", salvage_total)
+
+func take_damage(amount: int) -> void:
+	# Ignore invalid damage, defeated players and repeated hits
+	if amount <= 0 or current_health <= 0:
+		return
+	
+	if damage_cooldown > 0.0:
+		return
+	
+	# Apply damage.
+	current_health = maxi(current_health - amount, 0)
+	
+	# Start the invulnerability period.
+	damage_cooldown = invulnerability_duration
+	
+	# Notify the HUD.
+	health_changed.emit(current_health, max_health)
+	flash_player_hit()
+	
+	# Handle defeat
+	if current_health == 0:
+		# player_destroyed.emit()
+		
+		velocity = Vector2.ZERO
+		set_process(false)
+		set_physics_process(false)
+
+func flash_player_hit() -> void:
+	# Briefly tint the entire drone.
+	visual_rig.modulate = Color(1.0, 0.35, 0.35)
+	
+	# Restore its original colours.
+	var tween: Tween = create_tween()
+	
+	tween.tween_property(
+		visual_rig,
+		"modulate",
+		Color.WHITE,
+		0.18
+	) 

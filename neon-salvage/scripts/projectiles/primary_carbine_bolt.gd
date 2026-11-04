@@ -22,11 +22,19 @@ func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 
 func _on_body_entered(body: Node2D) -> void:
+	# Ignore collisions with the player who fired the projectile.
+	if body.is_in_group("player"):
+		return
+	
+	# Damage objects that support the damage system.
 	if body.has_method("take_damage"):
 		body.take_damage(1)
-		
+	
+	# Create an impact effect.
 	var impact: Node2D = IMPACT_EFFECT.instantiate()
+	
 	get_tree().current_scene.add_child(impact)
 	impact.global_position = global_position
-		
+	
+	# Remove the projectile.
 	queue_free()

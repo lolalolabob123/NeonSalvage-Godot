@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bq0waxbah2ib0"]
+
+[ext_resource type="Texture2D" uid="uid://doqs5y1w3b6aa" path="res://assets/enemies/SentryDrone_A.png" id="1_8gkan"]
+[ext_resource type="Script" uid="uid://cl8plbn2qeyrb" path="res://scripts/enemies/sentry_drone.gd" id="1_h8huq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8gkan"]
+radius = 25.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0gddg"]
+radius = 240.0
+
+[node name="SentryDrone" type="CharacterBody2D" unique_id=140838755]
+motion_mode = 1
+script = ExtResource("1_h8huq")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=68954907]
+texture_filter = 1
+texture = ExtResource("1_8gkan")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1352655627]
+shape = SubResource("CircleShape2D_8gkan")
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=175947916]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=1848162404]
+shape = SubResource("CircleShape2D_0gddg")
+
+[node name="Muzzle" type="Marker2D" parent="." unique_id=2066239883]
+position = Vector2(0, -42)
