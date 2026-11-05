@@ -12,6 +12,13 @@ const SENTRY_PULSE: PackedScene = preload(
 	"res://scenes/projectiles/SentryPulse.tscn"
 )
 
+enum SentryState {
+	GUARD,
+	PURSUE,
+	INVESTIGATE,
+	RETURN_TO_POST
+}
+
 @onready var detection_area: Area2D = $DetectionArea
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var muzzle: Marker2D = $Muzzle
@@ -32,9 +39,14 @@ var current_health: int = 0
 var fire_timer: float = 0.0
 var windup_timer: float = 0.0
 var is_winding_up: bool = false
-
+var current_state: SentryState = SentryState.GUARD
+var home_position: Vector2 = Vector2.ZERO
+var last_known_position: Vector2 = Vector2.ZERO
+var has_last_known_position: bool = false
 
 func _ready() -> void:
+	
+	home_position = global_position
 	current_health = max_health
 	charge_glow.hide()
 
@@ -46,16 +58,33 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
+		if int(body.get("current_health")) <= 0:
+			return
+			
 		target = body
+		current_state = SentryState.PURSUE
 		navigation_agent.target_position = body.global_position
 
 
 func _on_body_exited(body: Node2D) -> void:
 	if body == target:
 		target = null
+		
+		if has_last_known_position:
+			current_state = SentryState.INVESTIGATE
+			navigation_agent.target_position = last_known_position
+		else:
+			current_state = SentryState.GUARD
 
 
 func _physics_process(delta: float) -> void:
+	
+	# Stop tracking the player after their health reaches zero.
+	if is_instance_valid(target):
+		if int(target.get("current_health")) <= 0:
+			target = null
+			current_state = SentryState.GUARD
+	
 	var desired_velocity: Vector2 = Vector2.ZERO
 
 	if is_instance_valid(target):
@@ -84,6 +113,16 @@ func _physics_process(delta: float) -> void:
 					
 					if path_direction.length_squared() > 4.0:
 						desired_velocity = path_direction.normalized() * move_speed
+						
+	elif current_state == SentryState.INVESTIGATE:
+		# Dollow the navigation to the last known position.
+		if not navigation_agent.is_navigation_finished():
+			var next_point: Vector2 = navigation_agent.get_next_path_position()
+			var path_direction: Vector2 = next_point - global_position
+			
+			if path_direction.length_squared() > 4.0:
+				desired_velocity * path_direction.normalized() * move_speed
+	
 	# Accelerate or decelerate smoothly.
 	velocity = velocity.move_toward(
 		desired_velocity,
@@ -109,6 +148,10 @@ func _physics_process(delta: float) -> void:
 					fire_interval - windup_duration,
 					0.0
 				)
+				
+				# Remember the player's last known position while they are visible.
+				last_known_position = target.global_position
+				has_last_known_position = true
 
 		else:
 			# Wait until it's time to prepare another shot.
