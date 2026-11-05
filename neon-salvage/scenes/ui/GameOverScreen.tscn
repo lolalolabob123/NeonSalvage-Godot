@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://bx1wgwy237acn"]
+
+[ext_resource type="Script" uid="uid://cqjrsjnutdvq3" path="res://scripts/ui/game_over_screen.gd" id="1_0pcqs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bf55g"]
+bg_color = Color(0.07450981, 0.16470589, 0.21176471, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.19215687, 0.79607844, 0.8784314, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wi470"]
+bg_color = Color(0.043137256, 0.1254902, 0.16862746, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.19215687, 0.79607844, 0.8784314, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0pcqs"]
+bg_color = Color(0.1254902, 0.3137255, 0.39215687, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.19215687, 0.79607844, 0.8784314, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="GameOverScreen" type="CanvasLayer" unique_id=557411570]
+layer = 2
+script = ExtResource("1_0pcqs")
+
+[node name="DimBackground" type="ColorRect" parent="." unique_id=53707444]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.023529412, 0.08235294, 0.101960786, 0.8509804)
+
+[node name="ContentCenter" type="CenterContainer" parent="." unique_id=1657689212]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Content" type="VBoxContainer" parent="ContentCenter" unique_id=606757823]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="GameOverTitle" type="Label" parent="ContentCenter/Content" unique_id=1754238614]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9490196, 0.34117648, 0.40784314, 1)
+theme_override_font_sizes/font_size = 42
+text = "SYSTEM OFFLINE"
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="ContentCenter/Content" unique_id=633088564]
+custom_minimum_size = Vector2(240, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.8352941, 0.92941177, 0.94509804, 1)
+theme_override_colors/font_pressed_color = Color(0.6039216, 0.9372549, 0.9607843, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_bf55g")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_wi470")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0pcqs")
+text = "RESTART RUN"

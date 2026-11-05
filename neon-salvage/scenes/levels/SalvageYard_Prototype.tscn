@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://xcxn162tuund" path="res://scenes/environment/SalvageCrate.tscn" id="3_6eqrc"]
 [ext_resource type="PackedScene" uid="uid://oohw5n16r2ll" path="res://scenes/ui/SalvageHUD.tscn" id="5_n3p8q"]
 [ext_resource type="PackedScene" uid="uid://bq0waxbah2ib0" path="res://scenes/enemies/SentryDrone.tscn" id="6_hmiub"]
+[ext_resource type="PackedScene" uid="uid://bx1wgwy237acn" path="res://scenes/ui/GameOverScreen.tscn" id="7_x17an"]
 
 [node name="SalvageYardPrototype" type="Node2D" unique_id=1876928811]
 
@@ -45,8 +46,11 @@ position = Vector2(150, -100)
 position = Vector2(-60, 140)
 
 [node name="PlayerDrone" parent="." unique_id=1138100880 instance=ExtResource("1_dr0mu")]
+dash_unlocked = true
 
 [node name="SalvageHUD" parent="." unique_id=507685534 instance=ExtResource("5_n3p8q")]
 
 [node name="SentryDrone" parent="." unique_id=140838755 instance=ExtResource("6_hmiub")]
 position = Vector2(200, 0)
+
+[node name="GameOverScreen" parent="." unique_id=557411570 instance=ExtResource("7_x17an")]

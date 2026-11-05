@@ -19,6 +19,19 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0t7fv"]
+bg_color = Color(0.0627451, 0.14117648, 0.18039216, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2r02q"]
+bg_color = Color(0.19215687, 0.79607844, 0.8784314, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_left = 3
+
 [node name="SalvageHUD" type="CanvasLayer" unique_id=507685534]
 script = ExtResource("1_2r02q")
 
@@ -54,3 +67,48 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.8039216, 0.45882353, 1)
 theme_override_font_sizes/font_size = 20
 text = "0"
+
+[node name="HullPanel" type="PanelContainer" parent="." unique_id=2113411459]
+custom_minimum_size = Vector2(200, 50)
+offset_left = 20.0
+offset_top = 76.0
+offset_right = 220.0
+offset_bottom = 126.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8c4qq")
+
+[node name="Row" type="HBoxContainer" parent="HullPanel" unique_id=1528116465]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="HullPanel/Row" unique_id=1682402435]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+texture = ExtResource("1_wqvua")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="Title" type="Label" parent="HullPanel/Row" unique_id=1950826944]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.5686275, 0.68235296, 0.73333335, 1)
+theme_override_font_sizes/font_size = 13
+text = "HULL"
+
+[node name="Amount" type="Label" parent="HullPanel/Row" unique_id=563037385]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.8039216, 0.45882353, 1)
+theme_override_font_sizes/font_size = 20
+text = "5/5"
+
+[node name="HullBar" type="ProgressBar" parent="." unique_id=133290860]
+custom_minimum_size = Vector2(0, 8)
+offset_left = 28.0
+offset_top = 130.0
+offset_right = 204.0
+offset_bottom = 140.0
+theme_override_styles/background = SubResource("StyleBoxFlat_0t7fv")
+theme_override_styles/fill = SubResource("StyleBoxFlat_2r02q")
+max_value = 5.0
+value = 5.0
+show_percentage = false
