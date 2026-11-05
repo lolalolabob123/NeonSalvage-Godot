@@ -273,3 +273,12 @@ func flash_player_hit() -> void:
 		Color.WHITE,
 		0.18
 	) 
+
+func get_dash_status_text() -> String:
+	if not dash_unlocked:
+		return "LOCKED"
+	
+	if dash_cooldown_remaining > 0.0:
+		return "%.1fs" % dash_cooldown_remaining
+	
+	return "READY"

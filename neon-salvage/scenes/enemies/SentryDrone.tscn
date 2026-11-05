@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://doqs5y1w3b6aa" path="res://assets/enemies/SentryDrone_A.png" id="1_8gkan"]
 [ext_resource type="Script" uid="uid://cl8plbn2qeyrb" path="res://scripts/enemies/sentry_drone.gd" id="1_h8huq"]
+[ext_resource type="Texture2D" uid="uid://do5ny6rnn1fe7" path="res://assets/projectiles/SentryPulse_A.png" id="3_bxvkx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8gkan"]
 radius = 25.0
@@ -29,3 +30,15 @@ shape = SubResource("CircleShape2D_0gddg")
 
 [node name="Muzzle" type="Marker2D" parent="." unique_id=2066239883]
 position = Vector2(0, -42)
+
+[node name="ChargeGlow" type="Sprite2D" parent="Muzzle" unique_id=892580756]
+z_index = 2
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("3_bxvkx")
+
+[node name="SightRay" type="RayCast2D" parent="Muzzle" unique_id=663643955]
+target_position = Vector2(0, -400)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1381451748]
+path_desired_distance = 12.0
+target_desired_distance = 16.0

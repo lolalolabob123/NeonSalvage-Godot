@@ -8,6 +8,15 @@
 [ext_resource type="PackedScene" uid="uid://bq0waxbah2ib0" path="res://scenes/enemies/SentryDrone.tscn" id="6_hmiub"]
 [ext_resource type="PackedScene" uid="uid://bx1wgwy237acn" path="res://scenes/ui/GameOverScreen.tscn" id="7_x17an"]
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_bxvkx"]
+vertices = PackedVector2Array(-110, -148, 332, -100, 268, -100, -900, -118, -310, -148, 200, 188, 0, 188, -308, 175, -308, -25, 268, 100, -110, -212, -310, -212, -900, -268, -900, -332, 1516.9922, 1009.97656, 200, 252, 332, 100, 1515, -1004.9922, -1517.9375, 1004.0078, 0, 252, -1507.0469, -1002, -900, -182, -1100, -268, -1100, -182, -372, 175, -1100, -332, -1100, -118, -372, -25)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8, 2, 9), PackedInt32Array(10, 11, 12, 13), PackedInt32Array(14, 15, 16, 17), PackedInt32Array(15, 14, 18, 19), PackedInt32Array(16, 15, 5, 9), PackedInt32Array(17, 16, 1), PackedInt32Array(20, 17, 1, 10), PackedInt32Array(4, 3, 21, 11), PackedInt32Array(22, 12, 11, 21, 23), PackedInt32Array(7, 6, 19, 18, 24), PackedInt32Array(1, 0, 10), PackedInt32Array(20, 10, 13), PackedInt32Array(20, 13, 25), PackedInt32Array(18, 20, 25, 22), PackedInt32Array(18, 22, 23), PackedInt32Array(18, 23, 26), PackedInt32Array(24, 18, 26, 3, 27), PackedInt32Array(27, 3, 2, 8)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1517, -1012, 1525, -1015, 1527, 1020, -1528, 1014)])
+parsed_geometry_type = 1
+parsed_collision_mask = 4294967041
+source_geometry_mode = 2
+source_geometry_group_name = &"navigation_blockers"
+
 [node name="SalvageYardPrototype" type="Node2D" unique_id=1876928811]
 
 [node name="Floor" type="TextureRect" parent="." unique_id=30215839]
@@ -22,17 +31,23 @@ stretch_mode = 1
 
 [node name="Obstacles" type="Node2D" parent="." unique_id=109663560]
 
-[node name="CoverNorth" parent="Obstacles" unique_id=38345602 instance=ExtResource("1_ho4y1")]
+[node name="CoverNorth" parent="Obstacles" unique_id=38345602 groups=["navigation_blockers"] instance=ExtResource("1_ho4y1")]
 position = Vector2(-210, -180)
 
-[node name="CoverEast" parent="Obstacles" unique_id=1858343960 instance=ExtResource("1_ho4y1")]
+[node name="CoverNorth2" parent="Obstacles" unique_id=289107381 groups=["navigation_blockers"] instance=ExtResource("1_ho4y1")]
+position = Vector2(-1000, -300)
+
+[node name="CoverNorth3" parent="Obstacles" unique_id=1111306223 groups=["navigation_blockers"] instance=ExtResource("1_ho4y1")]
+position = Vector2(-1000, -150)
+
+[node name="CoverEast" parent="Obstacles" unique_id=1858343960 groups=["navigation_blockers"] instance=ExtResource("1_ho4y1")]
 position = Vector2(300, 0)
 rotation = 1.5707964
 
-[node name="CoverSouth" parent="Obstacles" unique_id=341584431 instance=ExtResource("1_ho4y1")]
+[node name="CoverSouth" parent="Obstacles" unique_id=341584431 groups=["navigation_blockers"] instance=ExtResource("1_ho4y1")]
 position = Vector2(100, 220)
 
-[node name="CoverWest" parent="Obstacles" unique_id=705001583 instance=ExtResource("1_ho4y1")]
+[node name="CoverWest" parent="Obstacles" unique_id=705001583 groups=["navigation_blockers"] instance=ExtResource("1_ho4y1")]
 position = Vector2(-340, 75)
 rotation = 1.5707964
 
@@ -54,3 +69,6 @@ dash_unlocked = true
 position = Vector2(200, 0)
 
 [node name="GameOverScreen" parent="." unique_id=557411570 instance=ExtResource("7_x17an")]
+
+[node name="EnemyNavigation" type="NavigationRegion2D" parent="." unique_id=572508341]
+navigation_polygon = SubResource("NavigationPolygon_bxvkx")
