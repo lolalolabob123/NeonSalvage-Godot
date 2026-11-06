@@ -55,21 +55,30 @@ rotation = 1.5707964
 [node name="SalvageCrate" parent="Obstacles" unique_id=362166078 instance=ExtResource("3_6eqrc")]
 position = Vector2(-120, -60)
 
-[node name="SalvageCrate2" parent="Obstacles" unique_id=1183883042 instance=ExtResource("3_6eqrc")]
-position = Vector2(150, -100)
-
-[node name="SalvageCrate3" parent="Obstacles" unique_id=143263393 instance=ExtResource("3_6eqrc")]
-position = Vector2(-60, 140)
-
 [node name="PlayerDrone" parent="." unique_id=1138100880 instance=ExtResource("1_dr0mu")]
 dash_unlocked = true
 
 [node name="SalvageHUD" parent="." unique_id=507685534 instance=ExtResource("5_n3p8q")]
 
-[node name="SentryDrone" parent="." unique_id=140838755 instance=ExtResource("6_hmiub")]
+[node name="SentryDrone" parent="." unique_id=140838755 node_paths=PackedStringArray("patrol_route") instance=ExtResource("6_hmiub")]
 position = Vector2(200, 0)
+patrol_route = NodePath("../PatrolRoutes/SentryPatrol01")
+
+[node name="SentryDrone2" parent="." unique_id=774804318 node_paths=PackedStringArray("patrol_route") instance=ExtResource("6_hmiub")]
+position = Vector2(-809, 19)
+patrol_route = NodePath("../PatrolRoutes/SentryPatrol01")
 
 [node name="GameOverScreen" parent="." unique_id=557411570 instance=ExtResource("7_x17an")]
 
 [node name="EnemyNavigation" type="NavigationRegion2D" parent="." unique_id=572508341]
 navigation_polygon = SubResource("NavigationPolygon_bxvkx")
+
+[node name="PatrolRoutes" type="Node2D" parent="." unique_id=1283895199]
+
+[node name="SentryPatrol01" type="Node2D" parent="PatrolRoutes" unique_id=633558565]
+
+[node name="PointA" type="Marker2D" parent="PatrolRoutes/SentryPatrol01" unique_id=17023676]
+position = Vector2(-472, -35)
+
+[node name="PointB" type="Marker2D" parent="PatrolRoutes/SentryPatrol01" unique_id=585559474]
+position = Vector2(516, -42)

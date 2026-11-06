@@ -33,6 +33,10 @@ enum SentryState {
 @export var max_health: int = 4
 @export var fire_interval: float = 1.5
 @export var windup_duration: float = 0.35
+@export var investigation_duration: float = 3.0
+@export var guard_scan_angle: float = 30.0
+@export var guard_scan_speed: float = 1.0
+@export var patrol_route: Node2D = null
 
 var target: Node2D = null
 var current_health: int = 0
@@ -43,10 +47,16 @@ var current_state: SentryState = SentryState.GUARD
 var home_position: Vector2 = Vector2.ZERO
 var last_known_position: Vector2 = Vector2.ZERO
 var has_last_known_position: bool = false
+var investigation_timer: float = 0.0
+var home_rotation: float = 0.0
+var guard_scan_timer: float = 0.0
+var patrol_points: Array[Vector2] = []
+var patrol_index: int = 0
 
 func _ready() -> void:
 	
 	home_position = global_position
+	home_rotation = rotation
 	current_health = max_health
 	charge_glow.hide()
 
@@ -54,16 +64,37 @@ func _ready() -> void:
 	detection_area.body_exited.connect(_on_body_exited)
 	
 	sight_ray.add_exception(self)
+	
+	# Load waypoints from  the assigned patrol route.
+	if patrol_route != null:
+		for point in patrol_route.get_children():
+			if point is Marker2D:
+				patrol_points.append(point.global_position)
+				
+		if patrol_points.size() >= 2:
+			#Set the first patrol destination.
+			navigation_agent.target_position = patrol_points[0]
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		if int(body.get("current_health")) <= 0:
-			return
-			
-		target = body
-		current_state = SentryState.PURSUE
-		navigation_agent.target_position = body.global_position
+	
+	print("Sentry detection entered", body.name)
+	
+	if not body.is_in_group("player"):
+		print("Body is not in the player group.")
+		return
+	
+	print("Player detected. Health: ", body.get("current_health"))
+	
+	if int(body.get("current_health")) <= 0:
+		print("Ignoring player because health is zero.")
+		return
+	
+	target = body
+	current_state = SentryState.PURSUE
+	navigation_agent.target_position = body.global_position
+	
+	print("Sentry swithced to PURSUE.")
 
 
 func _on_body_exited(body: Node2D) -> void:
@@ -73,6 +104,7 @@ func _on_body_exited(body: Node2D) -> void:
 		if has_last_known_position:
 			current_state = SentryState.INVESTIGATE
 			navigation_agent.target_position = last_known_position
+			investigation_timer = investigation_duration
 		else:
 			current_state = SentryState.GUARD
 
@@ -121,7 +153,77 @@ func _physics_process(delta: float) -> void:
 			var path_direction: Vector2 = next_point - global_position
 			
 			if path_direction.length_squared() > 4.0:
-				desired_velocity * path_direction.normalized() * move_speed
+				desired_velocity = path_direction.normalized() * move_speed
+				
+		else:
+			# Search briefly after reaching the last known position.
+			investigation_timer = maxf(
+				investigation_timer - delta,
+				0.0
+			)	
+			
+			if investigation_timer <= 0.0:
+				current_state = SentryState.RETURN_TO_POST
+				navigation_agent.target_position = home_position
+	
+	elif current_state == SentryState.RETURN_TO_POST:
+		# Check whether the Sentry has reached its starting position.
+		if navigation_agent.is_navigation_finished():
+			current_state = SentryState.GUARD
+			has_last_known_position = false
+		
+		else:
+			# Navigate back to the original position.
+			var next_point: Vector2 = navigation_agent.get_next_path_position()
+			var path_direction: Vector2 = next_point - global_position
+			
+			if path_direction.length_squared() > 4.0:
+				desired_velocity = path_direction.normalized() * move_speed
+				
+	# Slowly scan the surroundings while guarding
+	if current_state == SentryState.GUARD and patrol_points.size() < 2:
+		guard_scan_timer += delta
+		
+		# Sweep left and right around the original facing direction.
+		var scan_target: float = (
+			home_rotation
+			+ deg_to_rad(guard_scan_angle)
+			+ sin(guard_scan_timer * guard_scan_speed)
+		)
+		
+		rotation = lerp_angle(
+			rotation,
+			scan_target,
+			minf(rotation_speed * delta, 1.0)
+		)
+		
+	# Patrol between assigned waypoints while guarding.
+	if current_state == SentryState.GUARD and patrol_points.size() >= 2:
+		var waypoint: Vector2 = patrol_points[patrol_index]
+		
+		# Move to the next waypoint when close enough.
+		if global_position.distance_to(waypoint) <= 35.0:
+			patrol_index = (patrol_index + 1) % patrol_points.size()
+			waypoint = patrol_points[patrol_index]
+		
+		# Restore the patrol destination after other AI behaviours.
+		if navigation_agent.target_position.distance_to(waypoint) > 1.0:
+			navigation_agent.target_position = waypoint
+		
+		# Follow the navigation path around obstacles.
+		if not navigation_agent.is_navigation_finished():
+			var next_point: Vector2 = navigation_agent.get_next_path_position()
+			var path_direction: Vector2 = next_point - global_position
+			
+			if path_direction.length_squared() > 4.0:
+				desired_velocity = path_direction.normalized() * move_speed
+				
+				# Face the direction of movement.
+				rotation = lerp_angle(
+					rotation,
+					path_direction.angle() + PI / 2.0,
+					minf(rotation_speed * delta, 1.0)
+				)
 	
 	# Accelerate or decelerate smoothly.
 	velocity = velocity.move_toward(
@@ -133,6 +235,11 @@ func _physics_process(delta: float) -> void:
 
 	# Handle automatic firing.
 	if is_instance_valid(target) and has_line_of_sight():
+		
+		# Remember the player's position whenever they are visible
+		last_known_position = target.global_position
+		has_last_known_position = true
+		
 		if is_winding_up:
 			# Count down the weapon charging phase.
 			windup_timer -= delta
