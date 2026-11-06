@@ -77,49 +77,74 @@ func _ready() -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	
-	print("Sentry detection entered", body.name)
-	
 	if not body.is_in_group("player"):
-		print("Body is not in the player group.")
 		return
-	
-	print("Player detected. Health: ", body.get("current_health"))
 	
 	if int(body.get("current_health")) <= 0:
-		print("Ignoring player because health is zero.")
 		return
 	
+	# Remember the nearby player.
+	# Visibility is checked each physics frame
 	target = body
-	current_state = SentryState.PURSUE
-	navigation_agent.target_position = body.global_position
-	
-	print("Sentry swithced to PURSUE.")
-
 
 func _on_body_exited(body: Node2D) -> void:
-	if body == target:
-		target = null
-		
-		if has_last_known_position:
-			current_state = SentryState.INVESTIGATE
-			navigation_agent.target_position = last_known_position
-			investigation_timer = investigation_duration
-		else:
-			current_state = SentryState.GUARD
+	if body != target:
+		return
 
+	target = null
+
+	# Don't restart an investigation already in progress.
+	if current_state == SentryState.PURSUE:
+		begin_investigation()
+
+
+func begin_investigation() -> void:
+	is_winding_up = false
+	windup_timer = 0.0
+	fire_timer = fire_interval
+
+	if has_last_known_position:
+		current_state = SentryState.INVESTIGATE
+		navigation_agent.target_position = last_known_position
+		investigation_timer = investigation_duration
+	else:
+		current_state = SentryState.RETURN_TO_POST
+		navigation_agent.target_position = home_position
 
 func _physics_process(delta: float) -> void:
 	
-	# Stop tracking the player after their health reaches zero.
+	# Update awareness before choosing movement.
 	if is_instance_valid(target):
 		if int(target.get("current_health")) <= 0:
 			target = null
 			current_state = SentryState.GUARD
+			has_last_known_position = false
+
+			is_winding_up = false
+			windup_timer = 0.0
+			fire_timer = fire_interval
+
+		elif has_line_of_sight():
+			# Only visible positions become remembered positions.
+			last_known_position = target.global_position
+			has_last_known_position = true
+
+			# Acquire or reacquire the player.
+			if current_state != SentryState.PURSUE:
+				current_state = SentryState.PURSUE
+				navigation_agent.target_position = last_known_position
+
+		elif current_state == SentryState.PURSUE:
+			# Sight was lost: investigate the saved position.
+			begin_investigation()
+
+	elif current_state == SentryState.PURSUE:
+		# Also handle a target that was removed from the scene.
+		begin_investigation()
 	
 	var desired_velocity: Vector2 = Vector2.ZERO
 
-	if is_instance_valid(target):
+	if current_state == SentryState.PURSUE and is_instance_valid(target):
 		var to_player: Vector2 = target.global_position - global_position
 		var distance: float = to_player.length()
 
@@ -234,7 +259,11 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	# Handle automatic firing.
-	if is_instance_valid(target) and has_line_of_sight():
+	if (
+		current_state == SentryState.PURSUE
+		and is_instance_valid(target)
+		and has_line_of_sight()
+	):
 		
 		# Remember the player's position whenever they are visible
 		last_known_position = target.global_position
