@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://bydq36evamwfi" path="res://scripts/ui/facility_mission.gd" id="8_ecyq4"]
 [ext_resource type="Script" uid="uid://bk0u7tf7i7j10" path="res://scripts/ui/mission_hud.gd" id="10_v5ufq"]
 [ext_resource type="Script" uid="uid://bwtlstpn35lkj" path="res://scripts/ui/mission_results.gd" id="13_fs38f"]
+[ext_resource type="Script" uid="uid://d15rr4d8o45pr" path="res://scripts/security_response.gd" id="14_i52rn"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_r75la"]
 vertices = PackedVector2Array(942, -50, 942, -270, 1682, -270, 1682, 270, 942, 270, 942, 50, 370, -50, 370, 50, 370, 270, -370, 270, -370, -270, 370, -270)
@@ -258,6 +259,7 @@ position = Vector2(896, 0)
 
 [node name="MissionController" type="Node" parent="." unique_id=882846755]
 script = ExtResource("8_ecyq4")
+extraction_duration = 20.0
 
 [node name="MissionHUD" type="CanvasLayer" parent="." unique_id=1174053409 node_paths=PackedStringArray("mission_controller")]
 script = ExtResource("10_v5ufq")
@@ -320,3 +322,12 @@ horizontal_alignment = 1
 [node name="RestartButton" type="Button" parent="MissionResults/Overlay/Center/Panel/Margin/Content" unique_id=1559146770]
 layout_mode = 2
 text = "Run again"
+
+[node name="SecurityResponse" type="Node2D" parent="." unique_id=416945543 node_paths=PackedStringArray("mission_controller", "extraction_terminal")]
+script = ExtResource("14_i52rn")
+mission_controller = NodePath("../MissionController")
+sentry_scene = ExtResource("5_jbwxm")
+extraction_terminal = NodePath("../EntryRoom/Extractionterminal")
+
+[node name="ReinforcementSpawn" type="Marker2D" parent="SecurityResponse" unique_id=388084012]
+position = Vector2(1312, 180)

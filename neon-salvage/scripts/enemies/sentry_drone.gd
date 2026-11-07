@@ -97,6 +97,22 @@ func _on_body_exited(body: Node2D) -> void:
 	if current_state == SentryState.PURSUE:
 		begin_investigation()
 
+func respond_to_alarm(alarm_position: Vector2) -> void:
+	if current_health <= 0:
+		return
+	
+	# Keep pursuing a player already in clear view.
+	if (
+		current_state == SentryState.PURSUE
+		and is_instance_valid(target)
+		and has_line_of_sight()
+	):
+		return
+	
+	# Investigate the reported location.
+	last_known_position = alarm_position
+	has_last_known_position = true
+	begin_investigation()
 
 func begin_investigation() -> void:
 	is_winding_up = false

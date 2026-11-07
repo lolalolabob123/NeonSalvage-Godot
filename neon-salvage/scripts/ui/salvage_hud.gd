@@ -4,6 +4,7 @@ extends CanvasLayer
 @onready var hull_amount: Label = $HullPanel/Row/Amount
 @onready var hull_bar: ProgressBar = $HullBar
 @onready var dash_amount: Label = $DashPanel/Row/Amount
+@onready var banked_label: Label = $BankedLabel
 
 var player: Node = null
 var pulse_tween: Tween
@@ -13,6 +14,16 @@ var last_dash_text: String = ""
 
 func _ready() -> void:
 	amount_label.text = "0"
+	
+	ProgressStore.banked_salvage_changed.connect(
+		_on_banked_salvage_changed
+	)
+	_on_banked_salvage_changed(ProgressStore.banked_salvage)
+	
+	amount_label.add_theme_color_override(
+		"font_color",
+		Color("#F3AC57")
+	)
 
 	player = get_tree().get_first_node_in_group("player")
 
@@ -127,3 +138,9 @@ func _on_health_changed(current: int, maximum: int) -> void:
 
 	# Apply the updated colour.
 	hull_bar.add_theme_stylebox_override("fill", fill_style)
+
+func _on_banked_salvage_changed(total: int) -> void:
+	banked_label.add_theme_color_override(
+		"font_color",
+		Color("#31CBE0")
+	)

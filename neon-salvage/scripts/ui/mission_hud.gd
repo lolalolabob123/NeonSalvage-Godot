@@ -46,7 +46,7 @@ func _update_objective() -> void:
 		var seconds := ceili(mission_controller.extraction_time_left)
 
 		objective_label.text = (
-			"EXTRACTION INBOUND\n"
+			"EXTRACTION INBOUND — SECURITY ALERT\n"
 			+ "Transport arrives in %d seconds." % seconds
 		)
 		objective_label.modulate = Color("#F3AC57")

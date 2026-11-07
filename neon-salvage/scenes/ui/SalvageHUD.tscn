@@ -60,7 +60,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.5686275, 0.68235296, 0.73333335, 1)
 theme_override_font_sizes/font_size = 13
-text = "	SALVAGE"
+text = "UNBANKED"
 
 [node name="Amount" type="Label" parent="SalvagePanel/Row" unique_id=186692559]
 layout_mode = 2
@@ -146,3 +146,10 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_2r02q")
 max_value = 5.0
 value = 5.0
 show_percentage = false
+
+[node name="BankedLabel" type="Label" parent="." unique_id=1941415350]
+offset_left = 24.0
+offset_top = 230.0
+offset_right = 244.0
+offset_bottom = 258.0
+text = "BANKED: 0"
