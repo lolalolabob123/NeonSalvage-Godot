@@ -277,7 +277,6 @@ script = ExtResource("13_fs38f")
 mission_controller = NodePath("../MissionController")
 
 [node name="Overlay" type="ColorRect" parent="MissionResults" unique_id=194477661]
-custom_minimum_size = Vector2(440, 220)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -286,9 +285,12 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.7019608)
 
 [node name="Center" type="CenterContainer" parent="MissionResults/Overlay" unique_id=1794697554]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Panel" type="PanelContainer" parent="MissionResults/Overlay/Center" unique_id=2052727800]
 layout_mode = 2
