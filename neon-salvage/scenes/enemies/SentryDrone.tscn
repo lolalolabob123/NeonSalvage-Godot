@@ -10,7 +10,7 @@ radius = 25.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_0gddg"]
 radius = 240.0
 
-[node name="SentryDrone" type="CharacterBody2D" unique_id=140838755]
+[node name="SentryDrone" type="CharacterBody2D" unique_id=140838755 groups=["sentries"]]
 motion_mode = 1
 script = ExtResource("1_h8huq")
 

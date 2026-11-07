@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://b1pbipcmjsgtm"]
+
+[ext_resource type="Script" uid="uid://b7bj43gv4ga3b" path="res://scripts/environment/facility_door.gd" id="1_jjus3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5g8r0"]
+size = Vector2(32, 160)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0gddg"]
+radius = 64.0
+
+[node name="FacilityDoor" type="Node2D" unique_id=1856456536]
+script = ExtResource("1_jjus3")
+
+[node name="DoorBody" type="StaticBody2D" parent="." unique_id=86524592]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorBody" unique_id=749140368]
+shape = SubResource("RectangleShape2D_5g8r0")
+
+[node name="Panel" type="Polygon2D" parent="." unique_id=413304925]
+color = Color(0.7254902, 0.46666667, 0.24313726, 1)
+polygon = PackedVector2Array(-16, -80, 16, -80, 16, 80, -16, 80)
+
+[node name="InteractionPrompt" type="Label" parent="." unique_id=124022691]
+z_index = 2
+offset_left = -80.0
+offset_top = -116.0
+offset_right = 80.0
+offset_bottom = -88.0
+text = "[E] OPEN DOOR"
+horizontal_alignment = 1
+
+[node name="SentryApproachArea" type="Area2D" parent="." unique_id=1703166953]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SentryApproachArea" unique_id=952446287]
+shape = SubResource("CircleShape2D_0gddg")

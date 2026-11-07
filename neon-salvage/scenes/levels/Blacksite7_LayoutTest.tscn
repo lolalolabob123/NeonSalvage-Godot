@@ -2,9 +2,17 @@
 
 [ext_resource type="Texture2D" uid="uid://cqqouqhcddfm6" path="res://assets/environment/IndustrialDeck_A.png" id="1_fkvdf"]
 [ext_resource type="PackedScene" uid="uid://b8sv2wmfuy86" path="res://scenes/player/PlayerDrone.tscn" id="4_v5ufq"]
+[ext_resource type="PackedScene" uid="uid://xcxn162tuund" path="res://scenes/environment/SalvageCrate.tscn" id="5_fkvdf"]
 [ext_resource type="PackedScene" uid="uid://oohw5n16r2ll" path="res://scenes/ui/SalvageHUD.tscn" id="5_glfum"]
 [ext_resource type="PackedScene" uid="uid://bq0waxbah2ib0" path="res://scenes/enemies/SentryDrone.tscn" id="5_jbwxm"]
+[ext_resource type="PackedScene" uid="uid://b1pbipcmjsgtm" path="res://scenes/environment/FacilityDoor.tscn" id="6_5g8r0"]
+[ext_resource type="PackedScene" uid="uid://c126lk42xfw26" path="res://scenes/environment/Extractionterminal.tscn" id="6_glfum"]
+[ext_resource type="PackedScene" uid="uid://smciy0cpmrct" path="res://scenes/pickups/PrototypeCore.tscn" id="6_jh8b7"]
+[ext_resource type="Script" uid="uid://doy6tdcrrtjes" path="res://scripts/environment/extraction_terminal.gd" id="7_bljww"]
 [ext_resource type="PackedScene" uid="uid://bx1wgwy237acn" path="res://scenes/ui/GameOverScreen.tscn" id="7_fs38f"]
+[ext_resource type="Script" uid="uid://bydq36evamwfi" path="res://scripts/ui/facility_mission.gd" id="8_ecyq4"]
+[ext_resource type="Script" uid="uid://bk0u7tf7i7j10" path="res://scripts/ui/mission_hud.gd" id="10_v5ufq"]
+[ext_resource type="Script" uid="uid://bwtlstpn35lkj" path="res://scripts/ui/mission_results.gd" id="13_fs38f"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_r75la"]
 vertices = PackedVector2Array(942, -50, 942, -270, 1682, -270, 1682, 270, 942, 270, 942, 50, 370, -50, 370, 50, 370, 270, -370, 270, -370, -270, 370, -270)
@@ -36,6 +44,9 @@ size = Vector2(512, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_82m6p"]
 size = Vector2(512, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_afyma"]
+size = Vector2(160, 64)
 
 [node name="Blacksite7_LayoutTest" type="Node2D" unique_id=1876928811]
 
@@ -72,6 +83,9 @@ position = Vector2(-472, -35)
 position = Vector2(516, -42)
 
 [node name="EntryRoom" type="Node2D" parent="." unique_id=1532575703]
+
+[node name="SalvageCrate" parent="EntryRoom" unique_id=362166078 instance=ExtResource("5_fkvdf")]
+position = Vector2(-240, -160)
 
 [node name="WallNorth" type="StaticBody2D" parent="EntryRoom" unique_id=761430962 groups=["navigation_blockers"]]
 position = Vector2(0, -316)
@@ -127,6 +141,11 @@ shape = SubResource("RectangleShape2D_fkvdf")
 [node name="Polygon2D" type="Polygon2D" parent="EntryRoom/WallEastLower" unique_id=1672602917]
 color = Color(0.20392157, 0.28627452, 0.33333334, 1)
 polygon = PackedVector2Array(-16, -110, 16, -110, 16, 110, -16, 110)
+
+[node name="Extractionterminal" parent="EntryRoom" unique_id=2113362187 node_paths=PackedStringArray("mission_controller") instance=ExtResource("6_glfum")]
+position = Vector2(-240, 160)
+script = ExtResource("7_bljww")
+mission_controller = NodePath("../../MissionController")
 
 [node name="SecurityRoom" type="Node2D" parent="." unique_id=641623183]
 position = Vector2(1312, 0)
@@ -186,6 +205,9 @@ shape = SubResource("RectangleShape2D_fkvdf")
 color = Color(0.20392157, 0.28627452, 0.33333334, 1)
 polygon = PackedVector2Array(-16, -110, 16, -110, 16, 110, -16, 110)
 
+[node name="PrototypeCore" parent="SecurityRoom" unique_id=619065688 instance=ExtResource("6_jh8b7")]
+position = Vector2(240, 160)
+
 [node name="Corridor" type="Node2D" parent="." unique_id=770490834]
 
 [node name="WallNorth" type="StaticBody2D" parent="Corridor" unique_id=245071970 groups=["navigation_blockers"]]
@@ -219,3 +241,80 @@ polygon = PackedVector2Array(400, -80, 912, -80, 912, 80, 400, 80)
 [node name="SentryDrone" parent="." unique_id=140838755 node_paths=PackedStringArray("patrol_route") instance=ExtResource("5_jbwxm")]
 position = Vector2(1312, 0)
 patrol_route = NodePath("../PatrolRoutes/SentryPatrol01")
+
+[node name="Cover01" type="StaticBody2D" parent="." unique_id=758150178 groups=["navigation_blockers"]]
+position = Vector2(0, -140)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cover01" unique_id=245159401]
+shape = SubResource("RectangleShape2D_afyma")
+
+[node name="Polygon2D" type="Polygon2D" parent="Cover01" unique_id=1150995849]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-80, -32, 80, -32, 80, 32, -80, 32)
+
+[node name="FacilityDoor" parent="." unique_id=1856456536 instance=ExtResource("6_5g8r0")]
+position = Vector2(896, 0)
+
+[node name="MissionController" type="Node" parent="." unique_id=882846755]
+script = ExtResource("8_ecyq4")
+
+[node name="MissionHUD" type="CanvasLayer" parent="." unique_id=1174053409 node_paths=PackedStringArray("mission_controller")]
+script = ExtResource("10_v5ufq")
+mission_controller = NodePath("../MissionController")
+
+[node name="ObjectiveLabel" type="Label" parent="MissionHUD" unique_id=443284958]
+offset_left = 320.0
+offset_top = 24.0
+offset_right = 920.0
+offset_bottom = 84.0
+theme_override_font_sizes/font_size = 18
+
+[node name="MissionResults" type="CanvasLayer" parent="." unique_id=1804328093 node_paths=PackedStringArray("mission_controller")]
+process_mode = 3
+layer = 10
+script = ExtResource("13_fs38f")
+mission_controller = NodePath("../MissionController")
+
+[node name="Overlay" type="ColorRect" parent="MissionResults" unique_id=194477661]
+custom_minimum_size = Vector2(440, 220)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.7019608)
+
+[node name="Center" type="CenterContainer" parent="MissionResults/Overlay" unique_id=1794697554]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="PanelContainer" parent="MissionResults/Overlay/Center" unique_id=2052727800]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="MissionResults/Overlay/Center/Panel" unique_id=2139263631]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Content" type="VBoxContainer" parent="MissionResults/Overlay/Center/Panel/Margin" unique_id=1179561936]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TitleLabel" type="Label" parent="MissionResults/Overlay/Center/Panel/Margin/Content" unique_id=2038112083]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "EXTRACTION SUCCESSFUL"
+horizontal_alignment = 1
+
+[node name="DetailsLabel" type="Label" parent="MissionResults/Overlay/Center/Panel/Margin/Content" unique_id=769080798]
+layout_mode = 2
+text = "Prototype extracted."
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="MissionResults/Overlay/Center/Panel/Margin/Content" unique_id=1559146770]
+layout_mode = 2
+text = "Run again"
