@@ -7,13 +7,7 @@ signal player_destroyed
 
 var salvage_total: int = 0
 
-const CARBINE_BOLT: PackedScene = preload(
-	'res://scenes/projectiles/PrimaryCarbineBolt.tscn'
-)
-
 const PLAYER_DESTRUCTION_FX: PackedScene = preload("res://scenes/effects/PlayerDestructionFX.tscn")
-
-const FIRE_INTERVAL: float = 0.18
 
 @onready var weapon_pivot: Node2D = $VisualRig/WeaponPivot
 @onready var muzzle: Marker2D = $VisualRig/WeaponPivot/Muzzle
@@ -34,6 +28,7 @@ const FIRE_INTERVAL: float = 0.18
 @export var dash_speed: float = 950.0
 @export var dash_duration: float = 0.18
 @export var dash_cooldown: float = 2.0
+@export var primary_weapon: WeaponDefinition
 
 var fire_timer: float = 0.0
 var damage_cooldown: float = 0.0
@@ -58,11 +53,21 @@ func _process(delta: float) -> void:
 	fire_timer = maxf(fire_timer - delta, 0.0)
 	
 	if Input.is_action_pressed("fire_primary") and fire_timer <= 0.0:
-		fire_primary()
-		fire_timer = FIRE_INTERVAL
+		if primary_weapon != null:
+			if primary_weapon.projectile_scene != null:
+				fire_primary()
+				fire_timer = primary_weapon.fire_interval
 
 func fire_primary() -> void:
-	var projectile: Area2D = CARBINE_BOLT.instantiate() as Area2D
+	if primary_weapon == null:
+		return
+	
+	if primary_weapon.projectile_scene == null:
+		return
+	
+	var projectile: Area2D = (
+		primary_weapon.projectile_scene.instantiate() as Area2D
+	)
 	
 	get_tree().current_scene.add_child(projectile)
 	
@@ -282,3 +287,10 @@ func get_dash_status_text() -> String:
 		return "%.1fs" % dash_cooldown_remaining
 	
 	return "READY"
+
+func _ready() -> void:
+	if ProgressStore.hull_reinforced:
+		max_health += 1
+	
+	current_health = max_health
+	health_changed.emit(current_health, max_health)

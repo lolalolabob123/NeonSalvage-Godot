@@ -73,6 +73,9 @@ func complete_extraction() -> bool:
 	
 	extracted_salvage = mission_salvage
 	
+	player.set("salvage_total", 0)
+	player.emit_signal("salvage_changed", 0)
+	
 	extraction_complete = true
 	mission_completed.emit()
 	get_tree().paused = true

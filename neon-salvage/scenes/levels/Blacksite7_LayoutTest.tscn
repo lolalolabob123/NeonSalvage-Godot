@@ -15,10 +15,10 @@
 [ext_resource type="Script" uid="uid://bwtlstpn35lkj" path="res://scripts/ui/mission_results.gd" id="13_fs38f"]
 [ext_resource type="Script" uid="uid://d15rr4d8o45pr" path="res://scripts/security_response.gd" id="14_i52rn"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_r75la"]
-vertices = PackedVector2Array(942, -50, 942, -270, 1682, -270, 1682, 270, 942, 270, 942, 50, 370, -50, 370, 50, 370, 270, -370, 270, -370, -270, 370, -270)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 4, 5), PackedInt32Array(0, 3, 5), PackedInt32Array(6, 0, 5, 7), PackedInt32Array(7, 8, 9, 10), PackedInt32Array(6, 7, 10), PackedInt32Array(11, 6, 10)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-400, -300, 400, -300, 400, -80, 912, -80, 912, -300, 1712, -300, 1712, 300, 912, 300, 912, 80, 400, 80, 400, 300, -400, 300)])
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_i52rn"]
+vertices = PackedVector2Array(370, -270, 370, -50, 110, -78, 110, -202, -370, -270, -110, -202, -370, 270, -110, -78, 370, 270, 370, 50, 942, -50, 942, 50, 942, -270, 1682, -270, 1682, -50, 1682, 50, 2254, -50, 2254, -270, 2994, -270, 2994, 270, 2254, 270, 2254, 50, 1682, 270, 942, 270)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 0, 3, 5), PackedInt32Array(6, 4, 5, 7), PackedInt32Array(8, 6, 7, 2, 9), PackedInt32Array(9, 2, 1), PackedInt32Array(9, 1, 10, 11), PackedInt32Array(10, 12, 13, 14), PackedInt32Array(11, 10, 14, 15), PackedInt32Array(16, 17, 18, 19), PackedInt32Array(19, 20, 21), PackedInt32Array(16, 19, 21), PackedInt32Array(14, 16, 21, 15), PackedInt32Array(11, 15, 22, 23)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-400, -300, 400, -300, 400, -80, 912, -80, 912, -300, 1712, -300, 1712, -80, 2224, -80, 2224, -300, 3024, -300, 3024, 300, 2224, 300, 2224, 80, 1712, 80, 1712, 300, 912, 300, 912, 80, 400, 80, 400, 300, -400, 300)])
 parsed_geometry_type = 1
 parsed_collision_mask = 4294967041
 source_geometry_mode = 1
@@ -40,6 +40,9 @@ size = Vector2(32, 220)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fkvdf"]
 size = Vector2(32, 220)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i52rn"]
+size = Vector2(32, 220)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vpnm2"]
 size = Vector2(512, 32)
 
@@ -54,7 +57,7 @@ size = Vector2(160, 64)
 [node name="Floor" type="TextureRect" parent="." unique_id=30215839]
 offset_left = -1600.0
 offset_top = -1000.0
-offset_right = 2000.0
+offset_right = 3000.0
 offset_bottom = 1000.0
 mouse_filter = 2
 texture = ExtResource("1_fkvdf")
@@ -71,7 +74,7 @@ dash_unlocked = true
 visible = false
 
 [node name="EnemyNavigation" type="NavigationRegion2D" parent="." unique_id=572508341]
-navigation_polygon = SubResource("NavigationPolygon_r75la")
+navigation_polygon = SubResource("NavigationPolygon_i52rn")
 
 [node name="PatrolRoutes" type="Node2D" parent="." unique_id=1283895199]
 
@@ -173,16 +176,27 @@ shape = SubResource("RectangleShape2D_r75la")
 color = Color(0.20392157, 0.28627452, 0.33333334, 1)
 polygon = PackedVector2Array(-432, -16, 432, -16, 432, 16, -432, 16)
 
-[node name="WallEast" type="StaticBody2D" parent="SecurityRoom" unique_id=1145178574 groups=["navigation_blockers"]]
-position = Vector2(416, 0)
+[node name="WallEastUpper" type="StaticBody2D" parent="SecurityRoom" unique_id=1145178574 groups=["navigation_blockers"]]
+position = Vector2(416, -190)
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SecurityRoom/WallEast" unique_id=1213342150]
-shape = SubResource("RectangleShape2D_jbwxm")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SecurityRoom/WallEastUpper" unique_id=1213342150]
+shape = SubResource("RectangleShape2D_i52rn")
 
-[node name="Polygon2D" type="Polygon2D" parent="SecurityRoom/WallEast" unique_id=783245379]
+[node name="Polygon2D" type="Polygon2D" parent="SecurityRoom/WallEastUpper" unique_id=783245379]
 color = Color(0.20392157, 0.28627452, 0.33333334, 1)
-polygon = PackedVector2Array(-16, -300, 16, -300, 16, 300, -16, 300)
+polygon = PackedVector2Array(-16, -110, 16, -110, 16, 110, -16, 110)
+
+[node name="WallEastLower" type="StaticBody2D" parent="SecurityRoom" unique_id=1807078376 groups=["navigation_blockers"]]
+position = Vector2(416, 190)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SecurityRoom/WallEastLower" unique_id=2005943572]
+shape = SubResource("RectangleShape2D_i52rn")
+
+[node name="Polygon2D" type="Polygon2D" parent="SecurityRoom/WallEastLower" unique_id=226038563]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-16, -110, 16, -110, 16, 110, -16, 110)
 
 [node name="WallWestUpper" type="StaticBody2D" parent="SecurityRoom" unique_id=2030800715 groups=["navigation_blockers"]]
 position = Vector2(-416, -190)
@@ -208,6 +222,73 @@ polygon = PackedVector2Array(-16, -110, 16, -110, 16, 110, -16, 110)
 
 [node name="PrototypeCore" parent="SecurityRoom" unique_id=619065688 instance=ExtResource("6_jh8b7")]
 position = Vector2(240, 160)
+
+[node name="OptionalSalvageRoom" type="Node2D" parent="." unique_id=1909031761]
+position = Vector2(2624, 0)
+
+[node name="OptionalCrateNorth" parent="OptionalSalvageRoom" unique_id=1854757648 instance=ExtResource("5_fkvdf")]
+position = Vector2(200, -160)
+
+[node name="WallNorth" type="StaticBody2D" parent="OptionalSalvageRoom" unique_id=1570560865 groups=["navigation_blockers"]]
+position = Vector2(0, -316)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OptionalSalvageRoom/WallNorth" unique_id=1258590954]
+shape = SubResource("RectangleShape2D_0gddg")
+
+[node name="Polygon2D" type="Polygon2D" parent="OptionalSalvageRoom/WallNorth" unique_id=1137594654]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-432, -16, 432, -16, 432, 16, -432, 16)
+
+[node name="WallSouth" type="StaticBody2D" parent="OptionalSalvageRoom" unique_id=1965032808 groups=["navigation_blockers"]]
+position = Vector2(0, 316)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OptionalSalvageRoom/WallSouth" unique_id=686242041]
+shape = SubResource("RectangleShape2D_r75la")
+
+[node name="Polygon2D" type="Polygon2D" parent="OptionalSalvageRoom/WallSouth" unique_id=541932966]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-432, -16, 432, -16, 432, 16, -432, 16)
+
+[node name="WallEast" type="StaticBody2D" parent="OptionalSalvageRoom" unique_id=386826947 groups=["navigation_blockers"]]
+position = Vector2(416, 0)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OptionalSalvageRoom/WallEast" unique_id=1727906723]
+shape = SubResource("RectangleShape2D_jbwxm")
+
+[node name="Polygon2D" type="Polygon2D" parent="OptionalSalvageRoom/WallEast" unique_id=747022583]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-16, -300, 16, -300, 16, 300, -16, 300)
+
+[node name="WallWestUpper" type="StaticBody2D" parent="OptionalSalvageRoom" unique_id=762303014 groups=["navigation_blockers"]]
+position = Vector2(-416, -190)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OptionalSalvageRoom/WallWestUpper" unique_id=1233417908]
+shape = SubResource("RectangleShape2D_5g8r0")
+
+[node name="Polygon2D" type="Polygon2D" parent="OptionalSalvageRoom/WallWestUpper" unique_id=1388098941]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-16, -110, 16, -110, 16, 110, -16, 110)
+
+[node name="WallWestLower" type="StaticBody2D" parent="OptionalSalvageRoom" unique_id=113110201 groups=["navigation_blockers"]]
+position = Vector2(-416, 190)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OptionalSalvageRoom/WallWestLower" unique_id=463538907]
+shape = SubResource("RectangleShape2D_fkvdf")
+
+[node name="Polygon2D" type="Polygon2D" parent="OptionalSalvageRoom/WallWestLower" unique_id=684201990]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-16, -110, 16, -110, 16, 110, -16, 110)
+
+[node name="OptionalRoomGuard" parent="OptionalSalvageRoom" unique_id=140838755 instance=ExtResource("5_jbwxm")]
+position = Vector2(-120, 0)
+
+[node name="OptionalCrateSouth" parent="OptionalSalvageRoom" unique_id=830038882 instance=ExtResource("5_fkvdf")]
+position = Vector2(200, 160)
 
 [node name="Corridor" type="Node2D" parent="." unique_id=770490834]
 
@@ -239,7 +320,38 @@ position = Vector2(15, -4)
 color = Color(0.11372549, 0.1882353, 0.23137255, 1)
 polygon = PackedVector2Array(400, -80, 912, -80, 912, 80, 400, 80)
 
-[node name="SentryDrone" parent="." unique_id=140838755 node_paths=PackedStringArray("patrol_route") instance=ExtResource("5_jbwxm")]
+[node name="OptionalCorridor" type="Node2D" parent="." unique_id=1806694438]
+position = Vector2(1312, 0)
+
+[node name="WallNorth" type="StaticBody2D" parent="OptionalCorridor" unique_id=1109751542 groups=["navigation_blockers"]]
+position = Vector2(656, -96)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OptionalCorridor/WallNorth" unique_id=435835198]
+shape = SubResource("RectangleShape2D_vpnm2")
+
+[node name="Polygon2D" type="Polygon2D" parent="OptionalCorridor/WallNorth" unique_id=1434687476]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-256, -16, 256, -16, 256, 16, -256, 16)
+
+[node name="WallSouth" type="StaticBody2D" parent="OptionalCorridor" unique_id=1147951380 groups=["navigation_blockers"]]
+position = Vector2(656, 96)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OptionalCorridor/WallSouth" unique_id=2060821403]
+shape = SubResource("RectangleShape2D_82m6p")
+
+[node name="Polygon2D" type="Polygon2D" parent="OptionalCorridor/WallSouth" unique_id=1488524000]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-256, -16, 256, -16, 256, 16, -256, 16)
+
+[node name="Polygon2D" type="Polygon2D" parent="OptionalCorridor" unique_id=60042034]
+z_index = -1
+position = Vector2(15, -4)
+color = Color(0.11372549, 0.1882353, 0.23137255, 1)
+polygon = PackedVector2Array(400, -80, 912, -80, 912, 80, 400, 80)
+
+[node name="SentryDrone" parent="." unique_id=1027890939 node_paths=PackedStringArray("patrol_route") instance=ExtResource("5_jbwxm")]
 position = Vector2(1312, 0)
 patrol_route = NodePath("../PatrolRoutes/SentryPatrol01")
 

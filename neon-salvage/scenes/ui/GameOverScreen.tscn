@@ -68,6 +68,12 @@ theme_override_font_sizes/font_size = 42
 text = "SYSTEM OFFLINE"
 horizontal_alignment = 1
 
+[node name="DetailsLabel" type="Label" parent="ContentCenter/Content" unique_id=352606960]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Mission rewards lost."
+horizontal_alignment = 1
+
 [node name="RestartButton" type="Button" parent="ContentCenter/Content" unique_id=633088564]
 custom_minimum_size = Vector2(240, 48)
 layout_mode = 2

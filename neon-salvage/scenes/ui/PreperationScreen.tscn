@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://caku4o70roear"]
+
+[ext_resource type="Script" uid="uid://or6hof2aipoc" path="res://scripts/ui/preperation_screen.gd" id="1_e7rqc"]
+[ext_resource type="PackedScene" uid="uid://bjqolkdc44sdd" path="res://scenes/levels/Blacksite7_LayoutTest.tscn" id="2_jcvlb"]
+
+[node name="PreperationScreen" type="Control" unique_id=351789938]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e7rqc")
+mission_scene = ExtResource("2_jcvlb")
+
+[node name="Background" type="ColorRect" parent="." unique_id=198470478]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.0627451, 0.105882354, 0.14117648, 1)
+
+[node name="Center" type="CenterContainer" parent="." unique_id=1150015716]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Center" unique_id=927202602]
+custom_minimum_size = Vector2(440, 240)
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Center/Panel" unique_id=360732633]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Content" type="VBoxContainer" parent="Center/Panel/Margin" unique_id=2131173122]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TitleLabel" type="Label" parent="Center/Panel/Margin/Content" unique_id=1396109081]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "NEON SALVAGE"
+horizontal_alignment = 1
+
+[node name="BankedLabel" type="Label" parent="Center/Panel/Margin/Content" unique_id=1078175954]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Banked Salvage: 0"
+horizontal_alignment = 1
+
+[node name="HullUpgradeButton" type="Button" parent="Center/Panel/Margin/Content" unique_id=551257756]
+layout_mode = 2
+
+[node name="UpgradeStatus" type="Label" parent="Center/Panel/Margin/Content" unique_id=1637880845]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="DeployButton" type="Button" parent="Center/Panel/Margin/Content" unique_id=421703672]
+layout_mode = 2
+text = "Deploy to Blacksite 7"

@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://scxi5spjwust" path="res://assets/player/PlayerDrone_Shadow.png" id="1_a1gcq"]
 [ext_resource type="Script" uid="uid://bbi86bji33bwu" path="res://scripts/player/player_drone.gd" id="1_qcr60"]
+[ext_resource type="Resource" uid="uid://dfy6k7q7kne8x" path="res://resources/weapons/Carbine.tres" id="2_annjb"]
 [ext_resource type="Texture2D" uid="uid://dm8671uxxhdu0" path="res://assets/player/PlayerDrone_Thruster_Left.png" id="2_cunj6"]
 [ext_resource type="Texture2D" uid="uid://tsgq733vkbqn" path="res://assets/effects/SoftRadialLight.tres" id="3_cunj6"]
 [ext_resource type="Texture2D" uid="uid://c061xcskklm7d" path="res://assets/player/PlayerDrone_Thruster_Right.png" id="3_qcr60"]
@@ -154,6 +155,7 @@ collision_layer = 7
 collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_qcr60")
+primary_weapon = ExtResource("2_annjb")
 
 [node name="GroundShadow" type="Sprite2D" parent="." unique_id=727927119]
 scale = Vector2(0.5, 0.5)

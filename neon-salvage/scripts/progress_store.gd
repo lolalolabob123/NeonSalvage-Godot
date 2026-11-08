@@ -3,12 +3,12 @@ extends Node
 signal banked_salvage_changed(total: int)
 
 const SAVE_PATH: String = "user://neon_salvage_progress.cfg"
+const HULL_REINFORCEMENT_COST: int = 10
 
 var banked_salvage: int = 0
 var storage_available: bool = true
-
 var save_data: ConfigFile = ConfigFile.new()
-
+var hull_reinforced: bool = false
 
 func _ready() -> void:
 	var error := save_data.load(SAVE_PATH)
@@ -37,7 +37,17 @@ func _ready() -> void:
 		return
 
 	banked_salvage = int(saved_total)
-
+	
+	var saved_upgrade: Variant = save_data.get_value(
+		"upgrades", "hull_reinforced", false
+	)
+	
+	if typeof(saved_upgrade) != TYPE_BOOL:
+		storage_available = false
+		push_error("Saved hull upgrade is invalid.")
+		return
+	
+	hull_reinforced = bool(saved_upgrade)
 
 func bank_salvage(amount: int) -> bool:
 	if not storage_available or amount < 0:
@@ -55,5 +65,30 @@ func bank_salvage(amount: int) -> bool:
 		return false
 
 	banked_salvage = new_total
+	banked_salvage_changed.emit(banked_salvage)
+	return true
+
+func purchase_hull_reinforcement() -> bool:
+	if not storage_available or hull_reinforced:
+		return false
+	
+	if banked_salvage < HULL_REINFORCEMENT_COST:
+		return false
+	
+	var new_total: int = banked_salvage - HULL_REINFORCEMENT_COST
+	
+	save_data.set_value("progress", "banked_salvage", new_total)
+	save_data.set_value("upgrades", "hull_reinforced", true)
+	
+	var error := save_data.save(SAVE_PATH)
+	
+	if error != OK:
+		save_data.set_value("progress", "banked_salvage", banked_salvage)
+		save_data.set_value("upgrades", "hull_reinforced", false)
+		push_error("Could not save hull upgrade: %s" % error_string(error))
+		return false
+	
+	banked_salvage = new_total
+	hull_reinforced = true
 	banked_salvage_changed.emit(banked_salvage)
 	return true

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="WeaponDefinition" format=3 uid="uid://dfy6k7q7kne8x"]
+
+[ext_resource type="Script" uid="uid://56es1qj2gbrb" path="res://scripts/weapons/weapon_definition.gd" id="1_j680y"]
+[ext_resource type="PackedScene" uid="uid://bnw354tsrq20i" path="res://scenes/projectiles/PrimaryCarbineBolt.tscn" id="1_n32xt"]
+
+[resource]
+script = ExtResource("1_j680y")
+display_name = "Carbine"
+projectile_scene = ExtResource("1_n32xt")
+metadata/_custom_type_script = "uid://56es1qj2gbrb"
