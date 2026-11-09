@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://b350x34tney4e"]
+
+[ext_resource type="Texture2D" uid="uid://di7d15fpbbiv6" path="res://assets/environment/IndustrialCover_A.png" id="1_308jv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_afyma"]
+size = Vector2(160, 64)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0gddg"]
+polygon = PackedVector2Array(-80, -32, 80, -32, 80, 32, -80, 32)
+
+[node name="Cover01" type="StaticBody2D" unique_id=506129236 groups=["navigation_blockers"]]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1305514266]
+shape = SubResource("RectangleShape2D_afyma")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=865052853]
+visible = false
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-80, -32, 80, -32, 80, 32, -80, 32)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=85512805]
+occluder = SubResource("OccluderPolygon2D_0gddg")
+
+[node name="CoverArt" type="TextureRect" parent="." unique_id=355035230]
+offset_left = -80.0
+offset_top = -32.0
+offset_right = 80.0
+offset_bottom = 32.0
+mouse_filter = 2
+texture = ExtResource("1_308jv")
+expand_mode = 1

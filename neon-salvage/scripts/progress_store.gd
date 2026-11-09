@@ -9,6 +9,7 @@ var banked_salvage: int = 0
 var storage_available: bool = true
 var save_data: ConfigFile = ConfigFile.new()
 var hull_reinforced: bool = false
+var selected_primary_weapon: WeaponDefinition = null
 
 func _ready() -> void:
 	var error := save_data.load(SAVE_PATH)

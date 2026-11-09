@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="WeaponDefinition" format=3 uid="uid://ctcjxncy230e8"]
+
+[ext_resource type="PackedScene" uid="uid://2hxcm3rx0s0i" path="res://scenes/projectiles/ShotgunPellet.tscn" id="1_61ck4"]
+[ext_resource type="Script" uid="uid://56es1qj2gbrb" path="res://scripts/weapons/weapon_definition.gd" id="1_gqpy6"]
+
+[resource]
+script = ExtResource("1_gqpy6")
+weapon_id = &"shotgun"
+display_name = "Shotgun"
+projectile_scene = ExtResource("1_61ck4")
+fire_interval = 0.8
+pellets_per_shot = 5
+spread_degrees = 24.0
+metadata/_custom_type_script = "uid://56es1qj2gbrb"

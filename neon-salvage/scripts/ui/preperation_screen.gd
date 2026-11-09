@@ -1,11 +1,15 @@
 extends Control
 
+const CARBINE: WeaponDefinition = preload("res://resources/weapons/Carbine.tres")
+const SHOTGUN: WeaponDefinition = preload("res://resources/weapons/Shotgun.tres")
+
 @export var mission_scene: PackedScene
 
 @onready var banked_label: Label = $Center/Panel/Margin/Content/BankedLabel
 @onready var deploy_button: Button = $Center/Panel/Margin/Content/DeployButton
 @onready var hull_upgrade_button: Button = $Center/Panel/Margin/Content/HullUpgradeButton
 @onready var upgrade_status: Label = $Center/Panel/Margin/Content/UpgradeStatus
+@onready var primary_weapon_selector: OptionButton = $Center/Panel/Margin/Content/PrimaryWeaponSelector
 
 func _ready() -> void:
 	_update_bank_balance(ProgressStore.banked_salvage)
@@ -13,9 +17,18 @@ func _ready() -> void:
 	ProgressStore.banked_salvage_changed.connect(
 		_update_bank_balance
 	)
-	deploy_button.pressed.connect(_deploy)
 	
+	deploy_button.pressed.connect(_deploy)
 	hull_upgrade_button.pressed.connect(_purchase_hull_upgrade)
+	
+	primary_weapon_selector.clear()
+	primary_weapon_selector.add_item(CARBINE.display_name)
+	primary_weapon_selector.add_item(SHOTGUN.display_name)
+	
+	if ProgressStore.selected_primary_weapon == SHOTGUN:
+		primary_weapon_selector.select(1)
+	else:
+		primary_weapon_selector.select(0)
 
 func _update_bank_balance(total: int) -> void:
 	banked_label.text = "Banked salvage: %d" % total
@@ -25,6 +38,11 @@ func _deploy() -> void:
 	if mission_scene == null:
 		push_error("PreperationScene needs its Mission Scene assigned.")
 		return
+	
+	if primary_weapon_selector.selected == 1:
+		ProgressStore.selected_primary_weapon = SHOTGUN
+	else:
+		ProgressStore.selected_primary_weapon = CARBINE
 	
 	deploy_button.disabled = true
 	get_tree().paused = false

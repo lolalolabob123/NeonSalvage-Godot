@@ -65,6 +65,9 @@ layout_mode = 2
 layout_mode = 2
 horizontal_alignment = 1
 
+[node name="PrimaryWeaponSelector" type="OptionButton" parent="Center/Panel/Margin/Content" unique_id=1764344887]
+layout_mode = 2
+
 [node name="DeployButton" type="Button" parent="Center/Panel/Margin/Content" unique_id=421703672]
 layout_mode = 2
 text = "Deploy to Blacksite 7"

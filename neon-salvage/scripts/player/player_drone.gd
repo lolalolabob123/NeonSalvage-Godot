@@ -65,14 +65,31 @@ func fire_primary() -> void:
 	if primary_weapon.projectile_scene == null:
 		return
 	
-	var projectile: Area2D = (
-		primary_weapon.projectile_scene.instantiate() as Area2D
-	)
+	var pellet_count: int = maxi(primary_weapon.pellets_per_shot, 1)
+	var half_spread: float = primary_weapon.spread_degrees * 0.5
 	
-	get_tree().current_scene.add_child(projectile)
-	
-	projectile.global_position = muzzle.global_position
-	projectile.global_rotation = weapon_pivot.global_rotation
+	for pellet_index in range(pellet_count):
+		var angle_offset: float = 0.0
+		
+		if pellet_count > 1:
+			var fraction: float = (
+				float(pellet_index) / float(pellet_count - 1)
+			)
+			
+			angle_offset = deg_to_rad(
+				lerpf(-half_spread, half_spread, fraction)
+			)
+		
+		var projectile: Area2D = (
+			primary_weapon.projectile_scene.instantiate() as Area2D
+		)
+		
+		get_tree().current_scene.add_child(projectile)
+		
+		projectile.global_position = muzzle.global_position
+		projectile.global_rotation = (
+			muzzle.global_rotation + angle_offset
+		)
 
 func _physics_process(delta: float) -> void:
 	var input_direction: Vector2 = Input.get_vector(
@@ -289,6 +306,9 @@ func get_dash_status_text() -> String:
 	return "READY"
 
 func _ready() -> void:
+	if ProgressStore.selected_primary_weapon != null:
+		primary_weapon = ProgressStore.selected_primary_weapon
+	
 	if ProgressStore.hull_reinforced:
 		max_health += 1
 	

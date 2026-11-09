@@ -33,4 +33,9 @@ func _show_results() -> void:
 
 func _restart_mission() -> void:
 	get_tree().paused = false
-	get_tree().reload_current_scene()
+	
+	var error := get_tree().change_scene_to_file("res://scenes/ui/PreperationScreen.tscn")
+	
+	if error != OK:
+		get_tree().PAUSED = true
+		push_error("Could not return to preperation: %S" % error_string(error))
