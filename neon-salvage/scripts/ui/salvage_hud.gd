@@ -5,6 +5,7 @@ extends CanvasLayer
 @onready var hull_bar: ProgressBar = $HullBar
 @onready var dash_amount: Label = $DashPanel/Row/Amount
 @onready var banked_label: Label = $BankedLabel
+@onready var ammo_label: Label = $AmmoLabel
 
 var player: Node = null
 var pulse_tween: Tween
@@ -46,7 +47,9 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if not is_instance_valid(player):
 		return
-
+	
+	ammo_label.text = str(player.call("get_ammo_status_text"))
+	
 	var dash_text: String = str(
 		player.call("get_dash_status_text")
 	)

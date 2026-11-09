@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 @export var mission_controller: FacilityMission
+@export var show_security_card_objective: bool = false
 
 @onready var objective_label: Label = $ObjectiveLabel
 
@@ -24,6 +25,8 @@ func _ready() -> void:
 	mission_controller.mission_completed.connect(
 		_update_objective
 	)
+	
+	mission_controller.security_card_collected.connect(_update_objective)
 	
 	_update_objective()
 
@@ -57,6 +60,10 @@ func _update_objective() -> void:
 			+ "Return to the entry room."
 		)
 		objective_label.modulate = Color("#F3AC57")
+		
+	elif show_security_card_objective and not mission_controller.has_security_card:
+		objective_label.text = "OBJECTIVE\nFind the security access card in the entry room."
+		objective_label.modulate = Color("#31CBE0")
 
 	else:
 		objective_label.text = (

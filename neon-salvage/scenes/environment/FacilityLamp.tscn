@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cigmjeegxcf36"]
+
+[sub_resource type="Gradient" id="Gradient_np0i0"]
+offsets = PackedFloat32Array(0, 0.5421687, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.73333335, 0.73333335, 0.73333335, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_np0i0"]
+gradient = SubResource("Gradient_np0i0")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[node name="SecurityLamp" type="PointLight2D" unique_id=822794020]
+color = Color(0.6117647, 0.9098039, 1, 1)
+energy = 0.7
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_np0i0")
+texture_scale = 1.8

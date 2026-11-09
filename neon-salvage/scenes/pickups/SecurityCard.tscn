@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://da3ly0e8iir5v"]
+
+[ext_resource type="Script" uid="uid://d14fd0dsip0at" path="res://scripts/pickups/security_card.gd" id="1_m30ks"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0gddg"]
+radius = 24.0
+
+[node name="SecurityCard" type="Area2D" unique_id=1142736059]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_m30ks")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1326996114]
+shape = SubResource("CircleShape2D_0gddg")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=369967920]
+color = Color(0.9529412, 0.6745098, 0.34117648, 1)
+polygon = PackedVector2Array(-16, -10, 16, -10, 16, 10, -16, 10)

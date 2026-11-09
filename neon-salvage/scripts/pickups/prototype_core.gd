@@ -1,4 +1,7 @@
 extends Area2D
+
+@onready var interaction_prompt: Label = $InteractionPrompt
+
 func _unhandled_input(event: InputEvent) -> void:
 	if not event.is_action_pressed("interact"):
 		return
@@ -22,3 +25,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			queue_free()
 		
 		return
+
+func _process(_delta) -> void:
+	interaction_prompt.hide()
+	
+	for body in get_overlapping_bodies():
+		if body.is_in_group("player") and int(body.get("current_health")) > 0:
+			interaction_prompt.show()
+			return

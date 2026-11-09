@@ -35,6 +35,8 @@ var damage_cooldown: float = 0.0
 var dash_direction: Vector2 = Vector2.ZERO
 var dash_time_remaining: float = 0.0
 var dash_cooldown_remaining: float = 0.0
+var ammo_in_magazine: int = 0
+var reload_time_remaining: float = 0.0
 
 func _process(delta: float) -> void:
 	
@@ -50,13 +52,7 @@ func _process(delta: float) -> void:
 	if aim_direction.length_squared() > 4.0:
 		weapon_pivot.global_rotation = aim_direction.angle() + PI / 2.0
 	
-	fire_timer = maxf(fire_timer - delta, 0.0)
-	
-	if Input.is_action_pressed("fire_primary") and fire_timer <= 0.0:
-		if primary_weapon != null:
-			if primary_weapon.projectile_scene != null:
-				fire_primary()
-				fire_timer = primary_weapon.fire_interval
+	_update_primary_weapon(delta)
 
 func fire_primary() -> void:
 	if primary_weapon == null:
@@ -90,6 +86,45 @@ func fire_primary() -> void:
 		projectile.global_rotation = (
 			muzzle.global_rotation + angle_offset
 		)
+
+func _update_primary_weapon(delta: float) -> void:
+	if primary_weapon == null or primary_weapon.projectile_scene == null:
+		return
+	
+	fire_timer = maxf(fire_timer - delta, 0.0)
+	
+	if reload_time_remaining > 0.0:
+		reload_time_remaining = maxf(reload_time_remaining - delta, 0.0)
+		if reload_time_remaining == 0.0:
+			ammo_in_magazine = primary_weapon.magazine_capacity
+		return
+
+	if Input.is_action_just_pressed("reload"):
+		if ammo_in_magazine < primary_weapon.magazine_capacity:
+			reload_time_remaining = primary_weapon.reload_duration
+			return
+	
+	if(
+		ammo_in_magazine > 0
+		and fire_timer <= 0.0
+		and Input.is_action_just_pressed("fire_primary")
+	):
+		fire_primary()
+		ammo_in_magazine -= 1
+		fire_timer = primary_weapon.fire_interval
+
+func get_ammo_status_text() -> String:
+	if primary_weapon == null:
+		return ""
+	
+	if reload_time_remaining > 0.0:
+		return "%s RELOADING" % primary_weapon.display_name
+	
+	return "%s %d/%d [R]" % [
+		primary_weapon.display_name,
+		ammo_in_magazine,
+		primary_weapon.magazine_capacity,
+	]
 
 func _physics_process(delta: float) -> void:
 	var input_direction: Vector2 = Input.get_vector(
@@ -294,7 +329,7 @@ func flash_player_hit() -> void:
 		"modulate",
 		Color.WHITE,
 		0.18
-	) 
+	)
 
 func get_dash_status_text() -> String:
 	if not dash_unlocked:
@@ -308,6 +343,9 @@ func get_dash_status_text() -> String:
 func _ready() -> void:
 	if ProgressStore.selected_primary_weapon != null:
 		primary_weapon = ProgressStore.selected_primary_weapon
+	
+	if primary_weapon != null:
+		ammo_in_magazine = primary_weapon.magazine_capacity
 	
 	if ProgressStore.hull_reinforced:
 		max_health += 1

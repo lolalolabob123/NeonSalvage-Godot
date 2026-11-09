@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cgwogbn28uee7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5g8r0"]
+size = Vector2(32, 220)
+
+[node name="WallWestUpper" type="StaticBody2D" unique_id=330831572 groups=["navigation_blockers"]]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=849537935]
+shape = SubResource("RectangleShape2D_5g8r0")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1259928634]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-16, -110, 16, -110, 16, 110, -16, 110)
+
+[node name="innerTrim" type="Line2D" parent="." unique_id=148681255]
+points = PackedVector2Array(12, -106, 12, 106)
+width = 3.0
+default_color = Color(0.32156864, 0.41568628, 0.46666667, 1)

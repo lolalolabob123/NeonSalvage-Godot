@@ -23,10 +23,11 @@ polygon = PackedVector2Array(-16, -80, 16, -80, 16, 80, -16, 80)
 
 [node name="InteractionPrompt" type="Label" parent="." unique_id=124022691]
 z_index = 2
+custom_minimum_size = Vector2(240, 0)
 offset_left = -80.0
-offset_top = -116.0
-offset_right = 80.0
-offset_bottom = -88.0
+offset_top = -120.0
+offset_right = 160.0
+offset_bottom = -92.0
 text = "[E] OPEN DOOR"
 horizontal_alignment = 1
 
@@ -35,3 +36,15 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SentryApproachArea" unique_id=952446287]
 shape = SubResource("CircleShape2D_0gddg")
+
+[node name="Frame" type="Node2D" parent="." unique_id=509476196]
+
+[node name="TopCap" type="Polygon2D" parent="Frame" unique_id=1634192781]
+position = Vector2(0, -90)
+color = Color(0.32156864, 0.41568628, 0.46666667, 1)
+polygon = PackedVector2Array(-24, -10, 24, -10, 24, 10, -24, 10)
+
+[node name="BottomCap" type="Polygon2D" parent="Frame" unique_id=1407705993]
+position = Vector2(0, 90)
+color = Color(0.32156864, 0.41568628, 0.46666667, 1)
+polygon = PackedVector2Array(-24, -10, 24, -10, 24, 10, -24, 10)

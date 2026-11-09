@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://caku4o70roear"]
 
 [ext_resource type="Script" uid="uid://or6hof2aipoc" path="res://scripts/ui/preperation_screen.gd" id="1_e7rqc"]
-[ext_resource type="PackedScene" uid="uid://bjqolkdc44sdd" path="res://scenes/levels/Blacksite7_LayoutTest.tscn" id="2_jcvlb"]
+[ext_resource type="PackedScene" uid="uid://clvv1eri84hdl" path="res://scenes/levels/Blacksite7_VisualTest.tscn" id="2_jcvlb"]
 
 [node name="PreperationScreen" type="Control" unique_id=351789938]
 layout_mode = 3

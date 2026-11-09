@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dosul5yaab2my" path="res://scripts/projectiles/sentry_pulse.gd" id="1_nhs24"]
 [ext_resource type="Texture2D" uid="uid://do5ny6rnn1fe7" path="res://assets/projectiles/SentryPulse_A.png" id="1_ushlm"]
+[ext_resource type="Material" uid="uid://d2iwm1hrftn0x" path="res://resources/materials/CombatUnshaded.tres" id="2_ues0e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ushlm"]
 radius = 6.0
@@ -13,6 +14,7 @@ script = ExtResource("1_nhs24")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=92497000]
 texture_filter = 1
+material = ExtResource("2_ues0e")
 texture = ExtResource("1_ushlm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=208641831]

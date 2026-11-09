@@ -2,6 +2,7 @@ extends Node2D
 
 @export var interaction_distance: float = 96.0
 @export var auto_close_delay: float = 0.6
+@export var requires_security_card: bool = false
 
 @onready var collision_shape: CollisionShape2D = $DoorBody/CollisionShape2D
 @onready var panel: Polygon2D = $Panel
@@ -10,6 +11,7 @@ extends Node2D
 
 var is_open: bool = false
 var close_timer: float = 0.0
+var access_granted: bool = false
 
 func _unhandled_input(event: InputEvent) -> void:
 	if is_open or not event.is_action_pressed("interact"):
@@ -25,6 +27,13 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if global_position.distance_to(player.global_position) > interaction_distance:
 		return
+	
+	if is_locked():
+		if not player_has_security_card():
+			get_viewport().set_input_as_handled()
+			return
+		
+		access_granted = true
 	
 	open_door()
 	get_viewport().set_input_as_handled()
@@ -51,6 +60,14 @@ func _process(_delta: float) -> void:
 		global_position.distance_to(player.global_position)
 		<= interaction_distance
 	)
+	
+	if is_locked():
+		if player_has_security_card():
+			interaction_prompt.text = "[E] UNLOCK DOOR"
+		else:
+			interaction_prompt.text = "SECURITY CARD REQUIRED"
+	else:
+		interaction_prompt.text = "[E] OPEN DOOR"
 
 func _ready() -> void:
 	sentry_approach_area.body_entered.connect(
@@ -58,7 +75,7 @@ func _ready() -> void:
 	)
 
 func _on_sentry_approach(body: Node2D) -> void:
-	if is_open:
+	if is_open or is_locked():
 		return
 	
 	if not body.is_in_group("sentries"):
@@ -89,3 +106,13 @@ func close_door() -> void:
 	is_open = false
 	collision_shape.set_deferred("disabled", false)
 	panel.show()
+
+func is_locked() -> bool:
+	return requires_security_card and not access_granted
+
+func player_has_security_card() -> bool:
+	var mission := get_tree().get_first_node_in_group(
+		"mission_controller"
+	) as FacilityMission
+	
+	return is_instance_valid(mission) and mission.has_security_card

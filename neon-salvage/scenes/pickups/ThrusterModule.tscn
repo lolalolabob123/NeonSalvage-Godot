@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dxlegqbd22q4p"]
+
+[ext_resource type="Script" uid="uid://dvln2ldjoey07" path="res://scripts/pickups/thruster_module.gd" id="1_5mog8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0gddg"]
+radius = 24.0
+
+[node name="ThrusterModule" type="Area2D" unique_id=432663130]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_5mog8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1327026712]
+shape = SubResource("CircleShape2D_0gddg")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1179716799]
+color = Color(0.19215687, 0.79607844, 0.8784314, 1)
+polygon = PackedVector2Array(-16, -12, 0, -12, 16, 0, 0, 12, -16, 12, -3, 0)
+
+[node name="HintAnchor" type="Node2D" parent="." unique_id=1125688921]
+position = Vector2(-130, -68)
+
+[node name="PickupHint" type="Label" parent="HintAnchor" unique_id=200782606]
+custom_minimum_size = Vector2(260, 48)
+offset_right = 260.0
+offset_bottom = 49.0
+text = "THRUSTER MODULE
+Fly over to unlock dash"
+horizontal_alignment = 1

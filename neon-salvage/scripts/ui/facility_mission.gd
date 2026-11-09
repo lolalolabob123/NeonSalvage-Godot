@@ -5,10 +5,12 @@ signal prototype_recovered
 signal extraction_called
 signal transport_arrived
 signal mission_completed
+signal security_card_collected
 
 @export var extraction_duration: float = 8.0
 
 var has_prototype: bool = false
+var has_security_card: bool = false
 var has_called_extraction: bool = false
 var extraction_time_left: float = 0.0
 var transport_ready: bool = false
@@ -80,3 +82,10 @@ func complete_extraction() -> bool:
 	mission_completed.emit()
 	get_tree().paused = true
 	return true 
+
+func collect_security_card() -> void:
+	if has_security_card:
+		return
+	
+	has_security_card = true
+	security_card_collected.emit()

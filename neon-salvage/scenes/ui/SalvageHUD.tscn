@@ -127,7 +127,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.5686275, 0.68235296, 0.73333335, 1)
 theme_override_font_sizes/font_size = 13
-text = "DASH"
+text = "DASH [SPACE]"
 
 [node name="Amount" type="Label" parent="DashPanel/Row" unique_id=2096699885]
 layout_mode = 2
@@ -153,3 +153,9 @@ offset_top = 230.0
 offset_right = 244.0
 offset_bottom = 258.0
 text = "BANKED: 0"
+
+[node name="AmmoLabel" type="Label" parent="." unique_id=88108235]
+offset_left = 24.0
+offset_top = 260.0
+offset_right = 64.0
+offset_bottom = 283.0

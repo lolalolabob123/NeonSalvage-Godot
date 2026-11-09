@@ -16,3 +16,12 @@ shape = SubResource("CircleShape2D_e2wva")
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=693745532]
 color = Color(0.19215687, 0.79607844, 0.8784314, 1)
 polygon = PackedVector2Array(0, -20, 16, 0, 0, 20, -16, 0)
+
+[node name="InteractionPrompt" type="Label" parent="." unique_id=1117824332]
+custom_minimum_size = Vector2(240, 28)
+offset_left = -120.0
+offset_top = -58.0
+offset_right = 120.0
+offset_bottom = -30.0
+text = "[E] RECOVER PROTOTYPE"
+horizontal_alignment = 1

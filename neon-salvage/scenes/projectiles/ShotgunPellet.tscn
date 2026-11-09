@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://2hxcm3rx0s0i"]
 
 [ext_resource type="Script" uid="uid://dcxpnmqd3tm5x" path="res://scripts/projectiles/primary_carbine_bolt.gd" id="1_f6lm4"]
+[ext_resource type="Material" uid="uid://d2iwm1hrftn0x" path="res://resources/materials/CombatUnshaded.tres" id="2_ue1nh"]
 [ext_resource type="Texture2D" uid="uid://dapwwvvttuhhb" path="res://assets/projectiles/PrimaryCarbineBolt.png" id="2_vnv22"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hnsw8"]
@@ -14,6 +15,7 @@ script = ExtResource("1_f6lm4")
 lifetime = 0.32
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1885978306]
+material = ExtResource("2_ue1nh")
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_vnv22")
 
