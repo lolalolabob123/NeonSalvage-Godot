@@ -210,11 +210,20 @@ rotation = 3.1415927
 [node name="EntranceCover" parent="SecurityRoom" unique_id=1542903561 instance=ExtResource("9_wg0vd")]
 position = Vector2(-180, 0)
 
+[node name="SalvageWingSign" type="Label" parent="SecurityRoom" unique_id=1668772942]
+offset_left = 195.0
+offset_top = -73.0
+offset_right = 359.0
+offset_bottom = -50.0
+theme_override_colors/font_color = Color(0.9529412, 0.6745098, 0.34117648, 1)
+text = "SALVAGE STORAGE →"
+
 [node name="OptionalSalvageRoom" type="Node2D" parent="." unique_id=1909031761]
 position = Vector2(2624, 0)
 
 [node name="OptionalCrateNorth" parent="OptionalSalvageRoom" unique_id=1854757648 instance=ExtResource("5_uvhhh")]
 position = Vector2(200, -160)
+salvage_amount = 3
 
 [node name="WallNorth" type="StaticBody2D" parent="OptionalSalvageRoom" unique_id=1570560865 groups=["navigation_blockers"]]
 position = Vector2(0, -316)
@@ -276,6 +285,7 @@ position = Vector2(-120, 0)
 
 [node name="OptionalCrateSouth" parent="OptionalSalvageRoom" unique_id=830038882 instance=ExtResource("5_uvhhh")]
 position = Vector2(200, 160)
+salvage_amount = 3
 
 [node name="Corridor" type="Node2D" parent="." unique_id=770490834]
 

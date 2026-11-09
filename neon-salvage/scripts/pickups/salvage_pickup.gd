@@ -1,8 +1,8 @@
 extends Area2D
 
-@export var salvage_amount: int = 1
-
 @onready var pickup_sprite: Sprite2D = $Sprite2D
+
+var salvage_amount: int = 1
 
 func _ready() -> void:
 	monitoring = false

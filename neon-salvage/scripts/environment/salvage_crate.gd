@@ -3,6 +3,7 @@ extends StaticBody2D
 const SALVAGE_PICKUP_SCENE: PackedScene = preload("res://scenes/pickups/SalvagePickup.tscn")
 
 @export var max_health: int = 4
+@export var salvage_amount: int = 1
 
 @onready var crate_visual: Sprite2D = $CrateVisual
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
@@ -57,9 +58,8 @@ func take_damage(amount: int) -> void:
 		hit_tween.tween_callback(queue_free)
 
 func _spawn_salvage() -> void:
-	print("CRATE DROP FUNCTION CALLED")
-	
-	var pickup: Area2D = SALVAGE_PICKUP_SCENE.instantiate() as Area2D
-	
+	var pickup := SALVAGE_PICKUP_SCENE.instantiate() as Area2D
+	pickup.set("salvage_amount", salvage_amount)
+
 	get_tree().current_scene.add_child(pickup)
 	pickup.global_position = global_position
