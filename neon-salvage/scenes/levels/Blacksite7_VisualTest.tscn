@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bx1wgwy237acn" path="res://scenes/ui/GameOverScreen.tscn" id="4_cx0k4"]
 [ext_resource type="PackedScene" uid="uid://da3ly0e8iir5v" path="res://scenes/pickups/SecurityCard.tscn" id="5_0sgdx"]
 [ext_resource type="PackedScene" uid="uid://xcxn162tuund" path="res://scenes/environment/SalvageCrate.tscn" id="5_uvhhh"]
-[ext_resource type="PackedScene" uid="uid://c126lk42xfw26" path="res://scenes/environment/Extractionterminal.tscn" id="6_b6bub"]
+[ext_resource type="PackedScene" uid="uid://c126lk42xfw26" path="res://scenes/environment/ExtractionTerminal.tscn" id="6_b6bub"]
 [ext_resource type="Script" uid="uid://doy6tdcrrtjes" path="res://scripts/environment/extraction_terminal.gd" id="7_0sgdx"]
 [ext_resource type="PackedScene" uid="uid://smciy0cpmrct" path="res://scenes/pickups/PrototypeCore.tscn" id="8_lef3q"]
 [ext_resource type="PackedScene" uid="uid://e0ni7bv6g0qk" path="res://scenes/environment/WallStraight864.tscn" id="8_lsiek"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://bwtlstpn35lkj" path="res://scripts/ui/mission_results.gd" id="13_tavan"]
 [ext_resource type="PackedScene" uid="uid://ti5tm2bhdgvs" path="res://scenes/environment/CorridorWall512.tscn" id="14_b6bub"]
 [ext_resource type="Script" uid="uid://d15rr4d8o45pr" path="res://scripts/security_response.gd" id="14_wrxkt"]
+[ext_resource type="Script" uid="uid://biyu34xgffssx" path="res://scripts/environment/auto_floor.gd" id="15_dnu7g"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_i52rn"]
 vertices = PackedVector2Array(1682, -270, 1682, -50, 1502, -78, 1502, -202, 942, -270, 1282, -202, 942, -50, 1022, -62, 1242, 62, 1242, -62, 1682, 50, 1682, 270, 942, 270, 1022, 62, 942, 50, 2254, -50, 2254, -270, 2994, -270, 2994, 270, 2254, 270, 2254, 50, 1282, -78, 370, 50, 370, 270, -370, 270, -370, -270, 370, -270, 370, -50)
@@ -68,6 +69,7 @@ size = Vector2(512, 32)
 [node name="Blacksite7_LayoutTest" type="Node2D" unique_id=1876928811]
 
 [node name="Floor" type="TextureRect" parent="." unique_id=30215839]
+visible = false
 offset_left = -1600.0
 offset_top = -1000.0
 offset_right = 3000.0
@@ -218,6 +220,16 @@ offset_bottom = -50.0
 theme_override_colors/font_color = Color(0.9529412, 0.6745098, 0.34117648, 1)
 text = "SALVAGE STORAGE →"
 
+[node name="AutoFloor" type="Polygon2D" parent="SecurityRoom" unique_id=2066141425 node_paths=PackedStringArray("west_wall", "east_wall", "north_wall", "south_wall")]
+texture_repeat = 2
+texture = ExtResource("1_np0i0")
+polygon = PackedVector2Array(-416, -316, 416, -316, 416, 316, -416, 316)
+script = ExtResource("15_dnu7g")
+west_wall = NodePath("../WallWestUpper")
+east_wall = NodePath("../WallEastUpper")
+north_wall = NodePath("../WallNorth")
+south_wall = NodePath("../WallSouth")
+
 [node name="OptionalSalvageRoom" type="Node2D" parent="." unique_id=1909031761]
 position = Vector2(2624, 0)
 
@@ -309,6 +321,16 @@ energy = 0.4
 shadow_enabled = false
 texture_scale = 0.6
 
+[node name="AutoFloor" type="Polygon2D" parent="Corridor" unique_id=523646097 node_paths=PackedStringArray("west_wall", "east_wall", "north_wall", "south_wall")]
+texture_repeat = 2
+texture = ExtResource("1_np0i0")
+polygon = PackedVector2Array(416, -96, 896, -96, 896, 96, 416, 96)
+script = ExtResource("15_dnu7g")
+west_wall = NodePath("../../EntryRoom/WallEastUpper")
+east_wall = NodePath("../../SecurityRoom/WallWestUpper")
+north_wall = NodePath("../WallNorth")
+south_wall = NodePath("../WallSouth")
+
 [node name="OptionalCorridor" type="Node2D" parent="." unique_id=1806694438]
 position = Vector2(1312, 0)
 
@@ -350,7 +372,7 @@ requires_security_card = true
 
 [node name="MissionController" type="Node" parent="." unique_id=882846755]
 script = ExtResource("11_4q2j7")
-extraction_duration = 20.0
+extraction_duration = 14.0
 
 [node name="MissionHUD" type="CanvasLayer" parent="." unique_id=1174053409 node_paths=PackedStringArray("mission_controller")]
 script = ExtResource("12_g5lru")

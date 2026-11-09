@@ -3,12 +3,18 @@ extends Area2D
 @export var mission_controller: FacilityMission
 
 @onready var interaction_prompt: Label = $InteractionPrompt
+@onready var status_strip: Polygon2D = $Panel/StatusStrip
 
 func _process(_delta: float) -> void:
 	interaction_prompt.visible = player_can_interact()
 	
 	if not is_instance_valid(mission_controller):
 		return
+	
+	if mission_controller.transport_ready:
+		status_strip.color = Color("#B6FFD0")
+	else:
+		status_strip.color = Color("#F3AC57")
 	
 	if mission_controller.transport_ready:
 		interaction_prompt.text = "[E] EXTRACT"

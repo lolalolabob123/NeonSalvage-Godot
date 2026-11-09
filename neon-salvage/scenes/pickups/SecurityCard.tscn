@@ -16,3 +16,15 @@ shape = SubResource("CircleShape2D_0gddg")
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=369967920]
 color = Color(0.9529412, 0.6745098, 0.34117648, 1)
 polygon = PackedVector2Array(-16, -10, 16, -10, 16, 10, -16, 10)
+
+[node name="HintAnchor" type="Node2D" parent="." unique_id=1018357510]
+position = Vector2(-130, -68)
+
+[node name="PickupHint" type="Label" parent="HintAnchor" unique_id=949114771]
+custom_minimum_size = Vector2(260, 48)
+offset_right = 260.0
+offset_bottom = 49.0
+text = "SECURITY ACCESS CARD
+Fly over to collect"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true

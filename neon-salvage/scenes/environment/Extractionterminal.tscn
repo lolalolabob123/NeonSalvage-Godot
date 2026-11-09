@@ -3,7 +3,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_jc4l2"]
 radius = 80.0
 
-[node name="Extractionterminal" type="Area2D" unique_id=2113362187]
+[node name="ExtractionTerminal" type="Area2D" unique_id=2113362187]
 collision_layer = 0
 collision_mask = 2
 
@@ -12,6 +12,11 @@ shape = SubResource("CircleShape2D_jc4l2")
 
 [node name="Panel" type="Polygon2D" parent="." unique_id=1793015652]
 color = Color(0.19215687, 0.79607844, 0.8784314, 1)
+polygon = PackedVector2Array(-32, -20, 32, -20, 32, 20, -32, 20)
+
+[node name="StatusStrip" type="Polygon2D" parent="Panel" unique_id=873251100]
+color = Color(0.9529412, 0.6745098, 0.34117648, 1)
+polygon = PackedVector2Array(-22, -12, 22, -12, 22, -7, -22, -7)
 
 [node name="InteractionPrompt" type="Label" parent="." unique_id=1377470342]
 visible = false
@@ -21,3 +26,14 @@ offset_right = 110.0
 offset_bottom = -28.0
 text = "[E] CALL EXTRACTION"
 horizontal_alignment = 1
+
+[node name="HintAnchor" type="Node2D" parent="." unique_id=59483277]
+position = Vector2(-130, -100)
+
+[node name="PickupHint" type="Label" parent="HintAnchor" unique_id=1189827550]
+custom_minimum_size = Vector2(260, 48)
+offset_right = 260.0
+offset_bottom = 49.0
+text = "EXTRACTION TERMINAL"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://oohw5n16r2ll" path="res://scenes/ui/SalvageHUD.tscn" id="5_glfum"]
 [ext_resource type="PackedScene" uid="uid://bq0waxbah2ib0" path="res://scenes/enemies/SentryDrone.tscn" id="5_jbwxm"]
 [ext_resource type="PackedScene" uid="uid://b1pbipcmjsgtm" path="res://scenes/environment/FacilityDoor.tscn" id="6_5g8r0"]
-[ext_resource type="PackedScene" uid="uid://c126lk42xfw26" path="res://scenes/environment/Extractionterminal.tscn" id="6_glfum"]
+[ext_resource type="PackedScene" uid="uid://c126lk42xfw26" path="res://scenes/environment/ExtractionTerminal.tscn" id="6_glfum"]
 [ext_resource type="PackedScene" uid="uid://smciy0cpmrct" path="res://scenes/pickups/PrototypeCore.tscn" id="6_jh8b7"]
 [ext_resource type="Script" uid="uid://doy6tdcrrtjes" path="res://scripts/environment/extraction_terminal.gd" id="7_bljww"]
 [ext_resource type="PackedScene" uid="uid://bx1wgwy237acn" path="res://scenes/ui/GameOverScreen.tscn" id="7_fs38f"]
