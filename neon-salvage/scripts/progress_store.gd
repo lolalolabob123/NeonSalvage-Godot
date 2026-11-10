@@ -4,6 +4,14 @@ signal banked_salvage_changed(total: int)
 
 const SAVE_PATH: String = "user://neon_salvage_progress.cfg"
 const HULL_REINFORCEMENT_COST: int = 10
+const HULL_REINFORCEMENT_ID: StringName = &"hull_reinforcement"
+
+const SKILLS := {
+	HULL_REINFORCEMENT_ID: {
+		"cost": HULL_REINFORCEMENT_COST,
+		"prerequisites": [],
+	},
+}
 
 var banked_salvage: int = 0
 var storage_available: bool = true
@@ -70,10 +78,7 @@ func bank_salvage(amount: int) -> bool:
 	return true
 
 func purchase_hull_reinforcement() -> bool:
-	if not storage_available or hull_reinforced:
-		return false
-	
-	if banked_salvage < HULL_REINFORCEMENT_COST:
+	if not can_purchase_skill(HULL_REINFORCEMENT_ID):
 		return false
 	
 	var new_total: int = banked_salvage - HULL_REINFORCEMENT_COST
@@ -93,3 +98,30 @@ func purchase_hull_reinforcement() -> bool:
 	hull_reinforced = true
 	banked_salvage_changed.emit(banked_salvage)
 	return true
+
+func has_skill(skill_id: StringName) -> bool:
+	return skill_id == HULL_REINFORCEMENT_ID and hull_reinforced
+
+func get_skill_cost(skill_id: StringName) -> int:
+	var skill: Dictionary = SKILLS.get(skill_id, {})
+	return int(skill.get("cost", -1))
+
+func can_purchase_skill(skill_id: StringName) -> bool:
+	var cost := get_skill_cost(skill_id)
+	if not storage_available or cost < 0 or has_skill(skill_id):
+		return false
+	if banked_salvage < cost:
+		return false
+	
+	for prerequisite in SKILLS[skill_id]["prerequisites"]:
+		if not has_skill(prerequisite):
+			return false
+	
+	return true
+
+func purchase_skill(skill_id: StringName) -> bool:
+	match skill_id:
+		HULL_REINFORCEMENT_ID:
+			return purchase_hull_reinforcement()
+		_:
+			return false

@@ -58,15 +58,40 @@ theme_override_font_sizes/font_size = 18
 text = "Banked Salvage: 0"
 horizontal_alignment = 1
 
-[node name="HullUpgradeButton" type="Button" parent="Center/Panel/Margin/Content" unique_id=551257756]
+[node name="MissionBriefingLabel" type="Label" parent="Center/Panel/Margin/Content" unique_id=1338324614]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "BLACKSITE 7
+Recover the prototype and return to the entry terminal.
+Calling extraction triggers a security response.
+
+Optional: Raid Salvage Storage for extra loot.
+Extract successfully to bank your salvage."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="SkillTree" type="VBoxContainer" parent="Center/Panel/Margin/Content" unique_id=1305558613]
 layout_mode = 2
 
-[node name="UpgradeStatus" type="Label" parent="Center/Panel/Margin/Content" unique_id=1637880845]
+[node name="Label" type="Label" parent="Center/Panel/Margin/Content/SkillTree" unique_id=229876156]
+layout_mode = 2
+text = "UPGRADES / SURVIVAL"
+horizontal_alignment = 1
+
+[node name="HullUpgradeButton" type="Button" parent="Center/Panel/Margin/Content/SkillTree" unique_id=551257756]
+layout_mode = 2
+
+[node name="UpgradeStatus" type="Label" parent="Center/Panel/Margin/Content/SkillTree" unique_id=1637880845]
 layout_mode = 2
 horizontal_alignment = 1
 
 [node name="PrimaryWeaponSelector" type="OptionButton" parent="Center/Panel/Margin/Content" unique_id=1764344887]
 layout_mode = 2
+
+[node name="WeaponDescription" type="Label" parent="Center/Panel/Margin/Content" unique_id=923246664]
+layout_mode = 2
+autowrap_mode = 3
 
 [node name="DeployButton" type="Button" parent="Center/Panel/Margin/Content" unique_id=421703672]
 layout_mode = 2

@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bq0waxbah2ib0" path="res://scenes/enemies/SentryDrone.tscn" id="9_dnu7g"]
 [ext_resource type="PackedScene" uid="uid://dxlegqbd22q4p" path="res://scenes/pickups/ThrusterModule.tscn" id="9_lef3q"]
 [ext_resource type="PackedScene" uid="uid://b350x34tney4e" path="res://scenes/environment/SecurityCover.tscn" id="9_wg0vd"]
+[ext_resource type="PackedScene" uid="uid://df6gvmjp0tngj" path="res://scenes/environment/AutoFloor.tscn" id="10_4q2j7"]
 [ext_resource type="PackedScene" uid="uid://b1pbipcmjsgtm" path="res://scenes/environment/FacilityDoor.tscn" id="10_526av"]
 [ext_resource type="Script" uid="uid://bydq36evamwfi" path="res://scripts/ui/facility_mission.gd" id="11_4q2j7"]
 [ext_resource type="PackedScene" uid="uid://cigmjeegxcf36" path="res://scenes/environment/FacilityLamp.tscn" id="11_uvhhh"]
@@ -22,6 +23,9 @@
 [ext_resource type="PackedScene" uid="uid://ti5tm2bhdgvs" path="res://scenes/environment/CorridorWall512.tscn" id="14_b6bub"]
 [ext_resource type="Script" uid="uid://d15rr4d8o45pr" path="res://scripts/security_response.gd" id="14_wrxkt"]
 [ext_resource type="Script" uid="uid://biyu34xgffssx" path="res://scripts/environment/auto_floor.gd" id="15_dnu7g"]
+[ext_resource type="Script" uid="uid://bekvjdhdmwubs" path="res://scripts/environment/auto_corridor.gd" id="17_526av"]
+[ext_resource type="PackedScene" uid="uid://bvtdbeetlwk31" path="res://scenes/environment/ExteriorSupports.tscn" id="20_g5lru"]
+[ext_resource type="Script" uid="uid://hvbthjgtynm" path="res://scripts/environment/exterior_supports.gd" id="21_tavan"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_i52rn"]
 vertices = PackedVector2Array(1682, -270, 1682, -50, 1502, -78, 1502, -202, 942, -270, 1282, -202, 942, -50, 1022, -62, 1242, 62, 1242, -62, 1682, 50, 1682, 270, 942, 270, 1022, 62, 942, 50, 2254, -50, 2254, -270, 2994, -270, 2994, 270, 2254, 270, 2254, 50, 1282, -78, 370, 50, 370, 270, -370, 270, -370, -270, 370, -270, 370, -50)
@@ -60,11 +64,11 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(1, 0.5)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vpnm2"]
-size = Vector2(512, 32)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4q2j7"]
+size = Vector2(384, 32)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_82m6p"]
-size = Vector2(512, 32)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g5lru"]
+size = Vector2(384, 32)
 
 [node name="Blacksite7_LayoutTest" type="Node2D" unique_id=1876928811]
 
@@ -170,6 +174,13 @@ mission_controller = NodePath("../../MissionController")
 
 [node name="ThrusterModule" parent="EntryRoom" unique_id=432663130 instance=ExtResource("9_lef3q")]
 
+[node name="AutoFloor" parent="EntryRoom" unique_id=977414101 node_paths=PackedStringArray("west_wall", "east_wall", "north_wall", "south_wall") instance=ExtResource("10_4q2j7")]
+polygon = PackedVector2Array(-416, -316, 416, -316, 416, 316, -416, 316)
+west_wall = NodePath("../WallWest")
+east_wall = NodePath("../WallEastUpper")
+north_wall = NodePath("../WallNorth")
+south_wall = NodePath("../WallSouth")
+
 [node name="SecurityRoom" type="Node2D" parent="." unique_id=641623183]
 position = Vector2(1312, 0)
 
@@ -221,6 +232,8 @@ theme_override_colors/font_color = Color(0.9529412, 0.6745098, 0.34117648, 1)
 text = "SALVAGE STORAGE →"
 
 [node name="AutoFloor" type="Polygon2D" parent="SecurityRoom" unique_id=2066141425 node_paths=PackedStringArray("west_wall", "east_wall", "north_wall", "south_wall")]
+z_index = -10
+z_as_relative = false
 texture_repeat = 2
 texture = ExtResource("1_np0i0")
 polygon = PackedVector2Array(-416, -316, 416, -316, 416, 316, -416, 316)
@@ -231,7 +244,7 @@ north_wall = NodePath("../WallNorth")
 south_wall = NodePath("../WallSouth")
 
 [node name="OptionalSalvageRoom" type="Node2D" parent="." unique_id=1909031761]
-position = Vector2(2624, 0)
+position = Vector2(2621, -5)
 
 [node name="OptionalCrateNorth" parent="OptionalSalvageRoom" unique_id=1854757648 instance=ExtResource("5_uvhhh")]
 position = Vector2(200, -160)
@@ -299,7 +312,19 @@ position = Vector2(-120, 0)
 position = Vector2(200, 160)
 salvage_amount = 3
 
-[node name="Corridor" type="Node2D" parent="." unique_id=770490834]
+[node name="AutoFloor" parent="OptionalSalvageRoom" unique_id=1773321010 node_paths=PackedStringArray("west_wall", "east_wall", "north_wall", "south_wall") instance=ExtResource("10_4q2j7")]
+polygon = PackedVector2Array(-416, -316, 416, -316, 416, 316, -416, 316)
+west_wall = NodePath("../WallWestUpper")
+east_wall = NodePath("../WallEast")
+north_wall = NodePath("../WallNorth")
+south_wall = NodePath("../WallSouth")
+
+[node name="Corridor" type="Node2D" parent="." unique_id=770490834 node_paths=PackedStringArray("west_end", "east_end", "north_wall", "south_wall")]
+script = ExtResource("17_526av")
+west_end = NodePath("../EntryRoom/WallEastUpper")
+east_end = NodePath("../SecurityRoom/WallWestUpper")
+north_wall = NodePath("WallNorth")
+south_wall = NodePath("WallSouth")
 
 [node name="WallNorth" parent="Corridor" unique_id=348806659 instance=ExtResource("14_b6bub")]
 position = Vector2(656, -96)
@@ -309,6 +334,7 @@ position = Vector2(656, 96)
 rotation = 3.1415927
 
 [node name="Polygon2D" type="Polygon2D" parent="Corridor" unique_id=1050992002]
+visible = false
 z_index = -1
 position = Vector2(15, -4)
 color = Color(0.11372549, 0.1882353, 0.23137255, 1)
@@ -322,6 +348,7 @@ shadow_enabled = false
 texture_scale = 0.6
 
 [node name="AutoFloor" type="Polygon2D" parent="Corridor" unique_id=523646097 node_paths=PackedStringArray("west_wall", "east_wall", "north_wall", "south_wall")]
+z_index = -10
 texture_repeat = 2
 texture = ExtResource("1_np0i0")
 polygon = PackedVector2Array(416, -96, 896, -96, 896, 96, 416, 96)
@@ -331,36 +358,65 @@ east_wall = NodePath("../../SecurityRoom/WallWestUpper")
 north_wall = NodePath("../WallNorth")
 south_wall = NodePath("../WallSouth")
 
-[node name="OptionalCorridor" type="Node2D" parent="." unique_id=1806694438]
+[node name="ExteriorSupports" parent="Corridor" unique_id=1236914904 node_paths=PackedStringArray("west_end", "east_end", "corridor_wall") instance=ExtResource("20_g5lru")]
+script = ExtResource("21_tavan")
+west_end = NodePath("../../EntryRoom/WallEastUpper")
+east_end = NodePath("../../SecurityRoom/WallWestUpper")
+corridor_wall = NodePath("../WallNorth")
+below_corridor = true
+
+[node name="OptionalCorridor" type="Node2D" parent="." unique_id=1806694438 node_paths=PackedStringArray("west_end", "east_end", "north_wall", "south_wall")]
 position = Vector2(1312, 0)
+script = ExtResource("17_526av")
+west_end = NodePath("../SecurityRoom/WallEastUpper")
+east_end = NodePath("../OptionalSalvageRoom/WallWestUpper")
+north_wall = NodePath("WallNorth")
+south_wall = NodePath("WallSouth")
 
-[node name="WallNorth" type="StaticBody2D" parent="OptionalCorridor" unique_id=1109751542 groups=["navigation_blockers"]]
-position = Vector2(656, -96)
-collision_mask = 0
+[node name="WallNorth" parent="OptionalCorridor" unique_id=1159639976 instance=ExtResource("14_b6bub")]
+position = Vector2(654.5, -96)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="OptionalCorridor/WallNorth" unique_id=435835198]
-shape = SubResource("RectangleShape2D_vpnm2")
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="OptionalCorridor/WallNorth" unique_id=435835198]
+shape = SubResource("RectangleShape2D_4q2j7")
 
-[node name="Polygon2D" type="Polygon2D" parent="OptionalCorridor/WallNorth" unique_id=1434687476]
+[node name="Polygon2D" type="Polygon2D" parent="OptionalCorridor/WallNorth/CollisionShape2D2" unique_id=1434687476]
 color = Color(0.20392157, 0.28627452, 0.33333334, 1)
-polygon = PackedVector2Array(-256, -16, 256, -16, 256, 16, -256, 16)
+polygon = PackedVector2Array(0, -16, 0, -16, 0, 16, 0, 16)
 
-[node name="WallSouth" type="StaticBody2D" parent="OptionalCorridor" unique_id=1147951380 groups=["navigation_blockers"]]
-position = Vector2(656, 96)
-collision_mask = 0
+[node name="WallSouth" parent="OptionalCorridor" unique_id=358306107 instance=ExtResource("14_b6bub")]
+position = Vector2(654.5, 96)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="OptionalCorridor/WallSouth" unique_id=2060821403]
-shape = SubResource("RectangleShape2D_82m6p")
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="OptionalCorridor/WallSouth" unique_id=2060821403]
+shape = SubResource("RectangleShape2D_g5lru")
 
-[node name="Polygon2D" type="Polygon2D" parent="OptionalCorridor/WallSouth" unique_id=1488524000]
+[node name="Polygon2D2" type="Polygon2D" parent="OptionalCorridor/WallSouth" unique_id=1488524000]
 color = Color(0.20392157, 0.28627452, 0.33333334, 1)
-polygon = PackedVector2Array(-256, -16, 256, -16, 256, 16, -256, 16)
+polygon = PackedVector2Array(0, -16, 0, -16, 0, 16, 0, 16)
 
 [node name="Polygon2D" type="Polygon2D" parent="OptionalCorridor" unique_id=60042034]
+visible = false
 z_index = -1
 position = Vector2(15, -4)
 color = Color(0.11372549, 0.1882353, 0.23137255, 1)
 polygon = PackedVector2Array(400, -80, 912, -80, 912, 80, 400, 80)
+
+[node name="AutoFloor" type="Polygon2D" parent="OptionalCorridor" unique_id=1247571584 node_paths=PackedStringArray("west_wall", "east_wall", "north_wall", "south_wall")]
+z_index = -10
+texture_repeat = 2
+texture = ExtResource("1_np0i0")
+polygon = PackedVector2Array(416, -96, 893, -96, 893, 96, 416, 96)
+script = ExtResource("15_dnu7g")
+west_wall = NodePath("../../SecurityRoom/WallEastUpper")
+east_wall = NodePath("../../OptionalSalvageRoom/WallWestUpper")
+north_wall = NodePath("../WallNorth")
+south_wall = NodePath("../WallSouth")
+
+[node name="ExteriorSupports" parent="OptionalCorridor" unique_id=1882680385 node_paths=PackedStringArray("west_end", "east_end", "corridor_wall") instance=ExtResource("20_g5lru")]
+script = ExtResource("21_tavan")
+west_end = NodePath("../../EntryRoom/WallEastUpper")
+east_end = NodePath("../../SecurityRoom/WallWestUpper")
+corridor_wall = NodePath("../../Corridor/WallNorth")
+below_corridor = true
 
 [node name="SentryDrone" parent="." unique_id=1027890939 node_paths=PackedStringArray("patrol_route") instance=ExtResource("9_dnu7g")]
 position = Vector2(1112, 120)
@@ -448,3 +504,15 @@ position = Vector2(1312, 180)
 
 [node name="FacilityAmbient" type="CanvasModulate" parent="." unique_id=1475264949]
 color = Color(0.57254905, 0.61960787, 0.68235296, 1)
+
+[node name="ExteriorBackdrop" type="CanvasLayer" parent="." unique_id=456482848]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="ExteriorBackdrop" unique_id=447654928]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.03137255, 0.05490196, 0.09019608, 1)

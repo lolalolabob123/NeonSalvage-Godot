@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://df6gvmjp0tngj"]
+
+[ext_resource type="Texture2D" uid="uid://cqqouqhcddfm6" path="res://assets/environment/IndustrialDeck_A.png" id="1_yigwm"]
+[ext_resource type="Script" uid="uid://biyu34xgffssx" path="res://scripts/environment/auto_floor.gd" id="2_nvhyg"]
+
+[node name="AutoFloor" type="Polygon2D" unique_id=977414101 node_paths=PackedStringArray("west_wall", "east_wall", "north_wall", "south_wall")]
+z_index = -10
+texture_repeat = 2
+texture = ExtResource("1_yigwm")
+polygon = PackedVector2Array(416, -96, 1024, -96, 1024, 96, 416, 96)
+script = ExtResource("2_nvhyg")
+west_wall = NodePath("")
+east_wall = NodePath("")
+north_wall = NodePath("")
+south_wall = NodePath("")
