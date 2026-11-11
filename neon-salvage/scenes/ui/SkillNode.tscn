@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dwgv2sqfh0rra"]
+
+[ext_resource type="Script" uid="uid://8d0wacfbj4kg" path="res://scripts/ui/skill_node.gd" id="1_il5tn"]
+
+[node name="SkillNode" type="VBoxContainer" unique_id=992058283]
+custom_minimum_size = Vector2(340, 32)
+offset_right = 340.0
+offset_bottom = 62.0
+size_flags_horizontal = 4
+script = ExtResource("1_il5tn")
+
+[node name="NameLabel" type="Label" parent="." unique_id=256940048]
+layout_mode = 2
+
+[node name="EffectLabel" type="Label" parent="." unique_id=465865353]
+layout_mode = 2
+
+[node name="PurchaseButton" type="Button" parent="." unique_id=1692160332]
+layout_mode = 2

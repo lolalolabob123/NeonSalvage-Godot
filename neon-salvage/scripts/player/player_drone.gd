@@ -350,5 +350,8 @@ func _ready() -> void:
 	if ProgressStore.hull_reinforced:
 		max_health += 1
 	
+	if ProgressStore.has_skill(ProgressStore.HULL_REINFORCEMENT_II_ID):
+		max_health += 1
+	
 	current_health = max_health
 	health_changed.emit(current_health, max_health)

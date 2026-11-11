@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://or6hof2aipoc" path="res://scripts/ui/preperation_screen.gd" id="1_e7rqc"]
 [ext_resource type="PackedScene" uid="uid://clvv1eri84hdl" path="res://scenes/levels/Blacksite7_VisualTest.tscn" id="2_jcvlb"]
+[ext_resource type="PackedScene" uid="uid://dwgv2sqfh0rra" path="res://scenes/ui/SkillNode.tscn" id="3_ymwfk"]
 
 [node name="PreperationScreen" type="Control" unique_id=351789938]
 layout_mode = 3
@@ -71,20 +72,9 @@ Extract successfully to bank your salvage."
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="SkillTree" type="VBoxContainer" parent="Center/Panel/Margin/Content" unique_id=1305558613]
+[node name="UpgradesButton" type="Button" parent="Center/Panel/Margin/Content" unique_id=1865597188]
 layout_mode = 2
-
-[node name="Label" type="Label" parent="Center/Panel/Margin/Content/SkillTree" unique_id=229876156]
-layout_mode = 2
-text = "UPGRADES / SURVIVAL"
-horizontal_alignment = 1
-
-[node name="HullUpgradeButton" type="Button" parent="Center/Panel/Margin/Content/SkillTree" unique_id=551257756]
-layout_mode = 2
-
-[node name="UpgradeStatus" type="Label" parent="Center/Panel/Margin/Content/SkillTree" unique_id=1637880845]
-layout_mode = 2
-horizontal_alignment = 1
+text = "Upgrades"
 
 [node name="PrimaryWeaponSelector" type="OptionButton" parent="Center/Panel/Margin/Content" unique_id=1764344887]
 layout_mode = 2
@@ -96,3 +86,59 @@ autowrap_mode = 3
 [node name="DeployButton" type="Button" parent="Center/Panel/Margin/Content" unique_id=421703672]
 layout_mode = 2
 text = "Deploy to Blacksite 7"
+
+[node name="UpgradesView" type="CenterContainer" parent="." unique_id=879329405]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="UpgradesView" unique_id=1738764558]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="UpgradesView/Panel" unique_id=1394566765]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+
+[node name="Content" type="VBoxContainer" parent="UpgradesView/Panel/Margin" unique_id=924940289]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+
+[node name="UpgradesBankedLabel" type="Label" parent="UpgradesView/Panel/Margin/Content" unique_id=221573161]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="SkillTree" type="VBoxContainer" parent="UpgradesView/Panel/Margin/Content" unique_id=1305558613]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UpgradesView/Panel/Margin/Content/SkillTree" unique_id=229876156]
+layout_mode = 2
+text = "UPGRADES / SURVIVAL"
+horizontal_alignment = 1
+
+[node name="HullRankOne" parent="UpgradesView/Panel/Margin/Content/SkillTree" unique_id=992058283 instance=ExtResource("3_ymwfk")]
+layout_mode = 2
+skill_id = &"hull_reinforcement"
+effect_description = "	+1 maximum hull on every deployment."
+
+[node name="RankConnector" type="ColorRect" parent="UpgradesView/Panel/Margin/Content/SkillTree" unique_id=712247276]
+custom_minimum_size = Vector2(2, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+color = Color(0.24705882, 0.4117647, 0.47843137, 1)
+
+[node name="HullRankTwo" parent="UpgradesView/Panel/Margin/Content/SkillTree" unique_id=1439244773 instance=ExtResource("3_ymwfk")]
+layout_mode = 2
+skill_id = &"hull_reinforcement_ii"
+effect_description = "	+1 additional maximum hull on every deployment."
+
+[node name="UpgradeStatus" type="Label" parent="UpgradesView/Panel/Margin/Content/SkillTree" unique_id=1637880845]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="UpgradesView/Panel/Margin/Content" unique_id=1950199840]
+layout_mode = 2
+text = "Back to Preparation"

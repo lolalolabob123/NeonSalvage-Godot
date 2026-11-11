@@ -5,11 +5,20 @@ signal banked_salvage_changed(total: int)
 const SAVE_PATH: String = "user://neon_salvage_progress.cfg"
 const HULL_REINFORCEMENT_COST: int = 10
 const HULL_REINFORCEMENT_ID: StringName = &"hull_reinforcement"
+const HULL_REINFORCEMENT_II_ID: StringName = &"hull_reinforcement_ii"
 
 const SKILLS := {
 	HULL_REINFORCEMENT_ID: {
+		"display_name": "Hull reinforcement 1",
 		"cost": HULL_REINFORCEMENT_COST,
 		"prerequisites": [],
+		"save_key": "hull_reinforced",
+	},
+	HULL_REINFORCEMENT_II_ID: {
+		"display_name": "Hull Reinforcement 2",
+		"cost": 20,
+		"prerequisites": [HULL_REINFORCEMENT_ID],
+		"save_key": "hull_reinforcement_ii",
 	},
 }
 
@@ -78,29 +87,16 @@ func bank_salvage(amount: int) -> bool:
 	return true
 
 func purchase_hull_reinforcement() -> bool:
-	if not can_purchase_skill(HULL_REINFORCEMENT_ID):
-		return false
-	
-	var new_total: int = banked_salvage - HULL_REINFORCEMENT_COST
-	
-	save_data.set_value("progress", "banked_salvage", new_total)
-	save_data.set_value("upgrades", "hull_reinforced", true)
-	
-	var error := save_data.save(SAVE_PATH)
-	
-	if error != OK:
-		save_data.set_value("progress", "banked_salvage", banked_salvage)
-		save_data.set_value("upgrades", "hull_reinforced", false)
-		push_error("Could not save hull upgrade: %s" % error_string(error))
-		return false
-	
-	banked_salvage = new_total
-	hull_reinforced = true
-	banked_salvage_changed.emit(banked_salvage)
-	return true
+	return purchase_skill(HULL_REINFORCEMENT_ID)
 
 func has_skill(skill_id: StringName) -> bool:
-	return skill_id == HULL_REINFORCEMENT_ID and hull_reinforced
+	var skill: Dictionary = SKILLS.get(skill_id, {})
+	if skill.is_empty():
+		return false
+	
+	var save_key: String = skill["save_key"]
+	var owned: Variant = save_data.get_value("upgrades", save_key, false)
+	return typeof(owned) == TYPE_BOOL and bool(owned)
 
 func get_skill_cost(skill_id: StringName) -> int:
 	var skill: Dictionary = SKILLS.get(skill_id, {})
@@ -120,8 +116,27 @@ func can_purchase_skill(skill_id: StringName) -> bool:
 	return true
 
 func purchase_skill(skill_id: StringName) -> bool:
-	match skill_id:
-		HULL_REINFORCEMENT_ID:
-			return purchase_hull_reinforcement()
-		_:
-			return false
+	if not can_purchase_skill(skill_id):
+		return false
+	
+	var skill: Dictionary = SKILLS[skill_id]
+	var save_key: String = skill["save_key"]
+	var new_total := banked_salvage - get_skill_cost(skill_id)
+	var previous_ownership: Variant = save_data.get_value(
+		"upgrades", save_key, false
+	)
+	
+	save_data.set_value("progress", "banked_salvage", new_total)
+	save_data.set_value("upgrades", save_key, true)
+	
+	var error := save_data.save(SAVE_PATH)
+	if error != OK:
+		save_data.set_value("progress", "banked_salvage", banked_salvage)
+		save_data.set_value("upgrades", save_key, previous_ownership)
+		push_error("Could not save skill purchase: %s" % error_string(error))
+		return false
+	
+	banked_salvage = new_total
+	hull_reinforced = has_skill(HULL_REINFORCEMENT_ID)
+	banked_salvage_changed.emit(banked_salvage)
+	return true
