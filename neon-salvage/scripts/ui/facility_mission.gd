@@ -34,6 +34,11 @@ func request_extraction() -> bool:
 	
 	has_called_extraction = true
 	extraction_time_left = extraction_duration
+	
+	if ProgressStore.has_skill(ProgressStore.EMERGENCY_PATCH_ID):
+		var player := get_tree().get_first_node_in_group("player")
+		player.call("apply_emergency_patch")
+	
 	extraction_called.emit()
 	return true
 

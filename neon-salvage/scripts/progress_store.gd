@@ -6,6 +6,7 @@ const SAVE_PATH: String = "user://neon_salvage_progress.cfg"
 const HULL_REINFORCEMENT_COST: int = 10
 const HULL_REINFORCEMENT_ID: StringName = &"hull_reinforcement"
 const HULL_REINFORCEMENT_II_ID: StringName = &"hull_reinforcement_ii"
+const EMERGENCY_PATCH_ID: StringName = &"emergency_patch"
 
 const SKILLS := {
 	HULL_REINFORCEMENT_ID: {
@@ -19,6 +20,12 @@ const SKILLS := {
 		"cost": 20,
 		"prerequisites": [HULL_REINFORCEMENT_ID],
 		"save_key": "hull_reinforcement_ii",
+	},
+	EMERGENCY_PATCH_ID: {
+		"display_name": "Emergency Patch",
+		"cost": 20,
+		"prerequisites": [HULL_REINFORCEMENT_ID],
+		"save_key": "emergency_patch",
 	},
 }
 
@@ -138,5 +145,39 @@ func purchase_skill(skill_id: StringName) -> bool:
 	
 	banked_salvage = new_total
 	hull_reinforced = has_skill(HULL_REINFORCEMENT_ID)
+	banked_salvage_changed.emit(banked_salvage)
+	return true
+
+func reset_skills_for_testing() -> bool:
+	if not OS.is_debug_build() or not storage_available:
+		return false
+
+	var owned_save_keys: Array[String] = []
+	var refund := 0
+
+	for skill_id in SKILLS:
+		if has_skill(skill_id):
+			var skill: Dictionary = SKILLS[skill_id]
+			owned_save_keys.append(skill["save_key"])
+			refund += get_skill_cost(skill_id)
+
+	if owned_save_keys.is_empty():
+		return true
+
+	var new_total := banked_salvage + refund
+	for save_key in owned_save_keys:
+		save_data.set_value("upgrades", save_key, false)
+	save_data.set_value("progress", "banked_salvage", new_total)
+
+	var error := save_data.save(SAVE_PATH)
+	if error != OK:
+		for save_key in owned_save_keys:
+			save_data.set_value("upgrades", save_key, true)
+		save_data.set_value("progress", "banked_salvage", banked_salvage)
+		push_error("Could not reset skills: %s" % error_string(error))
+		return false
+
+	banked_salvage = new_total
+	hull_reinforced = false
 	banked_salvage_changed.emit(banked_salvage)
 	return true

@@ -2,6 +2,46 @@
 
 [ext_resource type="Script" uid="uid://8d0wacfbj4kg" path="res://scripts/ui/skill_node.gd" id="1_il5tn"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_il5tn"]
+bg_color = Color(0.09411765, 0.16862746, 0.21960784, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.24705882, 0.4117647, 0.47843137, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_31e40"]
+bg_color = Color(0.0627451, 0.12941177, 0.17254902, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.39607844, 0.7176471, 0.8117647, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8d4p3"]
+bg_color = Color(0.13725491, 0.26666668, 0.34117648, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.39607844, 0.7176471, 0.8117647, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7l1wk"]
+bg_color = Color(0.08235294, 0.11372549, 0.14117648, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.16470589, 0.21568628, 0.2509804, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i3rua"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.54901963, 0.9098039, 1, 1)
+
 [node name="SkillNode" type="VBoxContainer" unique_id=992058283]
 custom_minimum_size = Vector2(340, 32)
 offset_right = 340.0
@@ -11,9 +51,22 @@ script = ExtResource("1_il5tn")
 
 [node name="NameLabel" type="Label" parent="." unique_id=256940048]
 layout_mode = 2
+horizontal_alignment = 1
 
 [node name="EffectLabel" type="Label" parent="." unique_id=465865353]
 layout_mode = 2
+horizontal_alignment = 1
 
 [node name="PurchaseButton" type="Button" parent="." unique_id=1692160332]
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_il5tn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_31e40")
+theme_override_styles/hover = SubResource("StyleBoxFlat_8d4p3")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_7l1wk")
+theme_override_styles/focus = SubResource("StyleBoxFlat_i3rua")
+
+[node name="StatusLabel" type="Label" parent="." unique_id=1846267017]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 3

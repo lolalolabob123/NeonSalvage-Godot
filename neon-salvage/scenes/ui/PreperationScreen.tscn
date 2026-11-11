@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://or6hof2aipoc" path="res://scripts/ui/preperation_screen.gd" id="1_e7rqc"]
 [ext_resource type="PackedScene" uid="uid://clvv1eri84hdl" path="res://scenes/levels/Blacksite7_VisualTest.tscn" id="2_jcvlb"]
 [ext_resource type="PackedScene" uid="uid://dwgv2sqfh0rra" path="res://scenes/ui/SkillNode.tscn" id="3_ymwfk"]
+[ext_resource type="Script" uid="uid://cd4ct7oi4prx8" path="res://scripts/ui/branch_connector.gd" id="4_gn8cd"]
 
 [node name="PreperationScreen" type="Control" unique_id=351789938]
 layout_mode = 3
@@ -102,9 +103,13 @@ layout_mode = 2
 [node name="Margin" type="MarginContainer" parent="UpgradesView/Panel" unique_id=1394566765]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
 
 [node name="Content" type="VBoxContainer" parent="UpgradesView/Panel/Margin" unique_id=924940289]
-custom_minimum_size = Vector2(520, 0)
+custom_minimum_size = Vector2(720, 0)
 layout_mode = 2
 
 [node name="UpgradesBankedLabel" type="Label" parent="UpgradesView/Panel/Margin/Content" unique_id=221573161]
@@ -124,20 +129,35 @@ layout_mode = 2
 skill_id = &"hull_reinforcement"
 effect_description = "	+1 maximum hull on every deployment."
 
-[node name="RankConnector" type="ColorRect" parent="UpgradesView/Panel/Margin/Content/SkillTree" unique_id=712247276]
-custom_minimum_size = Vector2(2, 16)
+[node name="BranchConnector" type="Control" parent="UpgradesView/Panel/Margin/Content/SkillTree" unique_id=1951081307]
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
-size_flags_horizontal = 4
-color = Color(0.24705882, 0.4117647, 0.47843137, 1)
+mouse_filter = 2
+script = ExtResource("4_gn8cd")
 
-[node name="HullRankTwo" parent="UpgradesView/Panel/Margin/Content/SkillTree" unique_id=1439244773 instance=ExtResource("3_ymwfk")]
+[node name="SurvivalBranches" type="HBoxContainer" parent="UpgradesView/Panel/Margin/Content/SkillTree" unique_id=1826053430]
 layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="HullRankTwo" parent="UpgradesView/Panel/Margin/Content/SkillTree/SurvivalBranches" unique_id=1439244773 instance=ExtResource("3_ymwfk")]
+layout_mode = 2
+size_flags_horizontal = 3
 skill_id = &"hull_reinforcement_ii"
 effect_description = "	+1 additional maximum hull on every deployment."
+
+[node name="EmergencyPatch" parent="UpgradesView/Panel/Margin/Content/SkillTree/SurvivalBranches" unique_id=1888996412 instance=ExtResource("3_ymwfk")]
+layout_mode = 2
+size_flags_horizontal = 3
+skill_id = &"emergency_patch"
+effect_description = "Restore 1 hull when you call extraction."
 
 [node name="UpgradeStatus" type="Label" parent="UpgradesView/Panel/Margin/Content/SkillTree" unique_id=1637880845]
 layout_mode = 2
 horizontal_alignment = 1
+
+[node name="ResetSkillsButton" type="Button" parent="UpgradesView/Panel/Margin/Content" unique_id=101268339]
+layout_mode = 2
+text = "Reset Skills (Debug)"
 
 [node name="BackButton" type="Button" parent="UpgradesView/Panel/Margin/Content" unique_id=1950199840]
 layout_mode = 2

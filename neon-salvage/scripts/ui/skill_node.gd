@@ -6,6 +6,7 @@ extends VBoxContainer
 @onready var name_label: Label = $NameLabel
 @onready var effect_label: Label = $EffectLabel
 @onready var purchase_button: Button = $PurchaseButton
+@onready var status_label: Label = $StatusLabel
 
 func _ready() -> void:
 	effect_label.text = effect_description
@@ -17,28 +18,38 @@ func _on_balance_changed(_total: int) -> void:
 	_refresh()
 
 func _refresh() -> void:
+	status_label.text = ""
+	
 	var skill: Dictionary = ProgressStore.SKILLS.get(skill_id, {})
 	if skill.is_empty():
-		name_label.text = "Unknown skill"
+		name_label.text = "Unknown Skill"
+		purchase_button.text = "Unavailable"
 		purchase_button.disabled = true
 		return
-
+	
 	name_label.text = skill["display_name"]
 	purchase_button.disabled = not ProgressStore.can_purchase_skill(skill_id)
-
+	
 	if ProgressStore.has_skill(skill_id):
 		purchase_button.text = "Installed"
 		return
-
+	
+	var cost := ProgressStore.get_skill_cost(skill_id)
+	purchase_button.text = "Install (%d salvage)" % cost
+	
 	for prerequisite_id in skill["prerequisites"]:
 		if not ProgressStore.has_skill(prerequisite_id):
 			var prerequisite: Dictionary = ProgressStore.SKILLS[prerequisite_id]
-			purchase_button.text = "Requires %s" % prerequisite["display_name"]
+			status_label.text = "Requires %s" % prerequisite["display_name"]
 			return
-
-	purchase_button.text = "%d salvage" % ProgressStore.get_skill_cost(skill_id)
+	
+	if not ProgressStore.storage_available:
+		status_label.text = "Save Unavailable"
+	elif ProgressStore.banked_salvage < cost:
+		var shortfall := cost - ProgressStore.banked_salvage
+		status_label.text = "Need %d more salvage" % shortfall
 
 func _purchase() -> void:
 	if not ProgressStore.purchase_skill(skill_id):
 		_refresh()
-		purchase_button.text = "Purchase failed. Try again."
+		status_label.text = "Purchase failed. Try again."

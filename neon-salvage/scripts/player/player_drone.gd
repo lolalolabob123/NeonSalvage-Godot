@@ -355,3 +355,10 @@ func _ready() -> void:
 	
 	current_health = max_health
 	health_changed.emit(current_health, max_health)
+
+func apply_emergency_patch() -> void:
+	if current_health <= 0 or current_health >= max_health:
+		return
+	
+	current_health += 1
+	health_changed.emit(current_health, max_health)
