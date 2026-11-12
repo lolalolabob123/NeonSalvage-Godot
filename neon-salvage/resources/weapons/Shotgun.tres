@@ -2,14 +2,16 @@
 
 [ext_resource type="PackedScene" uid="uid://2hxcm3rx0s0i" path="res://scenes/projectiles/ShotgunPellet.tscn" id="1_61ck4"]
 [ext_resource type="Script" uid="uid://56es1qj2gbrb" path="res://scripts/weapons/weapon_definition.gd" id="1_gqpy6"]
+[ext_resource type="AudioStream" uid="uid://drfgd616i3cx5" path="res://assets/audio/ShotgunShot.wav" id="1_kmxba"]
 
 [resource]
 script = ExtResource("1_gqpy6")
 weapon_id = &"shotgun"
 display_name = "Shotgun"
 projectile_scene = ExtResource("1_61ck4")
+fire_sound = ExtResource("1_kmxba")
 fire_interval = 0.8
-pellets_per_shot = 5
+pellets_per_shot = 3
 spread_degrees = 24.0
 magazine_capacity = 5
 reload_duration = 1.6

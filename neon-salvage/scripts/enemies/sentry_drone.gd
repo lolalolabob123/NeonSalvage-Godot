@@ -23,6 +23,8 @@ enum SentryState {
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var muzzle: Marker2D = $Muzzle
 @onready var charge_glow: Sprite2D = $Muzzle/ChargeGlow
+@onready var charge_audio: AudioStreamPlayer2D = $Muzzle/ChargeAudio
+@onready var shot_audio: AudioStreamPlayer2D = $Muzzle/ShotAudio
 @onready var sight_ray: RayCast2D = $Muzzle/SightRay
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 
@@ -312,6 +314,7 @@ func _physics_process(delta: float) -> void:
 			if fire_timer <= 0.0:
 				is_winding_up = true
 				windup_timer = windup_duration
+				charge_audio.play()
 
 	else:
 		# Cancel charging if the player leaves detection range.
@@ -336,16 +339,15 @@ func _physics_process(delta: float) -> void:
 		)
 
 		# Grow the energy buildup at the muzzle.
-		var glow_scale: float = lerpf(
-			0.45,
-			1.2,
-			charge_progress
-		)
+		var glow_scale: float = lerpf(0.85, 1.45, charge_progress)
+		charge_glow.scale = Vector2.ONE * glow_scale
 
 		charge_glow.scale = Vector2.ONE * glow_scale
 
 	else:
 		sprite.self_modulate = Color.WHITE
+		if charge_audio.playing:
+			charge_audio.stop()
 
 func has_line_of_sight() -> bool:
 	if not is_instance_valid(target):
@@ -474,6 +476,8 @@ func fire_at_player() -> void:
 	var pulse: SentryPulse = (
 		SENTRY_PULSE.instantiate() as SentryPulse
 	)
+	
+	shot_audio.play()
 
 	# Configure its direction and owner.
 	pulse.configure(direction, self)

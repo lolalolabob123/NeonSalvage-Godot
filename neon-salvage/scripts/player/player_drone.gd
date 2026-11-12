@@ -17,6 +17,7 @@ const PLAYER_DESTRUCTION_FX: PackedScene = preload("res://scenes/effects/PlayerD
 @onready var invulnerability_duration: float = 0.75
 @onready var current_health: int = max_health
 @onready var dash_trail: CPUParticles2D = $DashTrail
+@onready var weapon_audio: AudioStreamPlayer2D = $WeaponAudio
 
 @export_group("Thruster Dash")
 
@@ -86,6 +87,10 @@ func fire_primary() -> void:
 		projectile.global_rotation = (
 			muzzle.global_rotation + angle_offset
 		)
+		
+	if primary_weapon.fire_sound != null:
+		weapon_audio.stream = primary_weapon.fire_sound
+		weapon_audio.play()			
 
 func _update_primary_weapon(delta: float) -> void:
 	if primary_weapon == null or primary_weapon.projectile_scene == null:

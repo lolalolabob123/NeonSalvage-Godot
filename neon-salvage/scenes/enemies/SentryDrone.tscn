@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://cl8plbn2qeyrb" path="res://scripts/enemies/sentry_drone.gd" id="1_h8huq"]
 [ext_resource type="Texture2D" uid="uid://do5ny6rnn1fe7" path="res://assets/projectiles/SentryPulse_A.png" id="3_bxvkx"]
 [ext_resource type="Material" uid="uid://d2iwm1hrftn0x" path="res://resources/materials/CombatUnshaded.tres" id="3_m0lsv"]
+[ext_resource type="AudioStream" uid="uid://neutph7ompo5" path="res://assets/audio/SentryCharge.wav" id="5_6buas"]
+[ext_resource type="AudioStream" uid="uid://yhaj8ue3jy4x" path="res://assets/audio/SentryShot.wav" id="6_6cf0j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8gkan"]
 radius = 25.0
@@ -14,6 +16,7 @@ radius = 240.0
 [node name="SentryDrone" type="CharacterBody2D" unique_id=140838755 groups=["sentries"]]
 motion_mode = 1
 script = ExtResource("1_h8huq")
+windup_duration = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=68954907]
 texture_filter = 1
@@ -41,7 +44,14 @@ texture = ExtResource("3_bxvkx")
 [node name="SightRay" type="RayCast2D" parent="Muzzle" unique_id=663643955]
 target_position = Vector2(0, -400)
 
+[node name="ChargeAudio" type="AudioStreamPlayer2D" parent="Muzzle" unique_id=572586807]
+stream = ExtResource("5_6buas")
+volume_db = -10.0
+
+[node name="ShotAudio" type="AudioStreamPlayer2D" parent="Muzzle" unique_id=1542597465]
+stream = ExtResource("6_6cf0j")
+volume_db = -10.0
+
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1381451748]
 path_desired_distance = 12.0
 target_desired_distance = 16.0
-debug_enabled = true

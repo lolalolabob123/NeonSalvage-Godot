@@ -2,9 +2,11 @@
 
 [ext_resource type="Script" uid="uid://56es1qj2gbrb" path="res://scripts/weapons/weapon_definition.gd" id="1_j680y"]
 [ext_resource type="PackedScene" uid="uid://bnw354tsrq20i" path="res://scenes/projectiles/PrimaryCarbineBolt.tscn" id="1_n32xt"]
+[ext_resource type="AudioStream" uid="uid://c3ownqumko5v2" path="res://assets/audio/CarbineShot.wav" id="1_rrwfu"]
 
 [resource]
 script = ExtResource("1_j680y")
 display_name = "Carbine"
 projectile_scene = ExtResource("1_n32xt")
+fire_sound = ExtResource("1_rrwfu")
 metadata/_custom_type_script = "uid://56es1qj2gbrb"

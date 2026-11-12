@@ -235,3 +235,5 @@ shape = SubResource("CapsuleShape2D_c2tng")
 [node name="FollowCamera" type="Camera2D" parent="." unique_id=402263176]
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0
+
+[node name="WeaponAudio" type="AudioStreamPlayer2D" parent="." unique_id=965464439]
