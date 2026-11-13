@@ -84,6 +84,9 @@ layout_mode = 2
 layout_mode = 2
 autowrap_mode = 3
 
+[node name="ActiveSystemSelector" type="OptionButton" parent="Center/Panel/Margin/Content" unique_id=2084743629]
+layout_mode = 2
+
 [node name="DeployButton" type="Button" parent="Center/Panel/Margin/Content" unique_id=421703672]
 layout_mode = 2
 text = "Deploy to Blacksite 7"

@@ -16,7 +16,7 @@ const SHOTGUN: WeaponDefinition = preload("res://resources/weapons/Shotgun.tres"
 @onready var upgrade_status: Label = $UpgradesView/Panel/Margin/Content/SkillTree/UpgradeStatus
 @onready var back_button: Button = $UpgradesView/Panel/Margin/Content/BackButton
 @onready var reset_skills_button: Button = $UpgradesView/Panel/Margin/Content/ResetSkillsButton
-
+@onready var active_system_selector: OptionButton = $Center/Panel/Margin/Content/ActiveSystemSelector
 
 func _ready() -> void:
 	upgrades_view.hide()
@@ -40,6 +40,15 @@ func _ready() -> void:
 
 	primary_weapon_selector.item_selected.connect(_update_weapon_description)
 	_update_weapon_description(primary_weapon_selector.selected)
+	
+	active_system_selector.clear()
+	active_system_selector.add_item("Active System - None")
+	active_system_selector.add_item("Active System - Shield Generator [Q]")
+	
+	if ProgressStore.selected_system == ProgressStore.SHIELD_GENERATOR_ID:
+		active_system_selector.select(1)
+	else:
+		active_system_selector.select(0)
 
 
 func _update_bank_balance(total: int) -> void:
@@ -65,6 +74,11 @@ func _deploy() -> void:
 		ProgressStore.selected_primary_weapon = SHOTGUN
 	else:
 		ProgressStore.selected_primary_weapon = CARBINE
+	
+	if active_system_selector.selected == 1:
+		ProgressStore.selected_system = ProgressStore.SHIELD_GENERATOR_ID
+	else:
+		ProgressStore.selected_system = &""
 
 	deploy_button.disabled = true
 	get_tree().paused = false

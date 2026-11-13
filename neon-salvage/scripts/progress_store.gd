@@ -7,6 +7,7 @@ const HULL_REINFORCEMENT_COST: int = 10
 const HULL_REINFORCEMENT_ID: StringName = &"hull_reinforcement"
 const HULL_REINFORCEMENT_II_ID: StringName = &"hull_reinforcement_ii"
 const EMERGENCY_PATCH_ID: StringName = &"emergency_patch"
+const SHIELD_GENERATOR_ID: StringName = &"shield_generator"
 
 const SKILLS := {
 	HULL_REINFORCEMENT_ID: {
@@ -34,6 +35,7 @@ var storage_available: bool = true
 var save_data: ConfigFile = ConfigFile.new()
 var hull_reinforced: bool = false
 var selected_primary_weapon: WeaponDefinition = null
+var selected_system: StringName = &""
 
 func _ready() -> void:
 	var error := save_data.load(SAVE_PATH)

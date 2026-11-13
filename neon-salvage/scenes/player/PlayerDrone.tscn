@@ -8,6 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://c061xcskklm7d" path="res://assets/player/PlayerDrone_Thruster_Right.png" id="3_qcr60"]
 [ext_resource type="Texture2D" uid="uid://cjy2lhg1121ou" path="res://assets/player/PlayerDrone_Hull.png" id="4_annjb"]
 [ext_resource type="Texture2D" uid="uid://12ftfaxtvras" path="res://assets/player/PlayerDrone_PrimaryCarbine.png" id="5_j1agh"]
+[ext_resource type="AudioStream" uid="uid://dau36antysi5w" path="res://assets/audio/ReloadReady.wav" id="9_j1agh"]
+[ext_resource type="AudioStream" uid="uid://ctpuxu3otye2y" path="res://assets/audio/HullHit.wav" id="10_n06tq"]
+[ext_resource type="AudioStream" uid="uid://bbgjf75odkk36" path="res://assets/audio/ThrusterDash.wav" id="11_bwu8i"]
 
 [sub_resource type="Gradient" id="Gradient_qcr60"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -237,3 +240,14 @@ position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 
 [node name="WeaponAudio" type="AudioStreamPlayer2D" parent="." unique_id=965464439]
+
+[node name="ReloadAudio" type="AudioStreamPlayer2D" parent="." unique_id=1467783192]
+stream = ExtResource("9_j1agh")
+
+[node name="HullHitAudio" type="AudioStreamPlayer2D" parent="." unique_id=1571370507]
+stream = ExtResource("10_n06tq")
+volume_db = -8.0
+
+[node name="DashAudio" type="AudioStreamPlayer2D" parent="." unique_id=324100719]
+stream = ExtResource("11_bwu8i")
+volume_db = -10.0

@@ -8,6 +8,8 @@ signal player_destroyed
 var salvage_total: int = 0
 
 const PLAYER_DESTRUCTION_FX: PackedScene = preload("res://scenes/effects/PlayerDestructionFX.tscn")
+const SHIELD_DURATION := 1.5
+const SHIELD_COOLDOWN := 8.0
 
 @onready var weapon_pivot: Node2D = $VisualRig/WeaponPivot
 @onready var muzzle: Marker2D = $VisualRig/WeaponPivot/Muzzle
@@ -18,6 +20,9 @@ const PLAYER_DESTRUCTION_FX: PackedScene = preload("res://scenes/effects/PlayerD
 @onready var current_health: int = max_health
 @onready var dash_trail: CPUParticles2D = $DashTrail
 @onready var weapon_audio: AudioStreamPlayer2D = $WeaponAudio
+@onready var reload_audio: AudioStreamPlayer2D = $ReloadAudio
+@onready var hull_hit_audio: AudioStreamPlayer2D = $HullHitAudio
+@onready var dash_audio: AudioStreamPlayer2D = $DashAudio
 
 @export_group("Thruster Dash")
 
@@ -38,6 +43,8 @@ var dash_time_remaining: float = 0.0
 var dash_cooldown_remaining: float = 0.0
 var ammo_in_magazine: int = 0
 var reload_time_remaining: float = 0.0
+var shield_time_remaining := 0.0
+var shield_cooldown_remaining := 0.0
 
 func _process(delta: float) -> void:
 	
@@ -102,6 +109,7 @@ func _update_primary_weapon(delta: float) -> void:
 		reload_time_remaining = maxf(reload_time_remaining - delta, 0.0)
 		if reload_time_remaining == 0.0:
 			ammo_in_magazine = primary_weapon.magazine_capacity
+			reload_audio.play()
 		return
 
 	if Input.is_action_just_pressed("reload"):
@@ -139,6 +147,8 @@ func _physics_process(delta: float) -> void:
 		"move_down"
 	)
 	
+	_update_shield(delta)
+	
 	# Update the dash timers.
 	var was_dashing: bool = dash_time_remaining > 0.0
 	
@@ -169,6 +179,7 @@ func _physics_process(delta: float) -> void:
 		if requested_direction.length_squared() > 0.01:
 			dash_direction = requested_direction.normalized()
 			dash_time_remaining = dash_duration
+			dash_audio.play()
 			dash_cooldown_remaining = dash_cooldown
 			dash_trail.global_rotation = dash_direction.angle()
 			dash_trail.emitting = true
@@ -257,8 +268,12 @@ func take_damage(amount: int) -> void:
 	if damage_cooldown > 0.0:
 		return
 	
+	if shield_time_remaining > 0.0:
+		return
+	
 	# Apply damage.
 	current_health = maxi(current_health - amount, 0)
+	hull_hit_audio.play()
 	
 	# Start the invulnerability period.
 	damage_cooldown = invulnerability_duration
@@ -367,3 +382,26 @@ func apply_emergency_patch() -> void:
 	
 	current_health += 1
 	health_changed.emit(current_health, max_health)
+
+func _update_shield(delta: float) -> void:
+	if shield_time_remaining > 0.0:
+		shield_time_remaining = maxf(shield_time_remaining - delta, 0.0)
+		if shield_time_remaining == 0.0:
+			shield_cooldown_remaining = SHIELD_COOLDOWN
+			queue_redraw()
+		return
+	
+	shield_cooldown_remaining = maxf(shield_cooldown_remaining - delta, 0.0)
+	
+	if (
+		current_health > 0
+		and ProgressStore.selected_system == ProgressStore.SHIELD_GENERATOR_ID
+		and shield_cooldown_remaining == 0.0
+		and Input.is_action_just_pressed("activate_system")
+	):
+		shield_time_remaining = SHIELD_DURATION
+		queue_redraw()
+
+func _draw() -> void:
+	if shield_time_remaining > 0.0:
+		draw_arc(Vector2.ZERO, 58.0, 0.0, TAU, 64, Color("#69DEFF"), 3.0, true)
