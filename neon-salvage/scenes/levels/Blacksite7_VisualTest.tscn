@@ -26,6 +26,7 @@
 [ext_resource type="Script" uid="uid://bekvjdhdmwubs" path="res://scripts/environment/auto_corridor.gd" id="17_526av"]
 [ext_resource type="PackedScene" uid="uid://bvtdbeetlwk31" path="res://scenes/environment/ExteriorSupports.tscn" id="20_g5lru"]
 [ext_resource type="Script" uid="uid://hvbthjgtynm" path="res://scripts/environment/exterior_supports.gd" id="21_tavan"]
+[ext_resource type="PackedScene" uid="uid://b6m3hu50r2afr" path="res://scenes/pickups/ShieldGeneratorPickup.tscn" id="27_wrxkt"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_i52rn"]
 vertices = PackedVector2Array(110, 143, 110, 19, 370, 50, 370, 270, -370, 270, -110, 143, -370, -270, -110, 19, 370, -270, 370, -50, 942, -50, 942, 50, 1682, -270, 1682, -50, 1502, -78, 1502, -202, 942, -270, 1282, -202, 1022, -62, 1682, 50, 1682, 270, 1242, 62, 1242, -62, 1282, -78, 942, 270, 1022, 62, 2254, -50, 2159, 45, 2254, -270, 2991, -270, 2991, 265, 2254, 265, 2254, 50, 2251, 50, 2251, 45, 2159, 50)
@@ -519,3 +520,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0.03137255, 0.05490196, 0.09019608, 1)
+
+[node name="PrototypeCore" parent="." unique_id=454840761 instance=ExtResource("27_wrxkt")]
+position = Vector2(2838, 9)

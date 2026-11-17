@@ -76,21 +76,30 @@ func _ready() -> void:
 	
 	hull_reinforced = bool(saved_upgrade)
 
-func bank_salvage(amount: int) -> bool:
+func owns_shield_generator() -> bool:
+	return save_data.get_value("gear", "shield_generator", false) == true
+
+func bank_salvage(amount: int, secure_shield: bool = false) -> bool:
 	if not storage_available or amount < 0:
 		return false
-
-	var new_total: int = banked_salvage + amount
-
+	
+	var new_total := banked_salvage + amount
+	var previous_shield: Variant = save_data.get_value(
+		"gear", "shield_generator", false
+	)
+	
 	save_data.set_value("progress", "banked_salvage", new_total)
-
+	if secure_shield:
+		save_data.set_value("gear", "shield_generator", true)
+	
 	var error := save_data.save(SAVE_PATH)
-
 	if error != OK:
 		save_data.set_value("progress", "banked_salvage", banked_salvage)
+		if secure_shield:
+			save_data.set_value("gear", "shield_generator", previous_shield)
 		push_error("Could not save progress: %s" % error_string(error))
 		return false
-
+	
 	banked_salvage = new_total
 	banked_salvage_changed.emit(banked_salvage)
 	return true

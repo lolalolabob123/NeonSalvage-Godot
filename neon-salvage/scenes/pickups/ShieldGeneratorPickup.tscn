@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://b6m3hu50r2afr"]
+
+[ext_resource type="Script" uid="uid://ejm02opec6c6" path="res://scripts/pickups/shield_generator_pickup.gd" id="1_fkb7h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e2wva"]
+radius = 24.0
+
+[node name="PrototypeCore" type="Area2D" unique_id=619065688]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_fkb7h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=83575486]
+shape = SubResource("CircleShape2D_e2wva")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=693745532]
+color = Color(0.8824378, 0.67786, 0.15461472, 1)
+polygon = PackedVector2Array(0, -20, 16, 0, 0, 20, -16, 0)
+
+[node name="InteractionPrompt" type="Label" parent="." unique_id=1117824332]
+custom_minimum_size = Vector2(240, 28)
+offset_left = -120.0
+offset_top = -58.0
+offset_right = 120.0
+offset_bottom = -30.0
+text = "[E] RECOVER SHIELD GENERATOR"
+horizontal_alignment = 1

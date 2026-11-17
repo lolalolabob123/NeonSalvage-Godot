@@ -6,6 +6,8 @@ extends CanvasLayer
 @onready var dash_amount: Label = $DashPanel/Row/Amount
 @onready var banked_label: Label = $BankedLabel
 @onready var ammo_label: Label = $AmmoLabel
+@onready var shield_panel: PanelContainer = $ShieldPanel
+@onready var shield_amount: Label = $ShieldPanel/Row/Amount
 
 var player: Node = null
 var pulse_tween: Tween
@@ -14,6 +16,10 @@ var last_dash_text: String = ""
 
 
 func _ready() -> void:
+	shield_panel.visible = (
+		ProgressStore.selected_system == ProgressStore.SHIELD_GENERATOR_ID
+	)
+	
 	amount_label.text = "0"
 	
 	ProgressStore.banked_salvage_changed.connect(
@@ -49,6 +55,9 @@ func _process(_delta: float) -> void:
 		return
 	
 	ammo_label.text = str(player.call("get_ammo_status_text"))
+	
+	if shield_panel.visible:
+		_update_shield_status()
 	
 	var dash_text: String = str(
 		player.call("get_dash_status_text")
@@ -149,3 +158,23 @@ func _on_banked_salvage_changed(total: int) -> void:
 		"font_color",
 		Color("#31CBE0")
 	)
+
+func _update_shield_status() -> void:
+	var active_time: float = player.get("shield_time_remaining")
+	var cooldown: float = player.get("shield_cooldown_remaining")
+
+	var status := "READY"
+	var status_color := Color("#31CBE0")
+
+	if active_time > 0.0:
+		status = "ACTIVE"
+		status_color = Color("#8CE8FF")
+	elif cooldown > 0.0:
+		status = "%.1fs" % (ceilf(cooldown * 10.0) / 10.0)
+		status_color = Color("#F3AC57")
+
+	if shield_amount.text != status:
+		shield_amount.text = status
+
+	if shield_amount.get_theme_color("font_color") != status_color:
+		shield_amount.add_theme_color_override("font_color", status_color)

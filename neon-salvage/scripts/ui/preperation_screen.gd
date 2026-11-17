@@ -41,11 +41,23 @@ func _ready() -> void:
 	primary_weapon_selector.item_selected.connect(_update_weapon_description)
 	_update_weapon_description(primary_weapon_selector.selected)
 	
+	var owns_shield := ProgressStore.owns_shield_generator()
+	
 	active_system_selector.clear()
 	active_system_selector.add_item("Active System - None")
-	active_system_selector.add_item("Active System - Shield Generator [Q]")
+	if owns_shield:
+		active_system_selector.add_item("Active System - Shield Generator [Q]")
+	else:
+		active_system_selector.add_item("Shield Generator (locked)")
+		active_system_selector.set_item_disabled(1, true)
 	
-	if ProgressStore.selected_system == ProgressStore.SHIELD_GENERATOR_ID:
+	active_system_selector.tooltip_text = ""
+	if not owns_shield:
+		active_system_selector.tooltip_text = (
+			"Recover the Shield Generator from Salvage Storage and extract to unlock."
+		)
+	
+	if owns_shield and ProgressStore.selected_system == ProgressStore.SHIELD_GENERATOR_ID:
 		active_system_selector.select(1)
 	else:
 		active_system_selector.select(0)
@@ -75,7 +87,7 @@ func _deploy() -> void:
 	else:
 		ProgressStore.selected_primary_weapon = CARBINE
 	
-	if active_system_selector.selected == 1:
+	if active_system_selector.selected == 1 and ProgressStore.owns_shield_generator():
 		ProgressStore.selected_system = ProgressStore.SHIELD_GENERATOR_ID
 	else:
 		ProgressStore.selected_system = &""

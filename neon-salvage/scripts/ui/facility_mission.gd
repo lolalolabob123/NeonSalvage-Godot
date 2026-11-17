@@ -10,6 +10,7 @@ signal security_card_collected
 @export var extraction_duration: float = 8.0
 
 var has_prototype: bool = false
+var has_unsecured_shield: bool = false
 var has_security_card: bool = false
 var has_called_extraction: bool = false
 var extraction_time_left: float = 0.0
@@ -19,6 +20,13 @@ var extracted_salvage: int = 0
 
 func _ready() -> void:
 	add_to_group("mission_controller")
+
+func recover_shield_generator() -> bool:
+	if extraction_complete or has_unsecured_shield or ProgressStore.owns_shield_generator():
+		return false
+	
+	has_unsecured_shield = true
+	return true
 
 func recover_prototype() -> bool:
 	if has_prototype:
@@ -74,7 +82,7 @@ func complete_extraction() -> bool:
 	
 	var mission_salvage: int = int(player.get("salvage_total"))
 	
-	if not ProgressStore.bank_salvage(mission_salvage):
+	if not ProgressStore.bank_salvage(mission_salvage, has_unsecured_shield):
 		push_error("Extraction could not finish because progress was not saved.")
 		return false
 	
