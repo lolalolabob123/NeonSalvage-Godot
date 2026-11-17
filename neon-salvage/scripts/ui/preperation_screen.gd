@@ -10,13 +10,17 @@ const SHOTGUN: WeaponDefinition = preload("res://resources/weapons/Shotgun.tres"
 @onready var banked_label: Label = $Center/Panel/Margin/Content/BankedLabel
 @onready var deploy_button: Button = $Center/Panel/Margin/Content/DeployButton
 @onready var upgrades_button: Button = $Center/Panel/Margin/Content/UpgradesButton
-@onready var primary_weapon_selector: OptionButton = $Center/Panel/Margin/Content/PrimaryWeaponSelector
-@onready var weapon_description: Label = $Center/Panel/Margin/Content/WeaponDescription
+@onready var primary_weapon_selector: OptionButton = $LoadoutView/Panel/Margin/Content/PrimaryWeaponSelector
+@onready var weapon_description: Label = $LoadoutView/Panel/Margin/Content/WeaponDescription
 @onready var upgrades_banked_label: Label = $UpgradesView/Panel/Margin/Content/UpgradesBankedLabel
 @onready var upgrade_status: Label = $UpgradesView/Panel/Margin/Content/SkillTree/UpgradeStatus
 @onready var back_button: Button = $UpgradesView/Panel/Margin/Content/BackButton
 @onready var reset_skills_button: Button = $UpgradesView/Panel/Margin/Content/ResetSkillsButton
-@onready var active_system_selector: OptionButton = $Center/Panel/Margin/Content/ActiveSystemSelector
+@onready var active_system_selector: OptionButton = $LoadoutView/Panel/Margin/Content/ActiveSystemSelector
+@onready var loadout_view: CenterContainer = $LoadoutView
+@onready var loadout_button: Button = $Center/Panel/Margin/Content/LoadoutButton
+@onready var system_description: Label = $LoadoutView/Panel/Margin/Content/SystemDescription
+@onready var loadout_back_button: Button = $LoadoutView/Panel/Margin/Content/LoadoutBackButton
 
 func _ready() -> void:
 	upgrades_view.hide()
@@ -61,6 +65,13 @@ func _ready() -> void:
 		active_system_selector.select(1)
 	else:
 		active_system_selector.select(0)
+	
+	loadout_view.hide()
+	loadout_button.pressed.connect(_open_loadout)
+	loadout_back_button.pressed.connect(_close_loadout)
+	
+	active_system_selector.item_selected.connect(_update_system_description)
+	_update_system_description(active_system_selector.selected)
 
 
 func _update_bank_balance(total: int) -> void:
@@ -140,3 +151,26 @@ func _reset_skills() -> void:
 		reset_skills_button.text = "Reset Skills (Debug)"
 	else:
 		reset_skills_button.text = "Reset failed. Try again."
+
+func _open_loadout() -> void:
+	preparation_view.hide()
+	loadout_view.show()
+	primary_weapon_selector.grab_focus()
+
+func _close_loadout() -> void:
+	loadout_view.hide()
+	preparation_view.show()
+	loadout_button.grab_focus()
+
+func _update_system_description(index: int) -> void:
+	if not ProgressStore.owns_shield_generator():
+		system_description.text = (
+			"Recover the shield generator from Salvage Storage and extract to unlock it."
+		)
+	elif index == 1:
+		system_description.text = (
+			"Press Q to block hull damage for 1.5 seconds. "
+			+ "The 8-second cooldown starts when the shield expires."
+		)
+	else:
+		system_description.text = "No active system equipped."

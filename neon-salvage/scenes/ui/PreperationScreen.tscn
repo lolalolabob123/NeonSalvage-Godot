@@ -77,15 +77,9 @@ autowrap_mode = 3
 layout_mode = 2
 text = "Upgrades"
 
-[node name="PrimaryWeaponSelector" type="OptionButton" parent="Center/Panel/Margin/Content" unique_id=1764344887]
+[node name="LoadoutButton" type="Button" parent="Center/Panel/Margin/Content" unique_id=393186376]
 layout_mode = 2
-
-[node name="WeaponDescription" type="Label" parent="Center/Panel/Margin/Content" unique_id=923246664]
-layout_mode = 2
-autowrap_mode = 3
-
-[node name="ActiveSystemSelector" type="OptionButton" parent="Center/Panel/Margin/Content" unique_id=2084743629]
-layout_mode = 2
+text = "Loadout"
 
 [node name="DeployButton" type="Button" parent="Center/Panel/Margin/Content" unique_id=421703672]
 layout_mode = 2
@@ -165,3 +159,50 @@ text = "Reset Skills (Debug)"
 [node name="BackButton" type="Button" parent="UpgradesView/Panel/Margin/Content" unique_id=1950199840]
 layout_mode = 2
 text = "Back to Preparation"
+
+[node name="LoadoutView" type="CenterContainer" parent="." unique_id=85782848]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="LoadoutView" unique_id=17163065]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="LoadoutView/Panel" unique_id=1187539729]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Content" type="VBoxContainer" parent="LoadoutView/Panel/Margin" unique_id=1087390251]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TitleLabel" type="Label" parent="LoadoutView/Panel/Margin/Content" unique_id=1517231873]
+layout_mode = 2
+text = "LOADOUT"
+horizontal_alignment = 1
+
+[node name="PrimaryWeaponSelector" type="OptionButton" parent="LoadoutView/Panel/Margin/Content" unique_id=833665148]
+layout_mode = 2
+
+[node name="WeaponDescription" type="Label" parent="LoadoutView/Panel/Margin/Content" unique_id=1839733130]
+layout_mode = 2
+autowrap_mode = 3
+
+[node name="ActiveSystemSelector" type="OptionButton" parent="LoadoutView/Panel/Margin/Content" unique_id=2139718317]
+layout_mode = 2
+
+[node name="SystemDescription" type="Label" parent="LoadoutView/Panel/Margin/Content" unique_id=1899808230]
+layout_mode = 2
+autowrap_mode = 3
+
+[node name="LoadoutBackButton" type="Button" parent="LoadoutView/Panel/Margin/Content" unique_id=441529395]
+layout_mode = 2
+text = "Back to Preperation"

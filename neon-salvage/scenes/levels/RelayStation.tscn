@@ -1,0 +1,575 @@
+[gd_scene format=3 uid="uid://do4v5j0iqnvcm"]
+
+[ext_resource type="PackedScene" uid="uid://e0ni7bv6g0qk" path="res://scenes/environment/WallStraight864.tscn" id="3_vh00a"]
+[ext_resource type="PackedScene" uid="uid://oohw5n16r2ll" path="res://scenes/ui/SalvageHUD.tscn" id="4_4oknj"]
+[ext_resource type="PackedScene" uid="uid://b8sv2wmfuy86" path="res://scenes/player/PlayerDrone.tscn" id="4_6x21o"]
+[ext_resource type="PackedScene" uid="uid://cgwogbn28uee7" path="res://scenes/environment/WallSide220.tscn" id="4_e7jn2"]
+[ext_resource type="PackedScene" uid="uid://cigmjeegxcf36" path="res://scenes/environment/FacilityLamp.tscn" id="6_hep0f"]
+[ext_resource type="PackedScene" uid="uid://df6gvmjp0tngj" path="res://scenes/environment/AutoFloor.tscn" id="6_jscxr"]
+[ext_resource type="Texture2D" uid="uid://cqqouqhcddfm6" path="res://assets/environment/IndustrialDeck_A.png" id="7_1e7dy"]
+[ext_resource type="Script" uid="uid://bekvjdhdmwubs" path="res://scripts/environment/auto_corridor.gd" id="8_jscxr"]
+[ext_resource type="Script" uid="uid://biyu34xgffssx" path="res://scripts/environment/auto_floor.gd" id="8_w8ryq"]
+[ext_resource type="PackedScene" uid="uid://bwbniirc376yl" path="res://scenes/environment/WallStraight352.tscn" id="9_1e7dy"]
+[ext_resource type="PackedScene" uid="uid://ti5tm2bhdgvs" path="res://scenes/environment/CorridorWall512.tscn" id="9_hep0f"]
+[ext_resource type="PackedScene" uid="uid://bvtdbeetlwk31" path="res://scenes/environment/ExteriorSupports.tscn" id="11_1e7dy"]
+[ext_resource type="Script" uid="uid://hvbthjgtynm" path="res://scripts/environment/exterior_supports.gd" id="12_w8ryq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1e7dy"]
+size = Vector2(864, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w8ryq"]
+size = Vector2(864, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hav87"]
+size = Vector2(32, 600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_maqib"]
+size = Vector2(32, 220)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nw5v5"]
+size = Vector2(32, 220)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hep0f"]
+size = Vector2(632, 32)
+
+[node name="RelayStation" type="Node2D" unique_id=743327280]
+
+[node name="Dock" type="Node2D" parent="." unique_id=2145870412]
+
+[node name="WallNorth" type="StaticBody2D" parent="Dock" unique_id=372112379 groups=["navigation_blockers"]]
+position = Vector2(0, -316)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dock/WallNorth" unique_id=358549275]
+shape = SubResource("RectangleShape2D_1e7dy")
+
+[node name="Polygon2D" type="Polygon2D" parent="Dock/WallNorth" unique_id=651943924]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-432, -16, 432, -16, 432, 16, -432, 16)
+
+[node name="WallSouth" type="StaticBody2D" parent="Dock" unique_id=1385276885 groups=["navigation_blockers"]]
+position = Vector2(0, 316)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dock/WallSouth" unique_id=381019057]
+shape = SubResource("RectangleShape2D_w8ryq")
+
+[node name="Polygon2D" type="Polygon2D" parent="Dock/WallSouth" unique_id=1088205767]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-432, -16, 432, -16, 432, 16, -432, 16)
+
+[node name="WallWest" type="StaticBody2D" parent="Dock" unique_id=1485034345 groups=["navigation_blockers"]]
+position = Vector2(-416, 0)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dock/WallWest" unique_id=750920314]
+shape = SubResource("RectangleShape2D_hav87")
+
+[node name="Polygon2D" type="Polygon2D" parent="Dock/WallWest" unique_id=1143846089]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-16, -300, 16, -300, 16, 300, -16, 300)
+
+[node name="WallEastUpper" type="StaticBody2D" parent="Dock" unique_id=2114203104 groups=["navigation_blockers"]]
+position = Vector2(416, -190)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dock/WallEastUpper" unique_id=489670223]
+shape = SubResource("RectangleShape2D_maqib")
+
+[node name="Polygon2D" type="Polygon2D" parent="Dock/WallEastUpper" unique_id=1882104471]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-16, -110, 16, -110, 16, 110, -16, 110)
+
+[node name="WallEastLower" type="StaticBody2D" parent="Dock" unique_id=1916831964 groups=["navigation_blockers"]]
+position = Vector2(416, 190)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dock/WallEastLower" unique_id=1327777703]
+shape = SubResource("RectangleShape2D_nw5v5")
+
+[node name="Polygon2D" type="Polygon2D" parent="Dock/WallEastLower" unique_id=1210728369]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-16, -110, 16, -110, 16, 110, -16, 110)
+
+[node name="AutoFloor" parent="Dock" unique_id=977414101 node_paths=PackedStringArray("west_wall", "east_wall", "north_wall", "south_wall") instance=ExtResource("6_jscxr")]
+polygon = PackedVector2Array(-416, -316, 416, -316, 416, 316, -416, 316)
+west_wall = NodePath("../WallWest")
+east_wall = NodePath("../WallEastUpper")
+north_wall = NodePath("../WallNorth")
+south_wall = NodePath("../WallSouth")
+
+[node name="DockCorridor" type="Node2D" parent="." unique_id=1723955633 node_paths=PackedStringArray("west_end", "east_end", "north_wall", "south_wall")]
+script = ExtResource("8_jscxr")
+west_end = NodePath("../Dock/WallEastUpper")
+east_end = NodePath("../Junction/WallWestUpper")
+north_wall = NodePath("WallNorth")
+south_wall = NodePath("WallSouth")
+
+[node name="WallNorth" parent="DockCorridor" unique_id=348806659 instance=ExtResource("9_hep0f")]
+position = Vector2(656, -96)
+
+[node name="WallSouth" parent="DockCorridor" unique_id=2097148455 instance=ExtResource("9_hep0f")]
+position = Vector2(656, 96)
+rotation = 3.1415927
+
+[node name="Polygon2D" type="Polygon2D" parent="DockCorridor" unique_id=300598830]
+visible = false
+z_index = -1
+position = Vector2(15, -4)
+color = Color(0.11372549, 0.1882353, 0.23137255, 1)
+polygon = PackedVector2Array(400, -80, 912, -80, 912, 80, 400, 80)
+
+[node name="DoorwayLamp" parent="DockCorridor" unique_id=822794020 instance=ExtResource("6_hep0f")]
+position = Vector2(832, 0)
+color = Color(0.9529412, 0.6745098, 0.34117648, 1)
+energy = 0.4
+shadow_enabled = false
+texture_scale = 0.6
+
+[node name="AutoFloor" type="Polygon2D" parent="DockCorridor" unique_id=1121881558 node_paths=PackedStringArray("west_wall", "east_wall", "north_wall", "south_wall")]
+z_index = -10
+texture_repeat = 2
+texture = ExtResource("7_1e7dy")
+polygon = PackedVector2Array(416, -96, 896, -96, 896, 96, 416, 96)
+script = ExtResource("8_w8ryq")
+west_wall = NodePath("../../Dock/WallEastUpper")
+east_wall = NodePath("../../Junction/WallWestUpper")
+north_wall = NodePath("../WallNorth")
+south_wall = NodePath("../WallSouth")
+
+[node name="ExteriorSupports" parent="DockCorridor" unique_id=1236914904 node_paths=PackedStringArray("corridor_wall") instance=ExtResource("11_1e7dy")]
+script = ExtResource("12_w8ryq")
+corridor_wall = NodePath("../WallNorth")
+below_corridor = true
+
+[node name="Junction" type="Node2D" parent="." unique_id=632244271]
+position = Vector2(1312, 0)
+
+[node name="WallNorthLeft" parent="Junction" unique_id=994361127 instance=ExtResource("9_1e7dy")]
+position = Vector2(-256, -316)
+
+[node name="WallNorthRight" parent="Junction" unique_id=40852027 instance=ExtResource("9_1e7dy")]
+position = Vector2(256, -316)
+
+[node name="WallWestUpper" parent="Junction" unique_id=330831572 instance=ExtResource("4_e7jn2")]
+position = Vector2(-416, -190)
+
+[node name="WallWestLower" parent="Junction" unique_id=1975264698 instance=ExtResource("4_e7jn2")]
+position = Vector2(-416, 190)
+
+[node name="WallEastUpper" parent="Junction" unique_id=64191275 instance=ExtResource("4_e7jn2")]
+position = Vector2(416, -190)
+rotation = 3.1415927
+
+[node name="WallEastLower" parent="Junction" unique_id=1456393287 instance=ExtResource("4_e7jn2")]
+position = Vector2(416, 190)
+rotation = 3.1415927
+
+[node name="WallSouth" parent="Junction" unique_id=2067291598 instance=ExtResource("3_vh00a")]
+position = Vector2(0, 316)
+rotation = 3.1415927
+
+[node name="AutoFloor" type="Polygon2D" parent="Junction" unique_id=1134570967 node_paths=PackedStringArray("west_wall", "east_wall", "north_wall", "south_wall")]
+z_index = -10
+z_as_relative = false
+texture_repeat = 2
+texture = ExtResource("7_1e7dy")
+polygon = PackedVector2Array(-416, -316, 416, -316, 416, 316, -416, 316)
+script = ExtResource("8_w8ryq")
+west_wall = NodePath("../WallWestUpper")
+east_wall = NodePath("../WallEastUpper")
+north_wall = NodePath("../WallNorthLeft")
+south_wall = NodePath("../WallSouth")
+
+[node name="Maintenance" type="Node2D" parent="." unique_id=490133829]
+position = Vector2(1312, -1112)
+
+[node name="WallNorth" type="StaticBody2D" parent="Maintenance" unique_id=1626460356 groups=["navigation_blockers"]]
+position = Vector2(0, -316)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Maintenance/WallNorth" unique_id=376103325]
+shape = SubResource("RectangleShape2D_1e7dy")
+
+[node name="Polygon2D" type="Polygon2D" parent="Maintenance/WallNorth" unique_id=52927948]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-432, -16, 432, -16, 432, 16, -432, 16)
+
+[node name="WallWest" type="StaticBody2D" parent="Maintenance" unique_id=1239433242 groups=["navigation_blockers"]]
+position = Vector2(-416, 0)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Maintenance/WallWest" unique_id=776225908]
+shape = SubResource("RectangleShape2D_hav87")
+
+[node name="Polygon2D" type="Polygon2D" parent="Maintenance/WallWest" unique_id=1651540532]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-16, -300, 16, -300, 16, 300, -16, 300)
+
+[node name="WallEastUpper" type="StaticBody2D" parent="Maintenance" unique_id=881837446 groups=["navigation_blockers"]]
+position = Vector2(416, -190)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Maintenance/WallEastUpper" unique_id=2012297753]
+shape = SubResource("RectangleShape2D_maqib")
+
+[node name="Polygon2D" type="Polygon2D" parent="Maintenance/WallEastUpper" unique_id=1344872151]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-16, -110, 16, -110, 16, 110, -16, 110)
+
+[node name="WallEastLower" type="StaticBody2D" parent="Maintenance" unique_id=444125683 groups=["navigation_blockers"]]
+position = Vector2(416, 190)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Maintenance/WallEastLower" unique_id=787911935]
+shape = SubResource("RectangleShape2D_nw5v5")
+
+[node name="Polygon2D" type="Polygon2D" parent="Maintenance/WallEastLower" unique_id=2133468675]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-16, -110, 16, -110, 16, 110, -16, 110)
+
+[node name="AutoFloor" parent="Maintenance" unique_id=1994260019 node_paths=PackedStringArray("west_wall", "east_wall", "north_wall", "south_wall") instance=ExtResource("6_jscxr")]
+polygon = PackedVector2Array(-416, -316, 416, -316, 416, 316, -416, 316)
+west_wall = NodePath("../WallWest")
+east_wall = NodePath("../WallEastUpper")
+north_wall = NodePath("../WallNorth")
+south_wall = NodePath("../WallSouthLeft")
+
+[node name="WallSouthLeft" parent="Maintenance" unique_id=1683564051 instance=ExtResource("9_1e7dy")]
+position = Vector2(-256, 316)
+rotation = 3.1415927
+
+[node name="WallSouthRight" parent="Maintenance" unique_id=1118758351 instance=ExtResource("9_1e7dy")]
+position = Vector2(256, 316)
+rotation = 3.1415927
+
+[node name="MaintenanceCorridor" type="Node2D" parent="." unique_id=675924027 node_paths=PackedStringArray("west_end", "east_end", "north_wall", "south_wall")]
+position = Vector2(1312, 0)
+rotation = -1.5707964
+script = ExtResource("8_jscxr")
+west_end = NodePath("../Junction/WallNorthLeft")
+east_end = NodePath("../Maintenance/WallSouthLeft")
+north_wall = NodePath("WallNorth")
+south_wall = NodePath("WallSouth")
+
+[node name="WallNorth" parent="MaintenanceCorridor" unique_id=385742539 instance=ExtResource("9_hep0f")]
+position = Vector2(556, -96)
+
+[node name="WallSouth" parent="MaintenanceCorridor" unique_id=843482182 instance=ExtResource("9_hep0f")]
+position = Vector2(556, 96)
+rotation = 3.1415927
+
+[node name="AutoFloor" parent="MaintenanceCorridor" unique_id=2022883097 node_paths=PackedStringArray("west_wall", "east_wall", "north_wall", "south_wall") instance=ExtResource("6_jscxr")]
+polygon = PackedVector2Array(316, -96, 796, -96, 796, 96, 316, 96)
+west_wall = NodePath("../../Junction/WallNorthLeft")
+east_wall = NodePath("../../Maintenance/WallSouthLeft")
+north_wall = NodePath("../WallNorth")
+south_wall = NodePath("../WallSouth")
+
+[node name="ControlAccessCorridor" type="Node2D" parent="." unique_id=1540624440 node_paths=PackedStringArray("west_end", "east_end", "north_wall", "south_wall")]
+position = Vector2(3936, 0)
+rotation = -1.5707964
+script = ExtResource("8_jscxr")
+west_end = NodePath("../ControlRoom/WallNorthLeft")
+east_end = NodePath("../SeviceBypass/WallSouthLeft")
+north_wall = NodePath("WallNorth")
+south_wall = NodePath("WallSouth")
+
+[node name="WallNorth" parent="ControlAccessCorridor" unique_id=289335288 instance=ExtResource("9_hep0f")]
+position = Vector2(556, -96)
+
+[node name="WallSouth" parent="ControlAccessCorridor" unique_id=1092090486 instance=ExtResource("9_hep0f")]
+position = Vector2(556, 96)
+rotation = 3.1415927
+
+[node name="AutoFloor" parent="ControlAccessCorridor" unique_id=1365970325 node_paths=PackedStringArray("west_wall", "east_wall", "north_wall", "south_wall") instance=ExtResource("6_jscxr")]
+polygon = PackedVector2Array(316.00003, -96, 796, -96, 796, 96, 316.00003, 96)
+west_wall = NodePath("../../ControlRoom/WallNorthLeft")
+east_wall = NodePath("../../SeviceBypass/WallSouthLeft")
+north_wall = NodePath("../WallNorth")
+south_wall = NodePath("../WallSouth")
+
+[node name="TurbineHall" type="Node2D" parent="." unique_id=897123412]
+position = Vector2(2624, 0)
+
+[node name="WallNorth" parent="TurbineHall" unique_id=659495595 instance=ExtResource("3_vh00a")]
+position = Vector2(0, -316)
+
+[node name="WallWestUpper" parent="TurbineHall" unique_id=572244632 instance=ExtResource("4_e7jn2")]
+position = Vector2(-416, -190)
+
+[node name="WallWestLower" parent="TurbineHall" unique_id=1352155416 instance=ExtResource("4_e7jn2")]
+position = Vector2(-416, 190)
+
+[node name="WallEastUpper" parent="TurbineHall" unique_id=1828253713 instance=ExtResource("4_e7jn2")]
+position = Vector2(416, -190)
+rotation = 3.1415927
+
+[node name="WallEastLower" parent="TurbineHall" unique_id=715505879 instance=ExtResource("4_e7jn2")]
+position = Vector2(416, 190)
+rotation = 3.1415927
+
+[node name="WallSouth" parent="TurbineHall" unique_id=1411530808 instance=ExtResource("3_vh00a")]
+position = Vector2(0, 316)
+rotation = 3.1415927
+
+[node name="AutoFloor" type="Polygon2D" parent="TurbineHall" unique_id=1763868040 node_paths=PackedStringArray("west_wall", "east_wall", "north_wall", "south_wall")]
+z_index = -10
+z_as_relative = false
+texture_repeat = 2
+texture = ExtResource("7_1e7dy")
+polygon = PackedVector2Array(-416, -316, 416, -316, 416, 316, -416, 316)
+script = ExtResource("8_w8ryq")
+west_wall = NodePath("../WallWestUpper")
+east_wall = NodePath("../WallEastUpper")
+north_wall = NodePath("../WallNorth")
+south_wall = NodePath("../WallSouth")
+
+[node name="HallCorridor" type="Node2D" parent="." unique_id=1182010628 node_paths=PackedStringArray("west_end", "east_end", "north_wall", "south_wall")]
+position = Vector2(1312, 0)
+script = ExtResource("8_jscxr")
+west_end = NodePath("../Junction/WallEastUpper")
+east_end = NodePath("../TurbineHall/WallWestUpper")
+north_wall = NodePath("WallNorth")
+south_wall = NodePath("WallSouth")
+
+[node name="WallNorth" parent="HallCorridor" unique_id=1424639503 instance=ExtResource("9_hep0f")]
+position = Vector2(656, -96)
+
+[node name="WallSouth" parent="HallCorridor" unique_id=59093714 instance=ExtResource("9_hep0f")]
+position = Vector2(656, 96)
+rotation = 3.1415927
+
+[node name="Polygon2D" type="Polygon2D" parent="HallCorridor" unique_id=1575071219]
+visible = false
+z_index = -1
+position = Vector2(15, -4)
+color = Color(0.11372549, 0.1882353, 0.23137255, 1)
+polygon = PackedVector2Array(400, -80, 912, -80, 912, 80, 400, 80)
+
+[node name="DoorwayLamp" parent="HallCorridor" unique_id=2071989548 instance=ExtResource("6_hep0f")]
+position = Vector2(832, 0)
+color = Color(0.9529412, 0.6745098, 0.34117648, 1)
+energy = 0.4
+shadow_enabled = false
+texture_scale = 0.6
+
+[node name="AutoFloor" type="Polygon2D" parent="HallCorridor" unique_id=1086263032 node_paths=PackedStringArray("west_wall", "east_wall", "north_wall", "south_wall")]
+z_index = -10
+texture_repeat = 2
+texture = ExtResource("7_1e7dy")
+polygon = PackedVector2Array(416, -96, 896, -96, 896, 96, 416, 96)
+script = ExtResource("8_w8ryq")
+west_wall = NodePath("../../Junction/WallEastUpper")
+east_wall = NodePath("../../TurbineHall/WallWestUpper")
+north_wall = NodePath("../WallNorth")
+south_wall = NodePath("../WallSouth")
+
+[node name="ExteriorSupports" parent="HallCorridor" unique_id=419942624 node_paths=PackedStringArray("corridor_wall") instance=ExtResource("11_1e7dy")]
+script = ExtResource("12_w8ryq")
+corridor_wall = NodePath("../WallNorth")
+below_corridor = true
+
+[node name="ControlRoom" type="Node2D" parent="." unique_id=553886111]
+position = Vector2(3936, -7.275958e-12)
+
+[node name="WallEast" parent="ControlRoom" unique_id=1947747549 instance=ExtResource("3_vh00a")]
+position = Vector2(416, 0)
+rotation = 1.5707964
+
+[node name="CollisionShape2D" parent="ControlRoom/WallEast" index="0" unique_id=1292135332]
+shape = SubResource("RectangleShape2D_hep0f")
+
+[node name="Polygon2D" parent="ControlRoom/WallEast" index="1" unique_id=838490077]
+polygon = PackedVector2Array(-316, -16, 316, -16, 316, 16, -316, 16)
+
+[node name="InnerTrim" parent="ControlRoom/WallEast" index="2" unique_id=614664727]
+points = PackedVector2Array(-312, 12, 312, 12)
+
+[node name="WallNorthLeft" parent="ControlRoom" unique_id=2068880947 instance=ExtResource("9_1e7dy")]
+position = Vector2(-256, -316)
+
+[node name="WallNorthRight" parent="ControlRoom" unique_id=378514123 instance=ExtResource("9_1e7dy")]
+position = Vector2(256, -316)
+
+[node name="WallWestUpper" parent="ControlRoom" unique_id=397068003 instance=ExtResource("4_e7jn2")]
+position = Vector2(-416, -190)
+
+[node name="WallWestLower" parent="ControlRoom" unique_id=1227857593 instance=ExtResource("4_e7jn2")]
+position = Vector2(-416, 190)
+
+[node name="WallSouth" parent="ControlRoom" unique_id=1867052927 instance=ExtResource("3_vh00a")]
+position = Vector2(0, 316)
+rotation = 3.1415927
+
+[node name="AutoFloor" type="Polygon2D" parent="ControlRoom" unique_id=638884706 node_paths=PackedStringArray("west_wall", "east_wall", "north_wall", "south_wall")]
+z_index = -10
+z_as_relative = false
+texture_repeat = 2
+texture = ExtResource("7_1e7dy")
+polygon = PackedVector2Array(-416, -316, 416, -316, 416, 316, -416, 316)
+script = ExtResource("8_w8ryq")
+west_wall = NodePath("../WallWestUpper")
+east_wall = NodePath("../WallEast")
+north_wall = NodePath("../WallNorthLeft")
+south_wall = NodePath("../WallSouth")
+
+[node name="ControlCorridor" type="Node2D" parent="." unique_id=571517292 node_paths=PackedStringArray("west_end", "east_end", "north_wall", "south_wall")]
+position = Vector2(2624, 0)
+script = ExtResource("8_jscxr")
+west_end = NodePath("../TurbineHall/WallEastUpper")
+east_end = NodePath("../ControlRoom/WallWestUpper")
+north_wall = NodePath("WallNorth")
+south_wall = NodePath("WallSouth")
+
+[node name="WallNorth" parent="ControlCorridor" unique_id=758844968 instance=ExtResource("9_hep0f")]
+position = Vector2(656, -96)
+
+[node name="WallSouth" parent="ControlCorridor" unique_id=1560257373 instance=ExtResource("9_hep0f")]
+position = Vector2(656, 96)
+rotation = 3.1415927
+
+[node name="Polygon2D" type="Polygon2D" parent="ControlCorridor" unique_id=958085601]
+visible = false
+z_index = -1
+position = Vector2(15, -4)
+color = Color(0.11372549, 0.1882353, 0.23137255, 1)
+polygon = PackedVector2Array(400, -80, 912, -80, 912, 80, 400, 80)
+
+[node name="DoorwayLamp" parent="ControlCorridor" unique_id=2114849499 instance=ExtResource("6_hep0f")]
+position = Vector2(832, 0)
+color = Color(0.9529412, 0.6745098, 0.34117648, 1)
+energy = 0.4
+shadow_enabled = false
+texture_scale = 0.6
+
+[node name="AutoFloor" type="Polygon2D" parent="ControlCorridor" unique_id=1828706425 node_paths=PackedStringArray("west_wall", "east_wall", "north_wall", "south_wall")]
+z_index = -10
+texture_repeat = 2
+texture = ExtResource("7_1e7dy")
+polygon = PackedVector2Array(416, -96, 896, -96, 896, 96, 416, 96)
+script = ExtResource("8_w8ryq")
+west_wall = NodePath("../../TurbineHall/WallEastUpper")
+east_wall = NodePath("../../ControlRoom/WallWestUpper")
+north_wall = NodePath("../WallNorth")
+south_wall = NodePath("../WallSouth")
+
+[node name="ExteriorSupports" parent="ControlCorridor" unique_id=1523396959 node_paths=PackedStringArray("corridor_wall") instance=ExtResource("11_1e7dy")]
+script = ExtResource("12_w8ryq")
+corridor_wall = NodePath("../WallNorth")
+below_corridor = true
+
+[node name="SeviceBypass" type="Node2D" parent="." unique_id=617312801]
+position = Vector2(3936, -1112)
+
+[node name="WallSouthLeft" parent="SeviceBypass" unique_id=999557264 instance=ExtResource("9_1e7dy")]
+position = Vector2(-256, 316)
+rotation = 3.1415927
+
+[node name="WallSouthRight" parent="SeviceBypass" unique_id=28132493 instance=ExtResource("9_1e7dy")]
+position = Vector2(256, 316)
+rotation = 3.1415927
+
+[node name="WallWestUpper" parent="SeviceBypass" unique_id=1125433949 instance=ExtResource("4_e7jn2")]
+position = Vector2(-416, -190)
+
+[node name="WallWestLower" parent="SeviceBypass" unique_id=1329477765 instance=ExtResource("4_e7jn2")]
+position = Vector2(-416, 190)
+
+[node name="WallNorth" parent="SeviceBypass" unique_id=92699650 instance=ExtResource("3_vh00a")]
+position = Vector2(0, -316)
+rotation = 3.1415927
+
+[node name="AutoFloor" type="Polygon2D" parent="SeviceBypass" unique_id=1965267334 node_paths=PackedStringArray("west_wall", "east_wall", "north_wall", "south_wall")]
+z_index = -10
+z_as_relative = false
+texture_repeat = 2
+texture = ExtResource("7_1e7dy")
+polygon = PackedVector2Array(-416, -316, 416, -316, 416, 316, -416, 316)
+script = ExtResource("8_w8ryq")
+west_wall = NodePath("../WallWestUpper")
+east_wall = NodePath("../WallEast")
+north_wall = NodePath("../WallNorth")
+south_wall = NodePath("../WallSouthLeft")
+
+[node name="WallEast" parent="SeviceBypass" unique_id=632808039 instance=ExtResource("3_vh00a")]
+position = Vector2(416, 0)
+rotation = 1.5707964
+
+[node name="CollisionShape2D" parent="SeviceBypass/WallEast" index="0" unique_id=1292135332]
+shape = SubResource("RectangleShape2D_hep0f")
+
+[node name="Polygon2D" parent="SeviceBypass/WallEast" index="1" unique_id=838490077]
+polygon = PackedVector2Array(-316, -16, 316, -16, 316, 16, -316, 16)
+
+[node name="InnerTrim" parent="SeviceBypass/WallEast" index="2" unique_id=614664727]
+points = PackedVector2Array(-312, 12, 312, 12)
+
+[node name="ServiceCorridor" type="Node2D" parent="." unique_id=467318434 node_paths=PackedStringArray("west_end", "east_end", "north_wall", "south_wall")]
+position = Vector2(1312, -1112)
+script = ExtResource("8_jscxr")
+west_end = NodePath("../Maintenance/WallEastUpper")
+east_end = NodePath("../SeviceBypass/WallWestUpper")
+north_wall = NodePath("WallNorth")
+south_wall = NodePath("WallSouth")
+
+[node name="WallNorth" parent="ServiceCorridor" unique_id=935490782 instance=ExtResource("9_hep0f")]
+position = Vector2(1312, -96)
+
+[node name="WallSouth" parent="ServiceCorridor" unique_id=343359901 instance=ExtResource("9_hep0f")]
+position = Vector2(1312, 96)
+rotation = 3.1415927
+
+[node name="Polygon2D" type="Polygon2D" parent="ServiceCorridor" unique_id=994558155]
+visible = false
+z_index = -1
+position = Vector2(15, -4)
+color = Color(0.11372549, 0.1882353, 0.23137255, 1)
+polygon = PackedVector2Array(400, -80, 912, -80, 912, 80, 400, 80)
+
+[node name="DoorwayLamp" parent="ServiceCorridor" unique_id=191380382 instance=ExtResource("6_hep0f")]
+position = Vector2(832, 0)
+color = Color(0.9529412, 0.6745098, 0.34117648, 1)
+energy = 0.4
+shadow_enabled = false
+texture_scale = 0.6
+
+[node name="AutoFloor" type="Polygon2D" parent="ServiceCorridor" unique_id=1931177845 node_paths=PackedStringArray("west_wall", "east_wall", "north_wall", "south_wall")]
+z_index = -10
+texture_repeat = 2
+texture = ExtResource("7_1e7dy")
+polygon = PackedVector2Array(416, -96, 2208, -96, 2208, 96, 416, 96)
+script = ExtResource("8_w8ryq")
+west_wall = NodePath("../../Maintenance/WallEastUpper")
+east_wall = NodePath("../../SeviceBypass/WallWestUpper")
+north_wall = NodePath("../WallNorth")
+south_wall = NodePath("../WallSouth")
+
+[node name="ExteriorSupports" parent="ServiceCorridor" unique_id=1833293504 node_paths=PackedStringArray("corridor_wall") instance=ExtResource("11_1e7dy")]
+script = ExtResource("12_w8ryq")
+corridor_wall = NodePath("../WallNorth")
+below_corridor = true
+
+[node name="PlayerDrone" parent="." unique_id=1138100880 instance=ExtResource("4_6x21o")]
+position = Vector2(-280, 160)
+dash_unlocked = true
+
+[node name="SalvageHUD" parent="." unique_id=507685534 instance=ExtResource("4_4oknj")]
+
+[node name="FacilityAmbient" type="CanvasModulate" parent="." unique_id=1328837977]
+color = Color(0.57254905, 0.61960787, 0.68235296, 1)
+
+[node name="ExteriorBackdrop" type="CanvasLayer" parent="." unique_id=132514556]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="ExteriorBackdrop" unique_id=2028021788]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.03137255, 0.05490196, 0.09019608, 1)
+
+[editable path="ControlRoom/WallEast"]
+[editable path="SeviceBypass/WallEast"]

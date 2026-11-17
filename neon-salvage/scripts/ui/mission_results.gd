@@ -27,6 +27,12 @@ func _show_results() -> void:
 		mission_controller.extracted_salvage,
 		ProgressStore.banked_salvage
 	]
+	
+	if mission_controller.secured_shield_this_run:
+		details_label.text += (
+			"\n\nShield Generator secured.\n"
+			+ "Equip it in Preperation."
+		)
 
 	overlay.show()
 	restart_button.grab_focus()

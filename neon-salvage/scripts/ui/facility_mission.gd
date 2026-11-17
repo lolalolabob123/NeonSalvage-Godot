@@ -17,6 +17,7 @@ var extraction_time_left: float = 0.0
 var transport_ready: bool = false
 var extraction_complete: bool = false
 var extracted_salvage: int = 0
+var secured_shield_this_run: bool = false
 
 func _ready() -> void:
 	add_to_group("mission_controller")
@@ -71,30 +72,34 @@ func _physics_process(delta: float) -> void:
 func complete_extraction() -> bool:
 	if not has_prototype or not transport_ready or extraction_complete:
 		return false
-	
+
 	var player := get_tree().get_first_node_in_group("player")
-	
+
 	if not is_instance_valid(player):
 		return false
-	
+
 	if int(player.get("current_health")) <= 0:
 		return false
-	
+
 	var mission_salvage: int = int(player.get("salvage_total"))
-	
-	if not ProgressStore.bank_salvage(mission_salvage, has_unsecured_shield):
+
+	if not ProgressStore.bank_salvage(
+		mission_salvage,
+		has_unsecured_shield
+	):
 		push_error("Extraction could not finish because progress was not saved.")
 		return false
-	
+
 	extracted_salvage = mission_salvage
-	
+	secured_shield_this_run = has_unsecured_shield
+
 	player.set("salvage_total", 0)
 	player.emit_signal("salvage_changed", 0)
-	
+
 	extraction_complete = true
 	mission_completed.emit()
 	get_tree().paused = true
-	return true 
+	return true
 
 func collect_security_card() -> void:
 	if has_security_card:
