@@ -6,8 +6,18 @@ signal extraction_called
 signal transport_arrived
 signal mission_completed
 signal security_card_collected
+signal power_restored
+signal mission_stage_changed
+signal turbine_started
+signal turbine_startup_begun
+
+enum ObjectiveType {
+	RECOVER_PROTOTYPE,
+	RESTORE_POWER
+}
 
 @export var extraction_duration: float = 8.0
+@export var objective_type = ObjectiveType.RECOVER_PROTOTYPE
 
 var has_prototype: bool = false
 var has_unsecured_shield: bool = false
@@ -18,6 +28,10 @@ var transport_ready: bool = false
 var extraction_complete: bool = false
 var extracted_salvage: int = 0
 var secured_shield_this_run: bool = false
+var has_restored_power: bool = false
+var power_fault_diagnosed: bool = false
+var turbine_running: bool = false
+var turbine_startup_active: bool = false
 
 func _ready() -> void:
 	add_to_group("mission_controller")
@@ -38,7 +52,7 @@ func recover_prototype() -> bool:
 	return true
 
 func request_extraction() -> bool:
-	if not has_prototype or has_called_extraction:
+	if not is_objective_complete() or has_called_extraction:
 		return false
 	
 	has_called_extraction = true
@@ -70,7 +84,7 @@ func _physics_process(delta: float) -> void:
 		transport_arrived.emit()
 
 func complete_extraction() -> bool:
-	if not has_prototype or not transport_ready or extraction_complete:
+	if not is_objective_complete() or not transport_ready or extraction_complete:
 		return false
 
 	var player := get_tree().get_first_node_in_group("player")
@@ -107,3 +121,94 @@ func collect_security_card() -> void:
 	
 	has_security_card = true
 	security_card_collected.emit()
+
+func is_objective_complete() -> bool:
+	match objective_type:
+		ObjectiveType.RECOVER_PROTOTYPE:
+			return has_prototype
+		ObjectiveType.RESTORE_POWER:
+			return has_restored_power
+		_:
+			return false
+
+func restore_power() -> bool:
+	if objective_type != ObjectiveType.RESTORE_POWER:
+		return false
+	
+	if not turbine_running:
+		return false
+	
+	if has_restored_power or extraction_complete:
+		return false
+	
+	has_restored_power = true
+	power_restored.emit()
+	return true
+
+func get_objective_complete_text() -> String:
+	match objective_type:
+		ObjectiveType.RESTORE_POWER:
+			return "POWER RESTORED"
+		_:
+			return "PROTOTYPE RECOVERED"
+
+func get_extraction_requirement_text() -> String:
+	match objective_type:
+		ObjectiveType.RESTORE_POWER:
+			return "RESTORE STATION POWER FIRST"
+		_:
+			return "RECOVER PROTOTYPE FIRST"
+
+func get_objective_instruction() -> String:
+	if objective_type == ObjectiveType.RESTORE_POWER:
+		if turbine_startup_active:
+			return "Maintain turbine restart: stay inside the control ring."
+
+		if power_fault_diagnosed:
+			return "Restart the turbine in Turbine Hall."
+
+		return "Restart the turbine. Control Room contains fault information."
+
+	return "Recover the prototype in the security room."
+
+func diagnose_power_fault() -> bool:
+	if objective_type != ObjectiveType.RESTORE_POWER:
+		return false
+	
+	if power_fault_diagnosed or extraction_complete or turbine_running:
+		return false
+	
+	power_fault_diagnosed = true
+	mission_stage_changed.emit()
+	return true
+
+func start_turbine() -> bool:
+	if objective_type != ObjectiveType.RESTORE_POWER:
+		return false
+
+	if not turbine_startup_active:
+		return false
+
+	if turbine_running or extraction_complete:
+		return false
+
+	turbine_startup_active = false
+	turbine_running = true
+
+	restore_power()
+
+	turbine_started.emit()
+	mission_stage_changed.emit()
+	return true
+
+func begin_turbine_restart() -> bool:
+	if objective_type != ObjectiveType.RESTORE_POWER:
+		return false
+
+	if turbine_startup_active or turbine_running or extraction_complete:
+		return false
+
+	turbine_startup_active = true
+	turbine_startup_begun.emit()
+	mission_stage_changed.emit()
+	return true

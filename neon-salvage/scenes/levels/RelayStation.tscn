@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://do4v5j0iqnvcm"]
 
+[ext_resource type="PackedScene" uid="uid://c126lk42xfw26" path="res://scenes/environment/ExtractionTerminal.tscn" id="2_maqib"]
+[ext_resource type="Script" uid="uid://doy6tdcrrtjes" path="res://scripts/environment/extraction_terminal.gd" id="3_ajid0"]
 [ext_resource type="PackedScene" uid="uid://e0ni7bv6g0qk" path="res://scenes/environment/WallStraight864.tscn" id="3_vh00a"]
 [ext_resource type="PackedScene" uid="uid://oohw5n16r2ll" path="res://scenes/ui/SalvageHUD.tscn" id="4_4oknj"]
 [ext_resource type="PackedScene" uid="uid://b8sv2wmfuy86" path="res://scenes/player/PlayerDrone.tscn" id="4_6x21o"]
@@ -12,7 +14,14 @@
 [ext_resource type="PackedScene" uid="uid://bwbniirc376yl" path="res://scenes/environment/WallStraight352.tscn" id="9_1e7dy"]
 [ext_resource type="PackedScene" uid="uid://ti5tm2bhdgvs" path="res://scenes/environment/CorridorWall512.tscn" id="9_hep0f"]
 [ext_resource type="PackedScene" uid="uid://bvtdbeetlwk31" path="res://scenes/environment/ExteriorSupports.tscn" id="11_1e7dy"]
+[ext_resource type="PackedScene" uid="uid://bhigc1j7geq34" path="res://scenes/environment/PowerTerminal.tscn" id="12_hav87"]
 [ext_resource type="Script" uid="uid://hvbthjgtynm" path="res://scripts/environment/exterior_supports.gd" id="12_w8ryq"]
+[ext_resource type="PackedScene" uid="uid://bcpwo5a3yl1mf" path="res://scenes/environment/TurbineStarter.tscn" id="13_nw5v5"]
+[ext_resource type="Script" uid="uid://bydq36evamwfi" path="res://scripts/ui/facility_mission.gd" id="14_1e7dy"]
+[ext_resource type="Script" uid="uid://bords25vw0mlt" path="res://scripts/environment/turbine_restart.gd" id="14_risd4"]
+[ext_resource type="Script" uid="uid://d1u5ducd7wrwg" path="res://scripts/environment/electrical_sweep.gd" id="15_l755m"]
+[ext_resource type="Script" uid="uid://bk0u7tf7i7j10" path="res://scripts/ui/mission_hud.gd" id="16_hav87"]
+[ext_resource type="PackedScene" uid="uid://cg1ufgms80u3y" path="res://scripts/tests/CoverBlock.tscn" id="16_lkva1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1e7dy"]
 size = Vector2(864, 32)
@@ -97,6 +106,11 @@ west_wall = NodePath("../WallWest")
 east_wall = NodePath("../WallEastUpper")
 north_wall = NodePath("../WallNorth")
 south_wall = NodePath("../WallSouth")
+
+[node name="ExtractionTerminal" parent="Dock" unique_id=2113362187 node_paths=PackedStringArray("mission_controller") instance=ExtResource("2_maqib")]
+position = Vector2(-220, 180)
+script = ExtResource("3_ajid0")
+mission_controller = NodePath("../../MissionController")
 
 [node name="DockCorridor" type="Node2D" parent="." unique_id=1723955633 node_paths=PackedStringArray("west_end", "east_end", "north_wall", "south_wall")]
 script = ExtResource("8_jscxr")
@@ -325,6 +339,20 @@ east_wall = NodePath("../WallEastUpper")
 north_wall = NodePath("../WallNorth")
 south_wall = NodePath("../WallSouth")
 
+[node name="TurbineStarter" parent="TurbineHall" unique_id=1840863516 node_paths=PackedStringArray("mission_controller") instance=ExtResource("13_nw5v5")]
+script = ExtResource("14_risd4")
+mission_controller = NodePath("../../MissionController")
+restart_duration = 12.0
+control_radius = 180.0
+interaction_radius = 80.0
+
+[node name="ElectricalSweep" type="Node2D" parent="TurbineHall" unique_id=588794753 node_paths=PackedStringArray("mission_controller")]
+script = ExtResource("15_l755m")
+mission_controller = NodePath("../../MissionController")
+
+[node name="CoverBlock" parent="TurbineHall" unique_id=38345602 instance=ExtResource("16_lkva1")]
+position = Vector2(-105, 60)
+
 [node name="HallCorridor" type="Node2D" parent="." unique_id=1182010628 node_paths=PackedStringArray("west_end", "east_end", "north_wall", "south_wall")]
 position = Vector2(1312, 0)
 script = ExtResource("8_jscxr")
@@ -413,6 +441,10 @@ west_wall = NodePath("../WallWestUpper")
 east_wall = NodePath("../WallEast")
 north_wall = NodePath("../WallNorthLeft")
 south_wall = NodePath("../WallSouth")
+
+[node name="PowerTerminal" parent="ControlRoom" unique_id=1708066752 node_paths=PackedStringArray("mission_controller") instance=ExtResource("12_hav87")]
+position = Vector2(220, 0)
+mission_controller = NodePath("../../MissionController")
 
 [node name="ControlCorridor" type="Node2D" parent="." unique_id=571517292 node_paths=PackedStringArray("west_end", "east_end", "north_wall", "south_wall")]
 position = Vector2(2624, 0)
@@ -570,6 +602,22 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0.03137255, 0.05490196, 0.09019608, 1)
+
+[node name="MissionController" type="Node" parent="." unique_id=281775683]
+script = ExtResource("14_1e7dy")
+extraction_duration = 14.0
+objective_type = 1
+
+[node name="MissionHUD" type="CanvasLayer" parent="." unique_id=206849072 node_paths=PackedStringArray("mission_controller")]
+script = ExtResource("16_hav87")
+mission_controller = NodePath("../MissionController")
+
+[node name="ObjectiveLabel" type="Label" parent="MissionHUD" unique_id=2065583741]
+offset_left = 320.0
+offset_top = 24.0
+offset_right = 920.0
+offset_bottom = 84.0
+theme_override_font_sizes/font_size = 18
 
 [editable path="ControlRoom/WallEast"]
 [editable path="SeviceBypass/WallEast"]

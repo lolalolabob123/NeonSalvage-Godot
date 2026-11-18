@@ -18,10 +18,12 @@ func _process(_delta: float) -> void:
 	
 	if mission_controller.transport_ready:
 		interaction_prompt.text = "[E] EXTRACT"
-	elif mission_controller.has_prototype:
+	elif mission_controller.is_objective_complete():
 		interaction_prompt.text = "[E] CALL EXTRACTION"
 	else:
-		interaction_prompt.text = "RECOVER PROTOTYPE FIRST"
+		interaction_prompt.text = (
+			mission_controller.get_extraction_requirement_text()
+		)
 
 func player_can_interact() -> bool:
 	if not is_instance_valid(mission_controller):
