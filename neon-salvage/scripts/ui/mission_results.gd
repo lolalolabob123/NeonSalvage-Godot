@@ -19,19 +19,24 @@ func _ready() -> void:
 	)
 
 func _show_results() -> void:
+	var outcome := "Main objective incomplete. Carried loot secured."
+
+	if mission_controller.objective_completed_on_extraction:
+		outcome = "Main objective complete. Carried loot secured."
+
 	details_label.text = (
-		"Prototype extracted.\n"
-		+ "Salvage banked this run: %d\n"
-		+ "Total banked salvage: %d"
+		outcome
+		+ "\nSalvage banked this run: %d"
+		+ "\nTotal banked salvage: %d"
 	) % [
 		mission_controller.extracted_salvage,
 		ProgressStore.banked_salvage
 	]
-	
+
 	if mission_controller.secured_shield_this_run:
 		details_label.text += (
-			"\n\nShield Generator secured.\n"
-			+ "Equip it in Preperation."
+			"\n\nShield Generator secured."
+			+ "\nEquip it in Preparation."
 		)
 
 	overlay.show()

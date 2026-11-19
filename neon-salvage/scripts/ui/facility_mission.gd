@@ -18,6 +18,7 @@ enum ObjectiveType {
 
 @export var extraction_duration: float = 8.0
 @export var objective_type = ObjectiveType.RECOVER_PROTOTYPE
+@export var allow_early_extraction: bool = false
 
 var has_prototype: bool = false
 var has_unsecured_shield: bool = false
@@ -34,6 +35,7 @@ var turbine_running: bool = false
 var turbine_startup_active: bool = false
 var extraction_response_suppressed: bool = false
 var turbine_circuit_isolated: bool = false
+var objective_completed_on_extraction: bool = false
 
 func _ready() -> void:
 	add_to_group("mission_controller")
@@ -54,7 +56,7 @@ func recover_prototype() -> bool:
 	return true
 
 func request_extraction() -> bool:
-	if not is_objective_complete() or has_called_extraction:
+	if not can_call_extraction():
 		return false
 	
 	has_called_extraction = true
@@ -86,7 +88,11 @@ func _physics_process(delta: float) -> void:
 		transport_arrived.emit()
 
 func complete_extraction() -> bool:
-	if not is_objective_complete() or not transport_ready or extraction_complete:
+	if (
+		not has_called_extraction
+		or not transport_ready
+		or extraction_complete
+	):
 		return false
 
 	var player := get_tree().get_first_node_in_group("player")
@@ -108,6 +114,7 @@ func complete_extraction() -> bool:
 
 	extracted_salvage = mission_salvage
 	secured_shield_this_run = has_unsecured_shield
+	objective_completed_on_extraction = is_objective_complete()
 
 	player.set("salvage_total", 0)
 	player.emit_signal("salvage_changed", 0)
@@ -240,3 +247,9 @@ func isolate_turbine_circuit() -> bool:
 	turbine_circuit_isolated = true
 	mission_stage_changed.emit()
 	return true
+
+func can_call_extraction() -> bool:
+	if has_called_extraction or extraction_complete:
+		return false
+	
+	return is_objective_complete() or allow_early_extraction

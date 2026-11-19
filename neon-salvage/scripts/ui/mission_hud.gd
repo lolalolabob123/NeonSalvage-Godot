@@ -37,10 +37,16 @@ func _update_objective() -> void:
 	objective_label.modulate = Color("#31CBE0")
 
 	if mission_controller.extraction_complete:
-		objective_label.text = (
-            "EXTRACTION SUCCESSFUL\n"
-			+ "Mission complete. Salvage secured."
-		)
+		if mission_controller.objective_completed_on_extraction:
+			objective_label.text = (
+				"EXTRACTION SUCCESSFUL\n"
+				+ "Main objective complete. Loot secured."
+			)
+		else:
+			objective_label.text = (
+				"EXTRACTION SUCCESSFUL\n"
+				+ "Main objective incomplete. Loot secured."
+			)
 
 	elif mission_controller.transport_ready:
 		objective_label.text = (

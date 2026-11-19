@@ -18,8 +18,14 @@ func _process(_delta: float) -> void:
 	
 	if mission_controller.transport_ready:
 		interaction_prompt.text = "[E] EXTRACT"
-	elif mission_controller.is_objective_complete():
-		interaction_prompt.text = "[E] CALL EXTRACTION"
+	elif mission_controller.can_call_extraction():
+		if mission_controller.is_objective_complete():
+			interaction_prompt.text = "[E] CALL EXTRACTION"
+		else:
+			interaction_prompt.text = (
+				"[E] CALL EXTRACTION\n"
+				+ "Main objective incomplete. Carried loot will be secured."
+			)
 	else:
 		interaction_prompt.text = (
 			mission_controller.get_extraction_requirement_text()
