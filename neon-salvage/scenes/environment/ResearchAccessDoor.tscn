@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://if2w234y1fc3"]
+
+[ext_resource type="Script" uid="uid://cj3snsvp1pbnl" path="res://scripts/environment/research_access_door.gd" id="1_8xa2u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5g8r0"]
+size = Vector2(32, 160)
+
+[node name="ResearchAccessDoor" type="Node2D" unique_id=1856456536]
+script = ExtResource("1_8xa2u")
+
+[node name="DoorBody" type="StaticBody2D" parent="." unique_id=86524592]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorBody" unique_id=749140368]
+shape = SubResource("RectangleShape2D_5g8r0")
+
+[node name="Panel" type="Polygon2D" parent="." unique_id=413304925]
+color = Color(0.7254902, 0.46666667, 0.24313726, 1)
+polygon = PackedVector2Array(-16, -80, 16, -80, 16, 80, -16, 80)
+
+[node name="InteractionPrompt" type="Label" parent="." unique_id=124022691]
+z_index = 2
+offset_left = -180.0
+offset_top = -150.0
+offset_right = 180.0
+offset_bottom = -60.0
+text = "[E] OPEN DOOR"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Frame" type="Node2D" parent="." unique_id=509476196]
+
+[node name="TopCap" type="Polygon2D" parent="Frame" unique_id=1634192781]
+position = Vector2(0, -90)
+color = Color(0.32156864, 0.41568628, 0.46666667, 1)
+polygon = PackedVector2Array(-24, -10, 24, -10, 24, 10, -24, 10)
+
+[node name="BottomCap" type="Polygon2D" parent="Frame" unique_id=1407705993]
+position = Vector2(0, 90)
+color = Color(0.32156864, 0.41568628, 0.46666667, 1)
+polygon = PackedVector2Array(-24, -10, 24, -10, 24, 10, -24, 10)

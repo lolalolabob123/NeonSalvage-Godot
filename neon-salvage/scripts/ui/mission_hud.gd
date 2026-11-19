@@ -70,9 +70,20 @@ func _update_objective() -> void:
 		objective_label.modulate = Color("#F3AC57")
 
 	elif mission_controller.is_objective_complete():
+		var next_step := "Return to the extraction terminal."
+
+		if (
+			mission_controller.objective_type
+			== FacilityMission.ObjectiveType.RESTORE_POWER
+		):
+			next_step = (
+				"Extract with your loot, or explore the Research Annex."
+			)
+
 		objective_label.text = (
 			mission_controller.get_objective_complete_text()
-			+ "\nReturn to the extraction terminal."
+			+ "\n"
+			+ next_step
 		)
 		objective_label.modulate = Color("#F3AC57")
 

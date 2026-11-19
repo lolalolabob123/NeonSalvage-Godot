@@ -36,16 +36,36 @@ var turbine_startup_active: bool = false
 var extraction_response_suppressed: bool = false
 var turbine_circuit_isolated: bool = false
 var objective_completed_on_extraction: bool = false
+var unsecured_gear: Array[StringName] = []
+var secured_gear_this_run: Array[StringName] = []
 
 func _ready() -> void:
 	add_to_group("mission_controller")
 
-func recover_shield_generator() -> bool:
-	if extraction_complete or has_unsecured_shield or ProgressStore.owns_shield_generator():
+func recover_gear(gear_id: StringName) -> bool:
+	if extraction_complete:
 		return false
-	
-	has_unsecured_shield = true
+
+	if not ProgressStore.GEAR.has(gear_id):
+		return false
+
+	if ProgressStore.owns_gear(gear_id):
+		return false
+
+	if unsecured_gear.has(gear_id):
+		return false
+
+	unsecured_gear.append(gear_id)
+
+	# Preserve compatibility with the existing shield code.
+	if gear_id == ProgressStore.SHIELD_GENERATOR_ID:
+		has_unsecured_shield = true
+
+	mission_stage_changed.emit()
 	return true
+
+func recover_shield_generator() -> bool:
+	return recover_gear(ProgressStore.SHIELD_GENERATOR_ID)
 
 func recover_prototype() -> bool:
 	if has_prototype:
@@ -105,14 +125,15 @@ func complete_extraction() -> bool:
 
 	var mission_salvage: int = int(player.get("salvage_total"))
 
-	if not ProgressStore.bank_salvage(
+	if not ProgressStore.bank_extraction(
 		mission_salvage,
-		has_unsecured_shield
+		unsecured_gear
 	):
 		push_error("Extraction could not finish because progress was not saved.")
 		return false
 
 	extracted_salvage = mission_salvage
+	secured_gear_this_run.assign(unsecured_gear)
 	secured_shield_this_run = has_unsecured_shield
 	objective_completed_on_extraction = is_objective_complete()
 

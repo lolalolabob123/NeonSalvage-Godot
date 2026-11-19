@@ -170,16 +170,13 @@ func _begin_recovery() -> void:
 func take_damage(amount: int) -> void:
 	if amount <= 0 or current_health <= 0:
 		return
-
+	
 	current_health = maxi(current_health - amount, 0)
-
+	
 	if current_health <= 0:
-		var pickup := SALVAGE_PICKUP.instantiate() as Area2D
-		var level := get_tree().current_scene
-
-		level.add_child(pickup)
-		pickup.global_position = global_position
-		queue_free()
+		velocity = Vector2.ZERO
+		set_physics_process(false)
+		call_deferred("_finish_death")
 
 
 func _draw() -> void:
@@ -212,3 +209,16 @@ func _draw() -> void:
 		3.0,
 		true
 	)
+
+func _finish_death() -> void:
+	var level := get_tree().current_scene as Node2D
+	
+	if not is_instance_valid(level):
+		queue_free()
+		return	
+	
+	var pickup := SALVAGE_PICKUP.instantiate() as Area2D
+	pickup.position = level.to_local(global_position)
+	level.add_child(pickup)
+	
+	queue_free()

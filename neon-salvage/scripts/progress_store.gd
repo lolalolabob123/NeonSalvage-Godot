@@ -8,6 +8,18 @@ const HULL_REINFORCEMENT_ID: StringName = &"hull_reinforcement"
 const HULL_REINFORCEMENT_II_ID: StringName = &"hull_reinforcement_ii"
 const EMERGENCY_PATCH_ID: StringName = &"emergency_patch"
 const SHIELD_GENERATOR_ID: StringName = &"shield_generator"
+const EMP_EMITTER_ID: StringName = &"emp_emitter"
+
+const GEAR := {
+	SHIELD_GENERATOR_ID: {
+		"display_name": "Shield Generator",
+		"save_key": "shield_generator",
+	},
+	EMP_EMITTER_ID: {
+		"display_name": "EMP Emitter",
+		"save_key": "emp_emitter",
+	},
+}
 
 const SKILLS := {
 	HULL_REINFORCEMENT_ID: {
@@ -76,30 +88,72 @@ func _ready() -> void:
 	
 	hull_reinforced = bool(saved_upgrade)
 
+func owns_gear(gear_id: StringName) -> bool:
+	var gear: Dictionary = GEAR.get(gear_id, {})
+	if gear.is_empty():
+		return false
+	
+	var save_key: String = gear["save_key"]
+	return save_data.get_value("gear", save_key, false) == true
+
 func owns_shield_generator() -> bool:
-	return save_data.get_value("gear", "shield_generator", false) == true
+	return owns_gear(SHIELD_GENERATOR_ID)
 
 func bank_salvage(amount: int, secure_shield: bool = false) -> bool:
+	var recovered_gear: Array[StringName] = []
+
+	if secure_shield:
+		recovered_gear.append(SHIELD_GENERATOR_ID)
+
+	return bank_extraction(amount, recovered_gear)
+
+
+func bank_extraction(
+	amount: int,
+	recovered_gear: Array[StringName]
+) -> bool:
 	if not storage_available or amount < 0:
 		return false
-	
+
+	# Validate everything before changing the save.
+	for gear_id in recovered_gear:
+		if not GEAR.has(gear_id):
+			push_error("Unknown recovered gear: %s" % gear_id)
+			return false
+
+	var previous_ownership: Dictionary = {}
+
+	for gear_id in recovered_gear:
+		var gear: Dictionary = GEAR[gear_id]
+		var save_key: String = gear["save_key"]
+		previous_ownership[save_key] = save_data.get_value(
+			"gear", save_key, false
+		)
+
 	var new_total := banked_salvage + amount
-	var previous_shield: Variant = save_data.get_value(
-		"gear", "shield_generator", false
-	)
-	
 	save_data.set_value("progress", "banked_salvage", new_total)
-	if secure_shield:
-		save_data.set_value("gear", "shield_generator", true)
-	
+
+	for save_key in previous_ownership:
+		save_data.set_value("gear", save_key, true)
+
+	# Save once, after all equipment has been recorded.
 	var error := save_data.save(SAVE_PATH)
+
 	if error != OK:
-		save_data.set_value("progress", "banked_salvage", banked_salvage)
-		if secure_shield:
-			save_data.set_value("gear", "shield_generator", previous_shield)
-		push_error("Could not save progress: %s" % error_string(error))
+		save_data.set_value(
+			"progress", "banked_salvage", banked_salvage
+		)
+
+		for save_key in previous_ownership:
+			save_data.set_value(
+				"gear", save_key, previous_ownership[save_key]
+			)
+
+		push_error(
+			"Could not save extraction: %s" % error_string(error)
+		)
 		return false
-	
+
 	banked_salvage = new_total
 	banked_salvage_changed.emit(banked_salvage)
 	return true
