@@ -32,6 +32,8 @@ var has_restored_power: bool = false
 var power_fault_diagnosed: bool = false
 var turbine_running: bool = false
 var turbine_startup_active: bool = false
+var extraction_response_suppressed: bool = false
+var turbine_circuit_isolated: bool = false
 
 func _ready() -> void:
 	add_to_group("mission_controller")
@@ -210,5 +212,31 @@ func begin_turbine_restart() -> bool:
 
 	turbine_startup_active = true
 	turbine_startup_begun.emit()
+	mission_stage_changed.emit()
+	return true
+
+func suppress_extraction_response() -> bool:
+	if objective_type != ObjectiveType.RESTORE_POWER:
+		return false
+	
+	if not has_restored_power:
+		return false
+	
+	if extraction_response_suppressed or has_called_extraction or extraction_complete:
+		return false
+	
+	extraction_response_suppressed = true
+	
+	mission_stage_changed.emit()
+	return true
+
+func isolate_turbine_circuit() -> bool:
+	if objective_type != ObjectiveType.RESTORE_POWER:
+		return false
+	
+	if turbine_circuit_isolated or turbine_running or extraction_complete:
+		return false
+	
+	turbine_circuit_isolated = true
 	mission_stage_changed.emit()
 	return true

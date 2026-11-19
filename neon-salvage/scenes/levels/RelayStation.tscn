@@ -19,9 +19,19 @@
 [ext_resource type="PackedScene" uid="uid://bcpwo5a3yl1mf" path="res://scenes/environment/TurbineStarter.tscn" id="13_nw5v5"]
 [ext_resource type="Script" uid="uid://bydq36evamwfi" path="res://scripts/ui/facility_mission.gd" id="14_1e7dy"]
 [ext_resource type="Script" uid="uid://bords25vw0mlt" path="res://scripts/environment/turbine_restart.gd" id="14_risd4"]
+[ext_resource type="PackedScene" uid="uid://b6pcllthefm75" path="res://scenes/environment/MaintenanceBreaker.tscn" id="14_sxxht"]
 [ext_resource type="Script" uid="uid://d1u5ducd7wrwg" path="res://scripts/environment/electrical_sweep.gd" id="15_l755m"]
 [ext_resource type="Script" uid="uid://bk0u7tf7i7j10" path="res://scripts/ui/mission_hud.gd" id="16_hav87"]
 [ext_resource type="PackedScene" uid="uid://cg1ufgms80u3y" path="res://scripts/tests/CoverBlock.tscn" id="16_lkva1"]
+[ext_resource type="Script" uid="uid://dp7df7h7ix8py" path="res://scripts/enemies/maintenance_navigation.gd" id="17_cupjd"]
+[ext_resource type="Script" uid="uid://c2ojgocpsx27p" path="res://scripts/enemies/turbine_navigation.gd" id="18_p7riy"]
+[ext_resource type="Script" uid="uid://cch2m18qw3oi7" path="res://scripts/environment/security_control.gd" id="19_msd4u"]
+[ext_resource type="Script" uid="uid://cyeg8ke56gbtn" path="res://scripts/enemies/turbine_response.gd" id="19_x3x6d"]
+[ext_resource type="PackedScene" uid="uid://b350x34tney4e" path="res://scenes/environment/SecurityCover.tscn" id="20_jlc1o"]
+[ext_resource type="Script" uid="uid://d0ho16s4roa3c" path="res://scripts/enemies/control_room_navigation.gd" id="22_vlcsw"]
+[ext_resource type="Script" uid="uid://d15rr4d8o45pr" path="res://scripts/security_response.gd" id="24_tpdgs"]
+[ext_resource type="PackedScene" uid="uid://bq0waxbah2ib0" path="res://scenes/enemies/SentryDrone.tscn" id="25_rg2ck"]
+[ext_resource type="Script" uid="uid://c2ndtbq6eudfu" path="res://scripts/enemies/relay_dock_navigation.gd" id="26_rg2ck"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1e7dy"]
 size = Vector2(864, 32)
@@ -38,8 +48,48 @@ size = Vector2(32, 220)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nw5v5"]
 size = Vector2(32, 220)
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_cupjd"]
+vertices = PackedVector2Array(690, -50, 690, 50, 370, 50, 110, 22, 370, -50, 110, -102, 370, -270, -370, -270, -110, -102, -370, 270, -110, 22, -50, 270, 370, 270, 50, 270, 50, 570, -50, 570)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(4, 3, 5, 6), PackedInt32Array(7, 6, 5, 8), PackedInt32Array(9, 7, 8, 10), PackedInt32Array(11, 9, 10, 3), PackedInt32Array(2, 12, 13, 3), PackedInt32Array(11, 3, 13), PackedInt32Array(11, 13, 14, 15)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-400, -300, 400, -300, 400, -80, 720, -80, 720, 80, 400, 80, 400, 300, 80, 300, 80, 600, -80, 600, -80, 300, -400, 300)])
+parsed_geometry_type = 1
+parsed_collision_mask = 1
+source_geometry_mode = 1
+source_geometry_group_name = &"navigation_blockers"
+agent_radius = 30.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_p7riy"]
+vertices = PackedVector2Array(370, -270, 370, 270, -370, 270, -370, 50, -690, 50, -690, -50, -370, -50, -370, -270)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 4, 5, 6), PackedInt32Array(0, 3, 6), PackedInt32Array(0, 6, 7)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-400, -300, 400, -300, 400, 300, -400, 300, -400, 80, -720, 80, -720, -80, -400, -80)])
+parsed_geometry_type = 1
+parsed_collision_mask = 1
+source_geometry_mode = 1
+source_geometry_group_name = &"navigation_blockers"
+agent_radius = 30.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hep0f"]
 size = Vector2(632, 32)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_vlcsw"]
+vertices = PackedVector2Array(110, 62, 370, 270, -370, 270, -110, 62, 370, -270, 110, -62, 50, -270, -110, -62, -370, 50, -690, 50, -690, -50, -370, -50, -370, -270, -50, -270, 50, -570, -50, -570)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 1, 0, 5), PackedInt32Array(6, 4, 5, 7), PackedInt32Array(3, 2, 8, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(7, 8, 11), PackedInt32Array(7, 11, 12, 13), PackedInt32Array(6, 7, 13, 14), PackedInt32Array(14, 13, 15)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-400, -300, -80, -300, -80, -600, 80, -600, 80, -300, 400, -300, 400, 300, -400, 300, -400, 80, -720, 80, -720, -80, -400, -80)])
+parsed_geometry_type = 1
+parsed_collision_mask = 1
+source_geometry_mode = 1
+source_geometry_group_name = &"navigation_blockers"
+agent_radius = 30.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_jlc1o"]
+vertices = PackedVector2Array(370, -50, 850, -50, 850, 50, 370, 50, 370, 270, -370, 270, -370, -270, 370, -270)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 4, 5, 6), PackedInt32Array(0, 3, 6), PackedInt32Array(7, 0, 6)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-400, -300, 400, -300, 400, -80, 880, -80, 880, 80, 400, 80, 400, 300, -400, 300)])
+parsed_geometry_type = 1
+parsed_collision_mask = 1
+source_geometry_mode = 1
+source_geometry_group_name = &"navigation_blockers"
+agent_radius = 30.0
 
 [node name="RelayStation" type="Node2D" unique_id=743327280]
 
@@ -179,8 +229,12 @@ rotation = 3.1415927
 position = Vector2(416, 190)
 rotation = 3.1415927
 
-[node name="WallSouth" parent="Junction" unique_id=2067291598 instance=ExtResource("3_vh00a")]
-position = Vector2(0, 316)
+[node name="WallSouthLeft" parent="Junction" unique_id=871012557 instance=ExtResource("9_1e7dy")]
+position = Vector2(-256, 316)
+rotation = 3.1415927
+
+[node name="WallSouthRight" parent="Junction" unique_id=798529987 instance=ExtResource("9_1e7dy")]
+position = Vector2(256, 316)
 rotation = 3.1415927
 
 [node name="AutoFloor" type="Polygon2D" parent="Junction" unique_id=1134570967 node_paths=PackedStringArray("west_wall", "east_wall", "north_wall", "south_wall")]
@@ -193,6 +247,146 @@ script = ExtResource("8_w8ryq")
 west_wall = NodePath("../WallWestUpper")
 east_wall = NodePath("../WallEastUpper")
 north_wall = NodePath("../WallNorthLeft")
+south_wall = NodePath("../WallSouthLeft")
+
+[node name="SalvageIntake" type="Node2D" parent="." unique_id=1700944804]
+position = Vector2(1312, 1112)
+
+[node name="WallNorthLeft" parent="SalvageIntake" unique_id=1431034364 instance=ExtResource("9_1e7dy")]
+position = Vector2(-256, -316)
+
+[node name="WallNorthRight" parent="SalvageIntake" unique_id=207279678 instance=ExtResource("9_1e7dy")]
+position = Vector2(256, -316)
+
+[node name="WallWest" type="StaticBody2D" parent="SalvageIntake" unique_id=1924834256 groups=["navigation_blockers"]]
+position = Vector2(-416, 0)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SalvageIntake/WallWest" unique_id=1001256449]
+shape = SubResource("RectangleShape2D_hav87")
+
+[node name="Polygon2D" type="Polygon2D" parent="SalvageIntake/WallWest" unique_id=1821664010]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-16, -300, 16, -300, 16, 300, -16, 300)
+
+[node name="WallEastUpper" type="StaticBody2D" parent="SalvageIntake" unique_id=1945268485 groups=["navigation_blockers"]]
+position = Vector2(416, -190)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SalvageIntake/WallEastUpper" unique_id=933991429]
+shape = SubResource("RectangleShape2D_maqib")
+
+[node name="Polygon2D" type="Polygon2D" parent="SalvageIntake/WallEastUpper" unique_id=521871462]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-16, -110, 16, -110, 16, 110, -16, 110)
+
+[node name="WallEastLower" type="StaticBody2D" parent="SalvageIntake" unique_id=1140272428 groups=["navigation_blockers"]]
+position = Vector2(416, 190)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SalvageIntake/WallEastLower" unique_id=1298637942]
+shape = SubResource("RectangleShape2D_nw5v5")
+
+[node name="Polygon2D" type="Polygon2D" parent="SalvageIntake/WallEastLower" unique_id=1704077261]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-16, -110, 16, -110, 16, 110, -16, 110)
+
+[node name="WallSouth" type="StaticBody2D" parent="SalvageIntake" unique_id=525037620 groups=["navigation_blockers"]]
+position = Vector2(0, 316)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SalvageIntake/WallSouth" unique_id=838869517]
+shape = SubResource("RectangleShape2D_w8ryq")
+
+[node name="Polygon2D" type="Polygon2D" parent="SalvageIntake/WallSouth" unique_id=138885592]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-432, -16, 432, -16, 432, 16, -432, 16)
+
+[node name="AutoFloor" parent="SalvageIntake" unique_id=757367396 node_paths=PackedStringArray("west_wall", "east_wall", "north_wall", "south_wall") instance=ExtResource("6_jscxr")]
+polygon = PackedVector2Array(-416, -316, 416, -316, 416, 316, -416, 316)
+west_wall = NodePath("../WallWest")
+east_wall = NodePath("../WallEastUpper")
+north_wall = NodePath("../WallNorthLeft")
+south_wall = NodePath("../WallSouth")
+
+[node name="ProcessingVault" type="Node2D" parent="." unique_id=466716657]
+position = Vector2(2624, 1112)
+
+[node name="WallWest" type="StaticBody2D" parent="ProcessingVault" unique_id=989073677 groups=["navigation_blockers"]]
+position = Vector2(-416, 0)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProcessingVault/WallWest" unique_id=1673451571]
+shape = SubResource("RectangleShape2D_hav87")
+
+[node name="Polygon2D" type="Polygon2D" parent="ProcessingVault/WallWest" unique_id=1819737734]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-16, -300, 16, -300, 16, 300, -16, 300)
+
+[node name="WallEastUpper" type="StaticBody2D" parent="ProcessingVault" unique_id=1757666078 groups=["navigation_blockers"]]
+position = Vector2(416, -190)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProcessingVault/WallEastUpper" unique_id=1359845561]
+shape = SubResource("RectangleShape2D_maqib")
+
+[node name="Polygon2D" type="Polygon2D" parent="ProcessingVault/WallEastUpper" unique_id=297048632]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-16, -110, 16, -110, 16, 110, -16, 110)
+
+[node name="WallEastLower" type="StaticBody2D" parent="ProcessingVault" unique_id=1872717631 groups=["navigation_blockers"]]
+position = Vector2(416, 190)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProcessingVault/WallEastLower" unique_id=2025232065]
+shape = SubResource("RectangleShape2D_nw5v5")
+
+[node name="Polygon2D" type="Polygon2D" parent="ProcessingVault/WallEastLower" unique_id=195842460]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-16, -110, 16, -110, 16, 110, -16, 110)
+
+[node name="WallSouth" type="StaticBody2D" parent="ProcessingVault" unique_id=1293524598 groups=["navigation_blockers"]]
+position = Vector2(0, 316)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProcessingVault/WallSouth" unique_id=1840615249]
+shape = SubResource("RectangleShape2D_w8ryq")
+
+[node name="Polygon2D" type="Polygon2D" parent="ProcessingVault/WallSouth" unique_id=136118331]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-432, -16, 432, -16, 432, 16, -432, 16)
+
+[node name="AutoFloor" parent="ProcessingVault" unique_id=1101456059 node_paths=PackedStringArray("west_wall", "east_wall", "north_wall", "south_wall") instance=ExtResource("6_jscxr")]
+polygon = PackedVector2Array(-416, -316, 416, -316, 416, 316, -416, 316)
+west_wall = NodePath("../WallWest")
+east_wall = NodePath("../WallEastUpper")
+north_wall = NodePath("../WallNorth")
+south_wall = NodePath("../WallSouth")
+
+[node name="WallNorth" parent="ProcessingVault" unique_id=760096156 instance=ExtResource("3_vh00a")]
+position = Vector2(0, -316)
+
+[node name="SalvageCorridor" type="Node2D" parent="." unique_id=329662167 node_paths=PackedStringArray("west_end", "east_end", "north_wall", "south_wall")]
+position = Vector2(1312, 0)
+rotation = 1.5707964
+script = ExtResource("8_jscxr")
+west_end = NodePath("../Junction/WallSouthLeft")
+east_end = NodePath("../SalvageIntake/WallNorthLeft")
+north_wall = NodePath("WallNorth")
+south_wall = NodePath("WallSouth")
+
+[node name="WallNorth" parent="SalvageCorridor" unique_id=1881636282 instance=ExtResource("9_hep0f")]
+position = Vector2(556, -96)
+
+[node name="WallSouth" parent="SalvageCorridor" unique_id=1601214947 instance=ExtResource("9_hep0f")]
+position = Vector2(556, 96)
+rotation = 3.1415927
+
+[node name="AutoFloor" parent="SalvageCorridor" unique_id=556710943 node_paths=PackedStringArray("west_wall", "east_wall", "north_wall", "south_wall") instance=ExtResource("6_jscxr")]
+polygon = PackedVector2Array(316, -96, 796, -96, 796, 96, 316, 96)
+west_wall = NodePath("../../Junction/WallSouthLeft")
+east_wall = NodePath("../../SalvageIntake/WallNorthLeft")
+north_wall = NodePath("../WallNorth")
 south_wall = NodePath("../WallSouth")
 
 [node name="Maintenance" type="Node2D" parent="." unique_id=490133829]
@@ -256,6 +450,35 @@ rotation = 3.1415927
 [node name="WallSouthRight" parent="Maintenance" unique_id=1118758351 instance=ExtResource("9_1e7dy")]
 position = Vector2(256, 316)
 rotation = 3.1415927
+
+[node name="MaintenanceBreaker" parent="Maintenance" unique_id=973005755 node_paths=PackedStringArray("mission_controller") instance=ExtResource("14_sxxht")]
+position = Vector2(-220, -100)
+mission_controller = NodePath("../../MissionController")
+
+[node name="MaintenanceCover" parent="Maintenance" unique_id=506129236 instance=ExtResource("20_jlc1o")]
+position = Vector2(0, -40)
+
+[node name="MaintenancePatrol" type="Node2D" parent="Maintenance" unique_id=760628469]
+
+[node name="PointA" type="Marker2D" parent="Maintenance/MaintenancePatrol" unique_id=1095958321]
+position = Vector2(-220, -190)
+
+[node name="PointB" type="Marker2D" parent="Maintenance/MaintenancePatrol" unique_id=1148689163]
+position = Vector2(220, -190)
+
+[node name="PointC" type="Marker2D" parent="Maintenance/MaintenancePatrol" unique_id=1208818443]
+position = Vector2(220, 150)
+
+[node name="PointD" type="Marker2D" parent="Maintenance/MaintenancePatrol" unique_id=664784642]
+position = Vector2(-220, 150)
+
+[node name="MaintenanceGuard" parent="Maintenance" unique_id=140838755 node_paths=PackedStringArray("patrol_route") instance=ExtResource("25_rg2ck")]
+position = Vector2(-220, -190)
+patrol_route = NodePath("../MaintenancePatrol")
+
+[node name="MaintenanceNavigation" type="NavigationRegion2D" parent="Maintenance" unique_id=2141119068]
+navigation_polygon = SubResource("NavigationPolygon_cupjd")
+script = ExtResource("17_cupjd")
 
 [node name="MaintenanceCorridor" type="Node2D" parent="." unique_id=675924027 node_paths=PackedStringArray("west_end", "east_end", "north_wall", "south_wall")]
 position = Vector2(1312, 0)
@@ -353,6 +576,26 @@ mission_controller = NodePath("../../MissionController")
 [node name="CoverBlock" parent="TurbineHall" unique_id=38345602 instance=ExtResource("16_lkva1")]
 position = Vector2(-105, 60)
 
+[node name="TurbineNavigation" type="NavigationRegion2D" parent="TurbineHall" unique_id=1910920936]
+navigation_polygon = SubResource("NavigationPolygon_p7riy")
+script = ExtResource("18_p7riy")
+
+[node name="TurbineResponse" type="Node2D" parent="TurbineHall" unique_id=1173287080 node_paths=PackedStringArray("mission_controller", "turbine_starter")]
+script = ExtResource("19_x3x6d")
+mission_controller = NodePath("../../MissionController")
+sentry_scene = ExtResource("25_rg2ck")
+turbine_starter = NodePath("../TurbineStarter")
+
+[node name="ResponseSpawn" type="Marker2D" parent="TurbineHall/TurbineResponse" unique_id=744893560]
+position = Vector2(-600, 0)
+
+[node name="WarningLabel" type="Label" parent="TurbineHall/TurbineResponse" unique_id=39878654]
+offset_left = -250.0
+offset_top = -260.0
+offset_right = 250.0
+offset_bottom = -205.0
+horizontal_alignment = 1
+
 [node name="HallCorridor" type="Node2D" parent="." unique_id=1182010628 node_paths=PackedStringArray("west_end", "east_end", "north_wall", "south_wall")]
 position = Vector2(1312, 0)
 script = ExtResource("8_jscxr")
@@ -442,9 +685,37 @@ east_wall = NodePath("../WallEast")
 north_wall = NodePath("../WallNorthLeft")
 south_wall = NodePath("../WallSouth")
 
-[node name="PowerTerminal" parent="ControlRoom" unique_id=1708066752 node_paths=PackedStringArray("mission_controller") instance=ExtResource("12_hav87")]
+[node name="SecurityControl" parent="ControlRoom" unique_id=1708066752 node_paths=PackedStringArray("mission_controller") instance=ExtResource("12_hav87")]
 position = Vector2(220, 0)
+script = ExtResource("19_msd4u")
 mission_controller = NodePath("../../MissionController")
+
+[node name="PickupHint" parent="ControlRoom/SecurityControl/HintAnchor" parent_id_path=PackedInt32Array(1708066752, 59483277) index="0" unique_id=1189827550]
+text = "SECURITY CONTROL"
+
+[node name="ControlCover" parent="ControlRoom" unique_id=1228226915 instance=ExtResource("20_jlc1o")]
+
+[node name="GuardPatrol" type="Node2D" parent="ControlRoom" unique_id=733896489]
+
+[node name="PointA" type="Marker2D" parent="ControlRoom/GuardPatrol" unique_id=563550500]
+position = Vector2(-200, -160)
+
+[node name="PointB" type="Marker2D" parent="ControlRoom/GuardPatrol" unique_id=1507783519]
+position = Vector2(180, -160)
+
+[node name="PointC" type="Marker2D" parent="ControlRoom/GuardPatrol" unique_id=77298704]
+position = Vector2(180, 160)
+
+[node name="PointD" type="Marker2D" parent="ControlRoom/GuardPatrol" unique_id=2062641108]
+position = Vector2(-200, 160)
+
+[node name="ControlGuard" parent="ControlRoom" unique_id=609008614 node_paths=PackedStringArray("patrol_route") instance=ExtResource("25_rg2ck")]
+position = Vector2(180, -160)
+patrol_route = NodePath("../GuardPatrol")
+
+[node name="ControlNavigation" type="NavigationRegion2D" parent="ControlRoom" unique_id=650227847]
+navigation_polygon = SubResource("NavigationPolygon_vlcsw")
+script = ExtResource("22_vlcsw")
 
 [node name="ControlCorridor" type="Node2D" parent="." unique_id=571517292 node_paths=PackedStringArray("west_end", "east_end", "north_wall", "south_wall")]
 position = Vector2(2624, 0)
@@ -619,5 +890,19 @@ offset_right = 920.0
 offset_bottom = 84.0
 theme_override_font_sizes/font_size = 18
 
+[node name="SecurityResponse" type="Node2D" parent="." unique_id=909373463 node_paths=PackedStringArray("mission_controller", "extraction_terminal")]
+script = ExtResource("24_tpdgs")
+mission_controller = NodePath("../MissionController")
+sentry_scene = ExtResource("25_rg2ck")
+extraction_terminal = NodePath("../Dock/ExtractionTerminal")
+
+[node name="ReinforcementSpawn" type="Marker2D" parent="SecurityResponse" unique_id=1746796114]
+position = Vector2(656, 0)
+
+[node name="DockNavigation" type="NavigationRegion2D" parent="." unique_id=531578164]
+navigation_polygon = SubResource("NavigationPolygon_jlc1o")
+script = ExtResource("26_rg2ck")
+
 [editable path="ControlRoom/WallEast"]
+[editable path="ControlRoom/SecurityControl"]
 [editable path="SeviceBypass/WallEast"]

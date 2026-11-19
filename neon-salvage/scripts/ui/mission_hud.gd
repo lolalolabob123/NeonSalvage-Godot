@@ -50,9 +50,16 @@ func _update_objective() -> void:
 
 	elif mission_controller.has_called_extraction:
 		var seconds := ceili(mission_controller.extraction_time_left)
+		var heading := "EXTRACTION INBOUND"
+
+		if mission_controller.extraction_response_suppressed:
+			heading += " — RESPONSE DISABLED"
+		else:
+			heading += " — SECURITY ALERT"
+
 		objective_label.text = (
-            "EXTRACTION INBOUND — SECURITY ALERT\n"
-			+ "Transport arrives in %d seconds." % seconds
+			heading
+			+ "\nTransport arrives in %d seconds." % seconds
 		)
 		objective_label.modulate = Color("#F3AC57")
 

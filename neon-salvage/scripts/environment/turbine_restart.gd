@@ -58,7 +58,11 @@ func _physics_process(delta: float) -> void:
 				progress_label.text = "STATION POWER RESTORED"
 	else:
 		interaction_prompt.text = "[E] BEGIN TURBINE RESTART"
-		progress_label.text = "MANUAL CONTROL AREA"
+
+		if mission_controller.turbine_circuit_isolated:
+			progress_label.text = "DISCHARGES ISOLATED — RESTART READY"
+		else:
+			progress_label.text = "MANUAL CONTROL AREA"
 	
 	queue_redraw()
 

@@ -20,7 +20,7 @@ func _physics_process(delta: float) -> void:
 	if not is_instance_valid(mission_controller):
 		return
 	
-	if not mission_controller.turbine_startup_active:
+	if not _is_sweep_active():
 		elapsed = 0.0
 		queue_redraw()
 		return
@@ -71,7 +71,7 @@ func _draw() -> void:
 	if not is_instance_valid(mission_controller):
 		return
 
-	if not mission_controller.turbine_startup_active:
+	if not _is_sweep_active():
 		return
 
 	var band := _lane_rect(current_lane)
@@ -98,3 +98,12 @@ func _draw() -> void:
 				2.0,
 				true
 			)
+
+func _is_sweep_active() -> bool:
+	if not is_instance_valid(mission_controller):
+		return false
+	
+	return (
+		mission_controller.turbine_startup_active
+		and not mission_controller.turbine_circuit_isolated
+	)

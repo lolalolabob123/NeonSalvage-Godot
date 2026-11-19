@@ -24,6 +24,9 @@ func _ready() -> void:
 func _deploy_reinforcement() -> void:
 	if response_deployed:
 		return
+
+	if mission_controller.extraction_response_suppressed:
+		return
 		
 	var sentry := sentry_scene.instantiate() as CharacterBody2D
 		
