@@ -32,6 +32,22 @@ corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_left = 3
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4qsvw"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.0627451, 0.13725491, 0.16862746, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.20784314, 0.34901962, 0.41568628, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
 [node name="SalvageHUD" type="CanvasLayer" unique_id=507685534]
 script = ExtResource("1_2r02q")
 
@@ -193,3 +209,36 @@ offset_left = 24.0
 offset_top = 318.0
 offset_right = 64.0
 offset_bottom = 341.0
+
+[node name="CargoPanel" type="PanelContainer" parent="." unique_id=1093997802]
+custom_minimum_size = Vector2(300, 0)
+offset_left = 20.0
+offset_top = 356.0
+offset_right = 320.0
+offset_bottom = 433.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4qsvw")
+
+[node name="Content" type="VBoxContainer" parent="CargoPanel" unique_id=565354419]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="CargoPanel/Content" unique_id=1121492044]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5686275, 0.68235296, 0.73333335, 1)
+theme_override_font_sizes/font_size = 13
+text = "	RECOVERED EQUIPMENT"
+
+[node name="EquipmentList" type="Label" parent="CargoPanel/Content" unique_id=1997557811]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9529412, 0.6745098, 0.34117648, 1)
+theme_override_font_sizes/font_size = 16
+text = "	EMP Emitter — unsecured"
+autowrap_mode = 3
+
+[node name="Hint" type="Label" parent="CargoPanel/Content" unique_id=565508631]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5686275, 0.68235296, 0.73333335, 1)
+theme_override_font_sizes/font_size = 13
+text = "Extract successfully to keep this equipment.	"
+autowrap_mode = 3

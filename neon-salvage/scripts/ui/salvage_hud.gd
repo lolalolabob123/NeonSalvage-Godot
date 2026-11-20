@@ -8,17 +8,31 @@ extends CanvasLayer
 @onready var ammo_label: Label = $AmmoLabel
 @onready var shield_panel: PanelContainer = $ShieldPanel
 @onready var shield_amount: Label = $ShieldPanel/Row/Amount
+@onready var system_title: Label = $ShieldPanel/Row/Title
+@onready var cargo_panel: PanelContainer = $CargoPanel
+@onready var cargo_equipment_list: Label = $CargoPanel/Content/EquipmentList
 
 var player: Node = null
 var pulse_tween: Tween
 var hull_tween: Tween
 var last_dash_text: String = ""
-
+var cargo_mission: FacilityMission = null
 
 func _ready() -> void:
+	cargo_panel.hide()
+	call_deferred("_connect_cargo_display")
+	
+	var system_id := ProgressStore.selected_system
+
 	shield_panel.visible = (
-		ProgressStore.selected_system == ProgressStore.SHIELD_GENERATOR_ID
+		system_id == ProgressStore.SHIELD_GENERATOR_ID
+		or system_id == ProgressStore.EMP_EMITTER_ID
 	)
+
+	if system_id == ProgressStore.EMP_EMITTER_ID:
+		system_title.text = "EMP [Q]"
+	else:
+		system_title.text = "SHIELD [Q]"
 	
 	amount_label.text = "0"
 	
@@ -160,8 +174,14 @@ func _on_banked_salvage_changed(total: int) -> void:
 	)
 
 func _update_shield_status() -> void:
-	var active_time: float = player.get("shield_time_remaining")
-	var cooldown: float = player.get("shield_cooldown_remaining")
+	var active_time: float = 0.0
+	var cooldown: float = 0.0
+
+	if ProgressStore.selected_system == ProgressStore.EMP_EMITTER_ID:
+		cooldown = float(player.get("emp_cooldown_remaining"))
+	else:
+		active_time = float(player.get("shield_time_remaining"))
+		cooldown = float(player.get("shield_cooldown_remaining"))
 
 	var status := "READY"
 	var status_color := Color("#31CBE0")
@@ -178,3 +198,47 @@ func _update_shield_status() -> void:
 
 	if shield_amount.get_theme_color("font_color") != status_color:
 		shield_amount.add_theme_color_override("font_color", status_color)
+
+func _connect_cargo_display() -> void:
+	cargo_mission = get_tree().get_first_node_in_group(
+		"mission_controller"
+	) as FacilityMission
+
+	if not is_instance_valid(cargo_mission):
+		cargo_panel.hide()
+		return
+
+	cargo_mission.mission_stage_changed.connect(
+		_refresh_cargo_display
+	)
+	cargo_mission.mission_completed.connect(
+		_refresh_cargo_display
+	)
+
+	_refresh_cargo_display()
+
+
+func _refresh_cargo_display() -> void:
+	if not is_instance_valid(cargo_mission):
+		cargo_panel.hide()
+		return
+
+	if cargo_mission.extraction_complete:
+		cargo_panel.hide()
+		return
+
+	var lines := PackedStringArray()
+
+	for gear_id in cargo_mission.unsecured_gear:
+		var gear: Dictionary = ProgressStore.GEAR.get(
+			gear_id, {}
+		)
+
+		if gear.is_empty():
+			continue
+
+		var display_name: String = gear["display_name"]
+		lines.append("%s — unsecured" % display_name)
+
+	cargo_equipment_list.text = "\n".join(lines)
+	cargo_panel.visible = not lines.is_empty()

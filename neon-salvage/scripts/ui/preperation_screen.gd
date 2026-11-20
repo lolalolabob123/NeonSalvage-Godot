@@ -45,26 +45,7 @@ func _ready() -> void:
 	primary_weapon_selector.item_selected.connect(_update_weapon_description)
 	_update_weapon_description(primary_weapon_selector.selected)
 	
-	var owns_shield := ProgressStore.owns_shield_generator()
-	
-	active_system_selector.clear()
-	active_system_selector.add_item("Active System - None")
-	if owns_shield:
-		active_system_selector.add_item("Active System - Shield Generator [Q]")
-	else:
-		active_system_selector.add_item("Shield Generator (locked)")
-		active_system_selector.set_item_disabled(1, true)
-	
-	active_system_selector.tooltip_text = ""
-	if not owns_shield:
-		active_system_selector.tooltip_text = (
-			"Recover the Shield Generator from Salvage Storage and extract to unlock."
-		)
-	
-	if owns_shield and ProgressStore.selected_system == ProgressStore.SHIELD_GENERATOR_ID:
-		active_system_selector.select(1)
-	else:
-		active_system_selector.select(0)
+	_build_system_selector()
 	
 	loadout_view.hide()
 	loadout_button.pressed.connect(_open_loadout)
@@ -98,8 +79,17 @@ func _deploy() -> void:
 	else:
 		ProgressStore.selected_primary_weapon = CARBINE
 	
-	if active_system_selector.selected == 1 and ProgressStore.owns_shield_generator():
-		ProgressStore.selected_system = ProgressStore.SHIELD_GENERATOR_ID
+	var selected_system_id := StringName(
+		active_system_selector.get_item_metadata(
+			active_system_selector.selected
+		)
+	)
+
+	if (
+		selected_system_id != &""
+		and ProgressStore.owns_gear(selected_system_id)
+	):
+		ProgressStore.selected_system = selected_system_id
 	else:
 		ProgressStore.selected_system = &""
 
@@ -163,14 +153,73 @@ func _close_loadout() -> void:
 	loadout_button.grab_focus()
 
 func _update_system_description(index: int) -> void:
-	if not ProgressStore.owns_shield_generator():
-		system_description.text = (
-			"Recover the shield generator from Salvage Storage and extract to unlock it."
+	if index < 0:
+		system_description.text = ""
+		return
+
+	var gear_id := StringName(
+		active_system_selector.get_item_metadata(index)
+	)
+
+	match gear_id:
+		ProgressStore.SHIELD_GENERATOR_ID:
+			system_description.text = (
+				"Press Q to block hull damage for 1.5 seconds. "
+				+ "The 8-second cooldown starts when the shield expires."
+			)
+		ProgressStore.EMP_EMITTER_ID:
+			system_description.text = (
+				"Press Q to interrupt and stun enemies within "
+				+ "220 pixels for 2 seconds. Deals no damage. "
+				+ "10-second cooldown."
+			)
+		_:
+			system_description.text = (
+				"No active system equipped. "
+				+ "Recover equipment and extract to unlock more options."
+			)
+
+func _build_system_selector() -> void:
+	active_system_selector.clear()
+	active_system_selector.tooltip_text = (
+		"Recover equipment and extract successfully to unlock it."
+	)
+	
+	active_system_selector.add_item("Active System - None")
+	active_system_selector.set_item_metadata(0, &"")
+	
+	_add_system_option(ProgressStore.SHIELD_GENERATOR_ID)
+	_add_system_option(ProgressStore.EMP_EMITTER_ID)
+	
+	# Default to None, then restore the equipped system if owned.
+	active_system_selector.select(0)
+	
+	for index in range(1, active_system_selector.item_count):
+		var gear_id := StringName(
+			active_system_selector.get_item_metadata(index)
 		)
-	elif index == 1:
-		system_description.text = (
-			"Press Q to block hull damage for 1.5 seconds. "
-			+ "The 8-second cooldown starts when the shield expires."
+		
+		if (
+			gear_id == ProgressStore.selected_system
+			and ProgressStore.owns_gear(gear_id)
+		):
+			active_system_selector.select(index)
+			break
+
+func _add_system_option(gear_id: StringName) -> void:
+	var gear: Dictionary = ProgressStore.GEAR[gear_id]
+	var display_name: String = gear["display_name"]
+	var owned := ProgressStore.owns_gear(gear_id)
+	var index := active_system_selector.item_count
+	
+	if owned:
+		active_system_selector.add_item(
+			"Active System - %s [Q]" % display_name
 		)
 	else:
-		system_description.text = "No active system equipped."
+		active_system_selector.add_item(
+			"%s (locked)" % display_name
+		)
+	
+	active_system_selector.set_item_metadata(index, gear_id)
+	active_system_selector.set_item_disabled(index, not owned)

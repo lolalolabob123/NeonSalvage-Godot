@@ -32,11 +32,12 @@ func _show_results() -> void:
 		mission_controller.extracted_salvage,
 		ProgressStore.banked_salvage
 	]
-
-	if mission_controller.secured_shield_this_run:
-		details_label.text += (
-			"\n\nShield Generator secured."
-			+ "\nEquip it in Preparation."
+	
+	for gear_id in mission_controller.secured_gear_this_run:
+		var gear: Dictionary = ProgressStore.GEAR[gear_id]
+		
+		details_label.text += "\n\n%s secured." % (
+			str(gear["display_name"])
 		)
 
 	overlay.show()

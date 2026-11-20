@@ -29,15 +29,23 @@ var current_state: State = State.CHASE
 var state_time: float = 0.0
 var alerted: bool = false
 var lunge_direction: Vector2 = Vector2.UP
+var emp_stun_remaining: float = 0.0
 
 
 func _ready() -> void:
+	add_to_group("emp_targets")
 	current_health = max_health
 	sight_ray.add_exception(self)
 
 
 func _physics_process(delta: float) -> void:
 	if current_health <= 0:
+		return
+	
+	if emp_stun_remaining > 0.0:
+		emp_stun_remaining = maxf(emp_stun_remaining - delta, 0.0)
+		velocity = Vector2.ZERO
+		sprite.modulate = Color("#98DFFF")
 		return
 
 	var player := get_tree().get_first_node_in_group("player") as Node2D
@@ -222,3 +230,17 @@ func _finish_death() -> void:
 	level.add_child(pickup)
 	
 	queue_free()
+
+func apply_emp(duration: float) -> void:
+	if current_health <= 0 or duration <= 0.0:
+		return
+
+	emp_stun_remaining = maxf(emp_stun_remaining, duration)
+
+	velocity = Vector2.ZERO
+	current_state = State.CHASE
+	state_time = 0.0
+	alerted = true
+
+	sprite.modulate = Color("#98DFFF")
+	queue_redraw()

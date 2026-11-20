@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://oohw5n16r2ll" path="res://scenes/ui/SalvageHUD.tscn" id="4_4oknj"]
 [ext_resource type="PackedScene" uid="uid://b8sv2wmfuy86" path="res://scenes/player/PlayerDrone.tscn" id="4_6x21o"]
 [ext_resource type="PackedScene" uid="uid://cgwogbn28uee7" path="res://scenes/environment/WallSide220.tscn" id="4_e7jn2"]
+[ext_resource type="PackedScene" uid="uid://cgd60ayixpwlw" path="res://scenes/environment/FacilitySign.tscn" id="4_otofu"]
 [ext_resource type="PackedScene" uid="uid://cigmjeegxcf36" path="res://scenes/environment/FacilityLamp.tscn" id="6_hep0f"]
 [ext_resource type="PackedScene" uid="uid://df6gvmjp0tngj" path="res://scenes/environment/AutoFloor.tscn" id="6_jscxr"]
 [ext_resource type="Texture2D" uid="uid://cqqouqhcddfm6" path="res://assets/environment/IndustrialDeck_A.png" id="7_1e7dy"]
@@ -29,6 +30,7 @@
 [ext_resource type="Script" uid="uid://dp7df7h7ix8py" path="res://scripts/enemies/maintenance_navigation.gd" id="17_cupjd"]
 [ext_resource type="PackedScene" uid="uid://mfbfst17wlxa" path="res://scenes/enemies/InterceptorDrone.tscn" id="18_ln565"]
 [ext_resource type="Script" uid="uid://c2ojgocpsx27p" path="res://scripts/enemies/turbine_navigation.gd" id="18_p7riy"]
+[ext_resource type="PackedScene" uid="uid://cuatntxw5x5js" path="res://scenes/pickups/EMPEmitterPickup.tscn" id="19_k5qey"]
 [ext_resource type="Script" uid="uid://cch2m18qw3oi7" path="res://scripts/environment/security_control.gd" id="19_msd4u"]
 [ext_resource type="Script" uid="uid://cyeg8ke56gbtn" path="res://scripts/enemies/turbine_response.gd" id="19_x3x6d"]
 [ext_resource type="PackedScene" uid="uid://b350x34tney4e" path="res://scenes/environment/SecurityCover.tscn" id="20_jlc1o"]
@@ -187,6 +189,12 @@ position = Vector2(-220, 180)
 script = ExtResource("3_ajid0")
 mission_controller = NodePath("../../MissionController")
 
+[node name="DockSign" parent="Dock" unique_id=626634381 instance=ExtResource("4_otofu")]
+position = Vector2(0, -245)
+heading = "RELAY STATION — DOCK"
+details = "EXTRACTION POINT
+Return here to secure carried loot."
+
 [node name="DockCorridor" type="Node2D" parent="." unique_id=1723955633 node_paths=PackedStringArray("west_end", "east_end", "north_wall", "south_wall")]
 script = ExtResource("8_jscxr")
 west_end = NodePath("../Dock/WallEastUpper")
@@ -274,6 +282,15 @@ east_wall = NodePath("../WallEastUpper")
 north_wall = NodePath("../WallNorthLeft")
 south_wall = NodePath("../WallSouthLeft")
 
+[node name="JunctionSign" parent="Junction" unique_id=1275711769 instance=ExtResource("4_otofu")]
+position = Vector2(0, -245)
+heading = "CENTRAL JUNCTION"
+details = "↑ MAINTENANCE
+→ TURBINE HALL
+↓ SALVAGE PROCESSING
+← DOCK / EXTRACTION"
+sign_width = 600.0
+
 [node name="SalvageIntake" type="Node2D" parent="." unique_id=1700944804]
 position = Vector2(1312, 1112)
 
@@ -337,6 +354,12 @@ south_wall = NodePath("../WallSouth")
 [node name="IntakeCache" parent="SalvageIntake" unique_id=362166078 instance=ExtResource("13_457vc")]
 position = Vector2(-180, -120)
 salvage_amount = 3
+
+[node name="SalvageIntakeSign" parent="SalvageIntake" unique_id=450346879 instance=ExtResource("4_otofu")]
+position = Vector2(0, -245)
+heading = "SALVAGE INTAKE"
+details = "	→ PROCESSING VAULT"
+sign_width = 600.0
 
 [node name="ProcessingVault" type="Node2D" parent="." unique_id=466716657]
 position = Vector2(2624, 1112)
@@ -432,6 +455,12 @@ patrol_route = NodePath("../VaultPatrols/InnerPatrol")
 [node name="VaultInterceptor" parent="ProcessingVault" unique_id=140838755 instance=ExtResource("18_ln565")]
 position = Vector2(-200, -100)
 
+[node name="ProcessingVaultSign" parent="ProcessingVault" unique_id=624210980 instance=ExtResource("4_otofu")]
+position = Vector2(0, -245)
+heading = "PROCESSING VAULT"
+details = "	Recover salvage. Extract to bank it."
+sign_width = 600.0
+
 [node name="ResearchAnnex" type="Node2D" parent="." unique_id=1875669272]
 position = Vector2(5248, -1112)
 
@@ -495,6 +524,15 @@ position = Vector2(220, 150)
 
 [node name="EMPPrototypePosition" type="Marker2D" parent="ResearchAnnex" unique_id=220719338]
 position = Vector2(280, -210)
+
+[node name="EMPEmitterPickup" parent="ResearchAnnex/EMPPrototypePosition" unique_id=619065688 instance=ExtResource("19_k5qey")]
+repeat_salvage_amount = 10
+
+[node name="ResearchAnnexSign" parent="ResearchAnnex" unique_id=353718272 instance=ExtResource("4_otofu")]
+position = Vector2(0, -245)
+heading = "RESEARCH ANNEX"
+details = "	Recover experimental equipment or research salvage."
+sign_width = 600.0
 
 [node name="ResearchCorridor" type="Node2D" parent="." unique_id=1146938709 node_paths=PackedStringArray("west_end", "east_end", "north_wall", "south_wall")]
 position = Vector2(3936, -1112)
@@ -704,6 +742,13 @@ patrol_route = NodePath("../MaintenancePatrol")
 navigation_polygon = SubResource("NavigationPolygon_cupjd")
 script = ExtResource("17_cupjd")
 
+[node name="JunctionSign" parent="Maintenance" unique_id=93968430 instance=ExtResource("4_otofu")]
+position = Vector2(0, -245)
+heading = "MAINTENANCE"
+details = "Optional: isolate the turbine discharges.
+The breaker makes restarting safer."
+sign_width = 600.0
+
 [node name="MaintenanceCorridor" type="Node2D" parent="." unique_id=675924027 node_paths=PackedStringArray("west_end", "east_end", "north_wall", "south_wall")]
 position = Vector2(1312, 0)
 rotation = -1.5707964
@@ -819,6 +864,12 @@ offset_top = -260.0
 offset_right = 250.0
 offset_bottom = -205.0
 horizontal_alignment = 1
+
+[node name="TurbineHallSign" parent="TurbineHall" unique_id=1434095729 instance=ExtResource("4_otofu")]
+position = Vector2(0, -245)
+heading = "TURBINE HALL"
+details = "	Restore station power to unlock Research access."
+sign_width = 600.0
 
 [node name="HallCorridor" type="Node2D" parent="." unique_id=1182010628 node_paths=PackedStringArray("west_end", "east_end", "north_wall", "south_wall")]
 position = Vector2(1312, 0)
@@ -941,6 +992,13 @@ patrol_route = NodePath("../GuardPatrol")
 navigation_polygon = SubResource("NavigationPolygon_vlcsw")
 script = ExtResource("22_vlcsw")
 
+[node name="ControlRoomSign" parent="ControlRoom" unique_id=2100675792 instance=ExtResource("4_otofu")]
+position = Vector2(0, -245)
+heading = "SECURITY CONTROL"
+details = "Optional: disable extraction reinforcements.
+Station power required."
+sign_width = 600.0
+
 [node name="ControlCorridor" type="Node2D" parent="." unique_id=571517292 node_paths=PackedStringArray("west_end", "east_end", "north_wall", "south_wall")]
 position = Vector2(2624, 0)
 script = ExtResource("8_jscxr")
@@ -1026,6 +1084,12 @@ rotation = 3.1415927
 [node name="WallEastLower" parent="SeviceBypass" unique_id=1599675053 instance=ExtResource("4_e7jn2")]
 position = Vector2(416, 190)
 rotation = 3.1415927
+
+[node name="ServiceBypassSign" parent="SeviceBypass" unique_id=472665668 instance=ExtResource("4_otofu")]
+position = Vector2(0, -245)
+heading = "RESEARCH ACCESS →"
+details = "Entrance unlocks when turbine power is restored."
+sign_width = 600.0
 
 [node name="ServiceCorridor" type="Node2D" parent="." unique_id=467318434 node_paths=PackedStringArray("west_end", "east_end", "north_wall", "south_wall")]
 position = Vector2(1312, -1112)

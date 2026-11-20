@@ -54,9 +54,11 @@ var home_rotation: float = 0.0
 var guard_scan_timer: float = 0.0
 var patrol_points: Array[Vector2] = []
 var patrol_index: int = 0
+var emp_stun_remaining: float = 0.0
 
 func _ready() -> void:
 	
+	add_to_group("emp_targets")
 	home_position = global_position
 	home_rotation = rotation
 	current_health = max_health
@@ -130,6 +132,15 @@ func begin_investigation() -> void:
 		navigation_agent.target_position = home_position
 
 func _physics_process(delta: float) -> void:
+	
+	if current_health <= 0:
+		return
+	
+	if emp_stun_remaining > 0.0:
+		emp_stun_remaining = maxf(emp_stun_remaining - delta, 0.0)
+		velocity = Vector2.ZERO
+		sprite.self_modulate = Color("#08DFFF")
+		return
 	
 	# Update awareness before choosing movement.
 	if is_instance_valid(target):
@@ -487,3 +498,18 @@ func fire_at_player() -> void:
 
 	pulse.position = level.to_local(muzzle.global_position)
 	level.add_child(pulse)
+
+func apply_emp(duration: float) -> void:
+	if current_health <= 0 or duration <= 0.0:
+		return
+	
+	emp_stun_remaining = maxf(emp_stun_remaining, duration)
+	
+	velocity = Vector2.ZERO
+	is_winding_up = false
+	windup_timer = 0.0
+	fire_timer = fire_interval
+	
+	charge_glow.hide()
+	charge_audio.stop()
+	sprite.self_modulate = Color("#98DFFF")

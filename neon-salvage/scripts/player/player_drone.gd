@@ -5,11 +5,13 @@ signal salvage_changed(total: int)
 signal health_changed(current: int, maximum: int)
 signal player_destroyed
 
-var salvage_total: int = 0
-
 const PLAYER_DESTRUCTION_FX: PackedScene = preload("res://scenes/effects/PlayerDestructionFX.tscn")
 const SHIELD_DURATION := 1.5
 const SHIELD_COOLDOWN := 8.0
+const EMP_RADIUS: float = 220.0
+const EMP_STUN_DURATION: float = 2.0
+const EMP_COOLDOWN: float = 10.0
+const EMP_VISUAL_DURATION: float = 0.35
 
 @onready var weapon_pivot: Node2D = $VisualRig/WeaponPivot
 @onready var muzzle: Marker2D = $VisualRig/WeaponPivot/Muzzle
@@ -36,6 +38,7 @@ const SHIELD_COOLDOWN := 8.0
 @export var dash_cooldown: float = 2.0
 @export var primary_weapon: WeaponDefinition
 
+var salvage_total: int = 0
 var fire_timer: float = 0.0
 var damage_cooldown: float = 0.0
 var dash_direction: Vector2 = Vector2.ZERO
@@ -45,6 +48,9 @@ var ammo_in_magazine: int = 0
 var reload_time_remaining: float = 0.0
 var shield_time_remaining := 0.0
 var shield_cooldown_remaining := 0.0
+var emp_cooldown_remaining: float = 0.0
+var emp_visual_remaining: float = 0.0
+var emp_origin: Vector2 = Vector2.ZERO	
 
 func _process(delta: float) -> void:
 	
@@ -148,6 +154,7 @@ func _physics_process(delta: float) -> void:
 	)
 	
 	_update_shield(delta)
+	_update_emp(delta)
 	
 	# Update the dash timers.
 	var was_dashing: bool = dash_time_remaining > 0.0
@@ -404,4 +411,89 @@ func _update_shield(delta: float) -> void:
 
 func _draw() -> void:
 	if shield_time_remaining > 0.0:
-		draw_arc(Vector2.ZERO, 58.0, 0.0, TAU, 64, Color("#69DEFF"), 3.0, true)
+		draw_arc(
+			Vector2.ZERO,
+			58.0,
+			0.0,
+			TAU,
+			64,
+			Color("#69DEFF"),
+			3.0,
+			true
+		)
+
+	if emp_visual_remaining > 0.0:
+		var progress := 1.0 - (
+			emp_visual_remaining / EMP_VISUAL_DURATION
+		)
+		var opacity := 1.0 - progress
+		var center := to_local(emp_origin)
+
+		# Briefly show the full affected area.
+		draw_circle(
+			center,
+			EMP_RADIUS,
+			Color(0.45, 0.75, 1.0, opacity * 0.10)
+		)
+
+		# Expanding pulse ring.
+		draw_arc(
+			center,
+			lerpf(25.0, EMP_RADIUS, progress),
+			0.0,
+			TAU,
+			96,
+			Color(0.60, 0.85, 1.0, opacity),
+			4.0,
+			true
+		)
+
+func _update_emp(delta: float) -> void:
+	emp_cooldown_remaining = maxf(
+		emp_cooldown_remaining - delta,
+		0.0
+	)
+
+	if emp_visual_remaining > 0.0:
+		emp_visual_remaining = maxf(
+			emp_visual_remaining - delta,
+			0.0
+		)
+		queue_redraw()
+
+	if current_health <= 0:
+		return
+
+	if ProgressStore.selected_system != ProgressStore.EMP_EMITTER_ID:
+		return
+
+	if not ProgressStore.owns_gear(ProgressStore.EMP_EMITTER_ID):
+		return
+
+	if emp_cooldown_remaining > 0.0:
+		return
+
+	if Input.is_action_just_pressed("activate_system"):
+		_activate_emp()
+
+
+func _activate_emp() -> void:
+	emp_cooldown_remaining = EMP_COOLDOWN
+	emp_visual_remaining = EMP_VISUAL_DURATION
+	emp_origin = global_position
+
+	for candidate in get_tree().get_nodes_in_group("emp_targets"):
+		var enemy := candidate as Node2D
+
+		if not is_instance_valid(enemy):
+			continue
+
+		if not enemy.has_method("apply_emp"):
+			continue
+
+		if emp_origin.distance_squared_to(
+			enemy.global_position
+		) <= EMP_RADIUS * EMP_RADIUS:
+			enemy.call("apply_emp", EMP_STUN_DURATION)
+
+	queue_redraw()
