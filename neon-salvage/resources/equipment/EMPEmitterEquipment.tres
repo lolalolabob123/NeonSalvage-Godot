@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EquipmentDefinition" format=3 uid="uid://dnl0r6xexc471"]
+
+[ext_resource type="Script" uid="uid://ba0ff61qwwbid" path="res://scripts/equipment/equipment_definition.gd" id="1_jue30"]
+
+[resource]
+script = ExtResource("1_jue30")
+equipment_id = &"emp_emitter"
+display_name = "EMP Emitter"
+description = "Interrupts and stuns enemies within 220 pixels for 2 seconds. Activate with Q. Deals no damage. Cooldown: 10 seconds."
+slot = 4
+metadata/_custom_type_script = "uid://ba0ff61qwwbid"

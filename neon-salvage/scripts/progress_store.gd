@@ -42,6 +42,26 @@ const SKILLS := {
 	},
 }
 
+const EQUIPMENT := {
+	&"carbine": preload(
+		"res://resources/equipment/CarbineEquipment.tres"
+	),
+	&"shotgun": preload(
+		"res://resources/equipment/ShotgunEquipment.tres"
+	),
+	SHIELD_GENERATOR_ID: preload(
+		"res://resources/equipment/ShieldGeneratorEquipment.tres"
+	),
+	EMP_EMITTER_ID: preload(
+		"res://resources/equipment/EMPEmitterEquipment.tres"
+	),
+}
+
+const STARTER_EQUIPMENT_IDS: Array[StringName] = [
+	&"carbine",
+	&"shotgun",
+]
+
 var banked_salvage: int = 0
 var storage_available: bool = true
 var save_data: ConfigFile = ConfigFile.new()
@@ -247,3 +267,36 @@ func reset_skills_for_testing() -> bool:
 	hull_reinforced = false
 	banked_salvage_changed.emit(banked_salvage)
 	return true
+
+func get_equipment(
+	equipment_id: StringName
+) -> EquipmentDefinition:
+	return EQUIPMENT.get(equipment_id) as EquipmentDefinition
+
+func owns_equipment(equipment_id: StringName) -> bool:
+	if not EQUIPMENT.has(equipment_id):
+		return false
+	
+	if STARTER_EQUIPMENT_IDS.has(equipment_id):
+		return true
+	
+	return owns_gear(equipment_id)
+
+func get_owned_equipment_for_slot(
+	slot: EquipmentDefinition.Slot
+) -> Array[EquipmentDefinition]:
+	var result: Array[EquipmentDefinition] = []
+	
+	for equipment_id in EQUIPMENT:
+		var equipment := get_equipment(equipment_id)
+		
+		if equipment == null:
+			continue
+		
+		if equipment.slot != slot:
+			continue
+		
+		if owns_equipment(equipment_id):
+			result.append(equipment)
+	
+	return result
