@@ -2,8 +2,11 @@
 
 [ext_resource type="Script" uid="uid://or6hof2aipoc" path="res://scripts/ui/preperation_screen.gd" id="1_e7rqc"]
 [ext_resource type="PackedScene" uid="uid://clvv1eri84hdl" path="res://scenes/levels/Blacksite7_VisualTest.tscn" id="2_jcvlb"]
+[ext_resource type="PackedScene" uid="uid://do4v5j0iqnvcm" path="res://scenes/levels/RelayStation.tscn" id="3_qdmyp"]
 [ext_resource type="PackedScene" uid="uid://dwgv2sqfh0rra" path="res://scenes/ui/SkillNode.tscn" id="3_ymwfk"]
 [ext_resource type="Script" uid="uid://cd4ct7oi4prx8" path="res://scripts/ui/branch_connector.gd" id="4_gn8cd"]
+[ext_resource type="Texture2D" uid="uid://cjy2lhg1121ou" path="res://assets/player/PlayerDrone_Hull.png" id="6_i8rs1"]
+[ext_resource type="PackedScene" uid="uid://b8t24l5y1o56g" path="res://scenes/ui/GearInventory.tscn" id="6_j6p6y"]
 
 [node name="PreperationScreen" type="Control" unique_id=351789938]
 layout_mode = 3
@@ -14,6 +17,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_e7rqc")
 mission_scene = ExtResource("2_jcvlb")
+relay_station_scene = ExtResource("3_qdmyp")
 
 [node name="Background" type="ColorRect" parent="." unique_id=198470478]
 layout_mode = 1
@@ -59,6 +63,10 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "Banked Salvage: 0"
 horizontal_alignment = 1
+
+[node name="MissionSelector" type="OptionButton" parent="Center/Panel/Margin/Content" unique_id=27810408]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
 
 [node name="MissionBriefingLabel" type="Label" parent="Center/Panel/Margin/Content" unique_id=1338324614]
 custom_minimum_size = Vector2(520, 0)
@@ -161,7 +169,6 @@ layout_mode = 2
 text = "Back to Preparation"
 
 [node name="LoadoutView" type="CenterContainer" parent="." unique_id=85782848]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -182,27 +189,63 @@ theme_override_constants/margin_bottom = 24
 [node name="Content" type="VBoxContainer" parent="LoadoutView/Panel/Margin" unique_id=1087390251]
 custom_minimum_size = Vector2(520, 0)
 layout_mode = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 16
 
 [node name="TitleLabel" type="Label" parent="LoadoutView/Panel/Margin/Content" unique_id=1517231873]
 layout_mode = 2
-text = "LOADOUT"
+text = "DRONE CUSTOMISATION"
 horizontal_alignment = 1
 
-[node name="PrimaryWeaponSelector" type="OptionButton" parent="LoadoutView/Panel/Margin/Content" unique_id=833665148]
+[node name="Body" type="HBoxContainer" parent="LoadoutView/Panel/Margin/Content" unique_id=678012674]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="DroneSchematic" type="Control" parent="LoadoutView/Panel/Margin/Content/Body" unique_id=893451663]
+custom_minimum_size = Vector2(560, 360)
 layout_mode = 2
 
-[node name="WeaponDescription" type="Label" parent="LoadoutView/Panel/Margin/Content" unique_id=1839733130]
-layout_mode = 2
-autowrap_mode = 3
+[node name="DronePreview" type="TextureRect" parent="LoadoutView/Panel/Margin/Content/Body/DroneSchematic" unique_id=957624796]
+layout_mode = 1
+offset_left = 180.0
+offset_top = 60.0
+offset_right = 380.0
+offset_bottom = 280.0
+mouse_filter = 2
+texture = ExtResource("6_i8rs1")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="ActiveSystemSelector" type="OptionButton" parent="LoadoutView/Panel/Margin/Content" unique_id=2139718317]
+[node name="WeaponSlot" type="Button" parent="LoadoutView/Panel/Margin/Content/Body/DroneSchematic" unique_id=1338252221]
+layout_mode = 0
+offset_top = 100.0
+offset_right = 160.0
+offset_bottom = 172.0
+theme_override_font_sizes/font_size = 15
+toggle_mode = true
+text = "PRIMARY WEAPON
+Carbine"
+
+[node name="SystemSlot" type="Button" parent="LoadoutView/Panel/Margin/Content/Body/DroneSchematic" unique_id=852050431]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 100.0
+offset_right = 560.0
+offset_bottom = 172.0
+toggle_mode = true
+text = "ACTIVE SYSTEM
+None"
+
+[node name="SlotInspector" type="VBoxContainer" parent="LoadoutView/Panel/Margin/Content/Body" unique_id=769776356]
+custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
 
-[node name="SystemDescription" type="Label" parent="LoadoutView/Panel/Margin/Content" unique_id=1899808230]
+[node name="GearInventory" parent="LoadoutView/Panel/Margin/Content/Body/SlotInspector" unique_id=1086114241 instance=ExtResource("6_j6p6y")]
+custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
-autowrap_mode = 3
+theme_override_constants/separation = 24
 
 [node name="LoadoutBackButton" type="Button" parent="LoadoutView/Panel/Margin/Content" unique_id=441529395]
 layout_mode = 2
 text = "Back to Preperation"
+
+[editable path="LoadoutView/Panel/Margin/Content/Body/SlotInspector/GearInventory"]

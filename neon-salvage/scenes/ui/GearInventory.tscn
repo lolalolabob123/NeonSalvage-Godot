@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://b8t24l5y1o56g"]
+
+[ext_resource type="Script" uid="uid://bj8rgh43xyo2q" path="res://scripts/ui/gear_inventory.gd" id="1_ii7dy"]
+
+[node name="GearInventory" type="VBoxContainer" unique_id=1086114241]
+custom_minimum_size = Vector2(520, 0)
+theme_override_constants/separation = 12
+script = ExtResource("1_ii7dy")
+
+[node name="EquippedSummary" type="Label" parent="." unique_id=1197822469]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.19215687, 0.79607844, 0.8784314, 1)
+
+[node name="OwnedGearList" type="ItemList" parent="." unique_id=1333306523]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+
+[node name="ItemName" type="Label" parent="." unique_id=1904787326]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+
+[node name="ItemDescription" type="Label" parent="." unique_id=1729979995]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+autowrap_mode = 3
+
+[node name="EquipButton" type="Button" parent="." unique_id=1983458247]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+text = "Equip"

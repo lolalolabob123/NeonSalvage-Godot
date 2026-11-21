@@ -197,7 +197,7 @@ func get_objective_instruction() -> String:
 		if power_fault_diagnosed:
 			return "Restart the turbine in Turbine Hall."
 
-		return "Restart the turbine. Control Room contains fault information."
+		return "Restart the turbine in Turbine Hall. Maintenance can disable its electrical hazards."
 
 	return "Recover the prototype in the security room."
 

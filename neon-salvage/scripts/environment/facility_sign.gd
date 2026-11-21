@@ -46,5 +46,5 @@ func _refresh() -> void:
 	details_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	details_label.add_theme_font_size_override("font_size", 18)
 	details_label.add_theme_color_override(
-		"font_color", Color("#7895A1")
+		"font_color", Color("#A0B8C2")
 	)

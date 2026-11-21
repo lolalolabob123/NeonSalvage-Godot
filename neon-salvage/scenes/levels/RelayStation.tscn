@@ -742,12 +742,12 @@ patrol_route = NodePath("../MaintenancePatrol")
 navigation_polygon = SubResource("NavigationPolygon_cupjd")
 script = ExtResource("17_cupjd")
 
-[node name="JunctionSign" parent="Maintenance" unique_id=93968430 instance=ExtResource("4_otofu")]
-position = Vector2(0, -245)
+[node name="MaintenanceSign" parent="Maintenance" unique_id=93968430 instance=ExtResource("4_otofu")]
+position = Vector2(120, -245)
 heading = "MAINTENANCE"
 details = "Optional: isolate the turbine discharges.
 The breaker makes restarting safer."
-sign_width = 600.0
+sign_width = 320.0
 
 [node name="MaintenanceCorridor" type="Node2D" parent="." unique_id=675924027 node_paths=PackedStringArray("west_end", "east_end", "north_wall", "south_wall")]
 position = Vector2(1312, 0)

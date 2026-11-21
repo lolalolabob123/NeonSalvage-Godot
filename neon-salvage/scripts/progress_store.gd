@@ -48,6 +48,7 @@ var save_data: ConfigFile = ConfigFile.new()
 var hull_reinforced: bool = false
 var selected_primary_weapon: WeaponDefinition = null
 var selected_system: StringName = &""
+var selected_mission_index: int = 0
 
 func _ready() -> void:
 	var error := save_data.load(SAVE_PATH)
