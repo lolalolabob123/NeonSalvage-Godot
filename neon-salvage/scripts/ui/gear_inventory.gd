@@ -33,7 +33,7 @@ func refresh_inventory(selected_index: int = 0) -> void:
 	entries.clear()
 	owned_gear_list.clear()
 	
-	if active_slot == &"weapon:":
+	if active_slot == &"weapon":
 		_add_weapon(
 			CARBINE,
 			"Precise fire for fighting across rooms."
