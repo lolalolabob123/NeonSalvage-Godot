@@ -1,6 +1,7 @@
 extends Node
 
 signal banked_salvage_changed(total: int)
+signal loadout_changed
 
 const SAVE_PATH: String = "user://neon_salvage_progress.cfg"
 const HULL_REINFORCEMENT_COST: int = 10
@@ -9,6 +10,9 @@ const HULL_REINFORCEMENT_II_ID: StringName = &"hull_reinforcement_ii"
 const EMERGENCY_PATCH_ID: StringName = &"emergency_patch"
 const SHIELD_GENERATOR_ID: StringName = &"shield_generator"
 const EMP_EMITTER_ID: StringName = &"emp_emitter"
+const STANDARD_CHASSIS_ID: StringName = &"standard_chassis"
+const LIGHT_CHASSIS_ID: StringName = &"light_chassis"
+const HEAVY_CHASSIS_ID: StringName = &"heavy_chassis"
 
 const GEAR := {
 	SHIELD_GENERATOR_ID: {
@@ -55,11 +59,25 @@ const EQUIPMENT := {
 	EMP_EMITTER_ID: preload(
 		"res://resources/equipment/EMPEmitterEquipment.tres"
 	),
+	STANDARD_CHASSIS_ID: preload(
+		"res://resources/equipment/StandardChassis.tres"
+	),
+	LIGHT_CHASSIS_ID: preload(
+		"res://resources/equipment/LightChassis.tres"
+	),
+	HEAVY_CHASSIS_ID: preload(
+		"res://resources/equipment/HeavyChassis.tres"
+	),
 }
 
 const STARTER_EQUIPMENT_IDS: Array[StringName] = [
 	&"carbine",
 	&"shotgun",
+	STANDARD_CHASSIS_ID,
+
+	# Temporarily available while testing chassis balance.
+	LIGHT_CHASSIS_ID,
+	HEAVY_CHASSIS_ID,
 ]
 
 var banked_salvage: int = 0
@@ -69,6 +87,7 @@ var hull_reinforced: bool = false
 var selected_primary_weapon: WeaponDefinition = null
 var selected_system: StringName = &""
 var selected_mission_index: int = 0
+var selected_chassis_id: StringName = STANDARD_CHASSIS_ID
 
 func _ready() -> void:
 	var error := save_data.load(SAVE_PATH)
@@ -300,3 +319,85 @@ func get_owned_equipment_for_slot(
 			result.append(equipment)
 	
 	return result
+
+func can_equip_equipment(
+	equipment_id: StringName,
+	target_slot: EquipmentDefinition.Slot
+) -> bool:
+	# These are thw two slots currently implemnted.
+	if (
+		target_slot != EquipmentDefinition.Slot.PRIMARY_WEAPON
+		and target_slot != EquipmentDefinition.Slot.ACTIVE_SYSTEM
+		and target_slot != EquipmentDefinition.Slot.CHASSIS
+	):
+		return false
+	
+	# An empty ID means unequip the active system.
+	if equipment_id == &"":
+		return target_slot == EquipmentDefinition.Slot.ACTIVE_SYSTEM
+	
+	var equipment := get_equipment(equipment_id)
+	
+	if equipment == null:
+		return false
+	
+	if equipment.equipment_id != equipment_id:
+		return false
+	
+	if equipment.slot != target_slot:
+		return false
+	
+	if not owns_equipment(equipment_id):
+		return false
+	
+	if target_slot == EquipmentDefinition.Slot.PRIMARY_WEAPON:
+		if equipment.weapon_definition == null:
+			return false
+	
+	return true
+
+func equip_equipment(
+	equipment_id: StringName,
+	target_slot: EquipmentDefinition.Slot
+) -> bool:
+	if not can_equip_equipment(equipment_id, target_slot):
+		return false
+
+	match target_slot:
+		EquipmentDefinition.Slot.PRIMARY_WEAPON:
+			var equipment := get_equipment(equipment_id)
+
+			if selected_primary_weapon == equipment.weapon_definition:
+				return true
+
+			selected_primary_weapon = equipment.weapon_definition
+
+		EquipmentDefinition.Slot.ACTIVE_SYSTEM:
+			if selected_system == equipment_id:
+				return true
+
+			selected_system = equipment_id
+
+		EquipmentDefinition.Slot.CHASSIS:
+			if selected_chassis_id == equipment_id:
+				return true
+
+			selected_chassis_id = equipment_id
+
+		_:
+			return false
+
+	loadout_changed.emit()
+	return true
+
+func get_equipped_chassis() -> EquipmentDefinition:
+	var chassis := get_equipment(selected_chassis_id)
+	
+	if (
+		chassis != null
+		and chassis.slot == EquipmentDefinition.Slot.CHASSIS
+		and owns_equipment(selected_chassis_id)
+	):
+		return chassis
+	
+	return get_equipment(STANDARD_CHASSIS_ID)

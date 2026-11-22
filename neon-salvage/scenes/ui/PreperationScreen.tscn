@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://cd4ct7oi4prx8" path="res://scripts/ui/branch_connector.gd" id="4_gn8cd"]
 [ext_resource type="Texture2D" uid="uid://cjy2lhg1121ou" path="res://assets/player/PlayerDrone_Hull.png" id="6_i8rs1"]
 [ext_resource type="PackedScene" uid="uid://b8t24l5y1o56g" path="res://scenes/ui/GearInventory.tscn" id="6_j6p6y"]
+[ext_resource type="Script" uid="uid://cuh1obc4tmjqm" path="res://scripts/ui/equipment_drop_slot.gd" id="7_berfe"]
 
 [node name="PreperationScreen" type="Control" unique_id=351789938]
 layout_mode = 3
@@ -181,15 +182,15 @@ layout_mode = 2
 
 [node name="Margin" type="MarginContainer" parent="LoadoutView/Panel" unique_id=1187539729]
 layout_mode = 2
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 24
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 24
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
 
 [node name="Content" type="VBoxContainer" parent="LoadoutView/Panel/Margin" unique_id=1087390251]
 custom_minimum_size = Vector2(520, 0)
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 12
 
 [node name="TitleLabel" type="Label" parent="LoadoutView/Panel/Margin/Content" unique_id=1517231873]
 layout_mode = 2
@@ -224,6 +225,7 @@ theme_override_font_sizes/font_size = 15
 toggle_mode = true
 text = "PRIMARY WEAPON
 Carbine"
+script = ExtResource("7_berfe")
 
 [node name="SystemSlot" type="Button" parent="LoadoutView/Panel/Margin/Content/Body/DroneSchematic" unique_id=852050431]
 layout_mode = 0
@@ -234,6 +236,21 @@ offset_bottom = 172.0
 toggle_mode = true
 text = "ACTIVE SYSTEM
 None"
+script = ExtResource("7_berfe")
+equipment_slot = 4
+
+[node name="ChassisSlot" type="Button" parent="LoadoutView/Panel/Margin/Content/Body/DroneSchematic" unique_id=247864727]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 285.0
+offset_right = 360.0
+offset_bottom = 357.0
+theme_override_font_sizes/font_size = 15
+toggle_mode = true
+text = "CHASSIS
+Standard Chassis"
+script = ExtResource("7_berfe")
+equipment_slot = 0
 
 [node name="SlotInspector" type="VBoxContainer" parent="LoadoutView/Panel/Margin/Content/Body" unique_id=769776356]
 custom_minimum_size = Vector2(320, 0)
@@ -242,7 +259,7 @@ layout_mode = 2
 [node name="GearInventory" parent="LoadoutView/Panel/Margin/Content/Body/SlotInspector" unique_id=1086114241 instance=ExtResource("6_j6p6y")]
 custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
-theme_override_constants/separation = 24
+theme_override_constants/separation = 8
 
 [node name="LoadoutBackButton" type="Button" parent="LoadoutView/Panel/Margin/Content" unique_id=441529395]
 layout_mode = 2

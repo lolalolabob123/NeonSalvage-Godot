@@ -2,7 +2,7 @@ class_name EquipmentDefinition
 extends Resource
 
 enum Slot {
-	CHASIS,
+	CHASSIS,
 	PRIMARY_WEAPON,
 	SECONDARY_WEAPON,
 	THRUSTERS,

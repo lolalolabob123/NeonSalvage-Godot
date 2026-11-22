@@ -380,6 +380,14 @@ func _ready() -> void:
 	if ProgressStore.has_skill(ProgressStore.HULL_REINFORCEMENT_II_ID):
 		max_health += 1
 	
+	var chassis := ProgressStore.get_equipped_chassis()
+
+	if chassis != null:
+		max_health += chassis.hull_bonus
+		move_speed *= chassis.move_speed_multiplier
+
+	max_health = maxi(max_health, 1)
+	
 	current_health = max_health
 	health_changed.emit(current_health, max_health)
 

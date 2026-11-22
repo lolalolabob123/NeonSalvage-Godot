@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EquipmentDefinition" format=3 uid="uid://bsc0ovhbskgex"]
+
+[ext_resource type="Script" uid="uid://ba0ff61qwwbid" path="res://scripts/equipment/equipment_definition.gd" id="1_4vm6x"]
+
+[resource]
+script = ExtResource("1_4vm6x")
+equipment_id = &"light_chassis"
+display_name = "Light Chassis"
+description = "A lightweight frame for evasive builds. Trades hull durability for movement speed."
+slot = 0
+hull_bonus = -1
+move_speed_multiplier = 1.1500000000000001
+metadata/_custom_type_script = "uid://ba0ff61qwwbid"

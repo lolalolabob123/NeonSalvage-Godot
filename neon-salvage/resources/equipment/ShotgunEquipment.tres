@@ -8,6 +8,5 @@ script = ExtResource("1_nm6pu")
 equipment_id = &"shotgun"
 display_name = "Shotgun"
 description = "Blocks hull damage for 1.5 seconds. Activate with Q. Cooldown: 8 seconds after the shield expires."
-slot = 4
 weapon_definition = ExtResource("2_pgbjv")
 metadata/_custom_type_script = "uid://ba0ff61qwwbid"

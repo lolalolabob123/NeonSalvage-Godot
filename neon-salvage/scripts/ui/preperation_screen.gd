@@ -20,6 +20,7 @@ extends Control
 @onready var gear_inventory: DroneGearInventory = $LoadoutView/Panel/Margin/Content/Body/SlotInspector/GearInventory
 @onready var weapon_slot: Button = $LoadoutView/Panel/Margin/Content/Body/DroneSchematic/WeaponSlot
 @onready var system_slot: Button = $LoadoutView/Panel/Margin/Content/Body/DroneSchematic/SystemSlot
+@onready var chassis_slot: Button = $LoadoutView/Panel/Margin/Content/Body/DroneSchematic/ChassisSlot
 
 func _ready() -> void:
 	upgrades_view.hide()
@@ -57,6 +58,10 @@ func _ready() -> void:
 	)
 	system_slot.pressed.connect(
 		_select_loadout_slot.bind(&"system")
+	)
+	
+	chassis_slot.pressed.connect(
+		_select_loadout_slot.bind(&"chassis")
 	)
 	
 	gear_inventory.loadout_changed.connect(_update_slot_labels)
@@ -188,11 +193,10 @@ func _get_selected_mission_scene() -> PackedScene:
 	return mission_scene
 
 func _select_loadout_slot(slot_id: StringName) -> void:
-	var selecting_weapon := slot_id == &"weapon"
-	
-	weapon_slot.set_pressed_no_signal(selecting_weapon)
-	system_slot.set_pressed_no_signal(not selecting_weapon)
-	
+	weapon_slot.set_pressed_no_signal(slot_id == &"weapon")
+	system_slot.set_pressed_no_signal(slot_id == &"system")
+	chassis_slot.set_pressed_no_signal(slot_id == &"chassis")
+
 	gear_inventory.select_slot(slot_id)
 	_update_slot_labels()
 
@@ -211,5 +215,10 @@ func _update_slot_labels() -> void:
 	if ProgressStore.owns_gear(system_id):
 		var gear: Dictionary = ProgressStore.GEAR[system_id]
 		system_name = gear["display_name"]
+	
+	var chassis := ProgressStore.get_equipped_chassis()
+
+	if chassis != null:
+		chassis_slot.text = "CHASSIS\n%s" % chassis.display_name
 	
 	system_slot.text = "ACTIVE SYSTEM\n%s" % system_name
