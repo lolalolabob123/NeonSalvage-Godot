@@ -1,11 +1,18 @@
 class_name DroneAppearance
 extends Node2D
 
+enum ThrusterPart {
+	ASSEMBLY,
+	LEFT,
+	RIGHT,
+}
+
 @export var equipment_slot: EquipmentDefinition.Slot = (
 	EquipmentDefinition.Slot.CHASSIS
 )
 @export var follow_loadout_changes: bool = true
 @export var weapon_source: Node
+@export var thruster_part: ThrusterPart = ThrusterPart.ASSEMBLY
 
 var current_visual: Node2D = null
 var displayed_scene: PackedScene = null
@@ -39,6 +46,9 @@ func _get_equipment_definition() -> EquipmentDefinition:
 				return ProgressStore.get_equipment(&"carbine")
 
 			return ProgressStore.get_equipment_for_weapon(weapon)
+		
+		EquipmentDefinition.Slot.THRUSTERS:
+			return ProgressStore.get_equipped_thrusters()
 
 	return null
 
@@ -63,6 +73,15 @@ func refresh_appearance() -> void:
 		instance.free()
 		push_error("Equipment visual scenes need a Node2D root.")
 		return
+	
+	if (
+		equipment_slot == EquipmentDefinition.Slot.THRUSTERS
+		and thruster_part != ThrusterPart.ASSEMBLY
+	):
+		instance = _extract_thruster_part(instance as Node2D)
+
+		if instance == null:
+			return
 
 	if is_instance_valid(current_visual):
 		remove_child(current_visual)
@@ -72,3 +91,23 @@ func refresh_appearance() -> void:
 	displayed_scene = requested_scene
 
 	add_child(current_visual)
+
+func _extract_thruster_part(assembly: Node2D) -> Node2D:
+	var part_name := "LeftThruster"
+
+	if thruster_part == ThrusterPart.RIGHT:
+		part_name = "RightThruster"
+
+	var part := assembly.get_node_or_null(part_name) as Node2D
+
+	if part == null:
+		assembly.free()
+		push_error("Thruster visual is missing: %s" % part_name)
+		return null
+
+	assembly.remove_child(part)
+	assembly.free()
+
+	# Gameplay already supplies the left/right mount position.
+	part.position = Vector2.ZERO
+	return part

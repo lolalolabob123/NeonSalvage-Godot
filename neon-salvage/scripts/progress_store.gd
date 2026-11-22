@@ -13,6 +13,9 @@ const EMP_EMITTER_ID: StringName = &"emp_emitter"
 const STANDARD_CHASSIS_ID: StringName = &"standard_chassis"
 const LIGHT_CHASSIS_ID: StringName = &"light_chassis"
 const HEAVY_CHASSIS_ID: StringName = &"heavy_chassis"
+const STANDARD_THRUSTERS_ID: StringName = &"standard_thrusters"
+const BURST_THRUSTERS_ID: StringName = &"burst_thrusters"
+const RAPID_CYCLE_THRUSTERS_ID: StringName = &"rapid_cycle_thrusters"
 
 const GEAR := {
 	SHIELD_GENERATOR_ID: {
@@ -68,16 +71,28 @@ const EQUIPMENT := {
 	HEAVY_CHASSIS_ID: preload(
 		"res://resources/equipment/HeavyChassis.tres"
 	),
+	STANDARD_THRUSTERS_ID: preload(
+		"res://resources/equipment/StandardThrusters.tres"
+	),
+	BURST_THRUSTERS_ID: preload(
+		"res://resources/equipment/BurstThrusters.tres"
+	),
+	RAPID_CYCLE_THRUSTERS_ID: preload(
+		"res://resources/equipment/RapidCycleThrusters.tres"
+	),
 }
 
 const STARTER_EQUIPMENT_IDS: Array[StringName] = [
 	&"carbine",
 	&"shotgun",
 	STANDARD_CHASSIS_ID,
+	STANDARD_THRUSTERS_ID,
 
-	# Temporarily available while testing chassis balance.
+	# Temporarily available for equipment testing.
 	LIGHT_CHASSIS_ID,
 	HEAVY_CHASSIS_ID,
+	BURST_THRUSTERS_ID,
+	RAPID_CYCLE_THRUSTERS_ID,
 ]
 
 var banked_salvage: int = 0
@@ -88,6 +103,7 @@ var selected_primary_weapon: WeaponDefinition = null
 var selected_system: StringName = &""
 var selected_mission_index: int = 0
 var selected_chassis_id: StringName = STANDARD_CHASSIS_ID
+var selected_thrusters_id: StringName = STANDARD_THRUSTERS_ID
 
 func _ready() -> void:
 	var error := save_data.load(SAVE_PATH)
@@ -329,6 +345,7 @@ func can_equip_equipment(
 		target_slot != EquipmentDefinition.Slot.PRIMARY_WEAPON
 		and target_slot != EquipmentDefinition.Slot.ACTIVE_SYSTEM
 		and target_slot != EquipmentDefinition.Slot.CHASSIS
+		and target_slot != EquipmentDefinition.Slot.THRUSTERS
 	):
 		return false
 	
@@ -383,6 +400,12 @@ func equip_equipment(
 				return true
 
 			selected_chassis_id = equipment_id
+		
+		EquipmentDefinition.Slot.THRUSTERS:
+			if selected_thrusters_id == equipment_id:
+				return true
+			
+			selected_thrusters_id = equipment_id
 
 		_:
 			return false
@@ -421,3 +444,15 @@ func get_equipment_for_weapon(
 			return equipment
 
 	return null
+
+func get_equipped_thrusters() -> EquipmentDefinition:
+	var thrusters := get_equipment(selected_thrusters_id)
+	
+	if (
+		thrusters != null
+		and thrusters.slot == EquipmentDefinition.Slot.THRUSTERS
+		and owns_equipment(selected_thrusters_id)
+	):
+		return thrusters
+	
+	return get_equipment(STANDARD_THRUSTERS_ID)

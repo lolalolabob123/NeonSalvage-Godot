@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EquipmentDefinition" format=3 uid="uid://crb0ucxtrc1k1"]
+
+[ext_resource type="Script" uid="uid://ba0ff61qwwbid" path="res://scripts/equipment/equipment_definition.gd" id="1_kwmq0"]
+[ext_resource type="PackedScene" uid="uid://b0phopdt886t" path="res://scenes/equipment/visuals/BurstThrustersVisual.tscn" id="2_778y3"]
+
+[resource]
+script = ExtResource("1_kwmq0")
+equipment_id = &"burst_thrusters"
+display_name = "Burst Thrusters"
+description = "A longer dash for crossing exposed ground. Requires more time between activations."
+slot = 3
+visual_scene = ExtResource("2_778y3")
+dash_speed_multiplier = 1.25
+dash_cooldown_multiplier = 1.5
+metadata/_custom_type_script = "uid://ba0ff61qwwbid"

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EquipmentDefinition" format=3 uid="uid://bnnttskg5f1hb"]
+
+[ext_resource type="Script" uid="uid://ba0ff61qwwbid" path="res://scripts/equipment/equipment_definition.gd" id="1_srqia"]
+[ext_resource type="PackedScene" uid="uid://dd4q1erlvwvk8" path="res://scenes/equipment/visuals/RapidCycleThrusterVisual.tscn" id="2_fkq4u"]
+
+[resource]
+script = ExtResource("1_srqia")
+equipment_id = &"rapid_cycle_thrusters"
+display_name = "Rapid-cycle Thrusters"
+description = "Short, frequent dashes for precise repositioning. Sacrifices travel distance for faster recovery."
+slot = 3
+visual_scene = ExtResource("2_fkq4u")
+dash_speed_multiplier = 0.7999999999999999
+dash_cooldown_multiplier = 0.7
+metadata/_custom_type_script = "uid://ba0ff61qwwbid"

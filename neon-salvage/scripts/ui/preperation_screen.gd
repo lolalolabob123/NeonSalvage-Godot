@@ -21,6 +21,7 @@ extends Control
 @onready var weapon_slot: Button = $LoadoutView/Panel/Margin/Content/Body/DroneSchematic/WeaponSlot
 @onready var system_slot: Button = $LoadoutView/Panel/Margin/Content/Body/DroneSchematic/SystemSlot
 @onready var chassis_slot: Button = $LoadoutView/Panel/Margin/Content/Body/DroneSchematic/ChassisSlot
+@onready var thruster_slot: Button = $LoadoutView/Panel/Margin/Content/Body/DroneSchematic/ThrusterSlot
 
 func _ready() -> void:
 	upgrades_view.hide()
@@ -62,6 +63,10 @@ func _ready() -> void:
 	
 	chassis_slot.pressed.connect(
 		_select_loadout_slot.bind(&"chassis")
+	)
+	
+	thruster_slot.pressed.connect(
+		_select_loadout_slot.bind(&"thrusters")
 	)
 	
 	gear_inventory.loadout_changed.connect(_update_slot_labels)
@@ -196,6 +201,7 @@ func _select_loadout_slot(slot_id: StringName) -> void:
 	weapon_slot.set_pressed_no_signal(slot_id == &"weapon")
 	system_slot.set_pressed_no_signal(slot_id == &"system")
 	chassis_slot.set_pressed_no_signal(slot_id == &"chassis")
+	thruster_slot.set_pressed_no_signal(slot_id == &"thrusters")
 
 	gear_inventory.select_slot(slot_id)
 	_update_slot_labels()
@@ -222,3 +228,8 @@ func _update_slot_labels() -> void:
 		chassis_slot.text = "CHASSIS\n%s" % chassis.display_name
 	
 	system_slot.text = "ACTIVE SYSTEM\n%s" % system_name
+	
+	var thrusters := ProgressStore.get_equipped_thrusters()
+
+	if thrusters != null:
+		thruster_slot.text = "THRUSTERS\n%s" % thrusters.display_name

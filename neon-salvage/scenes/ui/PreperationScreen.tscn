@@ -226,6 +226,10 @@ position = Vector2(0, -7)
 script = ExtResource("6_berfe")
 equipment_slot = 1
 
+[node name="ThrusterAppearance" type="Node2D" parent="LoadoutView/Panel/Margin/Content/Body/DroneSchematic/DronePreview/Appearance" unique_id=601485552]
+script = ExtResource("6_berfe")
+equipment_slot = 3
+
 [node name="WeaponSlot" type="Button" parent="LoadoutView/Panel/Margin/Content/Body/DroneSchematic" unique_id=1338252221]
 layout_mode = 0
 offset_top = 100.0
@@ -261,6 +265,19 @@ text = "CHASSIS
 Standard Chassis"
 script = ExtResource("7_berfe")
 equipment_slot = 0
+
+[node name="ThrusterSlot" type="Button" parent="LoadoutView/Panel/Margin/Content/Body/DroneSchematic" unique_id=1570283355]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 245.0
+offset_right = 560.0
+offset_bottom = 317.0
+theme_override_font_sizes/font_size = 15
+toggle_mode = true
+text = "THRUSTERS
+Standard Thrusters"
+script = ExtResource("7_berfe")
+equipment_slot = 3
 
 [node name="SlotInspector" type="VBoxContainer" parent="LoadoutView/Panel/Margin/Content/Body" unique_id=769776356]
 custom_minimum_size = Vector2(320, 0)

@@ -385,6 +385,12 @@ func _ready() -> void:
 	if chassis != null:
 		max_health += chassis.hull_bonus
 		move_speed *= chassis.move_speed_multiplier
+	
+	var thrusters := ProgressStore.get_equipped_thrusters()
+
+	if thrusters != null:
+		dash_speed *= thrusters.dash_speed_multiplier
+		dash_cooldown *= thrusters.dash_cooldown_multiplier
 
 	max_health = maxi(max_health, 1)
 	

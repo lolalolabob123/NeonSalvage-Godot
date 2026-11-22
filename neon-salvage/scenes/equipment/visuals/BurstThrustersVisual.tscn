@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://b0phopdt886t"]
+
+[ext_resource type="Texture2D" uid="uid://dm8671uxxhdu0" path="res://assets/player/PlayerDrone_Thruster_Left.png" id="1_j8shy"]
+[ext_resource type="Texture2D" uid="uid://c061xcskklm7d" path="res://assets/player/PlayerDrone_Thruster_Right.png" id="2_vcvcq"]
+
+[node name="StandardThrusterVisual" type="Node2D" unique_id=2083650205]
+
+[node name="LeftThruster" type="Node2D" parent="." unique_id=267406215]
+position = Vector2(-56, 22)
+scale = Vector2(1.15, 1.2)
+
+[node name="ThrusterSprite" type="Sprite2D" parent="LeftThruster" unique_id=938129084]
+position = Vector2(56, -22)
+texture = ExtResource("1_j8shy")
+
+[node name="RightThruster" type="Node2D" parent="." unique_id=1422443537]
+position = Vector2(56, 22)
+scale = Vector2(1.15, 1.2)
+
+[node name="ThrusterSprite" type="Sprite2D" parent="RightThruster" unique_id=1167294430]
+position = Vector2(-56, -22)
+texture = ExtResource("2_vcvcq")

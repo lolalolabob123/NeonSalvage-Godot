@@ -41,6 +41,8 @@ func refresh_inventory(selected_index: int = 0) -> void:
 			equipment_slot = EquipmentDefinition.Slot.ACTIVE_SYSTEM
 		&"chassis":
 			equipment_slot = EquipmentDefinition.Slot.CHASSIS
+		&"thrusters":
+			equipment_slot = EquipmentDefinition.Slot.THRUSTERS
 		_:
 			return
 	
@@ -97,6 +99,8 @@ func _add_equipment(equipment: EquipmentDefinition) -> void:
 		EquipmentDefinition.Slot.CHASSIS:
 			kind = "chassis"
 		
+		EquipmentDefinition.Slot.THRUSTERS:
+			kind = "thrusters"
 		_:
 			return
 	
@@ -119,6 +123,15 @@ func _add_equipment(equipment: EquipmentDefinition) -> void:
 		) % [
 			equipment.hull_bonus,
 			roundi(equipment.move_speed_multiplier * 100.0),
+		]
+	
+	if kind == "thrusters":
+		description += (
+			"\nDash distance: %d%% of standard"
+			+ "\nCooldown: %d%% of standard"
+		) % [
+			roundi(equipment.dash_speed_multiplier * 100.0),
+			roundi(equipment.dash_cooldown_multiplier * 100.0),
 		]
 	
 	entries.append({
@@ -169,6 +182,8 @@ func _equip_selected() -> void:
 		&"chassis":
 			target_slot = EquipmentDefinition.Slot.CHASSIS
 		
+		&"thrusters":
+			target_slot = EquipmentDefinition.Slot.THRUSTERS
 		_:
 			return
 	
@@ -185,6 +200,9 @@ func _is_equipped(entry: Dictionary) -> bool:
 
 		"chassis":
 			return entry["id"] == ProgressStore.selected_chassis_id
+		
+		"thrusters":
+			return entry["id"] == ProgressStore.selected_thrusters_id
 
 	return false
 
@@ -211,9 +229,19 @@ func _update_equipped_summary() -> void:
 
 	if chassis != null:
 		equipped_summary.text += "\nCHASSIS: %s" % chassis.display_name
+	
+	var thrusters := ProgressStore.get_equipped_thrusters()
+	
+	if thrusters != null:
+		equipped_summary.text += "\nTHRUSTERS: %s" % thrusters.display_name
 
 func select_slot(slot_id: StringName) -> void:
-	if slot_id not in [&"weapon", &"system", &"chassis"]:
+	if slot_id not in [
+		&"weapon",
+		&"system",
+		&"chassis",
+		&"thrusters",
+	]:
 		return
 
 	active_slot = slot_id

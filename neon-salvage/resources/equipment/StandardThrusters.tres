@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EquipmentDefinition" format=3 uid="uid://bb76duo38b5bd"]
+
+[ext_resource type="Script" uid="uid://ba0ff61qwwbid" path="res://scripts/equipment/equipment_definition.gd" id="1_bq7nf"]
+[ext_resource type="PackedScene" uid="uid://b5ijvl8y4ag1n" path="res://scenes/equipment/visuals/StandardThrusterVisual.tscn" id="2_v1vtt"]
+
+[resource]
+script = ExtResource("1_bq7nf")
+equipment_id = &"standard_thrusters"
+display_name = "Standard Thrusters"
+description = "Balanced thrusters with standard dash distance and recovery time."
+slot = 3
+visual_scene = ExtResource("2_v1vtt")
+metadata/_custom_type_script = "uid://ba0ff61qwwbid"

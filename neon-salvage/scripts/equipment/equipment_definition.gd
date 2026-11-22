@@ -26,3 +26,7 @@ enum Slot {
 
 @export_group("Appearance")
 @export var visual_scene: PackedScene
+
+@export_group("Thruster Modifiers")
+@export_range(0.1, 3.0, 0.05) var dash_speed_multiplier: float = 1.0
+@export_range(0.1, 3.0, 0.05) var dash_cooldown_multiplier: float = 1.0
