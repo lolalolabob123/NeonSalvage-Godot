@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="EquipmentDefinition" format=3 uid="uid://bn8nm6cjm4a5j"]
 
 [ext_resource type="Script" uid="uid://ba0ff61qwwbid" path="res://scripts/equipment/equipment_definition.gd" id="1_nm6pu"]
+[ext_resource type="PackedScene" uid="uid://4g3cl8nssl20" path="res://scenes/equipment/visuals/ShotgunVisual.tscn" id="2_1tf7i"]
 [ext_resource type="Resource" uid="uid://ctcjxncy230e8" path="res://resources/weapons/Shotgun.tres" id="2_pgbjv"]
 
 [resource]
@@ -9,4 +10,5 @@ equipment_id = &"shotgun"
 display_name = "Shotgun"
 description = "Blocks hull damage for 1.5 seconds. Activate with Q. Cooldown: 8 seconds after the shield expires."
 weapon_definition = ExtResource("2_pgbjv")
+visual_scene = ExtResource("2_1tf7i")
 metadata/_custom_type_script = "uid://ba0ff61qwwbid"

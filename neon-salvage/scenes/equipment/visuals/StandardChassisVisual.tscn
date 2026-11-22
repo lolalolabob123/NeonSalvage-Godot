@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cohqkkokd4tea"]
+
+[ext_resource type="Texture2D" uid="uid://cjy2lhg1121ou" path="res://assets/player/PlayerDrone_Hull.png" id="1_ci8nu"]
+
+[node name="StandardChassisVisual" type="Node2D" unique_id=1670527978]
+
+[node name="HullSprite" type="Sprite2D" parent="." unique_id=785197532]
+texture = ExtResource("1_ci8nu")

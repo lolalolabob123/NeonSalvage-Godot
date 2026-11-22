@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ba0ff61qwwbid" path="res://scripts/equipment/equipment_definition.gd" id="1_vu44o"]
 [ext_resource type="Resource" uid="uid://dfy6k7q7kne8x" path="res://resources/weapons/Carbine.tres" id="2_a5mce"]
+[ext_resource type="PackedScene" uid="uid://bqycl5qirop6p" path="res://scenes/equipment/visuals/CarbineVisual.tscn" id="2_rwgqh"]
 
 [resource]
 script = ExtResource("1_vu44o")
@@ -9,4 +10,5 @@ equipment_id = &"carbine"
 display_name = "Carbine"
 description = "Precise fire for fighting across rooms."
 weapon_definition = ExtResource("2_a5mce")
+visual_scene = ExtResource("2_rwgqh")
 metadata/_custom_type_script = "uid://ba0ff61qwwbid"

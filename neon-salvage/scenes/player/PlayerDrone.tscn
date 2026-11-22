@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c061xcskklm7d" path="res://assets/player/PlayerDrone_Thruster_Right.png" id="3_qcr60"]
 [ext_resource type="Texture2D" uid="uid://cjy2lhg1121ou" path="res://assets/player/PlayerDrone_Hull.png" id="4_annjb"]
 [ext_resource type="Texture2D" uid="uid://12ftfaxtvras" path="res://assets/player/PlayerDrone_PrimaryCarbine.png" id="5_j1agh"]
+[ext_resource type="Script" uid="uid://cn2soo0ognrv0" path="res://scripts/equipment/drone_appearance.gd" id="9_fl1o7"]
 [ext_resource type="AudioStream" uid="uid://dau36antysi5w" path="res://assets/audio/ReloadReady.wav" id="9_j1agh"]
 [ext_resource type="AudioStream" uid="uid://ctpuxu3otye2y" path="res://assets/audio/HullHit.wav" id="10_n06tq"]
 [ext_resource type="AudioStream" uid="uid://bbgjf75odkk36" path="res://assets/audio/ThrusterDash.wav" id="11_bwu8i"]
@@ -217,15 +218,26 @@ texture_scale = 0.55
 [node name="Hull" type="Sprite2D" parent="VisualRig" unique_id=784299406]
 texture = ExtResource("4_annjb")
 
+[node name="Appearance" type="Node2D" parent="VisualRig" unique_id=391189411]
+script = ExtResource("9_fl1o7")
+follow_loadout_changes = false
+
 [node name="WeaponPivot" type="Node2D" parent="VisualRig" unique_id=1228617046]
 position = Vector2(0, -7)
 
 [node name="PrimaryCarbine" type="Sprite2D" parent="VisualRig/WeaponPivot" unique_id=1270323904]
+visible = false
 position = Vector2(0, 7)
 texture = ExtResource("5_j1agh")
 
 [node name="Muzzle" type="Marker2D" parent="VisualRig/WeaponPivot" unique_id=2130137396]
 position = Vector2(0, -80)
+
+[node name="WeaponAppearance" type="Node2D" parent="VisualRig/WeaponPivot" unique_id=1886144020 node_paths=PackedStringArray("weapon_source")]
+script = ExtResource("9_fl1o7")
+equipment_slot = 1
+follow_loadout_changes = false
+weapon_source = NodePath("../../..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1127356994]
 libraries/ = SubResource("AnimationLibrary_cunj6")

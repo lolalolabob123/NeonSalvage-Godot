@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://do4v5j0iqnvcm" path="res://scenes/levels/RelayStation.tscn" id="3_qdmyp"]
 [ext_resource type="PackedScene" uid="uid://dwgv2sqfh0rra" path="res://scenes/ui/SkillNode.tscn" id="3_ymwfk"]
 [ext_resource type="Script" uid="uid://cd4ct7oi4prx8" path="res://scripts/ui/branch_connector.gd" id="4_gn8cd"]
-[ext_resource type="Texture2D" uid="uid://cjy2lhg1121ou" path="res://assets/player/PlayerDrone_Hull.png" id="6_i8rs1"]
+[ext_resource type="Script" uid="uid://cn2soo0ognrv0" path="res://scripts/equipment/drone_appearance.gd" id="6_berfe"]
 [ext_resource type="PackedScene" uid="uid://b8t24l5y1o56g" path="res://scenes/ui/GearInventory.tscn" id="6_j6p6y"]
 [ext_resource type="Script" uid="uid://cuh1obc4tmjqm" path="res://scripts/ui/equipment_drop_slot.gd" id="7_berfe"]
 
@@ -212,9 +212,19 @@ offset_top = 60.0
 offset_right = 380.0
 offset_bottom = 280.0
 mouse_filter = 2
-texture = ExtResource("6_i8rs1")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="Appearance" type="Node2D" parent="LoadoutView/Panel/Margin/Content/Body/DroneSchematic/DronePreview" unique_id=266709953]
+position = Vector2(100, 110)
+scale = Vector2(0.78, 0.78)
+script = ExtResource("6_berfe")
+
+[node name="WeaponAppearance" type="Node2D" parent="LoadoutView/Panel/Margin/Content/Body/DroneSchematic/DronePreview/Appearance" unique_id=830662489]
+z_index = 1
+position = Vector2(0, -7)
+script = ExtResource("6_berfe")
+equipment_slot = 1
 
 [node name="WeaponSlot" type="Button" parent="LoadoutView/Panel/Margin/Content/Body/DroneSchematic" unique_id=1338252221]
 layout_mode = 0

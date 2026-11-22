@@ -401,3 +401,23 @@ func get_equipped_chassis() -> EquipmentDefinition:
 		return chassis
 	
 	return get_equipment(STANDARD_CHASSIS_ID)
+
+func get_equipment_for_weapon(
+	weapon: WeaponDefinition
+) -> EquipmentDefinition:
+	if weapon == null:
+		return null
+
+	for equipment_id in EQUIPMENT:
+		var equipment := get_equipment(equipment_id)
+
+		if equipment == null:
+			continue
+
+		if equipment.slot != EquipmentDefinition.Slot.PRIMARY_WEAPON:
+			continue
+
+		if equipment.weapon_definition == weapon:
+			return equipment
+
+	return null

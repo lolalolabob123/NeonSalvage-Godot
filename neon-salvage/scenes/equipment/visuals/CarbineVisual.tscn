@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bqycl5qirop6p"]
+
+[ext_resource type="Texture2D" uid="uid://12ftfaxtvras" path="res://assets/player/PlayerDrone_PrimaryCarbine.png" id="1_dqcxn"]
+
+[node name="CarbineVisual" type="Node2D" unique_id=1772338187]
+
+[node name="WeaponSprite" type="Sprite2D" parent="." unique_id=1424735861]
+position = Vector2(0, 7)
+texture = ExtResource("1_dqcxn")

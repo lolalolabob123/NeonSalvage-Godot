@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="EquipmentDefinition" format=3 uid="uid://7rvdw1wwuhes"]
 
 [ext_resource type="Script" uid="uid://ba0ff61qwwbid" path="res://scripts/equipment/equipment_definition.gd" id="1_gn8la"]
+[ext_resource type="PackedScene" uid="uid://clv5bgj7f35t2" path="res://scenes/equipment/visuals/HeavyChassisVisual.tscn" id="2_l0dre"]
 
 [resource]
 script = ExtResource("1_gn8la")
@@ -10,4 +11,5 @@ description = "A reinforced frame for durable builds. Trades movement speed for 
 slot = 0
 hull_bonus = 2
 move_speed_multiplier = 0.85
+visual_scene = ExtResource("2_l0dre")
 metadata/_custom_type_script = "uid://ba0ff61qwwbid"
