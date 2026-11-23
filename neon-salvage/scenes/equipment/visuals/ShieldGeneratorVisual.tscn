@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dhqdu0f0yngj"]
+
+[ext_resource type="Script" uid="uid://dj18ysbsckua2" path="res://scripts/equipment/system_module_visual.gd" id="1_i1syl"]
+
+[node name="ShieldGeneratorVisual" type="Node2D" unique_id=639386228]
+script = ExtResource("1_i1syl")

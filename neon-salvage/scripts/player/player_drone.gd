@@ -6,11 +6,11 @@ signal health_changed(current: int, maximum: int)
 signal player_destroyed
 
 const PLAYER_DESTRUCTION_FX: PackedScene = preload("res://scenes/effects/PlayerDestructionFX.tscn")
-const SHIELD_DURATION := 1.5
-const SHIELD_COOLDOWN := 8.0
-const EMP_RADIUS: float = 220.0
-const EMP_STUN_DURATION: float = 2.0
-const EMP_COOLDOWN: float = 10.0
+const SHIELD_DURATION: float = DroneBuildStats.SHIELD_DURATION
+const SHIELD_COOLDOWN: float = DroneBuildStats.SHIELD_COOLDOWN
+const EMP_RADIUS: float = DroneBuildStats.EMP_RADIUS
+const EMP_STUN_DURATION: float = DroneBuildStats.EMP_STUN_DURATION
+const EMP_COOLDOWN: float = DroneBuildStats.EMP_COOLDOWN
 const EMP_VISUAL_DURATION: float = 0.35
 
 @onready var weapon_pivot: Node2D = $VisualRig/WeaponPivot
@@ -28,14 +28,14 @@ const EMP_VISUAL_DURATION: float = 0.35
 
 @export_group("Thruster Dash")
 
-@export var move_speed: float = 240.0
+@export var move_speed: float = DroneBuildStats.BASE_MOVE_SPEED
 @export var acceleration: float = 1250.0
 @export var deceleration: float = 1500.0
-@export var max_health: int = 5
+@export var max_health: int = DroneBuildStats.BASE_HULL
 @export var dash_unlocked: bool = false
-@export var dash_speed: float = 950.0
-@export var dash_duration: float = 0.18
-@export var dash_cooldown: float = 2.0
+@export var dash_speed: float = DroneBuildStats.BASE_DASH_SPEED
+@export var dash_duration: float = DroneBuildStats.BASE_DASH_DURATION
+@export var dash_cooldown: float = DroneBuildStats.BASE_DASH_COOLDOWN
 @export var primary_weapon: WeaponDefinition
 
 var salvage_total: int = 0
@@ -370,30 +370,23 @@ func get_dash_status_text() -> String:
 func _ready() -> void:
 	if ProgressStore.selected_primary_weapon != null:
 		primary_weapon = ProgressStore.selected_primary_weapon
-	
+
 	if primary_weapon != null:
 		ammo_in_magazine = primary_weapon.magazine_capacity
-	
-	if ProgressStore.hull_reinforced:
-		max_health += 1
-	
-	if ProgressStore.has_skill(ProgressStore.HULL_REINFORCEMENT_II_ID):
-		max_health += 1
-	
-	var chassis := ProgressStore.get_equipped_chassis()
 
-	if chassis != null:
-		max_health += chassis.hull_bonus
-		move_speed *= chassis.move_speed_multiplier
-	
-	var thrusters := ProgressStore.get_equipped_thrusters()
+	var stats := DroneBuildStats.calculate(
+		max_health,
+		move_speed,
+		dash_speed,
+		dash_duration,
+		dash_cooldown
+	)
 
-	if thrusters != null:
-		dash_speed *= thrusters.dash_speed_multiplier
-		dash_cooldown *= thrusters.dash_cooldown_multiplier
+	max_health = int(stats["maximum_hull"])
+	move_speed = float(stats["movement_speed"])
+	dash_speed = float(stats["dash_speed"])
+	dash_cooldown = float(stats["dash_cooldown"])
 
-	max_health = maxi(max_health, 1)
-	
 	current_health = max_health
 	health_changed.emit(current_health, max_health)
 

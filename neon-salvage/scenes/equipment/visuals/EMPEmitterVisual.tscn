@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://u8fgnu32b8ee"]
+
+[ext_resource type="Script" uid="uid://dj18ysbsckua2" path="res://scripts/equipment/system_module_visual.gd" id="1_pyjpd"]
+
+[node name="EmpEmitterVisual" type="Node2D" unique_id=682876456]
+script = ExtResource("1_pyjpd")
+module_style = 1

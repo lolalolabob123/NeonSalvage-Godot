@@ -49,6 +49,17 @@ func _get_equipment_definition() -> EquipmentDefinition:
 		
 		EquipmentDefinition.Slot.THRUSTERS:
 			return ProgressStore.get_equipped_thrusters()
+		
+		EquipmentDefinition.Slot.ACTIVE_SYSTEM:
+			var system_id := ProgressStore.selected_system
+				
+			if system_id == &"":
+				return null
+			
+			if not ProgressStore.owns_equipment(system_id):
+				return null
+			
+			return ProgressStore.get_equipment(system_id)
 
 	return null
 
@@ -56,7 +67,19 @@ func _get_equipment_definition() -> EquipmentDefinition:
 func refresh_appearance() -> void:
 	var equipment := _get_equipment_definition()
 
-	if equipment == null or equipment.visual_scene == null:
+	if equipment == null:
+		_clear_visual()
+
+		# An empty active system slot is allowed.
+		if equipment_slot != EquipmentDefinition.Slot.ACTIVE_SYSTEM:
+			push_warning(
+				"Equipment missing for slot: %s" % equipment_slot
+			)
+
+		return
+
+	if equipment.visual_scene == null:
+		_clear_visual()
 		push_warning(
 			"Equipment visual missing for slot: %s" % equipment_slot
 		)
@@ -111,3 +134,11 @@ func _extract_thruster_part(assembly: Node2D) -> Node2D:
 	# Gameplay already supplies the left/right mount position.
 	part.position = Vector2.ZERO
 	return part
+
+func _clear_visual() -> void:
+	if is_instance_valid(current_visual):
+		remove_child(current_visual)
+		current_visual.queue_free()
+	
+	current_visual = null
+	displayed_scene = null

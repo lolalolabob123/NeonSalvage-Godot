@@ -202,7 +202,7 @@ layout_mode = 2
 theme_override_constants/separation = 24
 
 [node name="DroneSchematic" type="Control" parent="LoadoutView/Panel/Margin/Content/Body" unique_id=893451663]
-custom_minimum_size = Vector2(560, 360)
+custom_minimum_size = Vector2(560, 530)
 layout_mode = 2
 
 [node name="DronePreview" type="TextureRect" parent="LoadoutView/Panel/Margin/Content/Body/DroneSchematic" unique_id=957624796]
@@ -229,6 +229,12 @@ equipment_slot = 1
 [node name="ThrusterAppearance" type="Node2D" parent="LoadoutView/Panel/Margin/Content/Body/DroneSchematic/DronePreview/Appearance" unique_id=601485552]
 script = ExtResource("6_berfe")
 equipment_slot = 3
+
+[node name="SystemAppearance" type="Node2D" parent="LoadoutView/Panel/Margin/Content/Body/DroneSchematic/DronePreview/Appearance" unique_id=25645111]
+z_index = 2
+position = Vector2(0, 45)
+script = ExtResource("6_berfe")
+equipment_slot = 4
 
 [node name="WeaponSlot" type="Button" parent="LoadoutView/Panel/Margin/Content/Body/DroneSchematic" unique_id=1338252221]
 layout_mode = 0
@@ -278,6 +284,26 @@ text = "THRUSTERS
 Standard Thrusters"
 script = ExtResource("7_berfe")
 equipment_slot = 3
+
+[node name="BuildStatsPanel" type="PanelContainer" parent="LoadoutView/Panel/Margin/Content/Body/DroneSchematic" unique_id=647400954]
+layout_mode = 0
+offset_top = 370.0
+offset_right = 560.0
+offset_bottom = 520.0
+mouse_filter = 2
+
+[node name="Margin" type="MarginContainer" parent="LoadoutView/Panel/Margin/Content/Body/DroneSchematic/BuildStatsPanel" unique_id=6187932]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="StatsLabel" type="Label" parent="LoadoutView/Panel/Margin/Content/Body/DroneSchematic/BuildStatsPanel/Margin" unique_id=1825509146]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "BUILD STATS"
+autowrap_mode = 3
 
 [node name="SlotInspector" type="VBoxContainer" parent="LoadoutView/Panel/Margin/Content/Body" unique_id=769776356]
 custom_minimum_size = Vector2(320, 0)

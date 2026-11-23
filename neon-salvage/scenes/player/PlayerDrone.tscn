@@ -254,6 +254,13 @@ equipment_slot = 1
 follow_loadout_changes = false
 weapon_source = NodePath("../../..")
 
+[node name="SystemAppearance" type="Node2D" parent="VisualRig" unique_id=860917295]
+z_index = 2
+position = Vector2(0, 45)
+script = ExtResource("9_fl1o7")
+equipment_slot = 4
+follow_loadout_changes = false
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1127356994]
 libraries/ = SubResource("AnimationLibrary_cunj6")
 autoplay = &"idle_hover"

@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="EquipmentDefinition" format=3 uid="uid://2pohmixr74lg"]
 
 [ext_resource type="Script" uid="uid://ba0ff61qwwbid" path="res://scripts/equipment/equipment_definition.gd" id="1_e5lia"]
+[ext_resource type="PackedScene" uid="uid://dhqdu0f0yngj" path="res://scenes/equipment/visuals/ShieldGeneratorVisual.tscn" id="2_1nui4"]
 
 [resource]
 script = ExtResource("1_e5lia")
@@ -8,4 +9,5 @@ equipment_id = &"shield_generator"
 display_name = "Shield Generator"
 description = "Blocks hull damage for 1.5 seconds. Activate with Q. Cooldown: 8 seconds after the shield expires."
 slot = 4
+visual_scene = ExtResource("2_1nui4")
 metadata/_custom_type_script = "uid://ba0ff61qwwbid"
