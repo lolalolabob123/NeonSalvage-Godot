@@ -110,6 +110,7 @@ func _ready() -> void:
 
 	# A new player doesn't have a save file yet.
 	if error == ERR_FILE_NOT_FOUND:
+		_restore_loadout()
 		return
 
 	if error != OK:
@@ -143,6 +144,7 @@ func _ready() -> void:
 		return
 	
 	hull_reinforced = bool(saved_upgrade)
+	_restore_loadout()
 
 func owns_gear(gear_id: StringName) -> bool:
 	var gear: Dictionary = GEAR.get(gear_id, {})
@@ -379,6 +381,9 @@ func equip_equipment(
 ) -> bool:
 	if not can_equip_equipment(equipment_id, target_slot):
 		return false
+	
+	if not _save_equipment_choice(equipment_id, target_slot):
+		return false
 
 	match target_slot:
 		EquipmentDefinition.Slot.PRIMARY_WEAPON:
@@ -456,3 +461,117 @@ func get_equipped_thrusters() -> EquipmentDefinition:
 		return thrusters
 	
 	return get_equipment(STANDARD_THRUSTERS_ID)
+
+func _read_saved_equipment_id(
+	save_key: String,
+	fallback_id: StringName,
+	target_slot: EquipmentDefinition.Slot
+) -> StringName:
+	var saved_value: Variant = save_data.get_value(
+		"loadout",
+		save_key,
+		String(fallback_id)
+	) 
+	
+	if (
+		typeof(saved_value) != TYPE_STRING
+		and typeof(saved_value) != TYPE_STRING_NAME
+	):
+		return fallback_id
+	
+	var equipment_id := StringName(saved_value)
+	
+	if can_equip_equipment(equipment_id, target_slot):
+		return equipment_id
+	
+	return fallback_id
+
+func _restore_loadout() -> void:
+	var weapon_id := _read_saved_equipment_id(
+		"primary_weapon",
+		&"carbine",
+		EquipmentDefinition.Slot.PRIMARY_WEAPON
+	)
+	
+	selected_primary_weapon = get_equipment(
+		weapon_id
+	).weapon_definition
+	
+	selected_system = _read_saved_equipment_id(
+		"active_system",
+		&"",
+		EquipmentDefinition.Slot.ACTIVE_SYSTEM
+	)
+	
+	selected_chassis_id = _read_saved_equipment_id(
+		"chassis",
+		STANDARD_CHASSIS_ID,
+		EquipmentDefinition.Slot.CHASSIS
+	)
+	
+	selected_thrusters_id = _read_saved_equipment_id(
+		"thrusters",
+		STANDARD_THRUSTERS_ID,
+		EquipmentDefinition.Slot.THRUSTERS
+	)
+
+func _save_equipment_choice(
+	equipment_id: StringName,
+	target_slot: EquipmentDefinition.Slot
+) -> bool:
+	if not storage_available:
+		return false
+	
+	var save_key: String
+	
+	match target_slot:
+		EquipmentDefinition.Slot.PRIMARY_WEAPON:
+			save_key = "primary_weapon"
+		
+		EquipmentDefinition.Slot.ACTIVE_SYSTEM:
+			save_key = "active_system"
+		
+		EquipmentDefinition.Slot.CHASSIS:
+			save_key = "chassis"
+		
+		EquipmentDefinition.Slot.THRUSTERS:
+			save_key = "thrusters"
+		
+		_:
+			return false
+	
+	var had_previous_value := save_data.has_section_key(
+		"loadout",
+		save_key
+	)
+	
+	var previous_value: Variant = save_data.get_value(
+		"loadout",
+		save_key,
+		""
+	)
+	
+	save_data.set_value(
+		"loadout",
+		save_key,
+		String(equipment_id)
+	)
+	
+	var error := save_data.save(SAVE_PATH)
+	
+	if error != OK:
+		if had_previous_value:
+			save_data.set_value(
+				"loadout",
+				save_key,
+				previous_value
+			)
+		else:
+			save_data.erase_section_key("loadout", save_key)
+		
+		push_error(
+			"Could not save equipment choice: %s"
+			% error_string(error)
+		)
+		return false
+	return true
