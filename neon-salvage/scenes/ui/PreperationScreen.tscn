@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://cn2soo0ognrv0" path="res://scripts/equipment/drone_appearance.gd" id="6_berfe"]
 [ext_resource type="PackedScene" uid="uid://b8t24l5y1o56g" path="res://scenes/ui/GearInventory.tscn" id="6_j6p6y"]
 [ext_resource type="Script" uid="uid://cuh1obc4tmjqm" path="res://scripts/ui/equipment_drop_slot.gd" id="7_berfe"]
+[ext_resource type="Script" uid="uid://rt6hwg77klxs" path="res://scripts/ui/drone_build_stats_panel.gd" id="8_gek4v"]
 
 [node name="PreperationScreen" type="Control" unique_id=351789938]
 layout_mode = 3
@@ -291,6 +292,7 @@ offset_top = 370.0
 offset_right = 560.0
 offset_bottom = 520.0
 mouse_filter = 2
+script = ExtResource("8_gek4v")
 
 [node name="Margin" type="MarginContainer" parent="LoadoutView/Panel/Margin/Content/Body/DroneSchematic/BuildStatsPanel" unique_id=6187932]
 layout_mode = 2

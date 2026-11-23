@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://brw4cu62hlr7x" path="res://assets/player/PlayerDrone_BodyComposite.png" id="1_jmkjn"]
 [ext_resource type="PackedScene" uid="uid://b8sv2wmfuy86" path="res://scenes/player/PlayerDrone.tscn" id="3_w2sf3"]
 [ext_resource type="Script" uid="uid://b7qclmnnou0un" path="res://scripts/tests/target_dummy.gd" id="4_b15v7"]
-[ext_resource type="PackedScene" uid="uid://cg1ufgms80u3y" path="res://scripts/tests/CoverBlock.tscn" id="5_c2tng"]
+[ext_resource type="PackedScene" uid="uid://cg1ufgms80u3y" path="res://scenes/tests/CoverBlock.tscn" id="5_c2tng"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0gddg"]
 size = Vector2(60, 60)

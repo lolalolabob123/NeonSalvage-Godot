@@ -11,15 +11,15 @@ var is_repeat_reward: bool = false
 func _ready() -> void:
 	interaction_prompt.hide()
 
-	var gear: Dictionary = ProgressStore.GEAR.get(gear_id, {})
+	var equipment := ProgressStore.get_equipment(gear_id)
 
-	if gear.is_empty():
-		push_error("Gear pickup needs a valid Gear ID.")
+	if equipment == null:
+		push_error("Equipment pickup needs a valid Gear ID.")
 		set_process(false)
 		set_process_unhandled_input(false)
 		return
 
-	if ProgressStore.owns_gear(gear_id):
+	if ProgressStore.owns_equipment(gear_id):
 		if repeat_salvage_amount <= 0:
 			queue_free()
 			return
@@ -27,19 +27,19 @@ func _ready() -> void:
 		is_repeat_reward = true
 
 		interaction_prompt.text = (
-			"[E] RECOVER RESEARCH CACHE\n"
+			"[E] RECOVER SALVAGE CACHE\n"
 			+ "%d salvage — extract to bank."
 		) % repeat_salvage_amount
 
 		var visual := get_node_or_null("Polygon2D") as Polygon2D
+
 		if visual != null:
 			visual.color = Color("#31CBE0")
 
 	else:
 		interaction_prompt.text = (
 			"[E] RECOVER %s\nExtract to secure."
-		) % str(gear["display_name"]).to_upper()
-
+		) % equipment.display_name.to_upper()
 
 func _process(_delta: float) -> void:
 	interaction_prompt.visible = _has_player_in_range()

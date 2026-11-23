@@ -26,8 +26,9 @@
 [ext_resource type="Script" uid="uid://d1u5ducd7wrwg" path="res://scripts/environment/electrical_sweep.gd" id="15_l755m"]
 [ext_resource type="Script" uid="uid://d2n22cjaxvhm7" path="res://scripts/enemies/vault_navigation.gd" id="16_8pq3c"]
 [ext_resource type="Script" uid="uid://bk0u7tf7i7j10" path="res://scripts/ui/mission_hud.gd" id="16_hav87"]
-[ext_resource type="PackedScene" uid="uid://cg1ufgms80u3y" path="res://scripts/tests/CoverBlock.tscn" id="16_lkva1"]
+[ext_resource type="PackedScene" uid="uid://cg1ufgms80u3y" path="res://scenes/tests/CoverBlock.tscn" id="16_lkva1"]
 [ext_resource type="Script" uid="uid://dp7df7h7ix8py" path="res://scripts/enemies/maintenance_navigation.gd" id="17_cupjd"]
+[ext_resource type="PackedScene" uid="uid://bh3yacrl4q6as" path="res://scenes/pickups/BurstThrustersPickup.tscn" id="18_8u5ge"]
 [ext_resource type="PackedScene" uid="uid://mfbfst17wlxa" path="res://scenes/enemies/InterceptorDrone.tscn" id="18_ln565"]
 [ext_resource type="Script" uid="uid://c2ojgocpsx27p" path="res://scripts/enemies/turbine_navigation.gd" id="18_p7riy"]
 [ext_resource type="PackedScene" uid="uid://cuatntxw5x5js" path="res://scenes/pickups/EMPEmitterPickup.tscn" id="19_k5qey"]
@@ -429,6 +430,11 @@ position = Vector2(280, 210)
 
 [node name="SouthCache" parent="ProcessingVault/RewardLocations/SouthCachePosition" unique_id=461746349 groups=["navigation_blockers"] instance=ExtResource("13_457vc")]
 salvage_amount = 4
+
+[node name="BurstThrusterPosition" type="Marker2D" parent="ProcessingVault/RewardLocations" unique_id=147315612]
+position = Vector2(280, 0)
+
+[node name="BurstThrustersPickup" parent="ProcessingVault/RewardLocations/BurstThrusterPosition" unique_id=387521179 instance=ExtResource("18_8u5ge")]
 
 [node name="VaultPatrols" type="Node2D" parent="ProcessingVault" unique_id=938465247]
 

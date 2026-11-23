@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bh3yacrl4q6as"]
+
+[ext_resource type="Script" uid="uid://bw7rb2gxtna84" path="res://scripts/pickups/gear_pickup.gd" id="1_dw2a6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dw2a6"]
+radius = 24.0
+
+[node name="BurstThrustersPickup" type="Area2D" unique_id=387521179]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_dw2a6")
+gear_id = &"burst_thrusters"
+repeat_salvage_amount = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=677953887]
+shape = SubResource("CircleShape2D_dw2a6")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=258650047]
+color = Color(0.9529412, 0.6745098, 0.34117648, 1)
+polygon = PackedVector2Array(0, -20, 16, 0, 0, 20, -16, 0)
+
+[node name="InteractionPrompt" type="Label" parent="." unique_id=1161980599]
+offset_left = -160.0
+offset_top = -190.0
+offset_right = 160.0
+offset_bottom = -120.0
+text = "	[E] RECOVER BURST THRUSTERS"
+horizontal_alignment = 1
+autowrap_mode = 3

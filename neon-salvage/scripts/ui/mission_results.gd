@@ -34,10 +34,13 @@ func _show_results() -> void:
 	]
 	
 	for gear_id in mission_controller.secured_gear_this_run:
-		var gear: Dictionary = ProgressStore.GEAR[gear_id]
-		
+		var equipment := ProgressStore.get_equipment(gear_id)
+
+		if equipment == null:
+			continue
+
 		details_label.text += "\n\n%s secured." % (
-			str(gear["display_name"])
+			equipment.display_name
 		)
 
 	overlay.show()

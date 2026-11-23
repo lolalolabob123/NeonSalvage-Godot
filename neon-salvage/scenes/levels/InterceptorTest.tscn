@@ -23,7 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://bcpwo5a3yl1mf" path="res://scenes/environment/TurbineStarter.tscn" id="20_fmqb8"]
 [ext_resource type="Script" uid="uid://bords25vw0mlt" path="res://scripts/environment/turbine_restart.gd" id="21_l57ht"]
 [ext_resource type="Script" uid="uid://d1u5ducd7wrwg" path="res://scripts/environment/electrical_sweep.gd" id="22_580il"]
-[ext_resource type="PackedScene" uid="uid://cg1ufgms80u3y" path="res://scripts/tests/CoverBlock.tscn" id="23_ae2i6"]
+[ext_resource type="PackedScene" uid="uid://cg1ufgms80u3y" path="res://scenes/tests/CoverBlock.tscn" id="23_ae2i6"]
 [ext_resource type="Script" uid="uid://c2ojgocpsx27p" path="res://scripts/enemies/turbine_navigation.gd" id="24_u2id1"]
 [ext_resource type="Script" uid="uid://cyeg8ke56gbtn" path="res://scripts/enemies/turbine_response.gd" id="25_jih67"]
 [ext_resource type="PackedScene" uid="uid://bhigc1j7geq34" path="res://scenes/environment/PowerTerminal.tscn" id="26_cqqxr"]

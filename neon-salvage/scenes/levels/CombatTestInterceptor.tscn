@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://derh8jsgkxa57"]
+
+[ext_resource type="Script" uid="uid://bwocmia3vrsrh" path="res://scripts/tests/combat_test.gd" id="1_xg36y"]
+[ext_resource type="PackedScene" uid="uid://cpdwi7khiga8l" path="res://scenes/environment/TestBlock.tscn" id="2_7iw4v"]
+[ext_resource type="Script" uid="uid://b5q6wxmohx3m5" path="res://scripts/enemies/combat_test_navigation.gd" id="3_xsncs"]
+[ext_resource type="PackedScene" uid="uid://b8sv2wmfuy86" path="res://scenes/player/PlayerDrone.tscn" id="4_o12ha"]
+[ext_resource type="PackedScene" uid="uid://oohw5n16r2ll" path="res://scenes/ui/SalvageHUD.tscn" id="5_i1hte"]
+[ext_resource type="PackedScene" uid="uid://mfbfst17wlxa" path="res://scenes/enemies/InterceptorDrone.tscn" id="6_xg36y"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_xg36y"]
+vertices = PackedVector2Array(250, 130, 570, 370, -570, 370, 110, 130, -110, 130, -250, 130, 570, -370, 250, -130, -570, -370, 110, -130, -250, -130, -110, -130)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 3, 2), PackedInt32Array(5, 4, 2), PackedInt32Array(6, 1, 0, 7), PackedInt32Array(8, 6, 7, 9), PackedInt32Array(5, 2, 8, 10), PackedInt32Array(9, 3, 4, 11), PackedInt32Array(8, 9, 11), PackedInt32Array(8, 11, 10)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-600, -400, 600, -400, 600, 400, -600, 400)])
+parsed_geometry_type = 1
+parsed_collision_mask = 1
+source_geometry_mode = 1
+source_geometry_group_name = &"navigation_blockers"
+agent_radius = 30.0
+
+[node name="CombatTestInterceptor" type="Area2D" unique_id=1197910353]
+script = ExtResource("1_xg36y")
+
+[node name="Floor" type="Polygon2D" parent="." unique_id=1609366409]
+z_index = -5
+color = Color(0.078431375, 0.15294118, 0.2, 1)
+polygon = PackedVector2Array(-600, -400, 600, -400, 600, 400, -600, 400)
+
+[node name="Geometry" type="Node2D" parent="." unique_id=1923876912 groups=["navigation_blockers"]]
+
+[node name="NorthWall" parent="Geometry" unique_id=825816141 instance=ExtResource("2_7iw4v")]
+position = Vector2(0, -440)
+scale = Vector2(8.5, 1)
+
+[node name="SouthWall" parent="Geometry" unique_id=999111032 instance=ExtResource("2_7iw4v")]
+position = Vector2(0, 440)
+scale = Vector2(8.5, 1)
+
+[node name="WestWall" parent="Geometry" unique_id=2127223500 instance=ExtResource("2_7iw4v")]
+position = Vector2(-640, 0)
+scale = Vector2(0.5, 10)
+
+[node name="EastWall" parent="Geometry" unique_id=78232745 instance=ExtResource("2_7iw4v")]
+position = Vector2(640, 0)
+scale = Vector2(0.5, 10)
+
+[node name="CoverLeft" parent="Geometry" unique_id=275887090 instance=ExtResource("2_7iw4v")]
+position = Vector2(-180, 0)
+scale = Vector2(0.5, 2.5)
+
+[node name="CoverRight" parent="Geometry" unique_id=2141632475 instance=ExtResource("2_7iw4v")]
+position = Vector2(180, 0)
+scale = Vector2(0.5, 2.5)
+
+[node name="Navigation" type="NavigationRegion2D" parent="." unique_id=465198650]
+navigation_polygon = SubResource("NavigationPolygon_xg36y")
+script = ExtResource("3_xsncs")
+
+[node name="PlayerDrone" parent="." unique_id=1138100880 instance=ExtResource("4_o12ha")]
+position = Vector2(-450, 0)
+dash_unlocked = true
+
+[node name="SalvageHUD" parent="." unique_id=507685534 instance=ExtResource("5_i1hte")]
+
+[node name="Enemies" type="Node2D" parent="." unique_id=435355426]
+
+[node name="InterceptionDrone" parent="Enemies" unique_id=140838755 instance=ExtResource("6_xg36y")]
+position = Vector2(350, 0)
+
+[node name="TestInstructions" type="CanvasLayer" parent="." unique_id=799471744]
+
+[node name="Label" type="Label" parent="TestInstructions" unique_id=1620436231]
+offset_left = 400.0
+offset_top = 20.0
+offset_right = 900.0
+offset_bottom = 100.0
+theme_override_font_sizes/font_size = 16
+text = "COMBAT TEST — INTERCEPTOR + COVER
+Approach to engage. Use cover to break line of sight.
+[T] Restart encounter"

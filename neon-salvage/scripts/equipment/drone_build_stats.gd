@@ -55,16 +55,16 @@ static func calculate(
 static func get_system_summary() -> String:
 	match ProgressStore.selected_system:
 		ProgressStore.SHIELD_GENERATOR_ID:
-			return "Shield: %.1fs protection / %1.f cooldown after expiry" % [
+			return "Shield: %.1fs protection / %.1fs cooldown after expiry" % [
 				SHIELD_DURATION,
 				SHIELD_COOLDOWN,
 			]
-		
+
 		ProgressStore.EMP_EMITTER_ID:
-			return "EMP: %.0fpx radius / %1.fs stun / %1.fs cooldoown" % [
+			return "EMP: %.0fpx radius / %.1fs stun / %.1fs cooldown" % [
 				EMP_RADIUS,
 				EMP_STUN_DURATION,
 				EMP_COOLDOWN,
 			]
-	
+
 	return "Active system: None"

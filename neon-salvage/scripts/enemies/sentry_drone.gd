@@ -39,6 +39,8 @@ enum SentryState {
 @export var guard_scan_angle: float = 30.0
 @export var guard_scan_speed: float = 1.0
 @export var patrol_route: Node2D = null
+@export var aim_lock_duration: float = 0.2
+@export var recovery_duration: float = 0.55
 
 var target: Node2D = null
 var current_health: int = 0
@@ -55,6 +57,10 @@ var guard_scan_timer: float = 0.0
 var patrol_points: Array[Vector2] = []
 var patrol_index: int = 0
 var emp_stun_remaining: float = 0.0
+var aim_locked: bool = false
+var shot_duration: bool = false
+var shot_direction: Vector2 = Vector2.UP
+var recovery_remaining: float = 0.0
 
 func _ready() -> void:
 	
@@ -119,9 +125,7 @@ func respond_to_alarm(alarm_position: Vector2) -> void:
 	begin_investigation()
 
 func begin_investigation() -> void:
-	is_winding_up = false
-	windup_timer = 0.0
-	fire_timer = fire_interval
+	_cancel_attack()
 
 	if has_last_known_position:
 		current_state = SentryState.INVESTIGATE
@@ -140,6 +144,13 @@ func _physics_process(delta: float) -> void:
 		emp_stun_remaining = maxf(emp_stun_remaining - delta, 0.0)
 		velocity = Vector2.ZERO
 		sprite.self_modulate = Color("#08DFFF")
+		return
+	
+	var attack_busy := _update_attack(delta)
+	_update_attack_visuals()
+	
+	if attack_busy:
+		velocity = Vector2.ZERO
 		return
 	
 	# Update awareness before choosing movement.
@@ -287,79 +298,6 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-	# Handle automatic firing.
-	if (
-		current_state == SentryState.PURSUE
-		and is_instance_valid(target)
-		and has_line_of_sight()
-	):
-		
-		# Remember the player's position whenever they are visible
-		last_known_position = target.global_position
-		has_last_known_position = true
-		
-		if is_winding_up:
-			# Count down the weapon charging phase.
-			windup_timer -= delta
-
-			if windup_timer <= 0.0:
-				is_winding_up = false
-
-				# Fire after charging finishes.
-				fire_at_player()
-
-				# Maintain the intended firing interval.
-				fire_timer = maxf(
-					fire_interval - windup_duration,
-					0.0
-				)
-				
-				# Remember the player's last known position while they are visible.
-				last_known_position = target.global_position
-				has_last_known_position = true
-
-		else:
-			# Wait until it's time to prepare another shot.
-			fire_timer -= delta
-
-			if fire_timer <= 0.0:
-				is_winding_up = true
-				windup_timer = windup_duration
-				charge_audio.play()
-
-	else:
-		# Cancel charging if the player leaves detection range.
-		is_winding_up = false
-		windup_timer = 0.0
-		fire_timer = fire_interval
-
-	# Update charging visuals every physics frame.
-	charge_glow.visible = is_winding_up
-
-	if is_winding_up:
-		var charge_progress: float = 1.0 - clampf(
-			windup_timer / maxf(windup_duration, 0.01),
-			0.0,
-			1.0
-		)
-
-		# Gradually tint the Sentry red-orange.
-		sprite.self_modulate = Color.WHITE.lerp(
-			Color("#F36A58"),
-			charge_progress
-		)
-
-		# Grow the energy buildup at the muzzle.
-		var glow_scale: float = lerpf(0.85, 1.45, charge_progress)
-		charge_glow.scale = Vector2.ONE * glow_scale
-
-		charge_glow.scale = Vector2.ONE * glow_scale
-
-	else:
-		sprite.self_modulate = Color.WHITE
-		if charge_audio.playing:
-			charge_audio.stop()
-
 func has_line_of_sight() -> bool:
 	if not is_instance_valid(target):
 		return false
@@ -475,41 +413,165 @@ func spawn_salvage_drop() -> void:
 
 
 func fire_at_player() -> void:
-	if not is_instance_valid(target):
-		return
+	var pulse := SENTRY_PULSE.instantiate() as SentryPulse
 
-	# Calculate the direction from the muzzle to the player.
-	var direction: Vector2 = (
-		target.global_position - muzzle.global_position
-	)
+	pulse.configure(shot_direction, self)
 
-	# Create an enemy projectile.
-	var pulse: SentryPulse = (
-		SENTRY_PULSE.instantiate() as SentryPulse
-	)
-	
-	shot_audio.play()
-
-	# Configure its direction and owner.
-	pulse.configure(direction, self)
-
-	# Add the projectile to the level.
-	var level: Node2D = get_tree().current_scene as Node2D
+	var level := get_tree().current_scene as Node2D
 
 	pulse.position = level.to_local(muzzle.global_position)
 	level.add_child(pulse)
 
+	shot_audio.play()
+
 func apply_emp(duration: float) -> void:
 	if current_health <= 0 or duration <= 0.0:
 		return
-	
-	emp_stun_remaining = maxf(emp_stun_remaining, duration)
-	
+
+	_cancel_attack()
+
+	emp_stun_remaining = maxf(
+		emp_stun_remaining,
+		duration
+	)
+
 	velocity = Vector2.ZERO
+	sprite.self_modulate = Color("#98DFFF")
+
+func _update_attack(delta: float) -> bool:
+	fire_timer = maxf(fire_timer - delta, 0.0)
+	
+	# Remain stationary briefly after firing.
+	if recovery_remaining > 0.0:
+		recovery_remaining = maxf(
+			recovery_remaining - delta,
+			0.0
+		)
+		return true
+	
+	if is_winding_up:
+		if not is_instance_valid(target):
+			_cancel_attack()
+			return false
+		
+		if int(target.get("current_health")) <= 0:
+			_cancel_attack()
+			return false
+		
+		# Cover can cancel the charge before aim locks.
+		if not aim_locked and not has_line_of_sight():
+			begin_investigation()
+			return false
+		
+		windup_timer = maxf(windup_timer - delta, 0.0)
+		
+		if not aim_locked:
+			_aim_attack_at_target()
+
+			var lock_window := clampf(
+				aim_lock_duration,
+				0.0,
+				maxf(windup_duration, 0.01)
+			)
+
+			if windup_timer <= lock_window:
+				aim_locked = true
+				shot_direction = Vector2.UP.rotated(
+					global_rotation
+				)
+		
+		if windup_timer <= 0.0:
+			# Capture a direction even if the lock window is zero.
+			if not aim_locked:
+				shot_direction = Vector2.UP.rotated(
+					global_rotation
+				)
+			
+			is_winding_up = false
+			aim_locked = false
+			
+			fire_at_player()
+			
+			recovery_remaining = maxf(recovery_duration, 0.0)
+			
+			fire_timer = maxf(
+				fire_interval - maxf(windup_duration, 0.01),
+				recovery_remaining
+			)
+		
+		return true
+	
+	if current_state != SentryState.PURSUE:
+		return false
+	
+	if not is_instance_valid(target):
+		return false
+	
+	if int(target.get("current_health")) <= 0:
+		return false
+	
+	if fire_timer > 0.0 or not has_line_of_sight():
+		return false
+	
+	# Begin a new stationary charge.
+	is_winding_up = true
+	aim_locked = false
+	windup_timer = maxf(windup_duration, 0.01)
+	
+	_aim_attack_at_target()
+	charge_audio.play()
+	
+	return true
+
+func _aim_attack_at_target() -> void:
+	var direction := target.global_position - global_position
+	
+	if direction.length_squared() > 0.01:
+		global_rotation = direction.angle() + PI / 2.0
+
+func _cancel_attack() -> void:
 	is_winding_up = false
+	aim_locked = false
 	windup_timer = 0.0
+	recovery_remaining = 0.0
 	fire_timer = fire_interval
 	
 	charge_glow.hide()
 	charge_audio.stop()
-	sprite.self_modulate = Color("#98DFFF")
+	sprite.self_modulate = Color.WHITE
+
+func _update_attack_visuals() -> void:
+	charge_glow.visible = is_winding_up
+	
+	if is_winding_up:
+		var progress := 1.0 - clampf(
+			windup_timer / maxf(windup_duration, 0.01),
+			0.0,
+			1.0
+		)
+		
+		sprite.self_modulate = Color.WHITE.lerp(
+			Color("#F36A58"),
+			progress
+		)
+		
+		charge_glow.scale = Vector2.ONE * lerpf(
+			0.85,
+			1.45,
+			progress
+		)
+		
+		# A bright muzzle marks the commited part of the shot.
+		if aim_locked:
+			charge_glow.modulate = Color("#FFE6A6")
+		else:
+			charge_glow.modulate = Color.WHITE
+	
+	else:
+		charge_audio.stop()
+		charge_glow.modulate = Color.WHITE
+		
+		if recovery_remaining > 0.0:
+			sprite.self_modulate = Color("#93A7B3")
+		else:
+			sprite.self_modulate = Color.WHITE

@@ -91,7 +91,6 @@ const STARTER_EQUIPMENT_IDS: Array[StringName] = [
 	# Temporarily available for equipment testing.
 	LIGHT_CHASSIS_ID,
 	HEAVY_CHASSIS_ID,
-	BURST_THRUSTERS_ID,
 	RAPID_CYCLE_THRUSTERS_ID,
 ]
 
@@ -147,12 +146,7 @@ func _ready() -> void:
 	_restore_loadout()
 
 func owns_gear(gear_id: StringName) -> bool:
-	var gear: Dictionary = GEAR.get(gear_id, {})
-	if gear.is_empty():
-		return false
-	
-	var save_key: String = gear["save_key"]
-	return save_data.get_value("gear", save_key, false) == true
+	return owns_equipment(gear_id)
 
 func owns_shield_generator() -> bool:
 	return owns_gear(SHIELD_GENERATOR_ID)
@@ -173,39 +167,74 @@ func bank_extraction(
 	if not storage_available or amount < 0:
 		return false
 
-	# Validate everything before changing the save.
-	for gear_id in recovered_gear:
-		if not GEAR.has(gear_id):
-			push_error("Unknown recovered gear: %s" % gear_id)
+	var previous_ownership: Dictionary = {}
+	var ownership_keys: Array[String] = []
+
+	# Validate every recovered item before changing the save.
+	for equipment_id in recovered_gear:
+		var equipment := get_equipment(equipment_id)
+
+		if equipment == null:
+			push_error("Unknown recovered equipment: %s" % equipment_id)
 			return false
 
-	var previous_ownership: Dictionary = {}
+		if equipment.equipment_id != equipment_id:
+			push_error("Equipment ID mismatch: %s" % equipment_id)
+			return false
 
-	for gear_id in recovered_gear:
-		var gear: Dictionary = GEAR[gear_id]
-		var save_key: String = gear["save_key"]
-		previous_ownership[save_key] = save_data.get_value(
-			"gear", save_key, false
-		)
+		var equipment_key := String(equipment_id)
+
+		if ownership_keys.has(equipment_key):
+			continue
+
+		ownership_keys.append(equipment_key)
+
+		previous_ownership[equipment_key] = {
+			"existed": save_data.has_section_key(
+				"gear", equipment_key
+			),
+			"value": save_data.get_value(
+				"gear", equipment_key, false
+			),
+		}
+
+	var had_balance := save_data.has_section_key(
+		"progress", "banked_salvage"
+	)
+	var previous_balance: Variant = save_data.get_value(
+		"progress", "banked_salvage", banked_salvage
+	)
 
 	var new_total := banked_salvage + amount
-	save_data.set_value("progress", "banked_salvage", new_total)
 
-	for save_key in previous_ownership:
-		save_data.set_value("gear", save_key, true)
+	save_data.set_value(
+		"progress", "banked_salvage", new_total
+	)
 
-	# Save once, after all equipment has been recorded.
+	for owned_key in ownership_keys:
+		save_data.set_value("gear", owned_key, true)
+
 	var error := save_data.save(SAVE_PATH)
 
 	if error != OK:
-		save_data.set_value(
-			"progress", "banked_salvage", banked_salvage
-		)
-
-		for save_key in previous_ownership:
+		if had_balance:
 			save_data.set_value(
-				"gear", save_key, previous_ownership[save_key]
+				"progress", "banked_salvage", previous_balance
 			)
+		else:
+			save_data.erase_section_key(
+				"progress", "banked_salvage"
+			)
+
+		for rollback_key in ownership_keys:
+			var previous: Dictionary = previous_ownership[rollback_key]
+
+			if previous["existed"]:
+				save_data.set_value(
+					"gear", rollback_key, previous["value"]
+				)
+			else:
+				save_data.erase_section_key("gear", rollback_key)
 
 		push_error(
 			"Could not save extraction: %s" % error_string(error)
@@ -311,13 +340,19 @@ func get_equipment(
 	return EQUIPMENT.get(equipment_id) as EquipmentDefinition
 
 func owns_equipment(equipment_id: StringName) -> bool:
-	if not EQUIPMENT.has(equipment_id):
+	if get_equipment(equipment_id) == null:
 		return false
-	
+
 	if STARTER_EQUIPMENT_IDS.has(equipment_id):
 		return true
-	
-	return owns_gear(equipment_id)
+
+	var owned: Variant = save_data.get_value(
+		"gear",
+		String(equipment_id),
+		false
+	)
+
+	return typeof(owned) == TYPE_BOOL and bool(owned)
 
 func get_owned_equipment_for_slot(
 	slot: EquipmentDefinition.Slot
@@ -381,7 +416,7 @@ func equip_equipment(
 ) -> bool:
 	if not can_equip_equipment(equipment_id, target_slot):
 		return false
-	
+
 	if not _save_equipment_choice(equipment_id, target_slot):
 		return false
 
@@ -405,11 +440,11 @@ func equip_equipment(
 				return true
 
 			selected_chassis_id = equipment_id
-		
+
 		EquipmentDefinition.Slot.THRUSTERS:
 			if selected_thrusters_id == equipment_id:
 				return true
-			
+
 			selected_thrusters_id = equipment_id
 
 		_:

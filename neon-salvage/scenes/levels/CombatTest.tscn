@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://dgf5xcj0tqh86"]
+
+[ext_resource type="PackedScene" uid="uid://b8sv2wmfuy86" path="res://scenes/player/PlayerDrone.tscn" id="1_kdcpg"]
+[ext_resource type="PackedScene" uid="uid://cpdwi7khiga8l" path="res://scenes/environment/TestBlock.tscn" id="1_kfrmv"]
+[ext_resource type="Script" uid="uid://bwocmia3vrsrh" path="res://scripts/tests/combat_test.gd" id="1_rfxvs"]
+[ext_resource type="Script" uid="uid://b5q6wxmohx3m5" path="res://scripts/enemies/combat_test_navigation.gd" id="2_35wgk"]
+[ext_resource type="PackedScene" uid="uid://oohw5n16r2ll" path="res://scenes/ui/SalvageHUD.tscn" id="2_kfrmv"]
+[ext_resource type="PackedScene" uid="uid://bq0waxbah2ib0" path="res://scenes/enemies/SentryDrone.tscn" id="3_35wgk"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_35wgk"]
+vertices = PackedVector2Array(570, 370, -570, 370, -570, -370, 570, -370)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-600, -400, 600, -400, 600, 400, -600, 400)])
+parsed_geometry_type = 1
+parsed_collision_mask = 1
+source_geometry_mode = 1
+source_geometry_group_name = &"navigation_blockers"
+agent_radius = 30.0
+
+[node name="CombatTest" type="Area2D" unique_id=1197910353]
+script = ExtResource("1_rfxvs")
+
+[node name="Floor" type="Polygon2D" parent="." unique_id=1609366409]
+z_index = -5
+color = Color(0.078431375, 0.15294118, 0.2, 1)
+polygon = PackedVector2Array(-600, -400, 600, -400, 600, 400, -600, 400)
+
+[node name="Geometry" type="Node2D" parent="." unique_id=1923876912]
+
+[node name="NorthWall" parent="Geometry" unique_id=825816141 instance=ExtResource("1_kfrmv")]
+position = Vector2(0, -440)
+scale = Vector2(8.5, 1)
+
+[node name="SouthWall" parent="Geometry" unique_id=999111032 instance=ExtResource("1_kfrmv")]
+position = Vector2(0, 440)
+scale = Vector2(8.5, 1)
+
+[node name="WestWall" parent="Geometry" unique_id=2127223500 instance=ExtResource("1_kfrmv")]
+position = Vector2(-640, 0)
+scale = Vector2(0.5, 10)
+
+[node name="EastWall" parent="Geometry" unique_id=78232745 instance=ExtResource("1_kfrmv")]
+position = Vector2(640, 0)
+scale = Vector2(0.5, 10)
+
+[node name="CoverLeft" parent="Geometry" unique_id=275887090 instance=ExtResource("1_kfrmv")]
+position = Vector2(-180, 0)
+scale = Vector2(0.5, 2.5)
+
+[node name="CoverRight" parent="Geometry" unique_id=2141632475 instance=ExtResource("1_kfrmv")]
+position = Vector2(180, 0)
+scale = Vector2(0.5, 2.5)
+
+[node name="Navigation" type="NavigationRegion2D" parent="." unique_id=465198650]
+navigation_polygon = SubResource("NavigationPolygon_35wgk")
+script = ExtResource("2_35wgk")
+
+[node name="PlayerDrone" parent="." unique_id=1138100880 instance=ExtResource("1_kdcpg")]
+position = Vector2(-450, 0)
+dash_unlocked = true
+
+[node name="SalvageHUD" parent="." unique_id=507685534 instance=ExtResource("2_kfrmv")]
+
+[node name="Enemies" type="Node2D" parent="." unique_id=435355426]
+
+[node name="SentryDrone" parent="Enemies" unique_id=140838755 instance=ExtResource("3_35wgk")]
+position = Vector2(350, 0)
+windup_duration = 0.65
+
+[node name="TestInstructions" type="CanvasLayer" parent="." unique_id=799471744]
+
+[node name="Label" type="Label" parent="TestInstructions" unique_id=1620436231]
+offset_left = 400.0
+offset_top = 20.0
+offset_right = 900.0
+offset_bottom = 100.0
+theme_override_font_sizes/font_size = 16
+text = "COMBAT TEST — SENTRY + COVER
+Approach to engage. Use cover to break line of sight.
+[T] Restart encounter"

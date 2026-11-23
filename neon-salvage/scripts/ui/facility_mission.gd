@@ -46,10 +46,10 @@ func recover_gear(gear_id: StringName) -> bool:
 	if extraction_complete:
 		return false
 
-	if not ProgressStore.GEAR.has(gear_id):
+	if ProgressStore.get_equipment(gear_id) == null:
 		return false
 
-	if ProgressStore.owns_gear(gear_id):
+	if ProgressStore.owns_equipment(gear_id):
 		return false
 
 	if unsecured_gear.has(gear_id):
@@ -57,7 +57,7 @@ func recover_gear(gear_id: StringName) -> bool:
 
 	unsecured_gear.append(gear_id)
 
-	# Preserve compatibility with the existing shield code.
+	# Preserve the existing shield compatibility flag.
 	if gear_id == ProgressStore.SHIELD_GENERATOR_ID:
 		has_unsecured_shield = true
 

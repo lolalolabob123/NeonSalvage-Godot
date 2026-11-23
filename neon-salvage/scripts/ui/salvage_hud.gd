@@ -230,15 +230,14 @@ func _refresh_cargo_display() -> void:
 	var lines := PackedStringArray()
 
 	for gear_id in cargo_mission.unsecured_gear:
-		var gear: Dictionary = ProgressStore.GEAR.get(
-			gear_id, {}
-		)
+		var equipment := ProgressStore.get_equipment(gear_id)
 
-		if gear.is_empty():
+		if equipment == null:
 			continue
 
-		var display_name: String = gear["display_name"]
-		lines.append("%s — unsecured" % display_name)
-
+		lines.append(
+			"%s — unsecured" % equipment.display_name
+		)
+	
 	cargo_equipment_list.text = "\n".join(lines)
 	cargo_panel.visible = not lines.is_empty()
