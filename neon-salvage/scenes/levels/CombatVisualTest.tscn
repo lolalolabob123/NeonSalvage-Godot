@@ -7,14 +7,15 @@
 [ext_resource type="PackedScene" uid="uid://b8sv2wmfuy86" path="res://scenes/player/PlayerDrone.tscn" id="4_hirvt"]
 [ext_resource type="PackedScene" uid="uid://bnb285piqdk8e" path="res://scenes/environment/ScientificWall.tscn" id="4_t5xgq"]
 [ext_resource type="PackedScene" uid="uid://oohw5n16r2ll" path="res://scenes/ui/SalvageHUD.tscn" id="5_71fwb"]
+[ext_resource type="PackedScene" uid="uid://bg0lii1p80hnd" path="res://scenes/environment/ScientificContainment.tscn" id="5_exxtn"]
 [ext_resource type="PackedScene" uid="uid://bq0waxbah2ib0" path="res://scenes/enemies/SentryDrone.tscn" id="6_exxtn"]
 [ext_resource type="PackedScene" uid="uid://mfbfst17wlxa" path="res://scenes/enemies/InterceptorDrone.tscn" id="7_hf50m"]
 [ext_resource type="PackedScene" uid="uid://b05h11bc3o05n" path="res://scenes/environment/ScientificWallLight.tscn" id="10_hirvt"]
 [ext_resource type="PackedScene" uid="uid://dlnkcxce2juje" path="res://scenes/environment/ScientificVent.tscn" id="11_71fwb"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_t5xgq"]
-vertices = PackedVector2Array(250, 130, 570, 370, -570, 370, 110, 130, -110, 130, -250, 130, 570, -370, 250, -130, -570, -370, 110, -130, -250, -130, -110, -130)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 3, 2), PackedInt32Array(5, 4, 2), PackedInt32Array(6, 1, 0, 7), PackedInt32Array(8, 6, 7, 9), PackedInt32Array(5, 2, 8, 10), PackedInt32Array(9, 3, 4, 11), PackedInt32Array(8, 9, 11), PackedInt32Array(8, 11, 10)])
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_exxtn"]
+vertices = PackedVector2Array(250, -130, 110, -130, 90, -158, 90, -362, 570, -370, 250, 130, 570, 370, -570, 370, 110, 130, -110, 130, -250, 130, -570, -370, -250, -130, -110, -130, -90, -158, -90, -362)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8), PackedInt32Array(9, 8, 7), PackedInt32Array(10, 9, 7), PackedInt32Array(4, 6, 5, 0), PackedInt32Array(10, 7, 11, 12), PackedInt32Array(2, 1, 8, 9, 13, 14), PackedInt32Array(11, 4, 3, 15), PackedInt32Array(12, 11, 15, 14, 13)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-600, -400, 600, -400, 600, 400, -600, 400)])
 parsed_geometry_type = 1
 parsed_collision_mask = 1
@@ -58,8 +59,11 @@ wall_size = Vector2(80, 800)
 position = Vector2(640, 0)
 wall_size = Vector2(80, 800)
 
+[node name="ScientificContainment" parent="Geometry" unique_id=1359440026 instance=ExtResource("5_exxtn")]
+position = Vector2(0, -260)
+
 [node name="Navigation" type="NavigationRegion2D" parent="." unique_id=465198650]
-navigation_polygon = SubResource("NavigationPolygon_t5xgq")
+navigation_polygon = SubResource("NavigationPolygon_exxtn")
 script = ExtResource("3_t5xgq")
 
 [node name="PlayerDrone" parent="." unique_id=1138100880 instance=ExtResource("4_hirvt")]
@@ -99,3 +103,15 @@ position = Vector2(400, -406)
 [node name="ScientificVent" parent="EnvironmentDetails" unique_id=715242275 instance=ExtResource("11_71fwb")]
 z_index = 1
 position = Vector2(0, -440)
+
+[node name="ExteriorBackdrop" type="CanvasLayer" parent="." unique_id=392396740]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="ExteriorBackdrop" unique_id=1592349536]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.03137255, 0.05490196, 0.09019608, 1)
