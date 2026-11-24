@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://b8sv2wmfuy86"]
 
-[ext_resource type="Texture2D" uid="uid://scxi5spjwust" path="res://assets/player/PlayerDrone_Shadow.png" id="1_a1gcq"]
 [ext_resource type="Script" uid="uid://bbi86bji33bwu" path="res://scripts/player/player_drone.gd" id="1_qcr60"]
 [ext_resource type="Resource" uid="uid://ctcjxncy230e8" path="res://resources/weapons/Shotgun.tres" id="2_annjb"]
 [ext_resource type="Texture2D" uid="uid://dm8671uxxhdu0" path="res://assets/player/PlayerDrone_Thruster_Left.png" id="2_cunj6"]
 [ext_resource type="Texture2D" uid="uid://tsgq733vkbqn" path="res://assets/effects/SoftRadialLight.tres" id="3_cunj6"]
+[ext_resource type="Script" uid="uid://c37vsrrrun7xx" path="res://scripts/equipment/drone_ground_shadow.gd" id="3_fl1o7"]
 [ext_resource type="Texture2D" uid="uid://c061xcskklm7d" path="res://assets/player/PlayerDrone_Thruster_Right.png" id="3_qcr60"]
 [ext_resource type="Texture2D" uid="uid://cjy2lhg1121ou" path="res://assets/player/PlayerDrone_Hull.png" id="4_annjb"]
 [ext_resource type="Texture2D" uid="uid://12ftfaxtvras" path="res://assets/player/PlayerDrone_PrimaryCarbine.png" id="5_j1agh"]
@@ -161,10 +161,6 @@ motion_mode = 1
 script = ExtResource("1_qcr60")
 primary_weapon = ExtResource("2_annjb")
 
-[node name="GroundShadow" type="Sprite2D" parent="." unique_id=727927119]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_a1gcq")
-
 [node name="DashTrail" type="CPUParticles2D" parent="." unique_id=866996437]
 emitting = false
 amount = 40
@@ -178,6 +174,15 @@ scale_amount_min = 3.0
 scale_amount_max = 5.0
 color = Color(0.19215687, 0.79607844, 0.8784314, 1)
 color_ramp = SubResource("Gradient_qcr60")
+
+[node name="GroundShadow" type="Node2D" parent="." unique_id=1170449079]
+top_level = true
+z_index = -1
+position = Vector2(8, 30)
+script = ExtResource("3_fl1o7")
+shadow_size = Vector2(80, 38)
+ground_offset = Vector2(8, 30)
+shadow_color = Color(0, 0, 0, 0.4)
 
 [node name="VisualRig" type="Node2D" parent="." unique_id=1540836901]
 position = Vector2(0, -1.5)

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dlnkcxce2juje"]
+
+[ext_resource type="Script" uid="uid://b5lrkhemoheue" path="res://scripts/environment/scientific_vent.gd" id="1_olcnp"]
+
+[node name="ScientificVent" type="Node2D" unique_id=715242275]
+script = ExtResource("1_olcnp")

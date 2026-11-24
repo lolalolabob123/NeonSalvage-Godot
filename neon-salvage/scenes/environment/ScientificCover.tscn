@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://cipt4pwfeq2v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r4djp"]
+size = Vector2(80, 200)
+
+[node name="ScientificCover" type="StaticBody2D" unique_id=830662124 groups=["navigation_blockers"]]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1621939720]
+shape = SubResource("RectangleShape2D_r4djp")
+
+[node name="GroundShadow" type="Polygon2D" parent="." unique_id=1981136006]
+z_index = -2
+color = Color(0, 0, 0, 0.25100002)
+polygon = PackedVector2Array(-34, -90, 46, -90, 46, 110, -34, 110)
+
+[node name="FrontFace" type="Polygon2D" parent="." unique_id=46153940]
+color = Color(0.1254902, 0.21176471, 0.25882354, 1)
+polygon = PackedVector2Array(-40, 80, 40, 80, 40, 100, -40, 100)
+
+[node name="TopFace" type="Polygon2D" parent="." unique_id=1163565336]
+color = Color(0.32156864, 0.44313726, 0.49803922, 1)
+polygon = PackedVector2Array(-40, -100, 40, -100, 40, 80, -40, 80)
+
+[node name="InsertPanel" type="Polygon2D" parent="." unique_id=144666204]
+color = Color(0.1882353, 0.29803923, 0.35686275, 1)
+polygon = PackedVector2Array(-30, -88, 30, -88, 30, 66, -30, 66)
+
+[node name="StatusStrip" type="Polygon2D" parent="." unique_id=1121198521]
+color = Color(0.19215687, 0.79607844, 0.8784314, 1)
+polygon = PackedVector2Array(-24, 73, 24, 73, 24, 77, -24, 77)

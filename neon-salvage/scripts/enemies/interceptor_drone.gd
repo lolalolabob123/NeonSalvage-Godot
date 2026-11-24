@@ -186,37 +186,19 @@ func take_damage(amount: int) -> void:
 		set_physics_process(false)
 		call_deferred("_finish_death")
 
-
 func _draw() -> void:
-	if current_state != State.WINDUP:
+	if current_health <= 0 or emp_stun_remaining > 0.0:
 		return
 
-	var reach := lunge_speed * lunge_duration
-	var warning_color := Color("#FFD166")
+	match current_state:
+		State.WINDUP:
+			_draw_charge_warning()
 
-	draw_line(
-		Vector2(0, -30),
-		Vector2(0, -reach),
-		warning_color,
-		4.0,
-		true
-	)
+		State.LUNGE:
+			_draw_lunge_streaks()
 
-	draw_line(
-		Vector2(-12, -reach + 18),
-		Vector2(0, -reach),
-		warning_color,
-		3.0,
-		true
-	)
-
-	draw_line(
-		Vector2(12, -reach + 18),
-		Vector2(0, -reach),
-		warning_color,
-		3.0,
-		true
-	)
+		State.RECOVER:
+			_draw_recovery_ring()
 
 func _finish_death() -> void:
 	var level := get_tree().current_scene as Node2D
@@ -244,3 +226,122 @@ func apply_emp(duration: float) -> void:
 
 	sprite.modulate = Color("#98DFFF")
 	queue_redraw()
+
+func _draw_charge_warning() -> void:
+	var progress := 1.0 - clampf(
+		state_time / maxf(windup_duration, 0.1),
+		0.0,
+		1.0
+	)
+
+	var reach := maxf(
+		lunge_speed * maxf(lunge_duration, 0.1),
+		40.0
+	)
+
+	var warning_color := Color("#F3AC57").lerp(
+		Color("#FFE6A6"),
+		progress
+	)
+
+	var pulse := 0.65 + 0.35 * (
+		0.5 + 0.5 * sin(progress * TAU * 2.0)
+	)
+
+	var arrow_color := warning_color
+	arrow_color.a = pulse
+
+	# Background track around the drone.
+	draw_arc(
+		Vector2.ZERO,
+		34.0,
+		0.0,
+		TAU,
+		64,
+		Color(0.95, 0.67, 0.34, 0.18),
+		2.0,
+		true
+	)
+
+	# Fill the ring as the attack approaches.
+	if progress > 0.0:
+		draw_arc(
+			Vector2.ZERO,
+			34.0,
+			-PI * 0.5,
+			-PI * 0.5 + TAU * progress,
+			64,
+			warning_color,
+			3.0,
+			true
+		)
+
+	# The drone already faces its committed lunge direction.
+	draw_line(
+		Vector2(0, -30),
+		Vector2(0, -reach + 18),
+		arrow_color,
+		lerpf(2.0, 4.0, progress),
+		true
+	)
+
+	# Solid arrowhead remains readable during the pulse.
+	draw_colored_polygon(
+		PackedVector2Array([
+			Vector2(0, -reach),
+			Vector2(-10, -reach + 18),
+			Vector2(10, -reach + 18),
+		]),
+		warning_color
+	)
+
+
+func _draw_lunge_streaks() -> void:
+	var streak_color := Color(1.0, 0.4, 0.36, 0.65)
+
+	# Positive local Y points behind the lunging drone.
+	draw_line(
+		Vector2(-14, 22),
+		Vector2(-14, 62),
+		streak_color,
+		3.0,
+		true
+	)
+
+	draw_line(
+		Vector2(14, 22),
+		Vector2(14, 62),
+		streak_color,
+		3.0,
+		true
+	)
+
+	draw_line(
+		Vector2(0, 28),
+		Vector2(0, 78),
+		Color(1.0, 0.65, 0.45, 0.35),
+		2.0,
+		true
+	)
+
+
+func _draw_recovery_ring() -> void:
+	var remaining_fraction := clampf(
+		state_time / maxf(recovery_duration, 0.1),
+		0.0,
+		1.0
+	)
+
+	if remaining_fraction <= 0.0:
+		return
+
+	draw_arc(
+		Vector2.ZERO,
+		34.0,
+		-PI * 0.5,
+		-PI * 0.5 + TAU * remaining_fraction,
+		64,
+		Color("#93A7B3"),
+		2.0,
+		true
+	)

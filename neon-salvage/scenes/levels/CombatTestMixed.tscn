@@ -18,7 +18,7 @@ source_geometry_mode = 1
 source_geometry_group_name = &"navigation_blockers"
 agent_radius = 30.0
 
-[node name="CombatTestInterceptor" type="Area2D" unique_id=1197910353]
+[node name="CombatTesMixed" type="Area2D" unique_id=1197910353]
 script = ExtResource("1_i4i2t")
 
 [node name="Floor" type="Polygon2D" parent="." unique_id=1609366409]

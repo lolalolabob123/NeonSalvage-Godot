@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b05h11bc3o05n"]
+
+[ext_resource type="PackedScene" uid="uid://cigmjeegxcf36" path="res://scenes/environment/FacilityLamp.tscn" id="1_ndtdc"]
+
+[node name="ScientificWallLight" type="Node2D" unique_id=1450007749]
+
+[node name="Glow" parent="." unique_id=822794020 instance=ExtResource("1_ndtdc")]
+color = Color(0.7137255, 0.9098039, 1, 1)
+energy = 0.35
+texture_scale = 0.9

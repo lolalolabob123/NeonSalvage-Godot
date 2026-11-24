@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bnb285piqdk8e"]
+
+[ext_resource type="Script" uid="uid://dx8c8und038ny" path="res://scripts/environment/scientific_wall.gd" id="1_wsghp"]
+
+[node name="ScientificWall" type="StaticBody2D" unique_id=1713839666 groups=["navigation_blockers"]]
+collision_mask = 2
+script = ExtResource("1_wsghp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=31543682]
