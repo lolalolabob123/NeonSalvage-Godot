@@ -66,7 +66,7 @@ func _physics_process(delta: float) -> void:
 
 	match current_state:
 		State.CHASE:
-			sprite.modulate = Color("#FFB45C")
+			sprite.modulate = Color.WHITE
 			velocity = Vector2.ZERO
 
 			if not alerted:

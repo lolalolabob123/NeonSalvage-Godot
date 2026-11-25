@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://co4ew0wlwx701" path="res://scripts/enemies/interceptor_drone.gd" id="1_5yf7x"]
 [ext_resource type="Texture2D" uid="uid://doqs5y1w3b6aa" path="res://assets/enemies/SentryDrone_A.png" id="2_ccxra"]
+[ext_resource type="Script" uid="uid://20fmseam4v1x" path="res://scripts/enemies/enemy_body_visual.gd" id="3_pw48m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8gkan"]
 radius = 25.0
@@ -13,6 +14,8 @@ script = ExtResource("1_5yf7x")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=68954907]
 texture_filter = 1
 texture = ExtResource("2_ccxra")
+script = ExtResource("3_pw48m")
+body_type = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1352655627]
 shape = SubResource("CircleShape2D_8gkan")
