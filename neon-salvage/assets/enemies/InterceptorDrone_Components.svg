@@ -9,7 +9,7 @@
    id="svg1"
    inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
    sodipodi:docname="InterceptorDrone_Components.svg"
-   inkscape:export-filename="InterceptorDrone_Base_Color.png"
+   inkscape:export-filename="InterceptorDrone_EngineRight"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -34,21 +34,23 @@
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer4"
+     inkscape:current-layer="layer7"
      showgrid="false" />
   <defs
      id="defs1" />
   <g
      inkscape:label="Guides"
      inkscape:groupmode="layer"
-     id="layer1" />
+     id="layer1"
+     style="display:none" />
   <g
      inkscape:groupmode="layer"
      id="layer2"
-     inkscape:label="Mechanics">
+     inkscape:label="Mechanics"
+     style="display:none">
     <path
        id="path1"
-       style="fill:#172630;stroke-width:0.0264583;fill-opacity:1"
+       style="fill:#172630;fill-opacity:1;stroke-width:0.0264583"
        inkscape:transform-center-x="-0.065250877"
        inkscape:transform-center-y="0.034450954"
        d="m 20.108333,23.8125 -1.5875,2.645833 h -3.175 l -1.5875,-2.645833 -1.5875,-5.820833 1.058334,-7.9375 3.704166,-5.8208337 3.704167,5.8208337 1.058333,7.9375 z"
@@ -70,30 +72,15 @@
        d="m 20.108333,16.933333 1.058334,3.704167 3.175,1.5875 L 25.4,15.875 21.166667,12.170833 Z"
        sodipodi:nodetypes="cccccc"
        inkscape:label="Right Fin" />
-    <rect
-       style="fill:#172630;fill-opacity:1;stroke-width:0.0260289"
-       id="rect3"
-       width="3.7041667"
-       height="8.4666662"
-       x="11.1125"
-       y="20.108334"
-       inkscape:label="Left Engine Underbody" />
-    <rect
-       style="fill:#172630;fill-opacity:1;stroke-width:0.0260289"
-       id="rect4"
-       width="3.7041667"
-       height="8.4666662"
-       x="19.049999"
-       y="20.108334"
-       inkscape:label="Right Engine Underbody" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer3"
-     inkscape:label="Armour">
+     inkscape:label="Armour"
+     style="display:none">
     <path
        id="path5"
-       style="fill:#607b87;stroke-width:0.0264583;fill-opacity:1"
+       style="fill:#607b87;fill-opacity:1;stroke-width:0.0264583"
        inkscape:transform-center-x="0.059233309"
        inkscape:transform-center-y="0.060232591"
        d="m 19.05,23.01875 -1.058333,2.116667 H 15.875 l -1.058333,-2.116667 -1.5875,-5.291667 1.058333,-7.14375 2.645833,-4.4979164 2.645834,4.4979164 1.058333,7.14375 z"
@@ -101,7 +88,7 @@
        inkscape:label="Central Armour" />
     <path
        id="path6"
-       style="fill:#748b97;stroke-width:0.0264583;fill-opacity:1"
+       style="fill:#748b97;fill-opacity:1;stroke-width:0.0264583"
        inkscape:transform-center-x="0.079431514"
        inkscape:transform-center-y="-0.11565967"
        d="m 9.525,16.139583 0.79375,4.7625 1.5875,-1.058333 L 12.7,16.933333 12.170833,14.022917 Z"
@@ -115,30 +102,15 @@
        d="m 24.341667,16.139583 -0.79375,4.7625 -1.5875,-1.058333 -0.79375,-2.910417 0.529166,-2.910416 z"
        sodipodi:nodetypes="cccccc"
        inkscape:label="Right Fin Armour" />
-    <rect
-       style="fill:#607b87;fill-opacity:1;stroke-width:0.036863"
-       id="rect7"
-       width="2.1166666"
-       height="5.8208332"
-       x="11.90625"
-       y="21.166666"
-       inkscape:label="Left Engine Cover" />
-    <rect
-       style="fill:#607b87;fill-opacity:1;stroke-width:0.036863"
-       id="rect8"
-       width="2.1166666"
-       height="5.8208332"
-       x="19.84375"
-       y="21.166666"
-       inkscape:label="Right Engine Cover" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer4"
-     inkscape:label="Armour Details">
+     inkscape:label="Armour Details"
+     style="display:none">
     <path
        id="path13"
-       style="fill:#748b97;stroke-width:0.0264583;fill-opacity:1"
+       style="fill:#748b97;fill-opacity:1;stroke-width:0.0264583"
        inkscape:transform-center-x="0.0097383702"
        inkscape:transform-center-y="-0.22010024"
        d="M 18.25625,16.404167 H 15.610417 L 14.2875,15.08125 15.08125,11.1125 16.933333,7.6729166 18.785417,11.1125 l 0.79375,3.96875 z"
@@ -146,7 +118,7 @@
        inkscape:label="Nose Armour" />
     <path
        id="path14"
-       style="fill:#304753;stroke-width:0.0264583;fill-opacity:1"
+       style="fill:#304753;fill-opacity:1;stroke-width:0.0264583"
        d="m 17.727083,14.552083 -0.79375,0.79375 -0.79375,-0.79375 0.264584,-3.175 0.529166,-1.322916 0.529167,1.322916 z"
        sodipodi:nodetypes="ccccccc"
        inkscape:label="Nose Channel" />
@@ -166,59 +138,12 @@
        inkscape:transform-center-y="-0.1119748"
        d="M 23.547917,16.66875 23.01875,19.314583 22.489583,18.785417 21.960417,16.933333 22.225,15.610417 Z"
        sodipodi:nodetypes="cccccc" />
-    <rect
-       style="fill:#243b47;fill-opacity:1;stroke-width:0.0466252"
-       id="rect16"
-       width="1.5875"
-       height="3.96875"
-       x="12.170834"
-       y="21.960417"
-       inkscape:label="Left Engine Intake" />
-    <rect
-       style="fill:#243b47;fill-opacity:1;stroke-width:0.0466252"
-       id="rect17"
-       width="1.5875"
-       height="3.96875"
-       x="20.108334"
-       y="21.960417"
-       inkscape:label="Right Engine Intake" />
-    <rect
-       style="fill:#607b87;fill-opacity:1;stroke-width:0.00939874"
-       id="rect18"
-       width="1.5875"
-       height="0.52916664"
-       x="12.170834"
-       y="23.018749"
-       inkscape:label="Left Intake Bar 1" />
-    <rect
-       style="fill:#607b87;fill-opacity:1;stroke-width:0.00939874"
-       id="rect19"
-       width="1.5875"
-       height="0.52916664"
-       x="12.170834"
-       y="24.606251"
-       inkscape:label="Left Intake Bar 2" />
-    <rect
-       style="fill:#607b87;fill-opacity:1;stroke-width:0.00939874"
-       id="rect20"
-       width="1.5875"
-       height="0.52916664"
-       x="20.108334"
-       y="23.018749"
-       inkscape:label="Right Intake Bar 1" />
-    <rect
-       style="fill:#607b87;fill-opacity:1;stroke-width:0.00939874"
-       id="rect21"
-       width="1.5875"
-       height="0.52916664"
-       x="20.108334"
-       y="24.606251"
-       inkscape:label="Right Intake Bar 2" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer5"
-     inkscape:label="Sensors">
+     inkscape:label="Sensors"
+     style="display:none">
     <rect
        style="fill:#172630;fill-opacity:1;stroke-width:0.0735569"
        id="rect9"
@@ -243,14 +168,52 @@
        x="15.875"
        y="18.520834"
        inkscape:label="Red Sensor" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer6"
+     inkscape:label="Right Engine"
+     style="display:inline">
     <rect
-       style="fill:#e87969;fill-opacity:1;stroke-width:0.0109813"
-       id="rect12"
+       style="fill:#172630;fill-opacity:1;stroke-width:0.0260289"
+       id="rect4"
+       width="3.7041667"
+       height="8.4666662"
+       x="19.049999"
+       y="20.108334"
+       inkscape:label="Right Engine Underbody" />
+    <rect
+       style="fill:#607b87;fill-opacity:1;stroke-width:0.036863"
+       id="rect8"
        width="2.1166666"
-       height="0.79374999"
-       x="11.90625"
-       y="26.987499"
-       inkscape:label="Left Exhaust" />
+       height="5.8208332"
+       x="19.84375"
+       y="21.166666"
+       inkscape:label="Right Engine Cover" />
+    <rect
+       style="fill:#243b47;fill-opacity:1;stroke-width:0.0466252"
+       id="rect17"
+       width="1.5875"
+       height="3.96875"
+       x="20.108334"
+       y="21.960417"
+       inkscape:label="Right Engine Intake" />
+    <rect
+       style="fill:#607b87;fill-opacity:1;stroke-width:0.00939874"
+       id="rect20"
+       width="1.5875"
+       height="0.52916664"
+       x="20.108334"
+       y="23.018749"
+       inkscape:label="Right Intake Bar 1" />
+    <rect
+       style="fill:#607b87;fill-opacity:1;stroke-width:0.00939874"
+       id="rect21"
+       width="1.5875"
+       height="0.52916664"
+       x="20.108334"
+       y="24.606251"
+       inkscape:label="Right Intake Bar 2" />
     <rect
        style="fill:#e87969;fill-opacity:1;stroke-width:0.0109813"
        id="rect13"
@@ -259,5 +222,59 @@
        x="19.84375"
        y="26.987499"
        inkscape:label="Right Exhaust" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer7"
+     inkscape:label="Left Engine"
+     style="display:none">
+    <rect
+       style="fill:#172630;fill-opacity:1;stroke-width:0.0260289"
+       id="rect3"
+       width="3.7041667"
+       height="8.4666662"
+       x="11.1125"
+       y="20.108334"
+       inkscape:label="Left Engine Underbody" />
+    <rect
+       style="fill:#607b87;fill-opacity:1;stroke-width:0.036863"
+       id="rect7"
+       width="2.1166666"
+       height="5.8208332"
+       x="11.90625"
+       y="21.166666"
+       inkscape:label="Left Engine Cover" />
+    <rect
+       style="fill:#243b47;fill-opacity:1;stroke-width:0.0466252"
+       id="rect16"
+       width="1.5875"
+       height="3.96875"
+       x="12.170834"
+       y="21.960417"
+       inkscape:label="Left Engine Intake" />
+    <rect
+       style="fill:#607b87;fill-opacity:1;stroke-width:0.00939874"
+       id="rect18"
+       width="1.5875"
+       height="0.52916664"
+       x="12.170834"
+       y="23.018749"
+       inkscape:label="Left Intake Bar 1" />
+    <rect
+       style="fill:#607b87;fill-opacity:1;stroke-width:0.00939874"
+       id="rect19"
+       width="1.5875"
+       height="0.52916664"
+       x="12.170834"
+       y="24.606251"
+       inkscape:label="Left Intake Bar 2" />
+    <rect
+       style="fill:#e87969;fill-opacity:1;stroke-width:0.0109813"
+       id="rect12"
+       width="2.1166666"
+       height="0.79374999"
+       x="11.90625"
+       y="26.987499"
+       inkscape:label="Left Exhaust" />
   </g>
 </svg>

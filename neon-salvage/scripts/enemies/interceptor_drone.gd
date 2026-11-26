@@ -21,6 +21,8 @@ enum State {
 @export var recovery_duration: float = 1.0
 
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var engine_left: Sprite2D = $Sprite2D/EngineLeftSprite
+@onready var engine_right: Sprite2D = $Sprite2D/EngineRightSprite
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var sight_ray: RayCast2D = $SightRay
 
@@ -30,6 +32,7 @@ var state_time: float = 0.0
 var alerted: bool = false
 var lunge_direction: Vector2 = Vector2.UP
 var emp_stun_remaining: float = 0.0
+var visual_time: float = 0.0
 
 
 func _ready() -> void:
@@ -97,7 +100,7 @@ func _physics_process(delta: float) -> void:
 
 		State.WINDUP:
 			velocity = Vector2.ZERO
-			sprite.modulate = Color("#FFE39A")
+			sprite.modulate = Color.WHITE.lerp(Color("#FFE39A"), 0.25)
 			state_time = maxf(state_time - delta, 0.0)
 
 			if state_time <= 0.0:
@@ -105,7 +108,7 @@ func _physics_process(delta: float) -> void:
 				state_time = maxf(lunge_duration, 0.1)
 
 		State.LUNGE:
-			sprite.modulate = Color("#FF665C")
+			sprite.modulate = Color.WHITE.lerp(Color("#FF665C"), 0.25)
 			velocity = lunge_direction * lunge_speed
 
 			var step_time := minf(delta, state_time)
@@ -345,3 +348,57 @@ func _draw_recovery_ring() -> void:
 		2.0,
 		true
 	)
+
+func _process(delta: float) -> void:
+	if current_health <= 0:
+		return
+
+	if emp_stun_remaining > 0.0:
+		sprite.position = Vector2.ZERO
+		engine_left.position = Vector2.ZERO
+		engine_right.position = Vector2.ZERO
+		return
+
+	visual_time += delta
+
+	var hover_amount: float = 1.0
+	var engine_shift: float = 0.0
+	var vibration: float = 0.25
+
+	match current_state:
+		State.WINDUP:
+			var progress := 1.0 - clampf(
+				state_time / maxf(windup_duration, 0.1),
+				0.0,
+				1.0
+			)
+			hover_amount = 0.4
+			engine_shift = lerpf(0.0, -2.0, progress)
+			vibration = lerpf(0.25, 0.55, progress)
+
+		State.LUNGE:
+			hover_amount = 0.15
+			engine_shift = 2.0
+			vibration = 0.4
+
+		State.RECOVER:
+			hover_amount = 0.6
+			engine_shift = 0.8
+			vibration = 0.15
+
+	# Keep the hover vertical on screen as the drone turns.
+	var hover := sin(visual_time * 2.8) * hover_amount
+	sprite.position = Vector2(0.0, hover).rotated(-global_rotation)
+
+	var left_target := Vector2(
+		0.0,
+		engine_shift + sin(visual_time * 10.0) * vibration
+	)
+	var right_target := Vector2(
+		0.0,
+		engine_shift + sin(visual_time * 10.0 + 1.7) * vibration
+	)
+
+	var blend := 1.0 - exp(-18.0 * delta)
+	engine_left.position = engine_left.position.lerp(left_target, blend)
+	engine_right.position = engine_right.position.lerp(right_target, blend)

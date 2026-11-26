@@ -1,7 +1,10 @@
 [gd_scene format=3 uid="uid://mfbfst17wlxa"]
 
 [ext_resource type="Script" uid="uid://co4ew0wlwx701" path="res://scripts/enemies/interceptor_drone.gd" id="1_5yf7x"]
-[ext_resource type="Texture2D" uid="uid://difl4whrj8io5" path="res://assets/enemies/InterceptorDrone_Base_Color.png" id="2_5yf7x"]
+[ext_resource type="Texture2D" uid="uid://dd88ylx6gbn2k" path="res://assets/enemies/InterceptorDrone_Body.png" id="3_pw48m"]
+[ext_resource type="Texture2D" uid="uid://bhde2mivh1t0r" path="res://assets/enemies/InterceptorDrone_EngineLeft.png" id="4_kivob"]
+[ext_resource type="Script" uid="uid://c37vsrrrun7xx" path="res://scripts/equipment/drone_ground_shadow.gd" id="5_kivob"]
+[ext_resource type="Texture2D" uid="uid://c5pydxe3svgo2" path="res://assets/enemies/InterceptorDrone_EngineRight.png" id="5_p0l01"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8gkan"]
 radius = 25.0
@@ -12,7 +15,15 @@ script = ExtResource("1_5yf7x")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=68954907]
 texture_filter = 2
-texture = ExtResource("2_5yf7x")
+
+[node name="BodySprite" type="Sprite2D" parent="Sprite2D" unique_id=1110295302]
+texture = ExtResource("3_pw48m")
+
+[node name="EngineLeftSprite" type="Sprite2D" parent="Sprite2D" unique_id=115400307]
+texture = ExtResource("4_kivob")
+
+[node name="EngineRightSprite" type="Sprite2D" parent="Sprite2D" unique_id=1036656079]
+texture = ExtResource("5_p0l01")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1352655627]
 shape = SubResource("CircleShape2D_8gkan")
@@ -22,3 +33,8 @@ path_desired_distance = 12.0
 target_desired_distance = 16.0
 
 [node name="SightRay" type="RayCast2D" parent="." unique_id=927252753]
+
+[node name="GroundShadow" type="Node2D" parent="." unique_id=749250010]
+script = ExtResource("5_kivob")
+shadow_size = Vector2(52, 24)
+ground_offset = Vector2(4, 12)
