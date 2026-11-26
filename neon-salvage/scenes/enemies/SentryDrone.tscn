@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://drud8stsjhix" path="res://assets/enemies/SentryDrone_EnginesNormal.svg" id="5_tibx5"]
 [ext_resource type="AudioStream" uid="uid://yhaj8ue3jy4x" path="res://assets/audio/SentryShot.wav" id="6_6cf0j"]
 [ext_resource type="Texture2D" uid="uid://owohsnoid67g" path="res://assets/enemies/SentryDrone_GunNormal.svg" id="7_ucogl"]
+[ext_resource type="Script" uid="uid://c37vsrrrun7xx" path="res://scripts/equipment/drone_ground_shadow.gd" id="13_3wc72"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_2gw8b"]
 diffuse_texture = ExtResource("2_6cf0j")
@@ -92,3 +93,9 @@ shape = SubResource("CircleShape2D_0gddg")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1381451748]
 path_desired_distance = 12.0
 target_desired_distance = 16.0
+
+[node name="GroundShadow" type="Node2D" parent="." unique_id=174801105]
+script = ExtResource("13_3wc72")
+shadow_size = Vector2(60, 28)
+ground_offset = Vector2(4, 12)
+shadow_color = Color(0, 0, 0, 0.2784314)
