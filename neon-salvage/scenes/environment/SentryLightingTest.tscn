@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://d1nenml6ddnkj"]
+
+[ext_resource type="Texture2D" uid="uid://n5ka4sss5p3g" path="res://assets/enemies/SentryDrone_Chassis.png" id="1_3exol"]
+[ext_resource type="Script" uid="uid://d2hsyg6wramst" path="res://scenes/environment/sentry_lighting_test.gd" id="1_28f3y"]
+[ext_resource type="Texture2D" uid="uid://nonyof53phnr" path="res://assets/enemies/SentryDrone_ChassisNormal.svg" id="2_00tqq"]
+[ext_resource type="PackedScene" uid="uid://cigmjeegxcf36" path="res://scenes/environment/FacilityLamp.tscn" id="3_00tqq"]
+[ext_resource type="Script" uid="uid://dyao6t64t8aux" path="res://scripts/environment/lighting_test_mouse.gd" id="4_2gw8b"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_t0isl"]
+diffuse_texture = ExtResource("1_3exol")
+normal_texture = ExtResource("2_00tqq")
+
+[node name="SentryLightingTest" type="Node2D" unique_id=1074919233]
+script = ExtResource("1_28f3y")
+
+[node name="Background" type="CanvasLayer" parent="." unique_id=1658576110]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="Background" unique_id=1419842060]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.078431375, 0.15294118, 0.2, 1)
+
+[node name="Ambient" type="CanvasModulate" parent="." unique_id=1459458288]
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="ChassisPreview" type="Sprite2D" parent="." unique_id=168960763]
+texture_filter = 2
+position = Vector2(400, 300)
+scale = Vector2(3, 3)
+texture = SubResource("CanvasTexture_t0isl")
+
+[node name="TestLight" parent="." unique_id=822794020 instance=ExtResource("3_00tqq")]
+position = Vector2(500, 220)
+color = Color(1, 1, 1, 1)
+energy = 1.0
+shadow_enabled = false
+texture_scale = 3.0
+height = 100.0
+script = ExtResource("4_2gw8b")

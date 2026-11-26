@@ -5,10 +5,29 @@
 [ext_resource type="Texture2D" uid="uid://do5ny6rnn1fe7" path="res://assets/projectiles/SentryPulse_A.png" id="3_bxvkx"]
 [ext_resource type="Material" uid="uid://d2iwm1hrftn0x" path="res://resources/materials/CombatUnshaded.tres" id="3_m0lsv"]
 [ext_resource type="Texture2D" uid="uid://dc0c2yaugfn36" path="res://assets/enemies/SentryDrone_EngineLeft.png" id="3_oblw3"]
+[ext_resource type="Texture2D" uid="uid://dpa3jt8qq5l8w" path="res://assets/enemies/SentryDrone_Chassis_Normal.png" id="3_ulxog"]
 [ext_resource type="Texture2D" uid="uid://cxdpbyire64k3" path="res://assets/enemies/SentryDrone_EngineRight.png" id="4_dqra7"]
 [ext_resource type="AudioStream" uid="uid://neutph7ompo5" path="res://assets/audio/SentryCharge.wav" id="5_6buas"]
 [ext_resource type="Texture2D" uid="uid://dd7atpviiy1nb" path="res://assets/enemies/SentryDrone_Gun.png" id="5_dqra7"]
+[ext_resource type="Texture2D" uid="uid://drud8stsjhix" path="res://assets/enemies/SentryDrone_EnginesNormal.svg" id="5_tibx5"]
 [ext_resource type="AudioStream" uid="uid://yhaj8ue3jy4x" path="res://assets/audio/SentryShot.wav" id="6_6cf0j"]
+[ext_resource type="Texture2D" uid="uid://owohsnoid67g" path="res://assets/enemies/SentryDrone_GunNormal.svg" id="7_ucogl"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_2gw8b"]
+diffuse_texture = ExtResource("2_6cf0j")
+normal_texture = ExtResource("3_ulxog")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_4e4bk"]
+diffuse_texture = ExtResource("3_oblw3")
+normal_texture = ExtResource("5_tibx5")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_3wc72"]
+diffuse_texture = ExtResource("4_dqra7")
+normal_texture = ExtResource("5_tibx5")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_n4v8v"]
+diffuse_texture = ExtResource("5_dqra7")
+normal_texture = ExtResource("7_ucogl")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8gkan"]
 radius = 25.0
@@ -27,18 +46,18 @@ texture_filter = 2
 [node name="BodyTint" type="Node2D" parent="Sprite2D" unique_id=1834280045]
 
 [node name="ChassisSprite" type="Sprite2D" parent="Sprite2D/BodyTint" unique_id=955585587]
-texture = ExtResource("2_6cf0j")
+texture = SubResource("CanvasTexture_2gw8b")
 
 [node name="EngineLeftSprite" type="Sprite2D" parent="Sprite2D/BodyTint" unique_id=1649786245]
-texture = ExtResource("3_oblw3")
+texture = SubResource("CanvasTexture_4e4bk")
 
 [node name="EngineRightSprite" type="Sprite2D" parent="Sprite2D/BodyTint" unique_id=677679624]
-texture = ExtResource("4_dqra7")
+texture = SubResource("CanvasTexture_3wc72")
 
 [node name="GunRig" type="Node2D" parent="Sprite2D/BodyTint" unique_id=797770530]
 
 [node name="GunSprite" type="Sprite2D" parent="Sprite2D/BodyTint/GunRig" unique_id=1874866073]
-texture = ExtResource("5_dqra7")
+texture = SubResource("CanvasTexture_n4v8v")
 
 [node name="Muzzle" type="Marker2D" parent="Sprite2D/BodyTint/GunRig" unique_id=2066239883]
 position = Vector2(0, -42)

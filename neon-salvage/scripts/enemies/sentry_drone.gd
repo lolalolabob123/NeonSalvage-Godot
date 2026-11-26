@@ -582,7 +582,7 @@ func _update_attack_visuals() -> void:
 		
 		body_tint.modulate = Color.WHITE.lerp(
 			Color("#F36A58"),
-			progress
+			progress * 0.25
 		)
 		
 		charge_glow.scale = Vector2.ONE * lerpf(

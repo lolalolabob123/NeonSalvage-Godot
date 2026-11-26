@@ -7,4 +7,6 @@
 [node name="Glow" parent="." unique_id=822794020 instance=ExtResource("1_ndtdc")]
 color = Color(0.7137255, 0.9098039, 1, 1)
 energy = 0.35
+shadow_enabled = false
 texture_scale = 0.9
+height = 100.0

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b5nqusf7dssrb"]
 
 [ext_resource type="Script" uid="uid://bwocmia3vrsrh" path="res://scripts/tests/combat_test.gd" id="1_1liq1"]
+[ext_resource type="PackedScene" uid="uid://cigmjeegxcf36" path="res://scenes/environment/FacilityLamp.tscn" id="2_hf50m"]
 [ext_resource type="Script" uid="uid://d2cmjqwb884cf" path="res://scripts/environment/scientific_floor.gd" id="2_t5xgq"]
 [ext_resource type="PackedScene" uid="uid://cipt4pwfeq2v" path="res://scenes/environment/ScientificCover.tscn" id="3_pi636"]
 [ext_resource type="Script" uid="uid://b5q6wxmohx3m5" path="res://scripts/enemies/combat_test_navigation.gd" id="3_t5xgq"]
@@ -25,6 +26,14 @@ agent_radius = 30.0
 
 [node name="CombatViusalTest" type="Area2D" unique_id=1197910353]
 script = ExtResource("1_1liq1")
+
+[node name="SurfaceTestLight" parent="." unique_id=822794020 instance=ExtResource("2_hf50m")]
+position = Vector2(0, -120)
+color = Color(1, 1, 1, 1)
+energy = 0.75
+shadow_enabled = false
+texture_scale = 4.0
+height = 180.0
 
 [node name="Floor" type="Polygon2D" parent="." unique_id=1609366409]
 z_index = -5
@@ -115,3 +124,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0.03137255, 0.05490196, 0.09019608, 1)
+
+[node name="Ambient" type="CanvasModulate" parent="." unique_id=1071780977]
+color = Color(0.5019608, 0.5019608, 0.5019608, 1)
