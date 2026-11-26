@@ -21,11 +21,33 @@ enum SentryState {
 
 @onready var detection_area: Area2D = $DetectionArea
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var muzzle: Marker2D = $Muzzle
-@onready var charge_glow: Sprite2D = $Muzzle/ChargeGlow
-@onready var charge_audio: AudioStreamPlayer2D = $Muzzle/ChargeAudio
-@onready var shot_audio: AudioStreamPlayer2D = $Muzzle/ShotAudio
-@onready var sight_ray: RayCast2D = $Muzzle/SightRay
+@onready var muzzle: Marker2D = (
+	$Sprite2D/BodyTint/GunRig/Muzzle
+)
+
+@onready var charge_glow: Sprite2D = (
+	$Sprite2D/BodyTint/GunRig/Muzzle/ChargeGlow
+)
+
+@onready var charge_audio: AudioStreamPlayer2D = (
+	$Sprite2D/BodyTint/GunRig/Muzzle/ChargeAudio
+)
+
+@onready var shot_audio: AudioStreamPlayer2D = (
+	$Sprite2D/BodyTint/GunRig/Muzzle/ShotAudio
+)
+
+@onready var sight_ray: RayCast2D = (
+	$Sprite2D/BodyTint/GunRig/Muzzle/SightRay
+)
+@onready var body_tint: Node2D = $Sprite2D/BodyTint
+@onready var gun_rig: Node2D = $Sprite2D/BodyTint/GunRig
+@onready var engine_left: Sprite2D = (
+	$Sprite2D/BodyTint/EngineLeftSprite
+)
+@onready var engine_right: Sprite2D = (
+	$Sprite2D/BodyTint/EngineRightSprite
+)
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 
 @export var move_speed: float = 115.0
@@ -61,6 +83,8 @@ var aim_locked: bool = false
 var shot_duration: bool = false
 var shot_direction: Vector2 = Vector2.UP
 var recovery_remaining: float = 0.0
+var visual_time: float = 0.0
+var recoil_tween: Tween
 
 func _ready() -> void:
 	
@@ -143,7 +167,7 @@ func _physics_process(delta: float) -> void:
 	if emp_stun_remaining > 0.0:
 		emp_stun_remaining = maxf(emp_stun_remaining - delta, 0.0)
 		velocity = Vector2.ZERO
-		sprite.self_modulate = Color("#08DFFF")
+		body_tint.modulate = Color("#08DFFF")
 		return
 	
 	var attack_busy := _update_attack(delta)
@@ -345,9 +369,14 @@ func flash_hit() -> void:
 
 
 func destroy_sentry() -> void:
+	
+	if recoil_tween != null:
+		recoil_tween.kill()
+
+	gun_rig.position = Vector2.ZERO
 	# Remove any remaining charging visuals.
 	charge_glow.hide()
-	sprite.self_modulate = Color.WHITE
+	body_tint.modulate = Color.WHITE
 
 	# Stop enemy movement.
 	velocity = Vector2.ZERO
@@ -423,6 +452,7 @@ func fire_at_player() -> void:
 	level.add_child(pulse)
 
 	shot_audio.play()
+	_play_recoil()
 
 func apply_emp(duration: float) -> void:
 	if current_health <= 0 or duration <= 0.0:
@@ -436,7 +466,7 @@ func apply_emp(duration: float) -> void:
 	)
 
 	velocity = Vector2.ZERO
-	sprite.self_modulate = Color("#98DFFF")
+	body_tint.modulate = Color("#98DFFF")
 
 func _update_attack(delta: float) -> bool:
 	fire_timer = maxf(fire_timer - delta, 0.0)
@@ -538,7 +568,7 @@ func _cancel_attack() -> void:
 	
 	charge_glow.hide()
 	charge_audio.stop()
-	sprite.self_modulate = Color.WHITE
+	body_tint.modulate = Color.WHITE
 
 func _update_attack_visuals() -> void:
 	charge_glow.visible = is_winding_up
@@ -550,7 +580,7 @@ func _update_attack_visuals() -> void:
 			1.0
 		)
 		
-		sprite.self_modulate = Color.WHITE.lerp(
+		body_tint.modulate = Color.WHITE.lerp(
 			Color("#F36A58"),
 			progress
 		)
@@ -572,6 +602,51 @@ func _update_attack_visuals() -> void:
 		charge_glow.modulate = Color.WHITE
 		
 		if recovery_remaining > 0.0:
-			sprite.self_modulate = Color("#93A7B3")
+			body_tint.modulate = Color("#93A7B3")
 		else:
-			sprite.self_modulate = Color.WHITE
+			body_tint.modulate = Color.WHITE
+
+func _process(delta: float) -> void:
+	if current_health <= 0:
+		return
+
+	visual_time += delta
+
+	# Keep the hover movement vertical on screen as the drone turns.
+	var hover_offset := Vector2(
+		0.0,
+		sin(visual_time * 2.2) * 1.2
+	)
+
+	sprite.position = hover_offset.rotated(-global_rotation)
+
+	# Small independent movement in the engine housings.
+	var engine_amplitude := 0.35
+
+	if emp_stun_remaining > 0.0:
+		engine_amplitude = 0.0
+
+	engine_left.position = Vector2(
+		0.0,
+		sin(visual_time * 7.0) * engine_amplitude
+	)
+
+	engine_right.position = Vector2(
+		0.0,
+		sin(visual_time * 7.0 + 1.7) * engine_amplitude
+	)
+
+func _play_recoil() -> void:
+	if recoil_tween != null:
+		recoil_tween.kill()
+
+	gun_rig.position = Vector2(0, 3)
+
+	recoil_tween = create_tween()
+
+	recoil_tween.tween_property(
+		gun_rig,
+		"position",
+		Vector2.ZERO,
+		0.18
+	).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)

@@ -1,10 +1,13 @@
 [gd_scene format=3 uid="uid://bq0waxbah2ib0"]
 
 [ext_resource type="Script" uid="uid://cl8plbn2qeyrb" path="res://scripts/enemies/sentry_drone.gd" id="1_h8huq"]
+[ext_resource type="Texture2D" uid="uid://n5ka4sss5p3g" path="res://assets/enemies/SentryDrone_Chassis.png" id="2_6cf0j"]
 [ext_resource type="Texture2D" uid="uid://do5ny6rnn1fe7" path="res://assets/projectiles/SentryPulse_A.png" id="3_bxvkx"]
-[ext_resource type="Script" uid="uid://20fmseam4v1x" path="res://scripts/enemies/enemy_body_visual.gd" id="3_kuxdl"]
 [ext_resource type="Material" uid="uid://d2iwm1hrftn0x" path="res://resources/materials/CombatUnshaded.tres" id="3_m0lsv"]
+[ext_resource type="Texture2D" uid="uid://dc0c2yaugfn36" path="res://assets/enemies/SentryDrone_EngineLeft.png" id="3_oblw3"]
+[ext_resource type="Texture2D" uid="uid://cxdpbyire64k3" path="res://assets/enemies/SentryDrone_EngineRight.png" id="4_dqra7"]
 [ext_resource type="AudioStream" uid="uid://neutph7ompo5" path="res://assets/audio/SentryCharge.wav" id="5_6buas"]
+[ext_resource type="Texture2D" uid="uid://dd7atpviiy1nb" path="res://assets/enemies/SentryDrone_Gun.png" id="5_dqra7"]
 [ext_resource type="AudioStream" uid="uid://yhaj8ue3jy4x" path="res://assets/audio/SentryShot.wav" id="6_6cf0j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8gkan"]
@@ -19,8 +22,43 @@ script = ExtResource("1_h8huq")
 windup_duration = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=68954907]
-texture_filter = 1
-script = ExtResource("3_kuxdl")
+texture_filter = 2
+
+[node name="BodyTint" type="Node2D" parent="Sprite2D" unique_id=1834280045]
+
+[node name="ChassisSprite" type="Sprite2D" parent="Sprite2D/BodyTint" unique_id=955585587]
+texture = ExtResource("2_6cf0j")
+
+[node name="EngineLeftSprite" type="Sprite2D" parent="Sprite2D/BodyTint" unique_id=1649786245]
+texture = ExtResource("3_oblw3")
+
+[node name="EngineRightSprite" type="Sprite2D" parent="Sprite2D/BodyTint" unique_id=677679624]
+texture = ExtResource("4_dqra7")
+
+[node name="GunRig" type="Node2D" parent="Sprite2D/BodyTint" unique_id=797770530]
+
+[node name="GunSprite" type="Sprite2D" parent="Sprite2D/BodyTint/GunRig" unique_id=1874866073]
+texture = ExtResource("5_dqra7")
+
+[node name="Muzzle" type="Marker2D" parent="Sprite2D/BodyTint/GunRig" unique_id=2066239883]
+position = Vector2(0, -42)
+
+[node name="ChargeGlow" type="Sprite2D" parent="Sprite2D/BodyTint/GunRig/Muzzle" unique_id=892580756]
+z_index = 2
+material = ExtResource("3_m0lsv")
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("3_bxvkx")
+
+[node name="SightRay" type="RayCast2D" parent="Sprite2D/BodyTint/GunRig/Muzzle" unique_id=663643955]
+target_position = Vector2(0, -400)
+
+[node name="ChargeAudio" type="AudioStreamPlayer2D" parent="Sprite2D/BodyTint/GunRig/Muzzle" unique_id=572586807]
+stream = ExtResource("5_6buas")
+volume_db = -10.0
+
+[node name="ShotAudio" type="AudioStreamPlayer2D" parent="Sprite2D/BodyTint/GunRig/Muzzle" unique_id=1542597465]
+stream = ExtResource("6_6cf0j")
+volume_db = -10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1352655627]
 shape = SubResource("CircleShape2D_8gkan")
@@ -31,26 +69,6 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=1848162404]
 shape = SubResource("CircleShape2D_0gddg")
-
-[node name="Muzzle" type="Marker2D" parent="." unique_id=2066239883]
-position = Vector2(0, -42)
-
-[node name="ChargeGlow" type="Sprite2D" parent="Muzzle" unique_id=892580756]
-z_index = 2
-material = ExtResource("3_m0lsv")
-scale = Vector2(0.7, 0.7)
-texture = ExtResource("3_bxvkx")
-
-[node name="SightRay" type="RayCast2D" parent="Muzzle" unique_id=663643955]
-target_position = Vector2(0, -400)
-
-[node name="ChargeAudio" type="AudioStreamPlayer2D" parent="Muzzle" unique_id=572586807]
-stream = ExtResource("5_6buas")
-volume_db = -10.0
-
-[node name="ShotAudio" type="AudioStreamPlayer2D" parent="Muzzle" unique_id=1542597465]
-stream = ExtResource("6_6cf0j")
-volume_db = -10.0
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1381451748]
 path_desired_distance = 12.0

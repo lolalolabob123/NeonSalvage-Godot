@@ -9,6 +9,9 @@
    id="svg1"
    inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
    sodipodi:docname="SentryDrone.svg"
+   inkscape:export-filename="C:\Github\NeonSalvage-Godot\neon-salvage\assets\enemies\SentryDrone_Base_Color.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -31,22 +34,24 @@
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer4"
-     showguides="true" />
+     inkscape:current-layer="layer8"
+     showguides="true"
+     showgrid="false" />
   <defs
      id="defs1" />
   <g
      inkscape:label="Guides"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     style="display:none">
     <circle
-       style="fill:none;stroke:#000000;stroke-width:0.02645833;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;stroke:#000000;stroke-width:0.0264583;stroke-dasharray:none;stroke-opacity:1"
        id="path1"
        cx="16.933332"
        cy="16.933332"
        r="6.5797653" />
     <rect
-       style="fill:none;stroke:#000000;stroke-width:0.02645833;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;stroke:#000000;stroke-width:0.0264583;stroke-dasharray:none;stroke-opacity:1"
        id="rect1"
        width="0.1890879"
        height="24.266171"
@@ -61,80 +66,395 @@
        style="fill:#172630;stroke:#000000;stroke-width:0.0264583;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1"
        d="m 12.7,10.583333 h 8.466666 l 2.116667,2.645833 v 8.466667 l -2.645833,3.175 h -7.408334 l -2.645833,-3.175 v -8.466667 z"
        id="path2"
-       sodipodi:nodetypes="ccccccccc" />
+       sodipodi:nodetypes="ccccccccc"
+       inkscape:label="Main Chassis" />
     <path
-       style="fill:#172630;fill-opacity:1;stroke:#000000;stroke-width:0.0264583;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#172630;fill-opacity:1;stroke:none;stroke-width:0.0264583;stroke-dasharray:none;stroke-opacity:1"
        d="M 11.90625,13.758333 11.1125,11.1125 l -2.1166668,1.058333 -1.3229167,3.175 v 4.7625 l 1.8520833,2.645833 H 11.90625 Z"
        id="path3"
-       sodipodi:nodetypes="cccccccc" />
+       sodipodi:nodetypes="cccccccc"
+       inkscape:label="Left Shoulder Underbody" />
     <path
-       style="fill:#172630;fill-opacity:1;stroke:#000000;stroke-width:0.0264583;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#172630;fill-opacity:1;stroke:none;stroke-width:0.0264583;stroke-dasharray:none;stroke-opacity:1"
        d="m 22.754166,11.1125 2.116667,1.058333 1.322916,3.175 v 4.7625 l -1.852083,2.645833 h -2.38125 v -8.995833 z"
        id="path4"
-       sodipodi:nodetypes="cccccccc" />
+       sodipodi:nodetypes="cccccccc"
+       inkscape:label="Right Shoulder Underbody" />
     <rect
-       style="fill:#172630;fill-opacity:1;stroke:#000000;stroke-width:0.0151805;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#172630;fill-opacity:1;stroke:none;stroke-width:0.0151805;stroke-dasharray:none;stroke-opacity:1"
        id="rect4"
        width="3.1598194"
        height="4.2181525"
        x="11.384673"
-       y="22.761757" />
+       y="22.761757"
+       inkscape:label="Left Rear Engine" />
     <rect
-       style="fill:#172630;fill-opacity:1;stroke:#000000;stroke-width:0.0151805;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#172630;fill-opacity:1;stroke:none;stroke-width:0.0151805;stroke-dasharray:none;stroke-opacity:1"
        id="rect5"
        width="3.1598194"
        height="4.2181525"
        x="19.322174"
-       y="22.761757" />
+       y="22.761757"
+       inkscape:label="Right Rear Engine" />
     <rect
-       style="fill:#172630;fill-opacity:1;stroke:#000000;stroke-width:0.0268345;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#172630;fill-opacity:1;stroke:none;stroke-width:0.0268345;stroke-dasharray:none;stroke-opacity:1"
        id="rect6"
        width="5.2648325"
        height="7.9106655"
        x="14.300917"
-       y="9.0092506" />
+       y="9.0092506"
+       inkscape:label="Gun Assembly Underbody" />
     <rect
-       style="fill:#172630;fill-opacity:1;stroke:#000000;stroke-width:0.0185884;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#172630;fill-opacity:1;stroke:none;stroke-width:0.0185884;stroke-dasharray:none;stroke-opacity:1"
        id="rect7"
        width="3.1564116"
        height="6.3314114"
        x="15.355127"
-       y="5.8301277" />
+       y="5.8301277"
+       inkscape:label="Barrel Underbody" />
     <rect
-       style="fill:#172630;fill-opacity:1;stroke:#000000;stroke-width:0.0122924;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#172630;fill-opacity:1;stroke:none;stroke-width:0.0122924;stroke-dasharray:none;stroke-opacity:1"
        id="rect8"
        width="4.7502074"
        height="1.8397909"
        x="14.558229"
-       y="5.8269796" />
+       y="5.8269796"
+       inkscape:label="Muzzle Block" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer4"
      inkscape:label="Armour">
     <path
-       sodipodi:type="star"
-       style="fill:#172630;fill-opacity:1;stroke:#000000;stroke-width:0.0264583;stroke-dasharray:none;stroke-opacity:1"
-       id="path8"
-       inkscape:flatsided="true"
-       sodipodi:sides="8"
-       sodipodi:cx="23.668898"
-       sodipodi:cy="1.9304419"
-       sodipodi:r1="2.8859153"
-       sodipodi:r2="2.6662381"
-       sodipodi:arg1="-0.7133581"
-       sodipodi:arg2="-0.32065902"
-       inkscape:rounded="0"
-       inkscape:randomized="0"
-       d="m 25.851136,0.04196601 0.696192,2.09619759 -0.989955,1.974517 -2.096197,0.6961912 -1.974517,-0.9899541 -0.696191,-2.0961976 0.989954,-1.97451699 2.096197,-0.69619115 z"
-       transform="translate(-4.4484217e-5,8.8997699)" />
+       id="path5"
+       style="fill:#607b87;stroke:#000000;stroke-width:0.0264583;fill-opacity:1"
+       d="m 22.225,21.166666 -2.116667,2.38125 h -6.35 l -2.116667,-2.38125 v -7.408333 l 1.5875,-2.116667 H 20.6375 l 1.5875,2.116667 z"
+       sodipodi:nodetypes="ccccccccc"
+       inkscape:label="Central Armour Plate" />
+    <path
+       id="path6"
+       style="fill:#748b97;stroke:none;stroke-width:0.0264583;fill-opacity:1"
+       inkscape:transform-center-x="0.012480636"
+       inkscape:transform-center-y="0.2912682"
+       d="m 8.7312498,15.610416 v 3.96875 L 10.054166,21.43125 H 11.1125 v -7.408334 l -0.529167,-1.5875 -1.0583332,0.529167 z"
+       sodipodi:nodetypes="cccccccc"
+       inkscape:label="Left Shoulder Armour" />
+    <path
+       id="path7"
+       style="fill:#748b97;stroke:none;stroke-width:0.0264583;fill-opacity:1"
+       inkscape:transform-center-x="-0.074792589"
+       inkscape:transform-center-y="0.19610519"
+       d="m 24.341666,12.964583 0.79375,2.645833 v 3.96875 L 23.8125,21.43125 h -1.058334 v -7.672917 l 0.529167,-1.322917 z"
+       sodipodi:nodetypes="cccccccc"
+       inkscape:label="Right Shoulder Armour" />
+    <rect
+       style="fill:#607b87;fill-opacity:1;stroke:none;stroke-width:0.0193691"
+       id="rect9"
+       width="2.1166666"
+       height="2.9104166"
+       x="11.90625"
+       y="23.018749"
+       inkscape:label="Left Engine Cover" />
+    <rect
+       style="fill:#607b87;fill-opacity:1;stroke:none;stroke-width:0.0212377"
+       id="rect10"
+       width="2.1166666"
+       height="2.9104166"
+       x="19.84375"
+       y="23.018749"
+       inkscape:label="Right Engine Cover" />
+    <rect
+       style="fill:#748b97;fill-opacity:1;stroke:none;stroke-width:0.054026"
+       id="rect11"
+       width="4.7624998"
+       height="6.614583"
+       x="14.552083"
+       y="9.5249996"
+       inkscape:label="Gun Housing" />
+    <rect
+       style="fill:#304753;fill-opacity:1;stroke:none;stroke-width:0.0153586"
+       id="rect12"
+       width="1.5875"
+       height="4.7624998"
+       x="16.139584"
+       y="10.318749"
+       inkscape:label="Gun Housing Recess" />
+    <rect
+       style="fill:#748b97;fill-opacity:1;stroke:none;stroke-width:0.0399644"
+       id="rect13"
+       width="1.5875"
+       height="3.96875"
+       x="16.139584"
+       y="6.614583"
+       inkscape:label="Barrel Surface" />
+    <rect
+       style="fill:#748b97;fill-opacity:1;stroke:none;stroke-width:0.0320182"
+       id="rect14"
+       width="3.7041667"
+       height="1.0583333"
+       x="15.081249"
+       y="6.0854163"
+       inkscape:label="Muzzle Surface" />
+    <rect
+       style="fill:#101b23;fill-opacity:1;stroke:none;stroke-width:0.00523028"
+       id="rect15"
+       width="2.1166666"
+       height="0.52916664"
+       x="15.875"
+       y="5.8208332"
+       inkscape:label="Muzzle Opening" />
+    <rect
+       style="fill:#243b47;fill-opacity:1;stroke:none;stroke-width:0.0284883"
+       id="rect23"
+       width="3.7041667"
+       height="1.3229166"
+       x="15.081249"
+       y="21.166666"
+       inkscape:label="Rear Centre Recess" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Armour Bevels">
+    <path
+       id="path33"
+       style="fill:#304753;stroke-width:0.0264583;fill-opacity:1"
+       d="m 21.43125,15.08125 v 5.55625 l -1.852084,1.852083 H 14.2875 L 12.435416,20.6375 v -5.55625 l 0.529167,-1.058334 h 7.9375 z"
+       sodipodi:nodetypes="ccccccccc"
+       inkscape:label="Recessed Central Panel" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer7"
+     inkscape:label="Armour Insets">
+    <path
+       id="path31"
+       style="fill:#526d7a;stroke-width:0.0264583"
+       inkscape:transform-center-x="0.03040889"
+       inkscape:transform-center-y="0.21213569"
+       d="m 9.5249998,15.875 v 3.439583 l 0.7937502,1.058333 h 0.264583 v -5.820833 l -0.264583,-0.79375 -0.5291669,0.264583 z"
+       sodipodi:nodetypes="cccccccc"
+       inkscape:label="Left Shoulder Inset" />
+    <path
+       id="path32"
+       style="fill:#526d7a;stroke-width:0.0264583"
+       inkscape:label="Right Shoulder Inset"
+       inkscape:transform-center-x="-0.13234052"
+       inkscape:transform-center-y="0.027353551"
+       d="m 24.341666,15.875 v 3.439583 l -0.79375,1.058333 h -0.264583 v -5.820833 l 0.264583,-0.79375 0.529167,0.264583 z"
+       sodipodi:nodetypes="cccccccc" />
+    <path
+       id="path34"
+       style="fill:#405965;stroke-width:0.0264583;fill-opacity:1"
+       d="m 20.6375,20.108333 -1.322917,1.322917 h -4.7625 l -1.322917,-1.322917 v -4.497917 l 0.264584,-0.79375 h 6.879166 l 0.264584,0.79375 z"
+       sodipodi:nodetypes="ccccccccc" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer8"
+     inkscape:label="Armour Details">
+    <rect
+       style="fill:#243b47;fill-opacity:1;stroke:none;stroke-width:0.0117953"
+       id="rect17"
+       width="1.5875"
+       height="0.52916664"
+       x="9.260416"
+       y="15.345833"
+       inkscape:label="Left Vent 1" />
+    <rect
+       style="fill:#243b47;fill-opacity:1;stroke:none;stroke-width:0.0117953"
+       id="rect18"
+       width="1.5875"
+       height="0.52916664"
+       x="9.260416"
+       y="16.933332"
+       inkscape:label="Left Vent 2" />
+    <rect
+       style="fill:#243b47;fill-opacity:1;stroke:none;stroke-width:0.0117953"
+       id="rect19"
+       width="1.5875"
+       height="0.52916664"
+       x="9.260416"
+       y="18.520832"
+       inkscape:label="Left Vent 3" />
+    <rect
+       style="fill:#243b47;fill-opacity:1;stroke:none;stroke-width:0.0117953"
+       id="rect20"
+       width="1.5875"
+       height="0.52916664"
+       x="23.018749"
+       y="15.345833"
+       inkscape:label="Right Vent 1" />
+    <rect
+       style="fill:#243b47;fill-opacity:1;stroke:none;stroke-width:0.0117953"
+       id="rect21"
+       width="1.5875"
+       height="0.52916664"
+       x="23.018749"
+       y="16.933332"
+       inkscape:label="Right Vent 2" />
+    <rect
+       style="fill:#243b47;fill-opacity:1;stroke:none;stroke-width:0.0117953"
+       id="rect22"
+       width="1.5875"
+       height="0.52916664"
+       x="23.018749"
+       y="18.520832"
+       inkscape:label="Right Vent 3" />
+    <circle
+       style="fill:#172630;fill-opacity:1;stroke:none;stroke-width:0.0392497"
+       id="path15"
+       cx="16.933332"
+       cy="17.197916"
+       inkscape:label="Dark Turret Recess"
+       r="2.6458333" />
+    <circle
+       style="fill:#748b97;fill-opacity:1;stroke:none;stroke-width:0.0218286"
+       id="path16"
+       cx="16.933332"
+       cy="17.197916"
+       inkscape:label="Raised Turret Ring"
+       r="2.1166666" />
+    <circle
+       style="fill:#304753;fill-opacity:1;stroke:none;stroke-width:0.0216407"
+       id="path17"
+       cx="16.933332"
+       cy="17.197916"
+       inkscape:label="Inner Turret Face"
+       r="1.5875" />
+    <rect
+       style="fill:#304753;fill-opacity:1;stroke:none;stroke-width:0.0305064"
+       id="rect34"
+       width="1.3229166"
+       height="1.5875"
+       x="11.377083"
+       y="14.022917"
+       inkscape:label="Left Upper Joint" />
+    <rect
+       style="fill:#304753;fill-opacity:1;stroke:none;stroke-width:0.0305064"
+       id="rect35"
+       width="1.3229166"
+       height="1.5875"
+       x="21.166666"
+       y="14.022917"
+       inkscape:label="Right Upper Joint" />
+    <rect
+       style="fill:#304753;fill-opacity:1;stroke:none;stroke-width:0.0305064"
+       id="rect36"
+       width="1.3229166"
+       height="1.5875"
+       x="11.377083"
+       y="19.84375"
+       inkscape:label="Left Lower Joint" />
+    <rect
+       style="fill:#304753;fill-opacity:1;stroke:none;stroke-width:0.0305064"
+       id="rect37"
+       width="1.3229166"
+       height="1.5875"
+       x="21.166666"
+       y="19.84375"
+       inkscape:label="Right Lower Joint" />
+    <rect
+       style="fill:#243b47;fill-opacity:1;stroke:none;stroke-width:0.0150892"
+       id="rect38"
+       width="1.5875"
+       height="1.8520833"
+       x="12.170833"
+       y="23.547916"
+       inkscape:label="Left Engine Recess" />
+    <rect
+       style="fill:#243b47;fill-opacity:1;stroke:none;stroke-width:0.0150892"
+       id="rect39"
+       width="1.5875"
+       height="1.8520833"
+       x="20.108334"
+       y="23.547916"
+       inkscape:label="Right Engine Recess" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer5"
-     inkscape:label="Sensors" />
+     inkscape:label="Sensors">
+    <circle
+       style="fill:#101b23;fill-opacity:1;stroke:none;stroke-width:0.0219719"
+       id="path23"
+       cx="16.933332"
+       cy="17.197916"
+       inkscape:label="Optic Surround"
+       r="1.5875" />
+    <circle
+       style="fill:#e85d62;fill-opacity:1;stroke:none;stroke-width:0.0164752"
+       id="path24"
+       cx="16.933334"
+       cy="16.933334"
+       inkscape:label="Red Targeting Optic"
+       r="1.0583333" />
+    <circle
+       style="display:none;fill:#ffd7cc;fill-opacity:1;stroke:none;stroke-width:0.00743037"
+       id="path25"
+       cx="16.536459"
+       cy="16.536457"
+       inkscape:label="Optic Reflection"
+       r="0.39687499" />
+    <rect
+       style="fill:#e87969;fill-opacity:1;stroke:none;stroke-width:0.0108204"
+       id="rect25"
+       width="2.1166666"
+       height="0.79374999"
+       x="11.90625"
+       y="25.664583"
+       inkscape:label="Left Exhaust Opening" />
+    <rect
+       style="fill:#e87969;fill-opacity:1;stroke:none;stroke-width:0.0108204"
+       id="rect26"
+       width="2.1166666"
+       height="0.79374999"
+       x="19.84375"
+       y="25.664583"
+       inkscape:label="Right Exhaust Opening" />
+  </g>
   <g
      inkscape:groupmode="layer"
      id="layer6"
-     inkscape:label="Highlights" />
+     inkscape:label="Highlights"
+     style="display:none">
+    <rect
+       style="fill:#afbec5;fill-opacity:1;stroke:none;stroke-width:0.0122642"
+       id="rect27"
+       width="3.7041667"
+       height="0.52916664"
+       x="15.081249"
+       y="9.5249996"
+       inkscape:label="Gun Housing Upper Edge" />
+    <rect
+       style="fill:#a4b5bd;fill-opacity:1;stroke:none;stroke-width:0.0034484"
+       id="rect28"
+       width="2.1166666"
+       height="0.26458332"
+       x="11.90625"
+       y="23.018749"
+       inkscape:label="Left Engine Upper Edge" />
+    <rect
+       style="fill:#a4b5bd;fill-opacity:1;stroke:none;stroke-width:0.0034484"
+       id="rect29"
+       width="2.1166666"
+       height="0.26458332"
+       x="19.84375"
+       y="23.018749"
+       inkscape:label="Right Engine Upper Edge" />
+    <rect
+       style="fill:#748b97;fill-opacity:1;stroke:none;stroke-width:0.0053517"
+       id="rect30"
+       width="5.2916665"
+       height="0.26458332"
+       x="14.287499"
+       y="23.018749"
+       inkscape:label="Rear Armour Highlight" />
+    <path
+       style="fill:#afbec5;fill-opacity:1;stroke:none;stroke-width:0.0264583"
+       d="m 10.583333,12.435416 -1.0583332,0.529167 -0.79375,2.645833 h 0.5291667 l 0.7937495,-2.116666 0.529167,-0.264584 z"
+       id="path30"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:label="Left Shoulder Highlight" />
+  </g>
 </svg>
