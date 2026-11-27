@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="112"
+   height="112"
+   viewBox="0 0 29.633333 29.633333"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   sodipodi:docname="ScientificWall_CornerSouthEast.svg"
+   inkscape:export-filename="ScientificWall_CornerSouthEast.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="7.2053571"
+     inkscape:cx="55.861215"
+     inkscape:cy="60.44114"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer11" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Guides"
+     inkscape:groupmode="layer"
+     id="layer1" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer9"
+     inkscape:label="Housing">
+    <rect
+       style="fill:#172630;stroke-width:0.200745;fill-opacity:1"
+       id="rect1"
+       width="21.166666"
+       height="21.166666"
+       x="4.2333331"
+       y="4.2333331"
+       inkscape:label="Underbody" />
+    <rect
+       style="fill:#52717f;fill-opacity:1;stroke-width:0.103447"
+       id="rect2"
+       width="21.166666"
+       height="21.166666"
+       x="4.2333331"
+       y="4.2333331"
+       inkscape:label="Upper Surface" />
+    <path
+       id="path3"
+       style="fill:#203642;stroke-width:0.0264583;fill-opacity:1"
+       inkscape:label="Front Face Transition"
+       inkscape:transform-center-x="-0.12347239"
+       inkscape:transform-center-y="-0.71604708"
+       d="M 25.4,21.166666 V 25.4 l -2.116667,-4.233334 z"
+       sodipodi:nodetypes="cccc" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer10"
+     inkscape:label="Panels">
+    <path
+       id="path1"
+       style="fill:#243b47;stroke-width:0.0264583"
+       d="M 25.4,19.05 H 23.283333 V 25.4 H 6.3499999 V 6.3499999 H 25.4 Z"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:label="Corner Panel Recess" />
+    <path
+       id="path2"
+       style="fill:#354f5d;stroke-width:0.0264583"
+       inkscape:label="Corner Panel Surface"
+       d="M 25.4,18.25625 H 22.489583 V 25.4 H 7.1437499 V 7.1437499 H 25.4 Z"
+       sodipodi:nodetypes="ccccccc" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer11"
+     inkscape:label="Details">
+    <rect
+       style="fill:#172630;fill-opacity:1;stroke-width:0.0125888"
+       id="rect4"
+       width="0.26458332"
+       height="12.7"
+       x="25.135416"
+       y="6.3499999"
+       inkscape:label="East Joint" />
+    <rect
+       style="fill:#172630;fill-opacity:1;stroke-width:0.0145363"
+       id="rect5"
+       width="16.933332"
+       height="0.26458332"
+       x="6.3499999"
+       y="25.135416"
+       inkscape:label="South Joint" />
+    <rect
+       style="fill:#607b87;fill-opacity:1;stroke-width:0.0422995"
+       id="rect6"
+       width="1.5875"
+       height="2.1166666"
+       x="22.225"
+       y="11.641666"
+       inkscape:label="East Latch" />
+    <rect
+       style="fill:#607b87;fill-opacity:1;stroke-width:0.0422995"
+       id="rect7"
+       width="2.1166666"
+       height="1.5875"
+       x="13.758333"
+       y="22.225"
+       inkscape:label="South Latch" />
+    <path
+       id="rect3"
+       style="fill:#172630;stroke-width:0.0264583;fill-opacity:1"
+       inkscape:label="Front Recess"
+       d="M 23.944791,22.489583 H 25.4 v 1.058333 h -0.926042 z"
+       sodipodi:nodetypes="ccccc" />
+  </g>
+</svg>

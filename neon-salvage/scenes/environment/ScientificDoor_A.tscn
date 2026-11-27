@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://16cdvcrqiubb"]
+
+[ext_resource type="Script" uid="uid://bb486hc42r3pm" path="res://scenes/environment/scientific_door_a.gd" id="1_i06tq"]
+[ext_resource type="Texture2D" uid="uid://co71i0k4q5r7u" path="res://assets/environment/ScientificDoor_A_UpperLeaf.png" id="2_btr7m"]
+[ext_resource type="Texture2D" uid="uid://csjklc057ngqf" path="res://assets/environment/ScientificDoor_A_LowerLeaf.png" id="3_c4ytq"]
+[ext_resource type="Texture2D" uid="uid://chmodet5aw44u" path="res://assets/environment/ScientificDoor_A_Frame.png" id="4_kf28t"]
+[ext_resource type="Material" uid="uid://d2iwm1hrftn0x" path="res://resources/materials/CombatUnshaded.tres" id="5_afkay"]
+[ext_resource type="Texture2D" uid="uid://vjfjggo10quj" path="res://assets/environment/ScientificDoor_A_Lights.png" id="5_i06tq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5g8r0"]
+size = Vector2(32, 160)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0gddg"]
+radius = 64.0
+
+[node name="ScientificDoor_A" type="Node2D" unique_id=1856456536]
+script = ExtResource("1_i06tq")
+
+[node name="DoorBody" type="StaticBody2D" parent="." unique_id=86524592]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorBody" unique_id=749140368]
+shape = SubResource("RectangleShape2D_5g8r0")
+
+[node name="Panel" type="Polygon2D" parent="." unique_id=413304925]
+color = Color(0.7254902, 0.46666667, 0.24313726, 1)
+
+[node name="UpperLeaf" type="Sprite2D" parent="Panel" unique_id=1646619952]
+texture_filter = 2
+texture = ExtResource("2_btr7m")
+
+[node name="LowerLeaf" type="Sprite2D" parent="Panel" unique_id=2042976527]
+texture_filter = 2
+texture = ExtResource("3_c4ytq")
+
+[node name="InteractionPrompt" type="Label" parent="." unique_id=124022691]
+z_index = 2
+custom_minimum_size = Vector2(240, 0)
+offset_left = -80.0
+offset_top = -120.0
+offset_right = 160.0
+offset_bottom = -92.0
+text = "[E] OPEN DOOR"
+horizontal_alignment = 1
+
+[node name="SentryApproachArea" type="Area2D" parent="." unique_id=1703166953]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SentryApproachArea" unique_id=952446287]
+shape = SubResource("CircleShape2D_0gddg")
+
+[node name="Frame" type="Node2D" parent="." unique_id=509476196]
+
+[node name="TopCap" type="Polygon2D" parent="Frame" unique_id=1634192781]
+visible = false
+position = Vector2(0, -90)
+color = Color(0.32156864, 0.41568628, 0.46666667, 1)
+polygon = PackedVector2Array(-24, -10, 24, -10, 24, 10, -24, 10)
+
+[node name="BottomCap" type="Polygon2D" parent="Frame" unique_id=1407705993]
+visible = false
+position = Vector2(0, 90)
+color = Color(0.32156864, 0.41568628, 0.46666667, 1)
+polygon = PackedVector2Array(-24, -10, 24, -10, 24, 10, -24, 10)
+
+[node name="FrameSprite" type="Sprite2D" parent="Frame" unique_id=119115681]
+texture_filter = 2
+texture = ExtResource("4_kf28t")
+
+[node name="StatusLights" type="Sprite2D" parent="Frame" unique_id=144067429]
+texture_filter = 2
+material = ExtResource("5_afkay")
+texture = ExtResource("5_i06tq")

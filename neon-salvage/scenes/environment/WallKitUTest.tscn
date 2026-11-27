@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://ie6gc0y3cnlw"]
+
+[ext_resource type="PackedScene" uid="uid://cajxqb8ih4pky" path="res://scenes/environment/ScientificWallCornerNorthEast.tscn" id="1_vni2a"]
+[ext_resource type="PackedScene" uid="uid://byhjnlhfnpfp7" path="res://scenes/environment/ScientificWallVertical256.tscn" id="2_0rua6"]
+[ext_resource type="PackedScene" uid="uid://du6l6xlvi0xtd" path="res://scenes/environment/ScientificWallStraight256.tscn" id="3_hdqjo"]
+[ext_resource type="PackedScene" uid="uid://xlrjsr5br3ih" path="res://scenes/environment/ScientificWallCornerNorthWest.tscn" id="4_0rua6"]
+
+[node name="WallKitUTest" type="Node2D" unique_id=1460889483]
+
+[node name="ScientificWallCornerNorthEast" parent="." unique_id=521692378 instance=ExtResource("1_vni2a")]
+
+[node name="ScientificWallVertical256" parent="." unique_id=1484194927 instance=ExtResource("2_0rua6")]
+position = Vector2(0, -168)
+
+[node name="ScientificWallStraight256" parent="." unique_id=2040557565 instance=ExtResource("3_hdqjo")]
+position = Vector2(168, 0)
+
+[node name="ScientificWallCornerNorthWest" parent="." unique_id=480550592 instance=ExtResource("4_0rua6")]
+position = Vector2(336, 0)
+
+[node name="ScientificWallVertical257" parent="." unique_id=1099273360 instance=ExtResource("2_0rua6")]
+position = Vector2(336, -168)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=65271116]
+position = Vector2(168, -128)
+scale = Vector2(1.5, 1.5)
+zoom = Vector2(1.5, 1.5)

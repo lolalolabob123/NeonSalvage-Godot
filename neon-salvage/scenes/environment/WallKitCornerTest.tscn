@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cajxqb8ih4pky" path="res://scenes/environment/ScientificWallCornerNorthEast.tscn" id="1_1fhmb"]
 [ext_resource type="PackedScene" uid="uid://byhjnlhfnpfp7" path="res://scenes/environment/ScientificWallVertical256.tscn" id="2_r6qvc"]
-[ext_resource type="PackedScene" uid="uid://du6l6xlvi0xtd" path="res://scenes/ScientificWallStraight256.tscn" id="3_f203m"]
+[ext_resource type="PackedScene" uid="uid://du6l6xlvi0xtd" path="res://scenes/environment/ScientificWallStraight256.tscn" id="3_f203m"]
 
 [node name="WallKitCornerTest" type="Node2D" unique_id=1460889483]
 

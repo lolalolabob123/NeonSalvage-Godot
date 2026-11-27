@@ -55,19 +55,33 @@ position = Vector2(180, 0)
 
 [node name="NorthWall" parent="Geometry" unique_id=1713839666 instance=ExtResource("4_t5xgq")]
 position = Vector2(0, -440)
+use_modular_art = true
 wall_size = Vector2(1360, 80)
+left_turns_down = true
+right_turns_down = true
 
 [node name="SouthWall" parent="Geometry" unique_id=449007739 instance=ExtResource("4_t5xgq")]
 position = Vector2(0, 440)
+use_modular_art = true
 wall_size = Vector2(1360, 80)
+left_turns_up = true
+right_turns_up = true
+left_turns_down = null
+right_turns_down = null
 
 [node name="WestWall" parent="Geometry" unique_id=132924072 instance=ExtResource("4_t5xgq")]
 position = Vector2(-640, 0)
+use_modular_art = true
 wall_size = Vector2(80, 800)
+left_turns_down = null
+right_turns_down = null
 
 [node name="EastWall" parent="Geometry" unique_id=1342731544 instance=ExtResource("4_t5xgq")]
 position = Vector2(640, 0)
+use_modular_art = true
 wall_size = Vector2(80, 800)
+left_turns_down = null
+right_turns_down = null
 
 [node name="ScientificContainment" parent="Geometry" unique_id=1359440026 instance=ExtResource("5_exxtn")]
 position = Vector2(0, -260)

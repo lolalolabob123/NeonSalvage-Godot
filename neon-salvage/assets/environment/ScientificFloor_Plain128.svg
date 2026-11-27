@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="128"
+   height="128"
+   viewBox="0 0 33.866666 33.866666"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   sodipodi:docname="ScientificFloor_Plain128.svg"
+   inkscape:export-filename="ScientificFloor_Plain128.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="6.3046875"
+     inkscape:cx="63.920694"
+     inkscape:cy="64"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer7" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Base"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#19303c;stroke-width:0.214616;fill-opacity:1"
+       id="rect1"
+       width="33.866665"
+       height="33.866665"
+       x="0"
+       y="0" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer7"
+     inkscape:label="Surface Details">
+    <rect
+       style="fill:#122631;fill-opacity:1;stroke-width:0.014428"
+       id="rect2"
+       width="0.26458332"
+       height="33.866665"
+       x="33.602081"
+       y="0"
+       inkscape:label="Right Joint" />
+    <rect
+       style="fill:#122631;fill-opacity:1;stroke-width:0.0295461"
+       id="rect3"
+       width="33.866665"
+       height="0.26458332"
+       x="0"
+       y="33.602081"
+       inkscape:label="Bottom Joint" />
+    <rect
+       style="fill:#243b47;fill-opacity:1;stroke-width:0.0225701"
+       id="rect5"
+       width="0.26458332"
+       height="30.956249"
+       x="1.3229166"
+       y="1.5875"
+       inkscape:label="Left Inset Edge" />
+    <rect
+       style="fill:#243b47;fill-opacity:1;stroke-width:0.0277302"
+       id="rect4"
+       width="31.220833"
+       height="0.26458332"
+       x="1.3229166"
+       y="1.3229166"
+       inkscape:label="Upper Inset Edge" />
+  </g>
+</svg>

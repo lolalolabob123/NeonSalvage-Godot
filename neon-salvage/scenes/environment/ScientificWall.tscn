@@ -1,9 +1,18 @@
 [gd_scene format=3 uid="uid://bnb285piqdk8e"]
 
 [ext_resource type="Script" uid="uid://dx8c8und038ny" path="res://scripts/environment/scientific_wall.gd" id="1_wsghp"]
+[ext_resource type="Script" uid="uid://730fwwrbl25y" path="res://scenes/environment/scientific_wall_art.gd" id="2_hjnra"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pw4ce"]
+size = Vector2(400, 80)
 
 [node name="ScientificWall" type="StaticBody2D" unique_id=1713839666 groups=["navigation_blockers"]]
 collision_mask = 2
 script = ExtResource("1_wsghp")
+use_modular_art = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=31543682]
+shape = SubResource("RectangleShape2D_pw4ce")
+
+[node name="WallArt" type="Node2D" parent="." unique_id=1657951757]
+script = ExtResource("2_hjnra")

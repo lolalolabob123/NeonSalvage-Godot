@@ -1,0 +1,755 @@
+[gd_scene format=3 uid="uid://c1l06poplxdv8"]
+
+[ext_resource type="Texture2D" uid="uid://cqqouqhcddfm6" path="res://assets/environment/IndustrialDeck_A.png" id="1_qpw88"]
+[ext_resource type="PackedScene" uid="uid://b8sv2wmfuy86" path="res://scenes/player/PlayerDrone.tscn" id="2_gsr7c"]
+[ext_resource type="PackedScene" uid="uid://oohw5n16r2ll" path="res://scenes/ui/SalvageHUD.tscn" id="3_1jgry"]
+[ext_resource type="PackedScene" uid="uid://bx1wgwy237acn" path="res://scenes/ui/GameOverScreen.tscn" id="4_o6yvp"]
+[ext_resource type="PackedScene" uid="uid://da3ly0e8iir5v" path="res://scenes/pickups/SecurityCard.tscn" id="5_vjjb2"]
+[ext_resource type="PackedScene" uid="uid://xcxn162tuund" path="res://scenes/environment/SalvageCrate.tscn" id="6_xnhkc"]
+[ext_resource type="PackedScene" uid="uid://c126lk42xfw26" path="res://scenes/environment/ExtractionTerminal.tscn" id="7_mutjv"]
+[ext_resource type="Script" uid="uid://dx8c8und038ny" path="res://scripts/environment/scientific_wall.gd" id="7_o6yvp"]
+[ext_resource type="Script" uid="uid://doy6tdcrrtjes" path="res://scripts/environment/extraction_terminal.gd" id="8_o5shh"]
+[ext_resource type="Script" uid="uid://730fwwrbl25y" path="res://scenes/environment/scientific_wall_art.gd" id="8_vjjb2"]
+[ext_resource type="PackedScene" uid="uid://dxlegqbd22q4p" path="res://scenes/pickups/ThrusterModule.tscn" id="9_1j5gj"]
+[ext_resource type="PackedScene" uid="uid://df6gvmjp0tngj" path="res://scenes/environment/AutoFloor.tscn" id="10_83ykx"]
+[ext_resource type="PackedScene" uid="uid://b350x34tney4e" path="res://scenes/environment/SecurityCover.tscn" id="11_2aucp"]
+[ext_resource type="PackedScene" uid="uid://e0ni7bv6g0qk" path="res://scenes/environment/WallStraight864.tscn" id="12_t1nir"]
+[ext_resource type="PackedScene" uid="uid://cgwogbn28uee7" path="res://scenes/environment/WallSide220.tscn" id="13_8dmsa"]
+[ext_resource type="PackedScene" uid="uid://smciy0cpmrct" path="res://scenes/pickups/PrototypeCore.tscn" id="14_v8kj6"]
+[ext_resource type="PackedScene" uid="uid://cigmjeegxcf36" path="res://scenes/environment/FacilityLamp.tscn" id="15_kbryl"]
+[ext_resource type="Script" uid="uid://biyu34xgffssx" path="res://scripts/environment/auto_floor.gd" id="16_fjpo7"]
+[ext_resource type="PackedScene" uid="uid://bq0waxbah2ib0" path="res://scenes/enemies/SentryDrone.tscn" id="17_v0leg"]
+[ext_resource type="Script" uid="uid://bkc2b2nxedfjv" path="res://scenes/levels/corridor-sizing.gd" id="18_gsr7c"]
+[ext_resource type="Script" uid="uid://bekvjdhdmwubs" path="res://scripts/environment/auto_corridor.gd" id="18_pbclr"]
+[ext_resource type="Texture2D" uid="uid://bgak5v817xpuy" path="res://assets/environment/ScientificFloor_Plain128.png" id="18_xnhkc"]
+[ext_resource type="PackedScene" uid="uid://bnb285piqdk8e" path="res://scenes/environment/ScientificWall.tscn" id="19_1jgry"]
+[ext_resource type="PackedScene" uid="uid://ti5tm2bhdgvs" path="res://scenes/environment/CorridorWall512.tscn" id="19_3tbvp"]
+[ext_resource type="PackedScene" uid="uid://bvtdbeetlwk31" path="res://scenes/environment/ExteriorSupports.tscn" id="20_u1esc"]
+[ext_resource type="Script" uid="uid://hvbthjgtynm" path="res://scripts/environment/exterior_supports.gd" id="21_7knp7"]
+[ext_resource type="Script" uid="uid://bydq36evamwfi" path="res://scripts/ui/facility_mission.gd" id="23_8vv1p"]
+[ext_resource type="PackedScene" uid="uid://16cdvcrqiubb" path="res://scenes/environment/ScientificDoor_A.tscn" id="24_1jgry"]
+[ext_resource type="Script" uid="uid://bk0u7tf7i7j10" path="res://scripts/ui/mission_hud.gd" id="24_s1t7p"]
+[ext_resource type="Script" uid="uid://bwtlstpn35lkj" path="res://scripts/ui/mission_results.gd" id="25_qimo0"]
+[ext_resource type="Script" uid="uid://d15rr4d8o45pr" path="res://scripts/security_response.gd" id="26_62jr5"]
+[ext_resource type="PackedScene" uid="uid://b6m3hu50r2afr" path="res://scenes/pickups/ShieldGeneratorPickup.tscn" id="27_asepw"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_i52rn"]
+vertices = PackedVector2Array(110, 143, 110, 19, 370, 50, 370, 270, -370, 270, -110, 143, -370, -270, -110, 19, 370, -270, 370, -50, 942, -50, 942, 50, 1682, -270, 1682, -50, 1502, -78, 1502, -202, 942, -270, 1282, -202, 1022, -62, 1682, 50, 1682, 270, 1242, 62, 1242, -62, 1282, -78, 942, 270, 1022, 62, 2254, -50, 2159, 45, 2254, -270, 2991, -270, 2991, 265, 2254, 265, 2254, 50, 2251, 50, 2251, 45, 2159, 50)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4, 5), PackedInt32Array(5, 4, 6, 7), PackedInt32Array(1, 7, 6, 8, 9), PackedInt32Array(2, 1, 9, 10, 11), PackedInt32Array(12, 13, 14, 15), PackedInt32Array(16, 12, 15, 17), PackedInt32Array(10, 16, 17, 18), PackedInt32Array(19, 20, 21, 22, 23, 14), PackedInt32Array(21, 20, 24, 25), PackedInt32Array(25, 24, 11, 18), PackedInt32Array(18, 11, 10), PackedInt32Array(22, 18, 17, 23), PackedInt32Array(19, 14, 13), PackedInt32Array(19, 13, 26, 27), PackedInt32Array(26, 28, 29, 30), PackedInt32Array(30, 31, 32), PackedInt32Array(26, 30, 32), PackedInt32Array(26, 32, 33, 34), PackedInt32Array(27, 35, 19), PackedInt32Array(27, 26, 34)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-400, -300, 400, -300, 400, -80, 912, -80, 912, -300, 1712, -300, 1712, -80, 2224, -80, 2224, -300, 3024, -300, 3024, 300, 2224, 300, 2224, 80, 1712, 80, 1712, 300, 912, 300, 912, 80, 400, 80, 400, 300, -400, 300)])
+parsed_geometry_type = 1
+parsed_collision_mask = 4294967041
+source_geometry_mode = 1
+source_geometry_group_name = &"navigation_blockers"
+agent_radius = 30.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vjjb2"]
+size = Vector2(960, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xnhkc"]
+size = Vector2(960, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mutjv"]
+size = Vector2(80, 600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o5shh"]
+size = Vector2(80, 220)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1j5gj"]
+size = Vector2(80, 220)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_83ykx"]
+size = Vector2(960, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2aucp"]
+size = Vector2(80, 220)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t1nir"]
+size = Vector2(80, 220)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8dmsa"]
+size = Vector2(80, 220)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v8kj6"]
+size = Vector2(80, 220)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kbryl"]
+size = Vector2(960, 80)
+
+[sub_resource type="Gradient" id="Gradient_np0i0"]
+offsets = PackedFloat32Array(0, 0.5421687, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.73333335, 0.73333335, 0.73333335, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_np0i0"]
+gradient = SubResource("Gradient_np0i0")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0gddg"]
+size = Vector2(864, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r75la"]
+size = Vector2(864, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jbwxm"]
+size = Vector2(32, 600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5g8r0"]
+size = Vector2(32, 220)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fkvdf"]
+size = Vector2(32, 220)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4q2j7"]
+size = Vector2(384, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g5lru"]
+size = Vector2(384, 32)
+
+[node name="ScienceCorridorTest" type="Node2D" unique_id=1876928811]
+
+[node name="Floor" type="TextureRect" parent="." unique_id=30215839]
+visible = false
+offset_left = -1600.0
+offset_top = -1000.0
+offset_right = 3000.0
+offset_bottom = 1000.0
+mouse_filter = 2
+texture = ExtResource("1_qpw88")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="PlayerDrone" parent="." unique_id=1138100880 instance=ExtResource("2_gsr7c")]
+position = Vector2(-280, 220)
+
+[node name="SalvageHUD" parent="." unique_id=507685534 instance=ExtResource("3_1jgry")]
+
+[node name="GameOverScreen" parent="." unique_id=557411570 instance=ExtResource("4_o6yvp")]
+visible = false
+
+[node name="EnemyNavigation" type="NavigationRegion2D" parent="." unique_id=572508341]
+navigation_polygon = SubResource("NavigationPolygon_i52rn")
+
+[node name="PatrolRoutes" type="Node2D" parent="." unique_id=1283895199]
+
+[node name="SentryPatrol01" type="Node2D" parent="PatrolRoutes" unique_id=633558565]
+
+[node name="PointA" type="Marker2D" parent="PatrolRoutes/SentryPatrol01" unique_id=17023676]
+position = Vector2(1112, 120)
+
+[node name="PointB" type="Marker2D" parent="PatrolRoutes/SentryPatrol01" unique_id=585559474]
+position = Vector2(1512, -140)
+
+[node name="EntryRoom" type="Node2D" parent="." unique_id=1532575703]
+
+[node name="SecurityCard" parent="EntryRoom" unique_id=1142736059 instance=ExtResource("5_vjjb2")]
+position = Vector2(200, -150)
+
+[node name="SalvageCrate" parent="EntryRoom" unique_id=362166078 instance=ExtResource("6_xnhkc")]
+position = Vector2(-240, -160)
+
+[node name="WallNorth" type="StaticBody2D" parent="EntryRoom" unique_id=761430962 groups=["navigation_blockers"]]
+position = Vector2(0, -340)
+collision_mask = 0
+script = ExtResource("7_o6yvp")
+use_modular_art = true
+wall_size = Vector2(960, 80)
+left_turns_down = true
+right_turns_down = true
+top_turns_left = null
+top_turns_right = null
+bottom_turns_left = null
+bottom_turns_right = null
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntryRoom/WallNorth" unique_id=1048829975]
+shape = SubResource("RectangleShape2D_vjjb2")
+
+[node name="Polygon2D" type="Polygon2D" parent="EntryRoom/WallNorth" unique_id=1066194247]
+visible = false
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-432, -16, 432, -16, 432, 16, -432, 16)
+
+[node name="WallArt" type="Node2D" parent="EntryRoom/WallNorth" unique_id=1894161384]
+script = ExtResource("8_vjjb2")
+
+[node name="WallSouth" type="StaticBody2D" parent="EntryRoom" unique_id=1604561904 groups=["navigation_blockers"]]
+position = Vector2(0, 340)
+collision_mask = 0
+script = ExtResource("7_o6yvp")
+use_modular_art = true
+wall_size = Vector2(960, 80)
+left_turns_up = true
+right_turns_up = true
+top_turns_left = null
+top_turns_right = null
+bottom_turns_left = null
+bottom_turns_right = null
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntryRoom/WallSouth" unique_id=473718360]
+shape = SubResource("RectangleShape2D_xnhkc")
+
+[node name="Polygon2D" type="Polygon2D" parent="EntryRoom/WallSouth" unique_id=823744423]
+visible = false
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-432, -16, 432, -16, 432, 16, -432, 16)
+
+[node name="WallArt" type="Node2D" parent="EntryRoom/WallSouth" unique_id=502223646]
+script = ExtResource("8_vjjb2")
+
+[node name="WallWest" type="StaticBody2D" parent="EntryRoom" unique_id=7087887 groups=["navigation_blockers"]]
+position = Vector2(-440, 0)
+collision_mask = 0
+script = ExtResource("7_o6yvp")
+use_modular_art = true
+wall_size = Vector2(80, 600)
+top_turns_left = null
+top_turns_right = null
+bottom_turns_left = null
+bottom_turns_right = null
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntryRoom/WallWest" unique_id=77456037]
+shape = SubResource("RectangleShape2D_mutjv")
+
+[node name="Polygon2D" type="Polygon2D" parent="EntryRoom/WallWest" unique_id=1395524905]
+visible = false
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+
+[node name="WallArt" type="Node2D" parent="EntryRoom/WallWest" unique_id=183638871]
+script = ExtResource("8_vjjb2")
+
+[node name="WallEastUpper" type="StaticBody2D" parent="EntryRoom" unique_id=153028004 groups=["navigation_blockers"]]
+position = Vector2(440, -190)
+collision_mask = 0
+script = ExtResource("7_o6yvp")
+use_modular_art = true
+wall_size = Vector2(80, 220)
+top_turns_left = null
+top_turns_right = null
+bottom_turns_left = null
+bottom_turns_right = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntryRoom/WallEastUpper" unique_id=268986676]
+shape = SubResource("RectangleShape2D_o5shh")
+
+[node name="Polygon2D" type="Polygon2D" parent="EntryRoom/WallEastUpper" unique_id=1896787878]
+visible = false
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+
+[node name="WallArt" type="Node2D" parent="EntryRoom/WallEastUpper" unique_id=749946555]
+script = ExtResource("8_vjjb2")
+
+[node name="WallEastLower" type="StaticBody2D" parent="EntryRoom" unique_id=54339193 groups=["navigation_blockers"]]
+position = Vector2(440, 190)
+collision_mask = 0
+script = ExtResource("7_o6yvp")
+use_modular_art = true
+wall_size = Vector2(80, 220)
+top_turns_left = null
+top_turns_right = true
+bottom_turns_left = null
+bottom_turns_right = null
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntryRoom/WallEastLower" unique_id=2136333888]
+shape = SubResource("RectangleShape2D_1j5gj")
+
+[node name="Polygon2D" type="Polygon2D" parent="EntryRoom/WallEastLower" unique_id=1672602917]
+visible = false
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+
+[node name="WallArt" type="Node2D" parent="EntryRoom/WallEastLower" unique_id=840782561]
+script = ExtResource("8_vjjb2")
+
+[node name="Extractionterminal" parent="EntryRoom" unique_id=2113362187 node_paths=PackedStringArray("mission_controller") instance=ExtResource("7_mutjv")]
+position = Vector2(-240, 160)
+script = ExtResource("8_o5shh")
+mission_controller = NodePath("../../MissionController")
+
+[node name="ThrusterModule" parent="EntryRoom" unique_id=432663130 instance=ExtResource("9_1j5gj")]
+
+[node name="AutoFloor" parent="EntryRoom" unique_id=977414101 node_paths=PackedStringArray("west_wall", "east_wall", "north_wall", "south_wall") instance=ExtResource("10_83ykx")]
+texture = ExtResource("18_xnhkc")
+polygon = PackedVector2Array(-440, -340, 440, -340, 440, 340, -440, 340)
+west_wall = NodePath("../WallWest")
+east_wall = NodePath("../WallEastUpper")
+north_wall = NodePath("../WallNorth")
+south_wall = NodePath("../WallSouth")
+
+[node name="Cover01" parent="EntryRoom" unique_id=506129236 instance=ExtResource("11_2aucp")]
+position = Vector2(0, 81)
+
+[node name="SecurityRoom" type="Node2D" parent="." unique_id=641623183]
+position = Vector2(1312, 0)
+
+[node name="WallNorth" parent="SecurityRoom" unique_id=994361127 instance=ExtResource("12_t1nir")]
+position = Vector2(0, -340)
+script = ExtResource("7_o6yvp")
+use_modular_art = true
+wall_size = Vector2(960, 80)
+left_turns_down = true
+right_turns_down = true
+top_turns_left = null
+top_turns_right = null
+bottom_turns_left = null
+bottom_turns_right = null
+
+[node name="CollisionShape2D" parent="SecurityRoom/WallNorth" index="0" unique_id=1292135332]
+shape = SubResource("RectangleShape2D_83ykx")
+
+[node name="Polygon2D" parent="SecurityRoom/WallNorth" index="1" unique_id=838490077]
+visible = false
+
+[node name="InnerTrim" parent="SecurityRoom/WallNorth" index="2" unique_id=614664727]
+visible = false
+
+[node name="WallArt" type="Node2D" parent="SecurityRoom/WallNorth" unique_id=582272577]
+script = ExtResource("8_vjjb2")
+
+[node name="WallWestUpper" parent="SecurityRoom" unique_id=330831572 instance=ExtResource("13_8dmsa")]
+position = Vector2(-440, -190)
+script = ExtResource("7_o6yvp")
+use_modular_art = true
+wall_size = Vector2(80, 220)
+top_turns_left = null
+top_turns_right = null
+bottom_turns_left = true
+bottom_turns_right = null
+
+[node name="CollisionShape2D" parent="SecurityRoom/WallWestUpper" index="0" unique_id=849537935]
+shape = SubResource("RectangleShape2D_2aucp")
+
+[node name="Polygon2D" parent="SecurityRoom/WallWestUpper" index="1" unique_id=1259928634]
+visible = false
+
+[node name="innerTrim" parent="SecurityRoom/WallWestUpper" index="2" unique_id=148681255]
+visible = false
+
+[node name="WallArt" type="Node2D" parent="SecurityRoom/WallWestUpper" unique_id=1526819819]
+script = ExtResource("8_vjjb2")
+
+[node name="WallWestLower" parent="SecurityRoom" unique_id=1489203854 instance=ExtResource("13_8dmsa")]
+position = Vector2(-440, 190)
+script = ExtResource("7_o6yvp")
+use_modular_art = true
+wall_size = Vector2(80, 220)
+top_turns_left = true
+top_turns_right = null
+bottom_turns_left = null
+bottom_turns_right = null
+
+[node name="CollisionShape2D" parent="SecurityRoom/WallWestLower" index="0" unique_id=849537935]
+shape = SubResource("RectangleShape2D_t1nir")
+
+[node name="Polygon2D" parent="SecurityRoom/WallWestLower" index="1" unique_id=1259928634]
+visible = false
+
+[node name="innerTrim" parent="SecurityRoom/WallWestLower" index="2" unique_id=148681255]
+visible = false
+
+[node name="WallArt" type="Node2D" parent="SecurityRoom/WallWestLower" unique_id=1913605513]
+script = ExtResource("8_vjjb2")
+
+[node name="WallEastUpper" parent="SecurityRoom" unique_id=71623239 instance=ExtResource("13_8dmsa")]
+position = Vector2(440, -190)
+script = ExtResource("7_o6yvp")
+use_modular_art = true
+wall_size = Vector2(80, 220)
+top_turns_left = null
+top_turns_right = null
+bottom_turns_left = null
+bottom_turns_right = null
+
+[node name="CollisionShape2D" parent="SecurityRoom/WallEastUpper" index="0" unique_id=849537935]
+shape = SubResource("RectangleShape2D_8dmsa")
+
+[node name="Polygon2D" parent="SecurityRoom/WallEastUpper" index="1" unique_id=1259928634]
+visible = false
+
+[node name="innerTrim" parent="SecurityRoom/WallEastUpper" index="2" unique_id=148681255]
+visible = false
+
+[node name="WallArt" type="Node2D" parent="SecurityRoom/WallEastUpper" unique_id=1182354303]
+script = ExtResource("8_vjjb2")
+
+[node name="WallEastLower" parent="SecurityRoom" unique_id=1358997542 instance=ExtResource("13_8dmsa")]
+position = Vector2(440, 190)
+script = ExtResource("7_o6yvp")
+use_modular_art = true
+wall_size = Vector2(80, 220)
+top_turns_left = null
+top_turns_right = null
+bottom_turns_left = null
+bottom_turns_right = null
+
+[node name="CollisionShape2D" parent="SecurityRoom/WallEastLower" index="0" unique_id=849537935]
+shape = SubResource("RectangleShape2D_v8kj6")
+
+[node name="Polygon2D" parent="SecurityRoom/WallEastLower" index="1" unique_id=1259928634]
+visible = false
+
+[node name="innerTrim" parent="SecurityRoom/WallEastLower" index="2" unique_id=148681255]
+visible = false
+
+[node name="WallArt" type="Node2D" parent="SecurityRoom/WallEastLower" unique_id=1798719183]
+script = ExtResource("8_vjjb2")
+
+[node name="WallSouth" parent="SecurityRoom" unique_id=1181984300 instance=ExtResource("12_t1nir")]
+position = Vector2(0, 340)
+script = ExtResource("7_o6yvp")
+use_modular_art = true
+wall_size = Vector2(960, 80)
+left_turns_up = true
+right_turns_up = true
+top_turns_left = null
+top_turns_right = null
+bottom_turns_left = null
+bottom_turns_right = null
+
+[node name="CollisionShape2D" parent="SecurityRoom/WallSouth" index="0" unique_id=1292135332]
+shape = SubResource("RectangleShape2D_kbryl")
+
+[node name="Polygon2D" parent="SecurityRoom/WallSouth" index="1" unique_id=838490077]
+visible = false
+
+[node name="InnerTrim" parent="SecurityRoom/WallSouth" index="2" unique_id=614664727]
+visible = false
+
+[node name="WallArt" type="Node2D" parent="SecurityRoom/WallSouth" unique_id=928926574]
+script = ExtResource("8_vjjb2")
+
+[node name="PrototypeCore" parent="SecurityRoom" unique_id=619065688 instance=ExtResource("14_v8kj6")]
+position = Vector2(240, 160)
+
+[node name="PrototypeBeacon" type="PointLight2D" parent="SecurityRoom/PrototypeCore" unique_id=1484055842]
+color = Color(0.6117647, 0.9098039, 1, 1)
+energy = 0.5
+texture = SubResource("GradientTexture2D_np0i0")
+texture_scale = 0.45
+
+[node name="SecurityLamp" parent="SecurityRoom" unique_id=822794020 instance=ExtResource("15_kbryl")]
+position = Vector2(0, -32)
+
+[node name="Cover01" parent="SecurityRoom" unique_id=786776171 instance=ExtResource("11_2aucp")]
+position = Vector2(80, -140)
+
+[node name="EntranceCover" parent="SecurityRoom" unique_id=1542903561 instance=ExtResource("11_2aucp")]
+position = Vector2(-180, 0)
+
+[node name="SalvageWingSign" type="Label" parent="SecurityRoom" unique_id=1668772942]
+offset_left = 195.0
+offset_top = -73.0
+offset_right = 359.0
+offset_bottom = -50.0
+theme_override_colors/font_color = Color(0.9529412, 0.6745098, 0.34117648, 1)
+text = "SALVAGE STORAGE →"
+
+[node name="AutoFloor" type="Polygon2D" parent="SecurityRoom" unique_id=2066141425 node_paths=PackedStringArray("west_wall", "east_wall", "north_wall", "south_wall")]
+z_index = -10
+z_as_relative = false
+texture_repeat = 2
+texture = ExtResource("18_xnhkc")
+polygon = PackedVector2Array(-440, -340, 440, -340, 440, 340, -440, 340)
+script = ExtResource("16_fjpo7")
+west_wall = NodePath("../WallWestUpper")
+east_wall = NodePath("../WallEastUpper")
+north_wall = NodePath("../WallNorth")
+south_wall = NodePath("../WallSouth")
+
+[node name="OptionalSalvageRoom" type="Node2D" parent="." unique_id=1909031761]
+position = Vector2(2621, -5)
+
+[node name="OptionalCrateNorth" parent="OptionalSalvageRoom" unique_id=1854757648 instance=ExtResource("6_xnhkc")]
+position = Vector2(200, -160)
+salvage_amount = 3
+
+[node name="WallNorth" type="StaticBody2D" parent="OptionalSalvageRoom" unique_id=1570560865 groups=["navigation_blockers"]]
+position = Vector2(0, -316)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OptionalSalvageRoom/WallNorth" unique_id=1258590954]
+shape = SubResource("RectangleShape2D_0gddg")
+
+[node name="Polygon2D" type="Polygon2D" parent="OptionalSalvageRoom/WallNorth" unique_id=1137594654]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-432, -16, 432, -16, 432, 16, -432, 16)
+
+[node name="WallSouth" type="StaticBody2D" parent="OptionalSalvageRoom" unique_id=1965032808 groups=["navigation_blockers"]]
+position = Vector2(0, 316)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OptionalSalvageRoom/WallSouth" unique_id=686242041]
+shape = SubResource("RectangleShape2D_r75la")
+
+[node name="Polygon2D" type="Polygon2D" parent="OptionalSalvageRoom/WallSouth" unique_id=541932966]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-432, -16, 432, -16, 432, 16, -432, 16)
+
+[node name="WallEast" type="StaticBody2D" parent="OptionalSalvageRoom" unique_id=386826947 groups=["navigation_blockers"]]
+position = Vector2(416, 0)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OptionalSalvageRoom/WallEast" unique_id=1727906723]
+shape = SubResource("RectangleShape2D_jbwxm")
+
+[node name="Polygon2D" type="Polygon2D" parent="OptionalSalvageRoom/WallEast" unique_id=747022583]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-16, -300, 16, -300, 16, 300, -16, 300)
+
+[node name="WallWestUpper" type="StaticBody2D" parent="OptionalSalvageRoom" unique_id=762303014 groups=["navigation_blockers"]]
+position = Vector2(-416, -190)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OptionalSalvageRoom/WallWestUpper" unique_id=1233417908]
+shape = SubResource("RectangleShape2D_5g8r0")
+
+[node name="Polygon2D" type="Polygon2D" parent="OptionalSalvageRoom/WallWestUpper" unique_id=1388098941]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-16, -110, 16, -110, 16, 110, -16, 110)
+
+[node name="WallWestLower" type="StaticBody2D" parent="OptionalSalvageRoom" unique_id=113110201 groups=["navigation_blockers"]]
+position = Vector2(-416, 190)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OptionalSalvageRoom/WallWestLower" unique_id=463538907]
+shape = SubResource("RectangleShape2D_fkvdf")
+
+[node name="Polygon2D" type="Polygon2D" parent="OptionalSalvageRoom/WallWestLower" unique_id=684201990]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(-16, -110, 16, -110, 16, 110, -16, 110)
+
+[node name="OptionalRoomGuard" parent="OptionalSalvageRoom" unique_id=140838755 instance=ExtResource("17_v0leg")]
+position = Vector2(-120, 0)
+
+[node name="OptionalCrateSouth" parent="OptionalSalvageRoom" unique_id=830038882 instance=ExtResource("6_xnhkc")]
+position = Vector2(200, 160)
+salvage_amount = 3
+
+[node name="AutoFloor" parent="OptionalSalvageRoom" unique_id=1773321010 node_paths=PackedStringArray("west_wall", "east_wall", "north_wall", "south_wall") instance=ExtResource("10_83ykx")]
+texture = ExtResource("18_xnhkc")
+polygon = PackedVector2Array(-416, -316, 416, -316, 416, 316, -416, 316)
+west_wall = NodePath("../WallWestUpper")
+east_wall = NodePath("../WallEast")
+north_wall = NodePath("../WallNorth")
+south_wall = NodePath("../WallSouth")
+
+[node name="Corridor" type="Node2D" parent="." unique_id=770490834 node_paths=PackedStringArray("west_end", "east_end", "north_wall", "south_wall")]
+script = ExtResource("18_gsr7c")
+west_end = NodePath("../EntryRoom/WallEastUpper")
+east_end = NodePath("../SecurityRoom/WallWestUpper")
+north_wall = NodePath("WallNorth")
+south_wall = NodePath("WallSouth")
+end_overlap = -40.0
+
+[node name="WallNorth" parent="Corridor" unique_id=1713839666 instance=ExtResource("19_1jgry")]
+position = Vector2(656, -120)
+use_modular_art = true
+wall_size = Vector2(352, 80)
+top_turns_left = null
+top_turns_right = null
+bottom_turns_left = null
+bottom_turns_right = null
+
+[node name="WallSouth" parent="Corridor" unique_id=1671164275 instance=ExtResource("19_1jgry")]
+position = Vector2(656, 120)
+use_modular_art = true
+wall_size = Vector2(352, 80)
+top_turns_left = null
+top_turns_right = null
+bottom_turns_left = null
+bottom_turns_right = null
+
+[node name="Polygon2D" type="Polygon2D" parent="Corridor" unique_id=1050992002]
+visible = false
+z_index = -1
+position = Vector2(15, -4)
+color = Color(0.11372549, 0.1882353, 0.23137255, 1)
+polygon = PackedVector2Array(400, -80, 912, -80, 912, 80, 400, 80)
+
+[node name="DoorwayLamp" parent="Corridor" unique_id=779649831 instance=ExtResource("15_kbryl")]
+position = Vector2(832, 0)
+color = Color(0.9529412, 0.6745098, 0.34117648, 1)
+energy = 0.4
+shadow_enabled = false
+texture_scale = 0.6
+
+[node name="AutoFloor" type="Polygon2D" parent="Corridor" unique_id=523646097 node_paths=PackedStringArray("west_wall", "east_wall", "north_wall", "south_wall")]
+z_index = -10
+texture_repeat = 2
+texture = ExtResource("18_xnhkc")
+polygon = PackedVector2Array(440, -120, 872, -120, 872, 120, 440, 120)
+script = ExtResource("16_fjpo7")
+west_wall = NodePath("../../EntryRoom/WallEastUpper")
+east_wall = NodePath("../../SecurityRoom/WallWestUpper")
+north_wall = NodePath("../WallNorth")
+south_wall = NodePath("../WallSouth")
+
+[node name="ExteriorSupports" parent="Corridor" unique_id=1236914904 node_paths=PackedStringArray("west_end", "east_end", "corridor_wall") instance=ExtResource("20_u1esc")]
+script = ExtResource("21_7knp7")
+west_end = NodePath("../../EntryRoom/WallEastUpper")
+east_end = NodePath("../../SecurityRoom/WallWestUpper")
+corridor_wall = NodePath("../WallSouth")
+below_corridor = true
+
+[node name="OptionalCorridor" type="Node2D" parent="." unique_id=1806694438 node_paths=PackedStringArray("west_end", "east_end", "north_wall", "south_wall")]
+position = Vector2(1312, 0)
+script = ExtResource("18_pbclr")
+west_end = NodePath("../SecurityRoom/WallEastUpper")
+east_end = NodePath("../OptionalSalvageRoom/WallWestUpper")
+north_wall = NodePath("WallNorth")
+south_wall = NodePath("WallSouth")
+
+[node name="WallNorth" parent="OptionalCorridor" unique_id=1159639976 instance=ExtResource("19_3tbvp")]
+position = Vector2(666.5, -96)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="OptionalCorridor/WallNorth" unique_id=435835198]
+shape = SubResource("RectangleShape2D_4q2j7")
+
+[node name="Polygon2D" type="Polygon2D" parent="OptionalCorridor/WallNorth/CollisionShape2D2" unique_id=1434687476]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(0, -16, 0, -16, 0, 16, 0, 16)
+
+[node name="WallSouth" parent="OptionalCorridor" unique_id=358306107 instance=ExtResource("19_3tbvp")]
+position = Vector2(666.5, 96)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="OptionalCorridor/WallSouth" unique_id=2060821403]
+shape = SubResource("RectangleShape2D_g5lru")
+
+[node name="Polygon2D2" type="Polygon2D" parent="OptionalCorridor/WallSouth" unique_id=1488524000]
+color = Color(0.20392157, 0.28627452, 0.33333334, 1)
+polygon = PackedVector2Array(0, -16, 0, -16, 0, 16, 0, 16)
+
+[node name="Polygon2D" type="Polygon2D" parent="OptionalCorridor" unique_id=60042034]
+visible = false
+z_index = -1
+position = Vector2(15, -4)
+color = Color(0.11372549, 0.1882353, 0.23137255, 1)
+polygon = PackedVector2Array(400, -80, 912, -80, 912, 80, 400, 80)
+
+[node name="AutoFloor" type="Polygon2D" parent="OptionalCorridor" unique_id=1247571584 node_paths=PackedStringArray("west_wall", "east_wall", "north_wall", "south_wall")]
+z_index = -10
+texture_repeat = 2
+texture = ExtResource("18_xnhkc")
+polygon = PackedVector2Array(440, -96, 893, -96, 893, 96, 440, 96)
+script = ExtResource("16_fjpo7")
+west_wall = NodePath("../../SecurityRoom/WallEastUpper")
+east_wall = NodePath("../../OptionalSalvageRoom/WallWestUpper")
+north_wall = NodePath("../WallNorth")
+south_wall = NodePath("../WallSouth")
+
+[node name="ExteriorSupports" parent="OptionalCorridor" unique_id=1882680385 node_paths=PackedStringArray("west_end", "east_end", "corridor_wall") instance=ExtResource("20_u1esc")]
+script = ExtResource("21_7knp7")
+west_end = NodePath("../../SecurityRoom/WallEastUpper")
+east_end = NodePath("../../OptionalSalvageRoom/WallWestUpper")
+corridor_wall = NodePath("../WallSouth")
+below_corridor = true
+
+[node name="SentryDrone" parent="." unique_id=1027890939 node_paths=PackedStringArray("patrol_route") instance=ExtResource("17_v0leg")]
+position = Vector2(1112, 120)
+patrol_route = NodePath("../PatrolRoutes/SentryPatrol01")
+
+[node name="FacilityDoor" parent="." unique_id=1856456536 instance=ExtResource("24_1jgry")]
+position = Vector2(872, 0)
+requires_security_card = true
+
+[node name="MissionController" type="Node" parent="." unique_id=882846755]
+script = ExtResource("23_8vv1p")
+extraction_duration = 14.0
+
+[node name="MissionHUD" type="CanvasLayer" parent="." unique_id=1174053409 node_paths=PackedStringArray("mission_controller")]
+script = ExtResource("24_s1t7p")
+mission_controller = NodePath("../MissionController")
+show_security_card_objective = true
+
+[node name="ObjectiveLabel" type="Label" parent="MissionHUD" unique_id=443284958]
+offset_left = 320.0
+offset_top = 24.0
+offset_right = 920.0
+offset_bottom = 84.0
+theme_override_font_sizes/font_size = 18
+
+[node name="MissionResults" type="CanvasLayer" parent="." unique_id=1804328093 node_paths=PackedStringArray("mission_controller")]
+process_mode = 3
+layer = 10
+script = ExtResource("25_qimo0")
+mission_controller = NodePath("../MissionController")
+
+[node name="Overlay" type="ColorRect" parent="MissionResults" unique_id=194477661]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.7019608)
+
+[node name="Center" type="CenterContainer" parent="MissionResults/Overlay" unique_id=1794697554]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="MissionResults/Overlay/Center" unique_id=2052727800]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="MissionResults/Overlay/Center/Panel" unique_id=2139263631]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Content" type="VBoxContainer" parent="MissionResults/Overlay/Center/Panel/Margin" unique_id=1179561936]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TitleLabel" type="Label" parent="MissionResults/Overlay/Center/Panel/Margin/Content" unique_id=2038112083]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "EXTRACTION SUCCESSFUL"
+horizontal_alignment = 1
+
+[node name="DetailsLabel" type="Label" parent="MissionResults/Overlay/Center/Panel/Margin/Content" unique_id=769080798]
+layout_mode = 2
+text = "Prototype extracted."
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="MissionResults/Overlay/Center/Panel/Margin/Content" unique_id=1559146770]
+layout_mode = 2
+text = "Run again"
+
+[node name="SecurityResponse" type="Node2D" parent="." unique_id=416945543 node_paths=PackedStringArray("mission_controller", "extraction_terminal")]
+script = ExtResource("26_62jr5")
+mission_controller = NodePath("../MissionController")
+sentry_scene = ExtResource("17_v0leg")
+extraction_terminal = NodePath("../EntryRoom/Extractionterminal")
+
+[node name="ReinforcementSpawn" type="Marker2D" parent="SecurityResponse" unique_id=388084012]
+position = Vector2(1312, 180)
+
+[node name="FacilityAmbient" type="CanvasModulate" parent="." unique_id=1475264949]
+color = Color(0.57254905, 0.61960787, 0.68235296, 1)
+
+[node name="ExteriorBackdrop" type="CanvasLayer" parent="." unique_id=456482848]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="ExteriorBackdrop" unique_id=447654928]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.03137255, 0.05490196, 0.09019608, 1)
+
+[node name="PrototypeCore" parent="." unique_id=454840761 instance=ExtResource("27_asepw")]
+position = Vector2(2838, 9)
+
+[editable path="SecurityRoom/WallNorth"]
+[editable path="SecurityRoom/WallWestUpper"]
+[editable path="SecurityRoom/WallWestLower"]
+[editable path="SecurityRoom/WallEastUpper"]
+[editable path="SecurityRoom/WallEastLower"]
+[editable path="SecurityRoom/WallSouth"]

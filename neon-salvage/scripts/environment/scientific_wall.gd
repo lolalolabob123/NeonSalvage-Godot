@@ -1,6 +1,11 @@
 @tool
 extends StaticBody2D
 
+@export var use_modular_art: bool = false:
+	set(value):
+		use_modular_art = value
+		queue_redraw()
+
 @export var wall_size: Vector2 = Vector2(400, 80):
 	set(value):
 		wall_size = Vector2(
@@ -10,6 +15,14 @@ extends StaticBody2D
 		queue_redraw()
 		call_deferred("_update_collision")
 
+@export var left_turns_up: bool = false
+@export var right_turns_up: bool = false
+@export var left_turns_down: bool = false
+@export var right_turns_down: bool = false
+@export var top_turns_left: bool = false
+@export var top_turns_right: bool = false
+@export var bottom_turns_left: bool = false
+@export var bottom_turns_right: bool = false
 
 func _ready() -> void:
 	_update_collision()
@@ -32,6 +45,9 @@ func _update_collision() -> void:
 
 
 func _draw() -> void:
+	if use_modular_art:
+		return
+	
 	var bounds := Rect2(-wall_size * 0.5, wall_size)
 	var face_depth := 16.0
 

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://xlrjsr5br3ih"]
+
+[ext_resource type="Texture2D" uid="uid://b201pqery1get" path="res://assets/environment/ScientificWall_CornerNorthEast.png" id="1_ni8f8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_al52j"]
+size = Vector2(80, 80)
+
+[node name="ScientificWallCornerNorthWest" type="StaticBody2D" unique_id=521692378 groups=["navigation_blockers"]]
+collision_mask = 2
+
+[node name="WallSprite" type="Sprite2D" parent="." unique_id=200606610]
+texture_filter = 2
+texture = ExtResource("1_ni8f8")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(16, 16, 80, 80)
+region_filter_clip_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=796456930]
+shape = SubResource("RectangleShape2D_al52j")

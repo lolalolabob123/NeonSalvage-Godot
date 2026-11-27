@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dk02qnah0ujo"]
 
-[ext_resource type="PackedScene" uid="uid://du6l6xlvi0xtd" path="res://scenes/ScientificWallStraight256.tscn" id="1_70yhj"]
+[ext_resource type="PackedScene" uid="uid://du6l6xlvi0xtd" path="res://scenes/environment/ScientificWallStraight256.tscn" id="1_70yhj"]
 
 [node name="WallKitTest" type="Node2D" unique_id=1651567847]
 
