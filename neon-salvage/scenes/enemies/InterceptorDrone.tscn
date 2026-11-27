@@ -1,10 +1,26 @@
 [gd_scene format=3 uid="uid://mfbfst17wlxa"]
 
 [ext_resource type="Script" uid="uid://co4ew0wlwx701" path="res://scripts/enemies/interceptor_drone.gd" id="1_5yf7x"]
+[ext_resource type="Texture2D" uid="uid://bal22r2nxkxb5" path="res://assets/enemies/InterceptorDrone_BodyNormal.svg" id="3_mgggo"]
 [ext_resource type="Texture2D" uid="uid://dd88ylx6gbn2k" path="res://assets/enemies/InterceptorDrone_Body.png" id="3_pw48m"]
+[ext_resource type="Material" uid="uid://d2iwm1hrftn0x" path="res://resources/materials/CombatUnshaded.tres" id="4_ccxra"]
 [ext_resource type="Texture2D" uid="uid://bhde2mivh1t0r" path="res://assets/enemies/InterceptorDrone_EngineLeft.png" id="4_kivob"]
+[ext_resource type="Texture2D" uid="uid://byuidoyjj2x13" path="res://assets/enemies/InterceptorExhaust.png" id="4_p0l01"]
+[ext_resource type="Texture2D" uid="uid://dmcpdd3pxd7ci" path="res://assets/enemies/InterceptorDrone_EnginesNormal.svg" id="5_camad"]
 [ext_resource type="Script" uid="uid://c37vsrrrun7xx" path="res://scripts/equipment/drone_ground_shadow.gd" id="5_kivob"]
 [ext_resource type="Texture2D" uid="uid://c5pydxe3svgo2" path="res://assets/enemies/InterceptorDrone_EngineRight.png" id="5_p0l01"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_hf50m"]
+diffuse_texture = ExtResource("3_pw48m")
+normal_texture = ExtResource("3_mgggo")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_camad"]
+diffuse_texture = ExtResource("4_kivob")
+normal_texture = ExtResource("5_camad")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_au01s"]
+diffuse_texture = ExtResource("5_p0l01")
+normal_texture = ExtResource("5_camad")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8gkan"]
 radius = 25.0
@@ -17,13 +33,31 @@ script = ExtResource("1_5yf7x")
 texture_filter = 2
 
 [node name="BodySprite" type="Sprite2D" parent="Sprite2D" unique_id=1110295302]
-texture = ExtResource("3_pw48m")
+texture = SubResource("CanvasTexture_hf50m")
 
 [node name="EngineLeftSprite" type="Sprite2D" parent="Sprite2D" unique_id=115400307]
-texture = ExtResource("4_kivob")
+texture = SubResource("CanvasTexture_camad")
+
+[node name="Exhaust" type="Sprite2D" parent="Sprite2D/EngineLeftSprite" unique_id=254822194]
+texture_filter = 2
+material = ExtResource("4_ccxra")
+position = Vector2(-15, 40)
+scale = Vector2(1, 0.2)
+texture = ExtResource("4_p0l01")
+centered = false
+offset = Vector2(-8, 0)
 
 [node name="EngineRightSprite" type="Sprite2D" parent="Sprite2D" unique_id=1036656079]
-texture = ExtResource("5_p0l01")
+texture = SubResource("CanvasTexture_au01s")
+
+[node name="Exhaust" type="Sprite2D" parent="Sprite2D/EngineRightSprite" unique_id=488924310]
+texture_filter = 2
+material = ExtResource("4_ccxra")
+position = Vector2(15, 40)
+scale = Vector2(1, 0.2)
+texture = ExtResource("4_p0l01")
+centered = false
+offset = Vector2(-8, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1352655627]
 shape = SubResource("CircleShape2D_8gkan")
@@ -35,6 +69,9 @@ target_desired_distance = 16.0
 [node name="SightRay" type="RayCast2D" parent="." unique_id=927252753]
 
 [node name="GroundShadow" type="Node2D" parent="." unique_id=749250010]
+top_level = true
+z_index = -1
+position = Vector2(4, 12)
 script = ExtResource("5_kivob")
 shadow_size = Vector2(52, 24)
 ground_offset = Vector2(4, 12)

@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://cu7th2w18tl54"]
+
+[ext_resource type="Texture2D" uid="uid://ddrw7xevhvs4d" path="res://assets/environment/ScientificCabinet_A.png" id="1_86y7x"]
+[ext_resource type="Texture2D" uid="uid://bgwtf422rqoi3" path="res://assets/environment/ScientificCabinet_A_Normal.svg" id="2_614un"]
+[ext_resource type="Material" uid="uid://d2iwm1hrftn0x" path="res://resources/materials/CombatUnshaded.tres" id="2_g520w"]
+[ext_resource type="Texture2D" uid="uid://b2ww3cesgwhqp" path="res://assets/environment/ScientificCabinet_A_Lights.png" id="2_r7pnj"]
+[ext_resource type="Texture2D" uid="uid://b1nnhjx1voak6" path="res://assets/environment/ScientificCabinet_A_Indicator.png" id="3_d2gxp"]
+[ext_resource type="Script" uid="uid://dabxkgfjbqds8" path="res://scenes/environment/diagnostic_lights.gd" id="4_d2gxp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r4djp"]
+size = Vector2(80, 200)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_fpw8g"]
+diffuse_texture = ExtResource("1_86y7x")
+normal_texture = ExtResource("2_614un")
+
+[node name="ScientificCabinet_A" type="StaticBody2D" unique_id=830662124 groups=["navigation_blockers"]]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1621939720]
+shape = SubResource("RectangleShape2D_r4djp")
+
+[node name="GroundShadow" type="Polygon2D" parent="." unique_id=1981136006]
+z_index = -2
+color = Color(0, 0, 0, 0.25100002)
+polygon = PackedVector2Array(-34, -90, 46, -90, 46, 110, -34, 110)
+
+[node name="CabinetSprite" type="Sprite2D" parent="." unique_id=1564674497]
+texture_filter = 2
+texture = SubResource("CanvasTexture_fpw8g")
+
+[node name="StatusLights" type="Sprite2D" parent="CabinetSprite" unique_id=1688614759]
+material = ExtResource("2_g520w")
+texture = ExtResource("2_r7pnj")
+
+[node name="DiagnosticLights" type="Sprite2D" parent="CabinetSprite" unique_id=1220086156]
+material = ExtResource("2_g520w")
+texture = ExtResource("3_d2gxp")
+script = ExtResource("4_d2gxp")

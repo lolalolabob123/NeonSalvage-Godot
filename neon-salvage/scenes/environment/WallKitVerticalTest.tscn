@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cxwbdcfysjdwa"]
+
+[ext_resource type="PackedScene" uid="uid://byhjnlhfnpfp7" path="res://scenes/environment/ScientificWallVertical256.tscn" id="1_45p3h"]
+
+[node name="WallKitVerticalTest" type="Node2D" unique_id=1122219577]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1075773108]
+
+[node name="WallTop" parent="." unique_id=1484194927 instance=ExtResource("1_45p3h")]
+position = Vector2(0, -128)
+
+[node name="WallBottom" parent="." unique_id=50818559 instance=ExtResource("1_45p3h")]
+position = Vector2(0, 128)

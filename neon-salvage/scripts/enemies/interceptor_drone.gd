@@ -4,6 +4,10 @@ const SALVAGE_PICKUP: PackedScene = preload(
 	"res://scenes/pickups/SalvagePickup.tscn"
 )
 
+const DESTRUCTION_FX: PackedScene = preload(
+	"res://scenes/effects/SentryDestructionFX.tscn"
+)
+
 enum State {
 	CHASE,
 	WINDUP,
@@ -21,10 +25,13 @@ enum State {
 @export var recovery_duration: float = 1.0
 
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var body_sprite: Sprite2D = $Sprite2D/BodySprite
 @onready var engine_left: Sprite2D = $Sprite2D/EngineLeftSprite
 @onready var engine_right: Sprite2D = $Sprite2D/EngineRightSprite
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var sight_ray: RayCast2D = $SightRay
+@onready var exhaust_left: Sprite2D = $Sprite2D/EngineLeftSprite/Exhaust
+@onready var exhaust_right: Sprite2D = $Sprite2D/EngineRightSprite/Exhaust
 
 var current_health: int = 0
 var current_state: State = State.CHASE
@@ -33,6 +40,7 @@ var alerted: bool = false
 var lunge_direction: Vector2 = Vector2.UP
 var emp_stun_remaining: float = 0.0
 var visual_time: float = 0.0
+var hit_tween: Tween
 
 
 func _ready() -> void:
@@ -181,13 +189,16 @@ func _begin_recovery() -> void:
 func take_damage(amount: int) -> void:
 	if amount <= 0 or current_health <= 0:
 		return
-	
+
 	current_health = maxi(current_health - amount, 0)
-	
+
 	if current_health <= 0:
 		velocity = Vector2.ZERO
 		set_physics_process(false)
 		call_deferred("_finish_death")
+		return
+
+	_flash_hit()
 
 func _draw() -> void:
 	if current_health <= 0 or emp_stun_remaining > 0.0:
@@ -204,16 +215,81 @@ func _draw() -> void:
 			_draw_recovery_ring()
 
 func _finish_death() -> void:
-	var level := get_tree().current_scene as Node2D
 	
+	if hit_tween != null:
+		hit_tween.kill()
+
+	body_sprite.self_modulate = Color.WHITE
+	engine_left.self_modulate = Color.WHITE
+	engine_right.self_modulate = Color.WHITE
+	
+	var level := get_tree().current_scene as Node2D
+
 	if not is_instance_valid(level):
 		queue_free()
-		return	
-	
+		return
+
+	# Stop animation and remove attack warnings.
+	set_process(false)
+	velocity = Vector2.ZERO
+	queue_redraw()
+
+	exhaust_left.hide()
+	exhaust_right.hide()
+	$CollisionShape2D.set_deferred("disabled", true)
+
+	var ground_shadow := get_node_or_null("GroundShadow") as CanvasItem
+	if ground_shadow != null:
+		ground_shadow.hide()
+
+	# The burst belongs to the level so it can outlive the drone.
+	var debris := DESTRUCTION_FX.instantiate() as CPUParticles2D
+	debris.color = Color("#FFB078")
+	debris.finished.connect(debris.queue_free)
+	level.add_child(debris)
+	debris.global_position = sprite.global_position
+	debris.emitting = true
+
+	# Clear the previous attack or EMP tint.
+	sprite.modulate = Color.WHITE
+
+	var tween := create_tween()
+	tween.set_parallel(true)
+
+	tween.tween_property(
+		engine_left,
+		"position",
+		engine_left.position + Vector2(-6.0, 4.0),
+		0.18
+	).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+
+	tween.tween_property(
+		engine_right,
+		"position",
+		engine_right.position + Vector2(6.0, 4.0),
+		0.18
+	).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+
+	tween.tween_property(
+		sprite,
+		"scale",
+		sprite.scale * 1.1,
+		0.18
+	)
+
+	tween.tween_property(
+		sprite,
+		"modulate",
+		Color(1.0, 0.75, 0.55, 0.0),
+		0.18
+	)
+
+	await tween.finished
+
 	var pickup := SALVAGE_PICKUP.instantiate() as Area2D
 	pickup.position = level.to_local(global_position)
 	level.add_child(pickup)
-	
+
 	queue_free()
 
 func apply_emp(duration: float) -> void:
@@ -350,6 +426,9 @@ func _draw_recovery_ring() -> void:
 	)
 
 func _process(delta: float) -> void:
+	
+	_update_exhaust(delta)
+	
 	if current_health <= 0:
 		return
 
@@ -402,3 +481,87 @@ func _process(delta: float) -> void:
 	var blend := 1.0 - exp(-18.0 * delta)
 	engine_left.position = engine_left.position.lerp(left_target, blend)
 	engine_right.position = engine_right.position.lerp(right_target, blend)
+
+func _update_exhaust(delta: float) -> void:
+	var active := current_health > 0 and emp_stun_remaining <= 0.0
+	exhaust_left.visible = active
+	exhaust_right.visible = active
+
+	if not active:
+		return
+
+	var target_length: float = 0.18
+	var target_alpha: float = 0.55
+
+	match current_state:
+		State.CHASE:
+			var movement := clampf(
+				velocity.length() / maxf(chase_speed, 1.0),
+				0.0,
+				1.0
+			)
+			target_length = lerpf(0.18, 0.4, movement)
+			target_alpha = lerpf(0.55, 0.8, movement)
+
+		State.WINDUP:
+			var progress := 1.0 - clampf(
+				state_time / maxf(windup_duration, 0.1),
+				0.0,
+				1.0
+			)
+			target_length = lerpf(0.3, 0.75, progress)
+			target_alpha = lerpf(0.7, 1.0, progress)
+
+		State.LUNGE:
+			target_length = 1.25
+			target_alpha = 1.0
+
+		State.RECOVER:
+			var remaining := clampf(
+				state_time / maxf(recovery_duration, 0.1),
+				0.0,
+				1.0
+			)
+			target_length = lerpf(0.18, 0.4, remaining)
+			target_alpha = lerpf(0.55, 0.8, remaining)
+
+	var blend := 1.0 - exp(-24.0 * delta)
+	var plumes: Array[Sprite2D] = [exhaust_left, exhaust_right]
+
+	for index in range(plumes.size()):
+		var plume := plumes[index]
+		var flicker := 0.96 + 0.04 * sin(
+			visual_time * 32.0 + float(index) * 1.8
+		)
+		plume.scale = plume.scale.lerp(
+			Vector2(1.0, target_length * flicker),
+			blend
+		)
+		plume.self_modulate.a = lerpf(
+			plume.self_modulate.a,
+			target_alpha,
+			blend
+		)
+
+func _flash_hit() -> void:
+	if hit_tween != null:
+		hit_tween.kill()
+
+	var pieces: Array[Sprite2D] = [
+		body_sprite,
+		engine_left,
+		engine_right,
+	]
+
+	hit_tween = create_tween()
+	hit_tween.set_parallel(true)
+
+	for piece in pieces:
+		piece.self_modulate = Color(2.0, 1.8, 1.6, 1.0)
+
+		hit_tween.tween_property(
+			piece,
+			"self_modulate",
+			Color.WHITE,
+			0.10
+		)

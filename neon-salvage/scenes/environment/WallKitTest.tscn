@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dk02qnah0ujo"]
+
+[ext_resource type="PackedScene" uid="uid://du6l6xlvi0xtd" path="res://scenes/ScientificWallStraight256.tscn" id="1_70yhj"]
+
+[node name="WallKitTest" type="Node2D" unique_id=1651567847]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2061485731]
+zoom = Vector2(2, 2)
+
+[node name="WallLeft" parent="." unique_id=2040557565 instance=ExtResource("1_70yhj")]
+position = Vector2(-128, 0)
+
+[node name="WallRight" parent="." unique_id=1676525549 instance=ExtResource("1_70yhj")]
+position = Vector2(128, 0)

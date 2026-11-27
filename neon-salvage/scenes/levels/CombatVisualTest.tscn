@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cipt4pwfeq2v" path="res://scenes/environment/ScientificCover.tscn" id="3_pi636"]
 [ext_resource type="Script" uid="uid://b5q6wxmohx3m5" path="res://scripts/enemies/combat_test_navigation.gd" id="3_t5xgq"]
 [ext_resource type="PackedScene" uid="uid://b8sv2wmfuy86" path="res://scenes/player/PlayerDrone.tscn" id="4_hirvt"]
+[ext_resource type="PackedScene" uid="uid://cu7th2w18tl54" path="res://scenes/environment/ScientificCabinet_A.tscn" id="4_osg4y"]
 [ext_resource type="PackedScene" uid="uid://bnb285piqdk8e" path="res://scenes/environment/ScientificWall.tscn" id="4_t5xgq"]
 [ext_resource type="PackedScene" uid="uid://oohw5n16r2ll" path="res://scenes/ui/SalvageHUD.tscn" id="5_71fwb"]
 [ext_resource type="PackedScene" uid="uid://bg0lii1p80hnd" path="res://scenes/environment/ScientificContainment.tscn" id="5_exxtn"]
@@ -46,7 +47,7 @@ script = ExtResource("2_t5xgq")
 
 [node name="Geometry" type="Node2D" parent="." unique_id=1923876912 groups=["navigation_blockers"]]
 
-[node name="CoverLeft" parent="Geometry" unique_id=830662124 instance=ExtResource("3_pi636")]
+[node name="Cover Left" parent="Geometry" unique_id=830662124 instance=ExtResource("4_osg4y")]
 position = Vector2(-180, 0)
 
 [node name="CoverRight" parent="Geometry" unique_id=1408896160 instance=ExtResource("3_pi636")]

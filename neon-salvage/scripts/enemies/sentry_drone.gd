@@ -85,6 +85,7 @@ var shot_direction: Vector2 = Vector2.UP
 var recovery_remaining: float = 0.0
 var visual_time: float = 0.0
 var recoil_tween: Tween
+var hit_tween: Tween
 
 func _ready() -> void:
 	
@@ -352,23 +353,27 @@ func take_damage(amount: int) -> void:
 
 	flash_hit()
 
-
 func flash_hit() -> void:
-	# Temporarily tint the enemy red.
-	sprite.modulate = Color(1.0, 0.35, 0.35)
+	if hit_tween != null:
+		hit_tween.kill()
 
-	# Smoothly restore its original colour.
-	var tween: Tween = create_tween()
+	# Briefly brighten the armour without adding a colour tint.
+	sprite.modulate = Color(2.0, 2.0, 2.0, 1.0)
 
-	tween.tween_property(
+	hit_tween = create_tween()
+	hit_tween.tween_property(
 		sprite,
 		"modulate",
 		Color.WHITE,
-		0.14
+		0.08
 	)
 
-
 func destroy_sentry() -> void:
+	
+	if hit_tween != null:
+		hit_tween.kill()
+
+	sprite.modulate = Color.WHITE
 	
 	if recoil_tween != null:
 		recoil_tween.kill()

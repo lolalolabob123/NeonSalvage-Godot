@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="128"
+   height="128"
+   viewBox="0 0 33.866666 33.866667"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   sodipodi:docname="InterceptorDrone_BodyNormal.svg"
+   inkscape:export-filename="C:\Users\callu\InterceptorDrone_Body_Normal.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="6.3046875"
+     inkscape:cx="64"
+     inkscape:cy="64"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer10"
+     showgrid="false" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Guides"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:none"
+     sodipodi:insensitive="true" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Mechanics"
+     style="display:none"
+     sodipodi:insensitive="true">
+    <path
+       id="path1"
+       style="fill:#172630;fill-opacity:1;stroke-width:0.0264583"
+       inkscape:transform-center-x="-0.065250877"
+       inkscape:transform-center-y="0.034450954"
+       d="m 20.108333,23.8125 -1.5875,2.645833 h -3.175 l -1.5875,-2.645833 -1.5875,-5.820833 1.058334,-7.9375 3.704166,-5.8208337 3.704167,5.8208337 1.058333,7.9375 z"
+       sodipodi:nodetypes="cccccccccc"
+       inkscape:label="Hull Underbody" />
+    <path
+       id="path2"
+       style="fill:#172630;stroke-width:0.0264583"
+       inkscape:transform-center-x="0.05597399"
+       inkscape:transform-center-y="0.12738239"
+       d="M 13.758333,16.933333 12.7,12.170833 8.4666666,15.875 9.525,22.225 12.7,20.6375 Z"
+       sodipodi:nodetypes="cccccc"
+       inkscape:label="Left Fin" />
+    <path
+       id="path3"
+       style="fill:#172630;stroke-width:0.0264583"
+       inkscape:transform-center-x="-0.22779968"
+       inkscape:transform-center-y="0.025936495"
+       d="m 20.108333,16.933333 1.058334,3.704167 3.175,1.5875 L 25.4,15.875 21.166667,12.170833 Z"
+       sodipodi:nodetypes="cccccc"
+       inkscape:label="Right Fin" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Armour"
+     style="display:none"
+     sodipodi:insensitive="true">
+    <path
+       id="path5"
+       style="fill:#607b87;fill-opacity:1;stroke-width:0.0264583"
+       inkscape:transform-center-x="0.059233309"
+       inkscape:transform-center-y="0.060232591"
+       d="m 19.05,23.01875 -1.058333,2.116667 H 15.875 l -1.058333,-2.116667 -1.5875,-5.291667 1.058333,-7.14375 2.645833,-4.4979164 2.645834,4.4979164 1.058333,7.14375 z"
+       sodipodi:nodetypes="cccccccccc"
+       inkscape:label="Central Armour" />
+    <path
+       id="path6"
+       style="fill:#748b97;fill-opacity:1;stroke-width:0.0264583"
+       inkscape:transform-center-x="0.079431514"
+       inkscape:transform-center-y="-0.11565967"
+       d="m 9.525,16.139583 0.79375,4.7625 1.5875,-1.058333 L 12.7,16.933333 12.170833,14.022917 Z"
+       sodipodi:nodetypes="cccccc"
+       inkscape:label="Left Fin Armour" />
+    <path
+       id="path7"
+       style="fill:#748b97;stroke-width:0.0264583"
+       inkscape:transform-center-x="0.24271102"
+       inkscape:transform-center-y="-0.11591248"
+       d="m 24.341667,16.139583 -0.79375,4.7625 -1.5875,-1.058333 -0.79375,-2.910417 0.529166,-2.910416 z"
+       sodipodi:nodetypes="cccccc"
+       inkscape:label="Right Fin Armour" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Armour Details"
+     style="display:none"
+     sodipodi:insensitive="true">
+    <path
+       id="path13"
+       style="fill:#748b97;fill-opacity:1;stroke-width:0.0264583"
+       inkscape:transform-center-x="0.0097383702"
+       inkscape:transform-center-y="-0.22010024"
+       d="M 18.25625,16.404167 H 15.610417 L 14.2875,15.08125 15.08125,11.1125 16.933333,7.6729166 18.785417,11.1125 l 0.79375,3.96875 z"
+       sodipodi:nodetypes="cccccccc"
+       inkscape:label="Nose Armour" />
+    <path
+       id="path14"
+       style="fill:#304753;fill-opacity:1;stroke-width:0.0264583"
+       d="m 17.727083,14.552083 -0.79375,0.79375 -0.79375,-0.79375 0.264584,-3.175 0.529166,-1.322916 0.529167,1.322916 z"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:label="Nose Channel" />
+    <path
+       id="path15"
+       style="fill:#405965;stroke-width:0.0264583"
+       inkscape:label="Left FIn Recess"
+       inkscape:transform-center-x="0.17672429"
+       inkscape:transform-center-y="-0.049925755"
+       d="m 10.31875,16.66875 0.529167,2.645833 0.529166,-0.529166 0.529167,-1.852084 -0.264583,-1.322916 z"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       id="path16"
+       style="fill:#405965;stroke-width:0.0264583"
+       inkscape:label="Right Fin Recess"
+       inkscape:transform-center-x="0.16631703"
+       inkscape:transform-center-y="-0.1119748"
+       d="M 23.547917,16.66875 23.01875,19.314583 22.489583,18.785417 21.960417,16.933333 22.225,15.610417 Z"
+       sodipodi:nodetypes="cccccc" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="Sensors"
+     style="display:none"
+     sodipodi:insensitive="true">
+    <rect
+       style="fill:#172630;fill-opacity:1;stroke-width:0.0735569"
+       id="rect9"
+       width="3.7041667"
+       height="5.2916665"
+       x="15.08125"
+       y="17.197916"
+       inkscape:label="Sensor Housing" />
+    <rect
+       style="fill:#405965;fill-opacity:1;stroke-width:0.0352897"
+       id="rect10"
+       width="2.6458333"
+       height="4.2333331"
+       x="15.610416"
+       y="17.727083"
+       inkscape:label="Sensor Face" />
+    <rect
+       style="fill:#e85d62;fill-opacity:1;stroke-width:0.0234157"
+       id="rect11"
+       width="2.1166666"
+       height="1.5875"
+       x="15.875"
+       y="18.520834"
+       inkscape:label="Red Sensor" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer6"
+     inkscape:label="Right Engine"
+     style="display:none"
+     sodipodi:insensitive="true">
+    <rect
+       style="fill:#172630;fill-opacity:1;stroke-width:0.0260289"
+       id="rect4"
+       width="3.7041667"
+       height="8.4666662"
+       x="19.049999"
+       y="20.108334"
+       inkscape:label="Right Engine Underbody" />
+    <rect
+       style="fill:#607b87;fill-opacity:1;stroke-width:0.036863"
+       id="rect8"
+       width="2.1166666"
+       height="5.8208332"
+       x="19.84375"
+       y="21.166666"
+       inkscape:label="Right Engine Cover" />
+    <rect
+       style="fill:#243b47;fill-opacity:1;stroke-width:0.0466252"
+       id="rect17"
+       width="1.5875"
+       height="3.96875"
+       x="20.108334"
+       y="21.960417"
+       inkscape:label="Right Engine Intake" />
+    <rect
+       style="fill:#607b87;fill-opacity:1;stroke-width:0.00939874"
+       id="rect20"
+       width="1.5875"
+       height="0.52916664"
+       x="20.108334"
+       y="23.018749"
+       inkscape:label="Right Intake Bar 1" />
+    <rect
+       style="fill:#607b87;fill-opacity:1;stroke-width:0.00939874"
+       id="rect21"
+       width="1.5875"
+       height="0.52916664"
+       x="20.108334"
+       y="24.606251"
+       inkscape:label="Right Intake Bar 2" />
+    <rect
+       style="fill:#e87969;fill-opacity:1;stroke-width:0.0109813"
+       id="rect13"
+       width="2.1166666"
+       height="0.79374999"
+       x="19.84375"
+       y="26.987499"
+       inkscape:label="Right Exhaust" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer7"
+     inkscape:label="Left Engine"
+     style="display:none"
+     sodipodi:insensitive="true">
+    <rect
+       style="fill:#172630;fill-opacity:1;stroke-width:0.0260289"
+       id="rect3"
+       width="3.7041667"
+       height="8.4666662"
+       x="11.1125"
+       y="20.108334"
+       inkscape:label="Left Engine Underbody" />
+    <rect
+       style="fill:#607b87;fill-opacity:1;stroke-width:0.036863"
+       id="rect7"
+       width="2.1166666"
+       height="5.8208332"
+       x="11.90625"
+       y="21.166666"
+       inkscape:label="Left Engine Cover" />
+    <rect
+       style="fill:#243b47;fill-opacity:1;stroke-width:0.0466252"
+       id="rect16"
+       width="1.5875"
+       height="3.96875"
+       x="12.170834"
+       y="21.960417"
+       inkscape:label="Left Engine Intake" />
+    <rect
+       style="fill:#607b87;fill-opacity:1;stroke-width:0.00939874"
+       id="rect18"
+       width="1.5875"
+       height="0.52916664"
+       x="12.170834"
+       y="23.018749"
+       inkscape:label="Left Intake Bar 1" />
+    <rect
+       style="fill:#607b87;fill-opacity:1;stroke-width:0.00939874"
+       id="rect19"
+       width="1.5875"
+       height="0.52916664"
+       x="12.170834"
+       y="24.606251"
+       inkscape:label="Left Intake Bar 2" />
+    <rect
+       style="fill:#e87969;fill-opacity:1;stroke-width:0.0109813"
+       id="rect12"
+       width="2.1166666"
+       height="0.79374999"
+       x="11.90625"
+       y="26.987499"
+       inkscape:label="Left Exhaust" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer8"
+     inkscape:label="Normal Background">
+    <rect
+       style="fill:#8080ff;stroke-width:0.150973;fill-opacity:1"
+       id="rect1"
+       width="33.866665"
+       height="33.866665"
+       x="0"
+       y="8.8817842e-16"
+       inkscape:label="rect1" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer9"
+     inkscape:label="Normal Bevels">
+    <path
+       id="path12"
+       style="fill:#4080ef;stroke-width:0.0264583"
+       inkscape:label="Left"
+       d="m 15.08125,11.1125 0.529167,0.264583 -0.529167,3.439584 -0.79375,0.264583 z"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       id="path11"
+       style="fill:#5353ef;stroke-width:0.0264583"
+       d="m 14.2875,15.08125 0.79375,-0.264583 0.79375,0.79375 -0.264583,0.79375 z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="Lower Left" />
+    <path
+       id="path10"
+       style="fill:#8040ef;stroke-width:0.0264583"
+       inkscape:label="Bottom"
+       d="M 15.610417,16.404167 15.875,15.610417 h 2.116667 l 0.264583,0.79375 z"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       id="path9"
+       style="fill:#ac53ef;stroke-width:0.0264583"
+       inkscape:label="Lower Right"
+       d="m 18.25625,16.404167 -0.264583,-0.79375 0.79375,-0.79375 0.79375,0.264583 z"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       id="path8"
+       style="fill:#bf80ef;stroke-width:0.0264583;fill-opacity:1"
+       inkscape:label="Right"
+       d="M 19.579167,15.08125 18.785417,14.816667 18.25625,11.377083 18.785417,11.1125 Z"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       id="path4"
+       style="fill:#acacef;stroke-width:0.0264583"
+       d="M 18.25625,11.377083 16.933333,8.9958333 V 7.6729166 L 18.785417,11.1125 Z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="Upper Right" />
+    <path
+       id="path17"
+       style="fill:#53acef;stroke-width:0.0264583;fill-opacity:1"
+       d="M 16.933333,7.6729166 V 8.9958333 L 15.610417,11.377083 15.08125,11.1125 Z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="Upper Left" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer10"
+     inkscape:label="Normal Recess">
+    <path
+       id="path23"
+       style="fill:#ac53ef;stroke-width:0.0264583;fill-opacity:1"
+       d="m 16.933333,11.1125 -0.264583,0.529167 -0.264583,-0.264584 0.529166,-1.322916 z"
+       inkscape:label="Channel Upper Left"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       id="path22"
+       style="fill:#bf80ef;stroke-width:0.0264583;fill-opacity:1"
+       d="m 16.404167,11.377083 0.264583,0.264584 -0.264583,2.645833 -0.264584,0.264583 z"
+       inkscape:label="Channel Left"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       id="path21"
+       style="fill:#acacef;stroke-width:0.0264583"
+       d="m 16.404167,14.2875 0.529166,0.529167 v 0.529166 l -0.79375,-0.79375 z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="Channel Lower Left" />
+    <path
+       id="path20"
+       style="fill:#53acef;stroke-width:0.0264583;fill-opacity:1"
+       d="M 16.933333,15.345833 V 14.816667 L 17.4625,14.2875 l 0.264583,0.264583 z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="Channel Lower Right" />
+    <path
+       id="path19"
+       style="fill:#4080ef;stroke-width:0.0264583;fill-opacity:1"
+       d="m 17.4625,14.2875 0.264583,0.264583 -0.264583,-3.175 -0.264583,0.264584 z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="Channel Right" />
+    <path
+       id="path18"
+       style="fill:#5353ef;stroke-width:0.0264583;fill-opacity:1"
+       d="M 17.4625,11.377083 17.197917,11.641667 16.933333,11.1125 v -1.058333 z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="Channel Upper Right" />
+    <path
+       id="path28"
+       style="fill:#acacef;stroke-width:0.0264583;fill-opacity:1"
+       d="m 12.170833,14.022917 -0.264583,1.322916 v 1.5875 H 12.7 Z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="Left Fin Upper Inner" />
+    <path
+       id="path27"
+       style="fill:#bf80ef;stroke-width:0.0264583;fill-opacity:1"
+       d="m 12.7,16.933333 h -0.79375 l -0.529167,2.38125 0.529167,0.529167 z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="Left Fin Inner" />
+    <path
+       id="path26"
+       style="fill:#ac53ef;stroke-width:0.0264583;fill-opacity:1"
+       d="M 11.90625,19.84375 11.377083,19.314583 10.847917,19.84375 10.31875,20.902083 Z"
+       inkscape:label="Left Fin Lower"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       id="path25"
+       style="fill:#4080ef;stroke-width:0.0264583;fill-opacity:1"
+       inkscape:label="Left Fin Outer"
+       d="M 10.31875,20.902083 10.847917,19.84375 10.31875,16.404167 9.525,16.139583 Z"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       id="path24"
+       style="fill:#53acef;stroke-width:0.0264583;fill-opacity:1"
+       d="m 9.525,16.139583 0.79375,0.264584 1.5875,-1.058334 0.264583,-1.322916 z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="Left Fin Upper" />
+    <path
+       id="path32"
+       style="fill:#4080ef;stroke-width:0.0264583;fill-opacity:1"
+       d="m 21.166667,16.933333 h 0.79375 l 0.529166,2.38125 -0.529166,0.529167 z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="Right Fin Inner" />
+    <path
+       id="path31"
+       style="fill:#5353ef;stroke-width:0.0264583;fill-opacity:1"
+       d="m 22.489583,19.314583 0.529167,0.529167 0.529167,1.058333 -1.5875,-1.058333 z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="Right Fin Lower" />
+    <path
+       id="path30"
+       style="fill:#bf80ef;stroke-width:0.0264583;fill-opacity:1"
+       d="m 23.547917,20.902083 -0.529167,-1.058333 0.529167,-3.439583 0.79375,-0.264584 z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="Right Fin Outer" />
+    <path
+       id="path29"
+       style="fill:#acacef;stroke-width:0.0264583"
+       d="m 23.547917,16.404167 -1.5875,-1.058334 -0.264584,-1.322916 2.645834,2.116666 z"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="Right Fin Upper" />
+    <path
+       id="path33"
+       style="fill:#53acef;stroke-width:0.0264583;fill-opacity:1"
+       d="m 21.960417,15.345833 v 1.5875 h -0.79375 l 0.529166,-2.910416 z"
+       sodipodi:nodetypes="ccccc" />
+  </g>
+</svg>

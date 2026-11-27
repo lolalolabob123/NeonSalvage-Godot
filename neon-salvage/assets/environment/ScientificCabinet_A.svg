@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="128"
+   height="256"
+   viewBox="0 0 33.866666 67.733333"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   sodipodi:docname="ScientificCabinet_A.svg"
+   inkscape:export-filename="ScientificCabinet_A_Indicator.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="3.1523438"
+     inkscape:cx="63.920694"
+     inkscape:cy="128"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer16" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer12"
+     inkscape:label="Guides"
+     style="display:none" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer13"
+     inkscape:label="Housing"
+     style="display:inline">
+    <path
+       id="path1"
+       style="fill:#172630;fill-opacity:1;stroke-width:0.0264583"
+       d="m 27.516666,58.737499 -1.5875,1.5875 H 7.9374999 l -1.5875,-1.5875 V 8.9958332 l 1.5875,-1.5875 H 25.929166 l 1.5875,1.5875 z"
+       sodipodi:nodetypes="ccccccccc"
+       inkscape:label="Cabinet Underbody" />
+    <path
+       id="path2"
+       style="fill:#52717f;fill-opacity:1;stroke-width:0.0264583"
+       d="M 26.722916,52.916666 25.4,54.239583 H 8.4666666 L 7.1437499,52.916666 V 9.2604166 L 8.2020832,8.2020832 H 25.664583 l 1.058333,1.0583334 z"
+       sodipodi:nodetypes="ccccccccc"
+       inkscape:label="Upper Housing" />
+    <path
+       id="path3"
+       style="fill:#203642;fill-opacity:1;stroke-width:0.0264583"
+       d="m 27.516666,53.445833 v 5.291666 l -1.5875,1.5875 H 7.9374999 l -1.5875,-1.5875 v -5.291666 l 1.5875,1.5875 H 25.929166 Z"
+       inkscape:label="Front Face"
+       sodipodi:nodetypes="ccccccccc" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer14"
+     inkscape:label="Panels"
+     style="display:inline">
+    <path
+       id="path4"
+       style="fill:#243b47;stroke-width:0.0264583"
+       inkscape:label="Panel Recess"
+       d="m 25.4,49.741666 -1.058334,1.058333 H 9.5249999 L 8.4666666,49.741666 V 11.641667 L 9.5249999,10.583333 H 24.341666 L 25.4,11.641667 Z"
+       sodipodi:nodetypes="ccccccccc" />
+    <path
+       id="path5"
+       style="fill:#354f5d;stroke-width:0.0264583"
+       d="M 24.341666,49.212499 23.8125,49.741666 H 10.054167 L 9.5249999,49.212499 V 12.170833 L 10.054167,11.641667 H 23.8125 l 0.529166,0.529166 z"
+       sodipodi:nodetypes="ccccccccc" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer15"
+     inkscape:label="Panel Details"
+     style="display:inline">
+    <rect
+       style="fill:#172630;fill-opacity:1;stroke-width:0.0569123"
+       id="rect6"
+       width="11.641666"
+       height="11.1125"
+       x="11.1125"
+       y="13.229166"
+       inkscape:label="Vent Recess" />
+    <rect
+       style="fill:#52717f;fill-opacity:1;stroke-width:0.0205158"
+       id="rect7"
+       width="9.5249996"
+       height="0.79374999"
+       x="12.170834"
+       y="21.960417"
+       inkscape:label="Vent Slat 5" />
+    <rect
+       style="fill:#52717f;fill-opacity:1;stroke-width:0.0205158"
+       id="rect8"
+       width="9.5249996"
+       height="0.79374999"
+       x="12.170834"
+       y="20.108334"
+       inkscape:label="Vent Slat 4" />
+    <rect
+       style="fill:#52717f;fill-opacity:1;stroke-width:0.0205158"
+       id="rect9"
+       width="9.5249996"
+       height="0.79374999"
+       x="12.170834"
+       y="18.25625"
+       inkscape:label="Vent Slat 3" />
+    <rect
+       style="fill:#52717f;fill-opacity:1;stroke-width:0.0205158"
+       id="rect10"
+       width="9.5249996"
+       height="0.79374999"
+       x="12.170834"
+       y="16.404167"
+       inkscape:label="Vent Slat 2" />
+    <rect
+       style="fill:#52717f;fill-opacity:1;stroke-width:0.0205158"
+       id="rect11"
+       width="9.5249996"
+       height="0.79374999"
+       x="12.170834"
+       y="14.552083"
+       inkscape:label="Vent Slat 1" />
+    <rect
+       style="fill:#243b47;fill-opacity:1;stroke-width:0.0594429"
+       id="rect12"
+       width="11.641666"
+       height="14.816667"
+       x="11.1125"
+       y="26.987499"
+       inkscape:label="Hatch Surround" />
+    <rect
+       style="fill:#405965;fill-opacity:1;stroke-width:0.0507591"
+       id="rect13"
+       width="10.583333"
+       height="13.758333"
+       x="11.641666"
+       y="27.516666"
+       inkscape:label="Hatch Surface" />
+    <rect
+       style="fill:#243b47;fill-opacity:1;stroke-width:0.0176973"
+       id="rect14"
+       width="0.52916664"
+       height="13.758333"
+       x="16.668749"
+       y="27.516666"
+       inkscape:label="Hatch Centre Seam" />
+    <rect
+       style="fill:#172630;fill-opacity:1;stroke-width:0.015596"
+       id="rect15"
+       width="2.6458333"
+       height="2.1166666"
+       x="18.25625"
+       y="32.808334"
+       inkscape:label="Handle Recess" />
+    <rect
+       style="fill:#748b97;fill-opacity:1;stroke-width:0.00292137"
+       id="rect16"
+       width="1.5875"
+       height="0.79374999"
+       x="-20.372915"
+       y="33.337498"
+       transform="scale(-1,1)"
+       inkscape:label="Handle" />
+    <rect
+       style="fill:#172630;fill-opacity:1;stroke-width:0.55325"
+       id="rect17"
+       width="11.641666"
+       height="3.7041667"
+       x="11.1125"
+       y="44.450001"
+       inkscape:label="Connector Bay" />
+    <rect
+       style="fill:#607b87;fill-opacity:1;stroke-width:0.0276423"
+       id="rect18"
+       width="2.1166666"
+       height="1.5875"
+       x="12.435416"
+       y="45.508331"
+       inkscape:label="Left Socket" />
+    <rect
+       style="fill:#607b87;fill-opacity:1;stroke-width:0.0342289"
+       id="rect19"
+       width="2.1166666"
+       height="1.5875"
+       x="15.610416"
+       y="45.508331"
+       inkscape:label="Right Socket" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer16"
+     inkscape:label="Status Lights"
+     style="display:inline">
+    <path
+       id="rect5"
+       style="display:inline;fill:#28c4d8;fill-opacity:1;stroke-width:0.0207544"
+       d="M 11.641667,52.387499 H 22.225 v 1.058333 H 11.641667 Z"
+       inkscape:label="Status Strip" />
+    <rect
+       style="display:inline;fill:#28c4d8;fill-opacity:1;stroke-width:0.0070659"
+       id="rect20"
+       width="1.0583333"
+       height="0.79374999"
+       x="19.84375"
+       y="45.243748"
+       inkscape:label="Active Indicator" />
+    <rect
+       style="display:inline;fill:#304753;fill-opacity:1;stroke-width:0.0124334"
+       id="rect21"
+       width="1.0583333"
+       height="0.52916664"
+       x="19.84375"
+       y="46.831249"
+       inkscape:label="Inactive Indicator" />
+  </g>
+</svg>

@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://byhjnlhfnpfp7"]
+
+[ext_resource type="Texture2D" uid="uid://hbdj0e6kl51g" path="res://assets/environment/ScientificWall_Vertical256.png" id="1_q0d1o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q0d1o"]
+size = Vector2(80, 256)
+
+[node name="ScientificWallVertical256" type="StaticBody2D" unique_id=1484194927 groups=["navigation_blockers"]]
+collision_mask = 2
+
+[node name="WallSprite" type="Sprite2D" parent="." unique_id=2040554120]
+texture_filter = 2
+texture = ExtResource("1_q0d1o")
+region_enabled = true
+region_rect = Rect2(16, 16, 80, 256)
+region_filter_clip_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=932227321]
+shape = SubResource("RectangleShape2D_q0d1o")
